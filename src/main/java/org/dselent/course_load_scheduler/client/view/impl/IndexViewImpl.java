@@ -27,6 +27,9 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	@UiField
 	PopupPanel glassLoadingPanel;
 	
+	@UiField
+	MenuTabsImpl menuTabs;
+	
 	public IndexViewImpl()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
