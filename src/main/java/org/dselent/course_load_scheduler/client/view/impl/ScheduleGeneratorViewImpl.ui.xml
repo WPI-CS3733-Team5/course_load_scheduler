@@ -1,0 +1,108 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel width="775" height="500">
+		<g:Grid width="771px" height="488px" cellPadding="20" ui:field="mainPanel">
+			<g:row>
+				<g:customCell>
+					<g:Grid height="329px" width="316px" ui:field="fieldsPanel">
+						<g:row>
+							<g:customCell>
+								<g:Label text="User Name" ui:field="userNameLabel"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:TextBox width="290px" ui:field="nameBox" text="Click to Search"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Term Range" ui:field="termLabel"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Grid width="308px" height="46px" ui:field="termPanel">
+									<g:row>
+										<g:customCell>
+											<g:ListBox ui:field="termCombo1"/>
+										</g:customCell>
+										<g:customCell>
+											<g:IntegerBox width="75px" text="Year" ui:field="yearBox1"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Label text="to" ui:field="toLabel"/>
+										</g:customCell>
+										<g:customCell>
+											<g:ListBox ui:field="termCombo2"/>
+										</g:customCell>
+										<g:customCell>
+											<g:IntegerBox width="75px" text="Year" ui:field="yearBox2"/>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label text="Add Course" ui:field="courseLabel"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:TextBox ui:field="courseBox" width="290px" text="Click to Search"/>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+				</g:customCell>
+				<g:customCell>
+					<g:Grid width="369px" height="440px" ui:field="rightPanel">
+						<g:row>
+							<g:customCell>
+								<g:Grid width="370px" height="50px" ui:field="selectPanel">
+									<g:row>
+										<g:customCell>
+											<g:Button ui:field="selectReqButton" text="Select Requested"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button ui:field="selectAllButton" text="Select All"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button ui:field="removeSelButton" text="Remove Selected"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button ui:field="removeAllButton" text="Remove All"/>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:ListBox visibleItemCount="5" width="366px" height="289px" ui:field="courseList"/>
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Grid width="209px" height="50px" ui:field="proceedPanel">
+									<g:row>
+										<g:customCell>
+											<g:Button ui:field="cancelButton" text="Cancel" width="87px"/>
+										</g:customCell>
+										<g:customCell>
+											<g:Button ui:field="generateButton" text="Generate" width="89px"/>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+	</g:HTMLPanel>
+</ui:UiBinder> 
