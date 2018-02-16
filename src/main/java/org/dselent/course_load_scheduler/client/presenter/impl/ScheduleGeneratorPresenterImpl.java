@@ -3,7 +3,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.List;
 
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
-import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
@@ -14,8 +14,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
-import org.dselent.course_load_scheduler.client.model.UserInfo;
-
 public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements ScheduleGeneratorPresenter{
 	private IndexPresenter parentPresenter;
 	private ScheduleGeneratorView view;
@@ -24,7 +22,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	private Integer yearOne;
 	private Integer yearTwo;
 	private UserInfo currentUser;
-	private List<CourseInfo> courseList;
+	private List<SectionInfo> sectionList;
 	private Boolean taskInProgress;
 	
 	@Inject
@@ -38,7 +36,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		yearOne = null;
 		yearTwo = null;
 		currentUser = null;
-		courseList = null;
+		sectionList = null;
 		taskInProgress = false;
 	}
 	
@@ -105,21 +103,21 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		this.currentUser = user;
 	}
 	
-	public List<CourseInfo> getCourseList(){
-		return courseList;
+	public List<SectionInfo> getSectionList(){
+		return sectionList;
 	}
-	public boolean verifyCourse(CourseInfo course);
-	public void setCourseList(List<CourseInfo> courseList) {
-		this.courseList = courseList;
+	public boolean verifySection(SectionInfo section) {}
+	public void setSectionList(List<SectionInfo> sectionList) {
+		this.sectionList = sectionList;
 	}
-	public void addToCourseList(CourseInfo toAdd) {
-		courseList.add(toAdd);
+	public void addToCourseList(SectionInfo toAdd) {
+		sectionList.add(toAdd);
 	}
-	public void removeFromCourseList(List<CourseInfo> removeList) {
-		for(CourseInfo C: removeList) {
-			for(CourseInfo D: courseList) {
+	public void removeFromCourseList(List<SectionInfo> removeList) {
+		for(SectionInfo C: removeList) {
+			for(SectionInfo D: sectionList) {
 				if(C.equals(D)) {
-					courseList.remove(D);
+					sectionList.remove(D);
 				}
 			}
 		}
