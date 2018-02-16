@@ -6,7 +6,7 @@ import org.dselent.course_load_scheduler.client.view.BaseView;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 /**
- * Super intefrace for all presenters
+ * Super interface for all presenters
  * 
  * @author dselent
  *
@@ -32,7 +32,7 @@ public interface BasePresenter
 	BaseView<? extends BasePresenter> getView();
 	
 	/**
-	 * Returns the modesl associated with the presenter
+	 * Returns the models associated with the presenter
 	 */
 	Model getModel();
 	
@@ -42,7 +42,7 @@ public interface BasePresenter
 	void bind();
 	
 	/**
-	 * Unbinds all speficied event handlers to the presenter
+	 * Unbinds all specified event handlers to the presenter
 	 */
 	void unbind();
 }
