@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendCoursesEvent extends GwtEvent<SendCoursesEventHandler>{
 	
-	public static Type<SendCoursesEventHandler> TYPE = new TYPE<SendCoursesEventHandler>();
+	public static Type<SendCoursesEventHandler> TYPE = new Type<SendCoursesEventHandler>();
 	
 	private SendCoursesAction action;
 	

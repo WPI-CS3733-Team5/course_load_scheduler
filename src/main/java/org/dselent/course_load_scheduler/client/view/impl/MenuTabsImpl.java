@@ -108,7 +108,7 @@ public class MenuTabsImpl extends BaseViewImpl<MenuTabsPresenter> implements Men
 	}
 
 	@Override
-	public void setPresenter(MenuTabsPresenter presenter) {
+	public void setPresenter(MenuTabsPresenterImpl presenter) {
 		this.presenter = presenter;		
 	}
 
@@ -120,6 +120,12 @@ public class MenuTabsImpl extends BaseViewImpl<MenuTabsPresenter> implements Men
 	@Override
 	public HasWidgets getViewRootPanel() {
 		return null;
+	}
+
+	@Override
+	public void setPresenter(MenuTabsPresenter presenter) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.view;
 
+import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenterImpl;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
@@ -48,5 +50,7 @@ public interface MenuTabs {
 	public Label getUsername();
 
 	public Widget getWidgetContainer();
+
+	public void setPresenter(MenuTabsPresenterImpl menuTabsPresenterImpl);
 
 }

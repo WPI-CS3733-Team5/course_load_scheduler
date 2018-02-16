@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendAcceptScheduleEvent extends GwtEvent<SendAcceptScheduleEventHandler>{
 	
-	public static Type<SendAcceptScheduleEventHandler> TYPE = new TYPE<SendAcceptScheduleEventHandler>();
+	public static Type<SendAcceptScheduleEventHandler> TYPE = new Type<SendAcceptScheduleEventHandler>();
 	
 	private SendAcceptScheduleAction action;
 	

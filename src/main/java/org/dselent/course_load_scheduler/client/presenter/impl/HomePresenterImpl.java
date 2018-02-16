@@ -12,6 +12,7 @@ import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.view.BaseView;
 import org.dselent.course_load_scheduler.client.view.HomeView;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.inject.Inject;
@@ -34,6 +35,28 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		requestDifferentScheduleInProgress = false;
 		applyFilterInProgress = false;
 		
+	}
+	
+	@Override
+	public void init()
+	{
+		bind();
+	}
+	
+	@Override
+	public void bind()
+	{
+		HandlerRegistration acceptRegistration;
+		acceptRegistration = eventBus.addHandler(SendAcceptScheduleEvent.TYPE, this);
+		eventBusRegistration.put(SendAcceptScheduleEvent.TYPE, acceptRegistration);
+		
+		HandlerRegistration requestRegistration;
+		requestRegistration = eventBus.addHandler(SendRequestDifferentScheduleEvent.TYPE,  this);
+		eventBusRegistration.put(SendRequestDifferentScheduleEvent.TYPE, requestRegistration);
+		
+		HandlerRegistration applyRegistration;
+		applyRegistration = eventBus.addHandler(SendHomeFilterEvent.TYPE,  this);
+		eventBusRegistration.put(SendHomeFilterEvent.TYPE, applyRegistration);
 	}
 	
 	@Override

@@ -10,7 +10,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendHomeEvent extends GwtEvent<SendHomeEventHandler>{
 
-	public static Type<SendHomeEventHandler> TYPE = new TYPE<SendHomeEventHandler>();
+	public static Type<SendHomeEventHandler> TYPE = new Type<SendHomeEventHandler>();
 	
 	private SendHomeAction action;
 	

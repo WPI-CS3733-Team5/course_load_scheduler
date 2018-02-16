@@ -22,6 +22,7 @@ import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.view.BaseView;
 import org.dselent.course_load_scheduler.client.view.MenuTabs;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
@@ -37,6 +38,64 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private boolean accountsInProgress;
 	private boolean schedulesInProgress;
 	private boolean logoutInProgress;
+	
+	@Inject
+	public MenuTabsPresenterImpl(IndexPresenter parentPresenter, MenuTabs view)
+	{
+		this.view = view;
+		this.parentPresenter = parentPresenter;
+		view.setPresenter(this);
+		homeInProgress = false;
+		profileInProgress = false;
+		notificationsInProgress = false;
+		wishlistInProgress = false;
+		coursesInProgress = false;
+		accountsInProgress = false;
+		schedulesInProgress = false;
+		logoutInProgress = false;
+	}
+	
+	@Override
+	public void init()
+	{
+		bind();
+	}
+	
+	@Override
+	public void bind()
+	{
+		HandlerRegistration homeRegistration;
+		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, this);
+		eventBusRegistration.put(SendHomeEvent.TYPE, homeRegistration);
+		
+		HandlerRegistration profileRegistration;
+		profileRegistration = eventBus.addHandler(SendProfileEvent.TYPE, this);
+		eventBusRegistration.put(SendProfileEvent.TYPE, profileRegistration);
+		
+		HandlerRegistration notificationsRegistration;
+		notificationsRegistration = eventBus.addHandler(SendNotificationsEvent.TYPE, this);
+		eventBusRegistration.put(SendNotificationsEvent.TYPE, notificationsRegistration);
+		
+		HandlerRegistration wishlistRegistration;
+		wishlistRegistration = eventBus.addHandler(SendWishlistEvent.TYPE, this);
+		eventBusRegistration.put(SendWishlistEvent.TYPE, wishlistRegistration);
+		
+		HandlerRegistration coursesRegistration;
+		coursesRegistration = eventBus.addHandler(SendCoursesEvent.TYPE, this);
+		eventBusRegistration.put(SendCoursesEvent.TYPE, coursesRegistration);
+		
+		HandlerRegistration accountsRegistration;
+		accountsRegistration = eventBus.addHandler(SendAccountsEvent.TYPE, this);
+		eventBusRegistration.put(SendAccountsEvent.TYPE, accountsRegistration);
+		
+		HandlerRegistration schedulesRegistration;
+		schedulesRegistration = eventBus.addHandler(SendSchedulesEvent.TYPE, this);
+		eventBusRegistration.put(SendSchedulesEvent.TYPE, schedulesRegistration);
+		
+		HandlerRegistration logoutRegistration;
+		logoutRegistration = eventBus.addHandler(SendLogoutEvent.TYPE, this);
+		eventBusRegistration.put(SendLogoutEvent.TYPE, logoutRegistration);
+	}
 
 	@Override
 	public void go(HasWidgets container) {
@@ -45,8 +104,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 
 	@Override
-	public BaseView<? extends BasePresenter> getView() {
-		return (BaseView<? extends BasePresenter>) this.view;
+	public MenuTabs getView() {
+		return this.view;
 	}
 
 	@Override
