@@ -1,0 +1,42 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel width="100%">
+		<g:VerticalPanel>
+			<g:Grid ui:field="menuGrid" width="100%">
+			<g:row>
+				<g:customCell>
+					<g:Button ui:field="homeButton">Home</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="profileButton">Profile</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="notificationsButton">Notifications</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="wishlistButton">Wishlist</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="coursesButton">Courses</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="accountsButton">Accounts</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="schedulesButton">Schedules</g:Button>
+				</g:customCell>
+				<g:customCell>
+					<g:Label text="username" ui:field="username"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="logoutButton">Logout</g:Button>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 
