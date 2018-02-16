@@ -7,7 +7,7 @@ public interface AccountsPresenter extends BasePresenter{
 	void editCourse();
 	void applyChanges();
 	void cancelChanges();
-	void removeCourse();
-	void createCourse();
+	void removeAccount();
+	void createAccount();
 	
 }

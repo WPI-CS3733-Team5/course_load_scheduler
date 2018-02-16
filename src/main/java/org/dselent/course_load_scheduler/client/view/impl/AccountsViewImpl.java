@@ -297,13 +297,11 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> {
 
 	@Override
 	public Widget getWidgetContainer() {
-		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
 	public HasWidgets getViewRootPanel() {
-		// TODO Auto-generated method stub
 		return this.fullGrid;
 	}
 	
@@ -325,12 +323,12 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> {
 	@UiHandler("buttonRemove")
 	void onbuttonRemoveClicked(ClickEvent evt)
 	{
-		presenter.removeCourse();
+		presenter.removeAccount();
 	}
 	@UiHandler("buttonCreate")
 	void onbuttonCreateClicked(ClickEvent evt)
 	{
-		presenter.createCourse();
+		presenter.createAccount();
 	}
 	
 }

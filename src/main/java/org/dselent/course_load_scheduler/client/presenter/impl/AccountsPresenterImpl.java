@@ -14,14 +14,38 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	private IndexPresenter parentPresenter;
 	private AccountsView view;
 	
+	private boolean editInProgress;
+	private boolean creationInProgress;
+	
 	public AccountsPresenterImpl(IndexPresenter parentPresenter, AccountsView view) {
 		this.parentPresenter = parentPresenter;
 		this.view = view;
+		editInProgress = false;
+		creationInProgress = false;
+
+		enableUserFields(false);
+		view.getButtonApply().setEnabled(false);
+		view.getButtonCancel().setEnabled(false);
+	}
+	
+	private void enableUserFields(boolean active) {
+		view.getEnterUserName().setEnabled(active);
+		view.getEnterFirstName().setEnabled(active);
+		view.getEnterLastName().setEnabled(active);
+		view.getEnterDepartment().setEnabled(active);
+		view.getEnterRank().setEnabled(active);
+		view.getEnterCourseLoad().setEnabled(active);
+		view.getEnterOffice().setEnabled(active);
+		view.getMenuPrivelages().setVisible(active);
+		view.getDropdownAdmin().setEnabled(active);
+		view.getDropdownNonAdmin().setEnabled(active);
+		view.getEnterEmail().setEnabled(active);
 	}
 	@Override
 	public void go(HasWidgets container) {
 		// TODO Auto-generated method stub
-		
+		container.clear();
+		container.add(view.getWidgetContainer());
 	}
 
 	@Override
@@ -56,32 +80,56 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	
 	@Override
 	public void editCourse() {
-		// TODO Auto-generated method stub
-		
+		if (!editInProgress && !creationInProgress) {
+			editInProgress = true;
+			enableUserFields(true);
+			view.getButtonApply().setEnabled(true);
+			view.getButtonCancel().setEnabled(true);
+			
+		}
 	}
 
 	@Override
 	public void applyChanges() {
-		// TODO Auto-generated method stub
-		
+		if (editInProgress) {
+			
+		}
+		else if (creationInProgress) {
+			
+		}
 	}
 
 	@Override
 	public void cancelChanges() {
-		// TODO Auto-generated method stub
+		if (editInProgress) {
+			editInProgress = false;
+			enableUserFields(false);
+			view.getButtonApply().setEnabled(false);
+			view.getButtonCancel().setEnabled(false);
+		}
+		else if (creationInProgress) {
+			creationInProgress = false;
+			enableUserFields(false);
+			view.getButtonApply().setEnabled(false);
+			view.getButtonCancel().setEnabled(false);
+		}
+	}
+
+	@Override
+	public void removeAccount() {
+		String item = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
+		
 		
 	}
 
 	@Override
-	public void removeCourse() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void createCourse() {
-		// TODO Auto-generated method stub
-		
+	public void createAccount() {
+		if (!creationInProgress && !editInProgress) {
+			creationInProgress = true;
+			enableUserFields(true);
+			view.getButtonApply().setEnabled(true);
+			view.getButtonCancel().setEnabled(true);
+		}
 	}
 
 }
