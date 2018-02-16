@@ -1,17 +1,9 @@
 package org.dselent.course_load_scheduler.client.view;
 
-import org.dselent.course_load_scheduler.client.view.impl.ScheduleSelectPresenter;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HasWidgets;
+import org.dselent.course_load_scheduler.client.presenter.ScheduleSelectPresenter;
+
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IntegerBox;
 

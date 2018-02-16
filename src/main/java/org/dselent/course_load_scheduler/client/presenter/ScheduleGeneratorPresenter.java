@@ -2,6 +2,9 @@ package org.dselent.course_load_scheduler.client.presenter;
 
 import java.util.List;
 
+import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
+
 public interface ScheduleGeneratorPresenter extends BasePresenter {
 	IndexPresenter getParentPresenter();
 	void setParentPresenter(IndexPresenter parentPresenter);
@@ -19,11 +22,11 @@ public interface ScheduleGeneratorPresenter extends BasePresenter {
 	UserInfo getUserInfo();
 	void setUserInfo(UserInfo user);
 	
-	List<CourseInfo> getCourseList();
-	boolean verifyCourse(CourseInfo course);
-	void setCourseList(List<CourseInfo> courseList);
-	void addToCourseList(List<CourseInfo> addList);
-	void removeFromCourseList(List<CourseInfo> removeList);
+	List<SectionInfo> getCourseList();
+	boolean verifyCourse(SectionInfo section);
+	void setCourseList(List<SectionInfo> sectionList);
+	void addToCourseList(List<SectionInfo> addList);
+	void removeFromCourseList(List<SectionInfo> removeList);
 	
 	void addRequested();
 	void selectRequested();
