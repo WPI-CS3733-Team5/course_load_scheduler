@@ -1,6 +1,8 @@
 package org.dselent.course_load_scheduler.client.view;
 
+import org.dselent.course_load_scheduler.client.presenter.MenuTabsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenterImpl;
+import org.dselent.course_load_scheduler.client.view.impl.BaseViewImpl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -8,10 +10,11 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
-public interface MenuTabs {
+public interface MenuTabs extends BaseView<MenuTabsPresenter>{
 		
 	public Button getHomeButton();
 	
@@ -50,6 +53,8 @@ public interface MenuTabs {
 	public Label getUsername();
 
 	public Widget getWidgetContainer();
+	
+	public HasWidgets getViewRootPanel();
 
 	public void setPresenter(MenuTabsPresenterImpl menuTabsPresenterImpl);
 

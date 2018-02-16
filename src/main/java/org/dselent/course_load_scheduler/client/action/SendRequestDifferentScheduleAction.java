@@ -1,13 +1,17 @@
 package org.dselent.course_load_scheduler.client.action;
 
+import com.google.gwt.user.client.ui.HasWidgets;
+
 public class SendRequestDifferentScheduleAction {
 	
 	private String userName;
 	private String term;
+	private HasWidgets panel;
 	
-	public SendRequestDifferentScheduleAction(String term, String username) {
+	public SendRequestDifferentScheduleAction(String term, String username, HasWidgets panel) {
 		this.term = term;
 		this.userName = username;
+		this.panel = panel;
 	}
 	
 	public String getUserName()
@@ -30,5 +34,9 @@ public class SendRequestDifferentScheduleAction {
 		builder.append(userName);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public HasWidgets getPanel() {
+		return panel;
 	}
 }
