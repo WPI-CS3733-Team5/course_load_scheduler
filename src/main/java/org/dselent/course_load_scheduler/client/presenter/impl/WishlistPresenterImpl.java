@@ -2,7 +2,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import org.dselent.course_load_scheduler.client.action.SendEditWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestNewScheduleAction;
-import org.dselent.course_load_scheduler.client.action.SendSortAction;
+import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
 import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
@@ -83,7 +83,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	private void sendSort(String dept, String term, String courseNum)
 	{
 		
-		SendSortAction ssa = new SendSortAction(dept, term, courseNum);
+		SendSortWishlistAction ssa = new SendSortWishlistAction(dept, term, courseNum);
 		SendSortWishlistEvent sse = new SendSortWishlistEvent(ssa);
 		eventBus.fireEvent(sse);
 		

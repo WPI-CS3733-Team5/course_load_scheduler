@@ -1,12 +1,12 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendSortAction 
+public class SendSortWishlistAction 
 {
 	private String dept;
 	private String term;
 	private String courseNum;
 	
-	public SendSortAction(String dept, String term, String courseNum)
+	public SendSortWishlistAction(String dept, String term, String courseNum)
 	{
 		this.dept = dept;
 		this.term = term;

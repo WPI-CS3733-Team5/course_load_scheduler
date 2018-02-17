@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.event;
 
-import org.dselent.course_load_scheduler.client.action.SendSortAction;
+import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
 //import org.dselent.course_load_scheduler.client.event_handler.SendSortEventHandler;
 import org.dselent.course_load_scheduler.client.event_handler.SendSortWishlistEventHandler;
 
@@ -10,14 +10,14 @@ import com.google.gwt.event.shared.GwtEvent;
 public class SendSortWishlistEvent extends GwtEvent<SendSortWishlistEventHandler>{
 		public static Type<SendSortWishlistEventHandler> TYPE = new Type<SendSortWishlistEventHandler>();
 		
-		private SendSortAction action;
+		private SendSortWishlistAction action;
 		
-		public SendSortWishlistEvent(SendSortAction action)
+		public SendSortWishlistEvent(SendSortWishlistAction action)
 		{
 			this.action = action;
 		}
 		
-		public SendSortAction getAction()
+		public SendSortWishlistAction getAction()
 		{
 			return action;
 		}
