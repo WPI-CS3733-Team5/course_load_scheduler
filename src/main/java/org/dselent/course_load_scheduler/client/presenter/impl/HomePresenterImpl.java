@@ -78,7 +78,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		}
 		
 		container.clear();
-		container.add(view.getWidgetContainer());		
+		container.add(view.getWidgetContainer());
 	}
 	
 	@SuppressWarnings("unchecked")
