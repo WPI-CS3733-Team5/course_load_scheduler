@@ -1,0 +1,47 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel ui:field="mainPanel">
+		<g:HorizontalPanel>
+			<g:VerticalPanel width="190px" ui:field="leftPanel">
+				<g:InlineLabel text="Notifications" width="191px" height="36px"/>
+				<g:ListBox visibleItemCount="5" height="416px" width="190px" ui:field="listNotification"/>
+			</g:VerticalPanel>
+			<g:LayoutPanel width="422px" height="329px" ui:field="rightPanel">
+				<g:layer left="16px" width="60px" top="18px" height="16px">
+					<g:Label text="Title:"/>
+				</g:layer>
+				<g:layer left="82px" top="18px" height="16px" right="0px">
+					<g:Label text="PLACEHOLDER_TITLE" ui:field="lblTitle"/>
+				</g:layer>
+				<g:layer left="16px" width="60px" top="40px" height="16px">
+					<g:Label text="Subject:"/>
+				</g:layer>
+				<g:layer left="82px" width="340px" top="40px" height="16px">
+					<g:Label text="PLACEHOLDER_SUBJECT" ui:field="lblSubject"/>
+				</g:layer>
+				<g:layer left="82px" width="340px" top="62px" height="16px">
+					<g:Label text="PLACEHOLDER_SENDER" ui:field="lblSender"/>
+				</g:layer>
+				<g:layer left="16px" width="60px" top="62px" height="16px">
+					<g:Label text="Sender:"/>
+				</g:layer>
+				<g:layer height="28px" right="0px" bottom="0px" left="339px">
+					<g:Button text="Archive" ui:field="btnArchive"/>
+				</g:layer>
+				<g:layer left="247px" height="28px" right="92px" bottom="0px">
+					<g:Button text="Reject" ui:field="btnReject"/>
+				</g:layer>
+				<g:layer left="155px" height="28px" bottom="0px" right="184px">
+					<g:Button text="Accept" ui:field="btnAccept"/>
+				</g:layer>
+				<g:layer left="16px" top="84px" right="0px" bottom="51px">
+					<g:TextArea ui:field="mainTextArea"/>
+				</g:layer>
+			</g:LayoutPanel>
+		</g:HorizontalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 
