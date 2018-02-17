@@ -34,6 +34,13 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private IndexPresenter parentPresenter;
 	private MenuTabs view;
 	private UserInfo user;
+	private HomePresenterImpl home;
+	private ProfilePresenterImpl profile;
+	private WishlistPresenterImpl wishlist;
+	private CoursesPresenterImpl courses;
+	private AccountsPresenterImpl accounts;
+	private SchedulesPresenterImpl schedules;
+	private LoginPresenterImpl login;
 	private boolean homeInProgress;
 	private boolean profileInProgress;
 	private boolean notificationsInProgress;
@@ -44,11 +51,26 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private boolean logoutInProgress;
 	
 	@Inject
-	public MenuTabsPresenterImpl(IndexPresenter parentPresenter, MenuTabs view)
+	public MenuTabsPresenterImpl(IndexPresenter parentPresenter, 
+			MenuTabs view, 
+			HomePresenterImpl home, 
+			ProfilePresenterImpl profile,  
+			WishlistPresenterImpl wishlist, 
+			CoursesPresenterImpl courses,
+			AccountsPresenterImpl accounts,
+			SchedulesPresenterImpl schedules,
+			LoginPresenterImpl login)
 	{
 		this.view = view;
 		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
+		this.home = home;
+		this.profile = profile;
+		this.wishlist = wishlist;
+		this.courses = courses;
+		this.accounts = accounts;
+		this.schedules = schedules;
+		this.login = login;
 		homeInProgress = false;
 		profileInProgress = false;
 		notificationsInProgress = false;
@@ -139,7 +161,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendHome()
 	{
-		SendHomeAction sha = new SendHomeAction(HomePresenterImpl.getView().getViewRootPanel());
+		SendHomeAction sha = new SendHomeAction(home.getView().getViewRootPanel());
 		SendHomeEvent she = new SendHomeEvent(sha);
 		eventBus.fireEvent(she);
 	}
@@ -156,7 +178,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendProfile() {
-		SendProfileAction spa = new SendProfileAction(ProfilePresenterImpl.getView().getViewRootPanel());
+		SendProfileAction spa = new SendProfileAction(profile.getView().getViewRootPanel());
 		SendProfileEvent spe = new SendProfileEvent(spa);
 		eventBus.fireEvent(spe);
 	}
@@ -191,7 +213,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendWishlist() {
-		SendWishlistAction swa = new SendWishlistAction(WishlistPresenterImpl.getView().getViewRootPanel());
+		SendWishlistAction swa = new SendWishlistAction(wishlist.getView().getViewRootPanel());
 		SendWishlistEvent swe = new SendWishlistEvent(swa);
 		eventBus.fireEvent(swe);
 	}
@@ -209,7 +231,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendCourses()
 	{
-		SendCoursesAction sca = new SendCoursesAction(CoursesPresenterImpl.getView().getViewRootPanel());
+		SendCoursesAction sca = new SendCoursesAction(courses.getView().getViewRootPanel());
 		SendCoursesEvent sce = new SendCoursesEvent(sca);
 		eventBus.fireEvent(sce);
 	}
@@ -227,7 +249,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendAccounts()
 	{
-		SendAccountsAction saa = new SendAccountsAction(AccountsPresenterImpl.getView().getViewRootPanel());
+		SendAccountsAction saa = new SendAccountsAction(accounts.getView().getViewRootPanel());
 		SendAccountsEvent sae = new SendAccountsEvent(saa);
 		eventBus.fireEvent(sae);
 	}
@@ -245,7 +267,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendSchedules()
 	{
-		SendSchedulesAction ssa = new SendSchedulesAction(SchedulesPresenterImpl.getView().getViewRootPanel());
+		SendSchedulesAction ssa = new SendSchedulesAction(schedules.getView().getViewRootPanel());
 		SendSchedulesEvent sse = new SendSchedulesEvent(ssa);
 		eventBus.fireEvent(sse);
 	}
@@ -262,7 +284,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendLogout() {
-		SendLogoutAction sla = new SendLogoutAction(LoginPresenterImpl.getView().getViewRootPanel());
+		SendLogoutAction sla = new SendLogoutAction(login.getView().getViewRootPanel());
 		SendLogoutEvent sle = new SendLogoutEvent(sla);
 		eventBus.fireEvent(sle);
 	}
