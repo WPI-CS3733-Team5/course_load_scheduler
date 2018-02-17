@@ -4,13 +4,13 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="mainPanel">
 		<g:HorizontalPanel>
-			<g:VerticalPanel width="190px">
+			<g:VerticalPanel width="190px" ui:field="leftPanel">
 				<g:InlineLabel text="Notifications" width="191px" height="36px"/>
 				<g:ListBox visibleItemCount="5" height="416px" width="190px" ui:field="listNotification"/>
 			</g:VerticalPanel>
-			<g:LayoutPanel width="422px" height="329px">
+			<g:LayoutPanel width="422px" height="329px" ui:field="rightPanel">
 				<g:layer left="16px" width="60px" top="18px" height="16px">
 					<g:Label text="Title:"/>
 				</g:layer>

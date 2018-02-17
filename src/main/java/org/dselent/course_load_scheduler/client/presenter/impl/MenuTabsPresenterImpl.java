@@ -2,6 +2,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
+import org.dselent.course_load_scheduler.client.action.SendFetchListAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
@@ -10,6 +11,7 @@ import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
+import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
@@ -75,8 +77,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		eventBusRegistration.put(SendProfileEvent.TYPE, profileRegistration);
 		
 		HandlerRegistration notificationsRegistration;
-		notificationsRegistration = eventBus.addHandler(SendNotificationsEvent.TYPE, this);
-		eventBusRegistration.put(SendNotificationsEvent.TYPE, notificationsRegistration);
+		notificationsRegistration = eventBus.addHandler(SendFetchListEvent.TYPE, this);
+		eventBusRegistration.put(SendFetchListEvent.TYPE, notificationsRegistration);
 		
 		HandlerRegistration wishlistRegistration;
 		wishlistRegistration = eventBus.addHandler(SendWishlistEvent.TYPE, this);
@@ -172,9 +174,9 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendNotifications() 
 	{
-		SendNotificationsAction sna = new SendNotificationsAction(NotificationsPresenterImpl.getView().getViewRootPanel());
-		SendNotificationsEvent sne = new SendNotificationsEvent(sna);
-		eventBus.fireEvent(sne);
+		SendFetchListAction sfla = new SendFetchListAction(user.getId());
+		SendFetchListEvent sfle = new SendFetchListEvent(sfla, this);
+		eventBus.fireEvent(sfle);
 	}
 
 	@Override

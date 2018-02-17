@@ -1,9 +1,12 @@
 package org.dselent.course_load_scheduler.client.presenter;
 
+//created by David M.
+
 import java.util.List;
 
 import org.dselent.course_load_scheduler.client.model.UserInfo;
-import org.dselent.course_load_scheduler.client.model.SectionInfo;
+import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
+import org.dselent.course_load_scheduler.client.model.CourseInfo;
 
 public interface ScheduleGeneratorPresenter extends BasePresenter {
 	IndexPresenter getParentPresenter();
@@ -21,13 +24,14 @@ public interface ScheduleGeneratorPresenter extends BasePresenter {
 	
 	UserInfo getUserInfo();
 	void setUserInfo(UserInfo user);
+	void verifyUser(String user) throws EmptyStringException;
 	
-	List<SectionInfo> getCourseList();
-	boolean verifyCourse(SectionInfo section);
-	void setCourseList(List<SectionInfo> sectionList);
-	void addToCourseList(List<SectionInfo> addList);
-	void removeFromCourseList(List<SectionInfo> removeList);
-	
+	List<CourseInfo> getCourseList();
+	void verifyCourse(String course) throws EmptyStringException;
+	void setCourseList(List<CourseInfo> sectionList);
+	void addToCourseList(String toAdd);
+	void removeFromCourseList(List<CourseInfo> removeList);
+		
 	void addRequested();
 	void selectRequested();
 	void selectAll();
