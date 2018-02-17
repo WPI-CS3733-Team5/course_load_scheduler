@@ -2,6 +2,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
+import org.dselent.course_load_scheduler.client.action.SendFetchListAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
@@ -10,6 +11,7 @@ import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
+import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
@@ -29,6 +31,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private IndexPresenter parentPresenter;
 	private MenuTabs view;
+	private int userID;
 	private boolean homeInProgress;
 	private boolean profileInProgress;
 	private boolean notificationsInProgress;
@@ -107,9 +110,9 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendNotifications() 
 	{
-		SendNotificationsAction sna = new SendNotificationsAction();
-		SendNotificationsEvent sne = new SendNotificationsEvent(sna);
-		eventBus.fireEvent(sne);
+			SendFetchListAction sfla = new SendFetchListAction(userID);
+			SendFetchListEvent sfle = new SendFetchListEvent(sfla, this);
+			eventBus.fireEvent(sfle);
 	}
 
 	@Override
@@ -199,4 +202,5 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		SendLogoutEvent sle = new SendLogoutEvent(sla);
 		eventBus.fireEvent(sle);
 	}
+
 }

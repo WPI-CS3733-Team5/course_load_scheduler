@@ -42,6 +42,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		container.add(view.getWidgetContainer());		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public BaseView<? extends BasePresenter> getView() {
 		return (BaseView<? extends BasePresenter>) this.view;
