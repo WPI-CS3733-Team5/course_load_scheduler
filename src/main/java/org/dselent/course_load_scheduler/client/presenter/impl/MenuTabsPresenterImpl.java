@@ -39,7 +39,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private WishlistPresenterImpl wishlist;
 	private CoursesPresenterImpl courses;
 	private AccountsPresenterImpl accounts;
-	private SchedulesPresenterImpl schedules;
+	private ScheduleGeneratorPresenterImpl schedules;
 	private LoginPresenterImpl login;
 	private boolean homeInProgress;
 	private boolean profileInProgress;
@@ -58,7 +58,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 			WishlistPresenterImpl wishlist, 
 			CoursesPresenterImpl courses,
 			AccountsPresenterImpl accounts,
-			SchedulesPresenterImpl schedules,
+			ScheduleGeneratorPresenterImpl schedules,
 			LoginPresenterImpl login)
 	{
 		this.view = view;
