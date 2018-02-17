@@ -43,16 +43,16 @@ public interface WishlistView {
 	
 	//Buttons. The "String errorMessage" may need to be changed to more appropriate names
 	Button getSortButton();
-	void showSortButtonErrorMessage(String errorMessages);
+	void showSortButtonErrorMessage(String INVALID_SEARCH_BUTTON);
 	
 	Button getViewCourseDetailsButton();
-	//void showViewCourseDetailsButtonErrorMessage(String errorMessage);
+	void showViewCourseDetailsButtonErrorMessage(String VIEW_COURSE_DETAILS_BUTTON);
 	
 	Button getEditWishlistButton();
-	//void showEditWishlistButtonErrorMessage(String errorMessage);
+	void showEditWishlistButtonErrorMessage(String EDIT_WISHLISTBUTTON);
 	
 	Button getRequestNewScheduleButton();
-	//void showRequestNewScheduleButton(String errorMessage);
+	void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN);
 	
 	Widget getWidgetContainer();
 	
