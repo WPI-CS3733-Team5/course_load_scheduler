@@ -24,12 +24,12 @@ public interface ScheduleGeneratorPresenter extends BasePresenter {
 	
 	UserInfo getUserInfo();
 	void setUserInfo(UserInfo user);
-	void verifyUserInfo(String user) throws EmptyStringException;
+	void verifyUser(String user) throws EmptyStringException;
 	
 	List<CourseInfo> getCourseList();
 	void verifyCourse(String course) throws EmptyStringException;
 	void setCourseList(List<CourseInfo> sectionList);
-	void addToCourseList(List<CourseInfo> addList);
+	void addToCourseList(String toAdd);
 	void removeFromCourseList(List<CourseInfo> removeList);
 		
 	void addRequested();
