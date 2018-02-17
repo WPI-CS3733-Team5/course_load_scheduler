@@ -37,6 +37,8 @@
 				</g:customCell>
 			</g:row>
 		</g:Grid>
+		<g:HTMLPanel ui:field="baseContainer" width="100%">
+		</g:HTMLPanel>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -161,7 +161,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendHome()
 	{
-		SendHomeAction sha = new SendHomeAction(home.getView().getViewRootPanel());
+		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
 		SendHomeEvent she = new SendHomeEvent(sha);
 		eventBus.fireEvent(she);
 	}
@@ -178,7 +178,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendProfile() {
-		SendProfileAction spa = new SendProfileAction(profile.getView().getViewRootPanel());
+		SendProfileAction spa = new SendProfileAction(view.getViewRootPanel());
 		SendProfileEvent spe = new SendProfileEvent(spa);
 		eventBus.fireEvent(spe);
 	}
@@ -213,7 +213,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendWishlist() {
-		SendWishlistAction swa = new SendWishlistAction(wishlist.getView().getViewRootPanel());
+		SendWishlistAction swa = new SendWishlistAction(view.getViewRootPanel());
 		SendWishlistEvent swe = new SendWishlistEvent(swa);
 		eventBus.fireEvent(swe);
 	}
@@ -231,7 +231,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendCourses()
 	{
-		SendCoursesAction sca = new SendCoursesAction(courses.getView().getViewRootPanel());
+		SendCoursesAction sca = new SendCoursesAction(view.getViewRootPanel());
 		SendCoursesEvent sce = new SendCoursesEvent(sca);
 		eventBus.fireEvent(sce);
 	}
@@ -249,7 +249,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendAccounts()
 	{
-		SendAccountsAction saa = new SendAccountsAction(accounts.getView().getViewRootPanel());
+		SendAccountsAction saa = new SendAccountsAction(view.getViewRootPanel());
 		SendAccountsEvent sae = new SendAccountsEvent(saa);
 		eventBus.fireEvent(sae);
 	}
@@ -267,7 +267,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendSchedules()
 	{
-		SendSchedulesAction ssa = new SendSchedulesAction(schedules.getView().getViewRootPanel());
+		SendSchedulesAction ssa = new SendSchedulesAction(view.getViewRootPanel());
 		SendSchedulesEvent sse = new SendSchedulesEvent(ssa);
 		eventBus.fireEvent(sse);
 	}
@@ -284,7 +284,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendLogout() {
-		SendLogoutAction sla = new SendLogoutAction(login.getView().getViewRootPanel());
+		SendLogoutAction sla = new SendLogoutAction(view.getViewRootPanel());
 		SendLogoutEvent sle = new SendLogoutEvent(sla);
 		eventBus.fireEvent(sle);
 	}		

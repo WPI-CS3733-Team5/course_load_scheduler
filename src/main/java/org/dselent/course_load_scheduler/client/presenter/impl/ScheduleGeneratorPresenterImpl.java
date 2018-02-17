@@ -58,6 +58,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	@Override
 	public void bind()
 	{
+		/*
 		HandlerRegistration homeRegistration;
 		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, SendHomeEventHandler);
 		eventBusRegistration.put(SendHomeEvent.TYPE, homeRegistration);
@@ -85,7 +86,8 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		HandlerRegistration sendGenerateEventRegistration;
 		sendGenerateEventRegistration = eventBus.addHandler(SendGenerateEvent.TYPE, SendGenerateEventHandler);
 		eventBusRegistration.put(SendGenerateEvent.TYPE, sendGenerateEventRegistration);
-	}
+		*/
+		}
 		
 	@Override
 	public void go(HasWidgets container)
@@ -154,20 +156,20 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			sendUserRequest(toSet);
 			sendWishlistRequest(toSet);
 		}else {
-			InvalidUserAction iua = new InvalidUserAction(toSet);
-			InvalidUserEvent iue = new InvalidUserEvent(iua);
-			eventBus.fireEvent(iue);
+		//	InvalidUserAction iua = new InvalidUserAction(toSet);
+		//	InvalidUserEvent iue = new InvalidUserEvent(iua);
+		//	eventBus.fireEvent(iue);
 		}
 	}
 	public void sendUserRequest(String user) {
-		SendUserInfoAction suia = new SendUserInfoAction(user);
-		SendUserInfoEvent suie = new SendUserInfoEvent(suia);
-		eventBus.fireEvent(suie);
+	//	SendUserInfoAction suia = new SendUserInfoAction(user);
+	//	SendUserInfoEvent suie = new SendUserInfoEvent(suia);
+	//	eventBus.fireEvent(suie);
 	}
 	public void sendWishlistRequest(String user) {
-		SendWishlistAction swa = new SendWishlistAction(user);
-		SendWishlistEvent swe = new SendWishlistEvent(swa);
-		eventBus.fireEvent(swe);
+	//	SendWishlistAction swa = new SendWishlistAction(user);
+	//	SendWishlistEvent swe = new SendWishlistEvent(swa);
+	//	eventBus.fireEvent(swe);
 	}
 	
 	public List<CourseInfo> getCourseList(){
@@ -191,15 +193,15 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		if(validCourse) {
 			sendCourseRequest(toAdd);
 		}else {
-			InvalidCourseAction ica = new InvalidCourseAction(toAdd);
-			InvalidCourseEvent ice = new InvalidCourseEvent(ica);
-			eventBus.fireEvent(ice);
+		//	InvalidCourseAction ica = new InvalidCourseAction(toAdd);
+		//	InvalidCourseEvent ice = new InvalidCourseEvent(ica);
+		//	eventBus.fireEvent(ice);
 		}
 	}
 	public void sendCourseRequest(String course) {
-		SendCourseInfoAction scia = new SendCourseInfoAction(course);
-		SendCourseInfoEvent scie = new SendCourseInfoEvent(scia);
-		eventBus.fireEvent(scie);
+	//	SendCourseInfoAction scia = new SendCourseInfoAction(course);
+	//	SendCourseInfoEvent scie = new SendCourseInfoEvent(scia);
+	//	eventBus.fireEvent(scie);
 	}
 	public void removeFromCourseList(List<CourseInfo> removeList) {
 		for(CourseInfo C: removeList) {
@@ -271,15 +273,15 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		if(!taskInProgress)
 		{
 			taskInProgress = true;			
-			sendHome();
+			//sendHome();
 		}
 	}
-	private void sendHome()
-	{
-		SendHomeAction sha = new SendHomeAction();
-		SendHomeEvent she = new SendHomeEvent(sha);
-		eventBus.fireEvent(she);
-	}
+	//private void sendHome()
+	//{
+	//	SendHomeAction sha = new SendHomeAction();
+	//	SendHomeEvent she = new SendHomeEvent(sha);
+	//	eventBus.fireEvent(she);
+	//}
 	public void generate() {
 		if(!taskInProgress) {
 			taskInProgress = true;
@@ -292,9 +294,9 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 				}
 			}
 			
-			SendGenerateAction sga = new SendGenerateAction(selected, currentUser);
-			SendGenerateEvent sge = new SendGenerateEvent(sga);
-			eventBus.fireEvend(sge);
+		//	SendGenerateAction sga = new SendGenerateAction(selected, currentUser);
+		//	SendGenerateEvent sge = new SendGenerateEvent(sga);
+		//	eventBus.fireEvend(sge);
 		}
 	}
 	

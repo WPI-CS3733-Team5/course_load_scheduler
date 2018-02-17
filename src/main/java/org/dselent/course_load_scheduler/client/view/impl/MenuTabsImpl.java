@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -21,6 +22,7 @@ public class MenuTabsImpl extends BaseViewImpl<MenuTabsPresenter> implements Men
 	private MenuTabsPresenterImpl parent;
 
 	@UiField Grid menuGrid;
+	@UiField HTMLPanel baseContainer;
 	@UiField Button homeButton;
 	@UiField Button profileButton;
 	@UiField Button notificationsButton;
@@ -119,13 +121,20 @@ public class MenuTabsImpl extends BaseViewImpl<MenuTabsPresenter> implements Men
 
 	@Override
 	public HasWidgets getViewRootPanel() {
-		return null;
+		return this.getBaseContainer();
 	}
 
 	@Override
 	public void setPresenter(MenuTabsPresenter presenter) {
-		// TODO Auto-generated method stub
-		
+		this.presenter = presenter;		
+	}
+
+	public HTMLPanel getBaseContainer() {
+		return baseContainer;
+	}
+
+	public void setBaseContainer(HTMLPanel baseContainer) {
+		this.baseContainer = baseContainer;
 	}
 
 }

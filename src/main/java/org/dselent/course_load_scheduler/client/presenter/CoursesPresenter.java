@@ -2,8 +2,8 @@ package org.dselent.course_load_scheduler.client.presenter;
 
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 
-import com.google.gwt.dev.asm.Label;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RadioButton;

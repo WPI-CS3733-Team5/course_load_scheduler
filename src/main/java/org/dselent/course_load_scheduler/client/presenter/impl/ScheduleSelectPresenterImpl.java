@@ -64,17 +64,17 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 	@Override
 	public void bind()
 	{
-		HandlerRegistration schedulesRegistration;
-		schedulesRegistration = eventBus.addHandler(SendSchedulesEvent.TYPE, SendSchedulesEventHandler);
-		eventBusRegistration.put(SendSchedulesEvent.TYPE, schedulesRegistration);
-		
-		HandlerRegistration invalidSelectionRegistration;
-		invalidSelectionRegistration = eventBus.addHandler(InvalidSelectionEvent.TYPE, InvalidSelectionEventHandler);
-		eventBusRegistration.put(InvalidSelectionEvent.TYPE, invalidSelectionRegistration);
-		
-		HandlerRegistration commitScheduleRegistration;
-		commitScheduleRegistration = eventBus.addHandler(SendCommitScheduleEvent.TYPE, SendCommitScheduleEventHandler);
-		eventBusRegistration.put(SendCommitScheduleEvent.TYPE, commitScheduleRegistration);
+//		HandlerRegistration schedulesRegistration;
+//		schedulesRegistration = eventBus.addHandler(SendSchedulesEvent.TYPE, SendSchedulesEventHandler);
+//		eventBusRegistration.put(SendSchedulesEvent.TYPE, schedulesRegistration);
+//		
+//		HandlerRegistration invalidSelectionRegistration;
+//		invalidSelectionRegistration = eventBus.addHandler(InvalidSelectionEvent.TYPE, InvalidSelectionEventHandler);
+//		eventBusRegistration.put(InvalidSelectionEvent.TYPE, invalidSelectionRegistration);
+//		
+//		HandlerRegistration commitScheduleRegistration;
+//		commitScheduleRegistration = eventBus.addHandler(SendCommitScheduleEvent.TYPE, SendCommitScheduleEventHandler);
+//		eventBusRegistration.put(SendCommitScheduleEvent.TYPE, commitScheduleRegistration);
 	}
 	
 	public IndexPresenter getParentPresenter() {
@@ -153,9 +153,9 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 				view.getCourseListBox().addItem(c.getSectionNumber() + c.getSectionType());
 			}
 		}else {
-			InvalidSelectionAction isa = new InvalidSelectionAction();
-			InvalidSelectionEvent ise = new InvalidSelectionEvent(isa);
-			eventBus.fireEvent(ise);
+//			InvalidSelectionAction isa = new InvalidSelectionAction();
+//			InvalidSelectionEvent ise = new InvalidSelectionEvent(isa);
+//			eventBus.fireEvent(ise);
 		}
 	}
 	//returns to the schedule generator pane
@@ -180,9 +180,9 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 			view.getScheduleListBox().removeItem(targetIndex);
 			view.getCourseListBox().clear();
 		}else {
-			InvalidSelectionAction isa = new InvalidSelectionAction();
-			InvalidSelectionEvent ise = new InvalidSelectionEvent(isa);
-			eventBus.fireEvent(ise);
+//			InvalidSelectionAction isa = new InvalidSelectionAction();
+//			InvalidSelectionEvent ise = new InvalidSelectionEvent(isa);
+//			eventBus.fireEvent(ise);
 		}
 	}
 	public void accept() {
@@ -196,9 +196,9 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 		}
 		
 		if(proceed) {
-			SendCommitScheduleAction scsa = new SendCommitScheduleAction(scheduleList.get(targetIndex));
-			SendCommitScheduleEvent scse = new SendCommitScheduleEvent(scsa);
-			eventBus.fireEvent(scse);
+//			SendCommitScheduleAction scsa = new SendCommitScheduleAction(scheduleList.get(targetIndex));
+//			SendCommitScheduleEvent scse = new SendCommitScheduleEvent(scsa);
+//			eventBus.fireEvent(scse);
 		}
 	}
 }

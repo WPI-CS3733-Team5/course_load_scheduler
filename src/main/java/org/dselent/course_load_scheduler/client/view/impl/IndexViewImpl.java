@@ -28,7 +28,7 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	PopupPanel glassLoadingPanel;
 	
 	@UiField
-	MenuTabsImpl menuTabs;
+	MenuTabsImpl menuTabsImpl;
 	
 	public IndexViewImpl()
 	{
