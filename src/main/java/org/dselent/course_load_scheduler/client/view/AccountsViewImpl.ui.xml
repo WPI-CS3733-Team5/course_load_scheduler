@@ -1,0 +1,130 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:com.google.gwt.widget.client">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:Grid width="670px" ui:field="fullGrid">
+			<g:row>
+				<g:customCell>
+					<g:Label text="Sort Accounts" ui:field="labelSort"/>
+				</g:customCell>
+				<g:customCell>
+					<g:HorizontalPanel ui:field="radioPanel">
+						<g:RadioButton name="new name" text="Department" ui:field="radioSortDepartment"/>
+						<g:RadioButton name="new name" text="Name" ui:field="radioSortName"/>
+						<g:RadioButton name="new name" text="UserName" ui:field="radioSortUserName"/>
+					</g:HorizontalPanel>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:ListBox visibleItemCount="5" width="271px" height="394px" ui:field="listAccounts"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Grid ui:field="gridEditing">
+			<g:row>
+				<g:customCell>
+					<g:Label text="UserName" ui:field="labelUserName"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterUserName"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="First Name" ui:field="labelFirstName"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterFirstName"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Last Name" ui:field="labelLastName"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterLastName"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Department" ui:field="labelDepartment"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterDepartment"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Rank" ui:field="labelRank"/>
+				</g:customCell>
+				<g:customCell>
+					<g:IntegerBox ui:field="enterRank"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Course Load" ui:field="labelCourseLoad"/>
+				</g:customCell>
+				<g:customCell>
+					<g:IntegerBox ui:field="enterCourseLoad"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Office" ui:field="labelOffice"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterOffice"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Privelages" ui:field="labelPrivelages"/>
+				</g:customCell>
+				<g:customCell>
+					<g:MenuBar ui:field="menuPrivelages">
+						<g:MenuItem text="Admin" ui:field="dropdownAdmin"/>
+						<g:MenuItem text="Non-Admin" ui:field="dropdownNonAdmin"/>
+					</g:MenuBar>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Email" ui:field="labelEmail"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="enterEmail"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Button ui:field="buttonEdit" text="Edit" width="130px"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Button ui:field="buttonApply" text="Apply Changes" width="130px"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="buttonCancel" text="Cancel Changes" width="130px"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Button ui:field="buttonRemove" text="Remove Account" width="130px"/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Button ui:field="buttonCreate" text="Create Account"/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+	</g:HTMLPanel>
+</ui:UiBinder> 
