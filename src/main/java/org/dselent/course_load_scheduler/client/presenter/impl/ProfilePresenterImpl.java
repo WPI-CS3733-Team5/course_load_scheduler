@@ -39,19 +39,18 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	
 	@Override
 	public void go(HasWidgets container) {
-		// TODO Auto-generated method stub
-		
+		container.clear();
+		container.add(view.getWidgetContainer());		
 	}
 
 	@Override
 	public ProfileView getView() {
-		// TODO Auto-generated method stub
 		return view;
 	}
 
 	@Override
-	public IndexPresenter getParentPresenter() {
-		// TODO Auto-generated method stub
+	public IndexPresenter getParentPresenter()
+	{
 		return parentPresenter;
 	}
 	
@@ -69,7 +68,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	private void sendProfileEditInfo() {
 		SendProfileEditInfoAction speia = new SendProfileEditInfoAction();
 		SendProfileEditInfoEvent speie = new SendProfileEditInfoEvent(speia);
-		eventBus.fireEvent(speia);
+		eventBus.fireEvent(speie);
 	}
 
 	@Override
