@@ -1,5 +1,16 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
+import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
+import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
+import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
+import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
+import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
+import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
+import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
+import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
+import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
@@ -82,9 +93,17 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	@Override
 	public void bind() {
-		HandlerRegistration registration;
+		HandlerRegistration createAccountRegistration;
+		createAccountRegistration = eventBus.addHandler(SendCreateAccountEvent.TYPE, this);
+		eventBusRegistration.put(SendCreateAccountEvent.TYPE, createAccountRegistration);
 		
+		HandlerRegistration editAccountRegistration;
+		editAccountRegistration = eventBus.addHandler(SendEditAccountEvent.TYPE,  this);
+		eventBusRegistration.put(SendEditAccountEvent.TYPE, editAccountRegistration);
 		
+		HandlerRegistration removeAccountRegistration;
+		removeAccountRegistration = eventBus.addHandler(SendRemoveAccountEvent.TYPE,  this);
+		eventBusRegistration.put(SendRemoveAccountEvent.TYPE, removeAccountRegistration);
 		
 	}
 	
@@ -106,28 +125,63 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			enableUserFields(false);
 			view.getButtonApply().setEnabled(false);
 			view.getButtonCancel().setEnabled(false);
+			UserInfo user = new UserInfo();
+			InstructorInfo instructor = new InstructorInfo();
+			
 			
 			String username = view.getEnterUserName().getText();
+			user.setUserName(username);
 			String firstName = view.getEnterFirstName().getText();
+			user.setFirstName(firstName);
 			String lastName = view.getEnterLastName().getText();
+			user.setLastName(lastName);
 			String department = view.getEnterDepartment().getText();
+			instructor.setDepartment(department);
 			Integer rank = view.getEnterRank().getValue();
+			instructor.setRank(rank);
 			Integer courseLoad = view.getEnterCourseLoad().getValue();
+			instructor.setCourseLoad(courseLoad);
 			String office = view.getEnterOffice().getText();
+			instructor.setOffice(office);
 			String email = view.getEnterEmail().getText();
+			user.setEmail(email);
+			
+			SendEditAccountAction seaa = new SendEditAccountAction(user, instructor);
+			SendEditAccountEvent seae = new SendEditAccountEvent(seaa);
+			eventBus.fireEvent(seae);
 			
 			
 			
 		}
 		else if (creationInProgress) {
+			creationInProgress = false;
+			enableUserFields(false);
+			view.getButtonApply().setEnabled(false);
+			view.getButtonCancel().setEnabled(false);
+			UserInfo user = new UserInfo();
+			InstructorInfo instructor = new InstructorInfo();
+			
 			String username = view.getEnterUserName().getText();
+			user.setUserName(username);
 			String firstName = view.getEnterFirstName().getText();
+			user.setFirstName(firstName);
 			String lastName = view.getEnterLastName().getText();
+			user.setLastName(lastName);
 			String department = view.getEnterDepartment().getText();
+			instructor.setDepartment(department);
 			Integer rank = view.getEnterRank().getValue();
+			instructor.setRank(rank);
 			Integer courseLoad = view.getEnterCourseLoad().getValue();
+			instructor.setCourseLoad(courseLoad);
 			String office = view.getEnterOffice().getText();
+			instructor.setOffice(office);
 			String email = view.getEnterEmail().getText();
+			user.setEmail(email);
+			
+			SendCreateAccountAction scaa = new SendCreateAccountAction(user, instructor);
+			SendCreateAccountEvent scae = new SendCreateAccountEvent(scaa);
+			eventBus.fireEvent(scae);
+			
 			
 			
 		}
@@ -153,7 +207,12 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 
 	@Override
 	public void removeAccount() {
-		String itemToRemove = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
+		//String itemToRemove = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
+		String accountInfo = view.getListAccounts().getItemText(view.getListAccounts().getSelectedIndex());
+		
+		SendRemoveAccountAction sraa = new SendRemoveAccountAction(accountInfo);
+		SendRemoveAccountEvent srae = new SendRemoveAccountEvent(sraa);
+		eventBus.fireEvent(srae);
 		
 		
 	}

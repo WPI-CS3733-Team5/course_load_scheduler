@@ -5,12 +5,15 @@ import org.dselent.course_load_scheduler.client.event.ReceiveNotificationListEve
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
+import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
+import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
+import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
@@ -40,7 +43,10 @@ implements InvalidLoginEventHandler,
 			SendCoursesEventHandler,
 			SendAccountsEventHandler,
 			SendSchedulesEventHandler,
-			SendLogoutEventHandler
+			SendLogoutEventHandler,
+			SendCreateAccountEventHandler,
+			SendEditAccountEventHandler,
+			SendRemoveAccountEventHandler
 {
 	@Override
 	public void onInvalidLogin(InvalidLoginEvent evt) {}
@@ -82,4 +88,13 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onSendLogout(SendLogoutEvent evt) {}
+	
+	@Override
+	public void onSendCreateAccount(SendCreateAccountEvent evt) {}
+	
+	@Override
+	public void onSendEditAccount(SendEditAccountEvent evt) {}
+	
+	@Override
+	public void onSendRemoveAccount(SendRemoveAccountEvent evt) {}
 }
