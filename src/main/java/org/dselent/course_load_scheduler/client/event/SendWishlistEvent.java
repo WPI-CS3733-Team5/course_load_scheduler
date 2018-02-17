@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendWishlistEvent  extends GwtEvent<SendWishlistEventHandler>{
 	
-	public static Type<SendWishlistEventHandler> TYPE = new TYPE<SendWishlistEventHandler>();
+	public static Type<SendWishlistEventHandler> TYPE = new Type<SendWishlistEventHandler>();
 	
 	private SendWishlistAction action;
 	

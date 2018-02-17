@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendNotificationsEvent extends GwtEvent<SendNotificationsEventHandler>{
 	
-	public static Type<SendNotificationsEventHandler> TYPE = new TYPE<SendNotificationsEventHandler>();
+	public static Type<SendNotificationsEventHandler> TYPE = new Type<SendNotificationsEventHandler>();
 	
 	private SendNotificationsAction action;
 	

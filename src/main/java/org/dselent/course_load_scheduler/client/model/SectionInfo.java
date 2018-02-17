@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.model;
 
+// created by David M.
+
 public class SectionInfo {
 	private Integer id;
 	private Integer sectionNumber;
