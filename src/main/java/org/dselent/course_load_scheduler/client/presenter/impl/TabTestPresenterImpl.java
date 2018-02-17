@@ -35,9 +35,10 @@ public class TabTestPresenterImpl extends BasePresenterImpl implements TabTestPr
 	
 	TabTestView view;
 	
-	@Inject
+	//@Inject
 	public void TabTestPresenterImpl(TabTestView view)
 	{
+		this.view=view;
 		view.setPresenter(this);
 	}
 	
@@ -50,7 +51,6 @@ public class TabTestPresenterImpl extends BasePresenterImpl implements TabTestPr
 	@Override
 	public void bind()
 	{
-
 	}
 
 	@Override
@@ -62,13 +62,11 @@ public class TabTestPresenterImpl extends BasePresenterImpl implements TabTestPr
 
 	@Override
 	public BaseView<? extends BasePresenter> getView() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.view;
 	}
 
 	@Override
 	public IndexPresenter getParentPresenter() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

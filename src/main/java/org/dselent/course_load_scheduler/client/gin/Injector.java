@@ -36,10 +36,10 @@ public interface Injector extends Ginjector
     // presenters
     public IndexPresenterImpl getIndexPresenter();
     public LoginPresenterImpl getLoginPresenter();
-    public TabTestPresenterImpl getTestTabPresenter();
+    //public TabTestPresenterImpl getTestTabPresenter();
     
     //views
     public IndexViewImpl getIndexView();
     public LoginViewImpl getLoginView();
-    public TabTest getTabTestView();
+    //public TabTest getTabTestView();
 }

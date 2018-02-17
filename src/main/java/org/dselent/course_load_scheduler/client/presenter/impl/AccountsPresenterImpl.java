@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import javax.inject.Inject;
+
 import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
@@ -29,6 +31,7 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	private boolean editInProgress;
 	private boolean creationInProgress;
 	
+	@Inject
 	public AccountsPresenterImpl(IndexPresenter parentPresenter, AccountsView view) {
 		this.parentPresenter = parentPresenter;
 		this.view = view;

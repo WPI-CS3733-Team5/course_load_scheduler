@@ -27,6 +27,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	private boolean editInfoClickInProgress;
 	private boolean editWishlistClickInProgress;
 
+	@Inject
 	public ProfilePresenterImpl(IndexPresenter parentPresenter, ProfileView view)
 	{
 		this.view = view;

@@ -1,5 +1,8 @@
 package org.dselent.course_load_scheduler.client.view;
 
+import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
+import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
+
 //import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
 import com.google.gwt.user.client.ui.Button;
 //import com.google.gwt.user.client.ui.TextBox;
@@ -7,7 +10,7 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.ListBox;
 
-public interface WishlistView {
+public interface WishlistView extends BaseView<WishlistPresenter>{
 	
 	//radio buttons
 	RadioButton getSortDeptRadioButton();

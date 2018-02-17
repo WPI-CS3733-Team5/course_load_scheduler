@@ -2,6 +2,8 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
@@ -26,7 +28,8 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 	private List<SectionInfo> displayedSchedule;
 	private Boolean taskInProgress;
 	
-	public ScheduleSelectPresenterImpl(IndexPresenter parentPresenter, ScheduleSelectView view, List<List<SectionInfo>> scheduleList)
+	@Inject
+	public ScheduleSelectPresenterImpl(IndexPresenter parentPresenter, ScheduleSelectView view)
 	{
 		this.view = view;
 		this.parentPresenter = parentPresenter;
@@ -36,11 +39,6 @@ public class ScheduleSelectPresenterImpl extends BasePresenterImpl implements Sc
 		year = null;
 		displayedSchedule = null;
 		taskInProgress = false;
-		
-		int i = 1;
-		for(List<SectionInfo> s:scheduleList) {
-			view.getScheduleListBox().addItem("Schedule" + i);
-		}
 	}
 	
 	@Override

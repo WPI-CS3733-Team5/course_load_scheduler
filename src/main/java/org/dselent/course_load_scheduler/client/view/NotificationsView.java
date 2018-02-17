@@ -1,5 +1,6 @@
 package org.dselent.course_load_scheduler.client.view;
 
+import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPresenterImpl;
 
 import com.google.gwt.user.client.ui.Button;
@@ -7,7 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 
-public interface NotificationsView extends BaseView<NotificationsPresenterImpl>{
+public interface NotificationsView extends BaseView<NotificationsPresenter>{
 	
 	public Button getBtnAccept();
 	public void setBtnAccept(Button btnAccept);

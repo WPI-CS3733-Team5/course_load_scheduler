@@ -1,8 +1,15 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
+import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
+import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
+import org.dselent.course_load_scheduler.client.view.NotificationsView;
+import org.dselent.course_load_scheduler.client.view.WishlistView;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
 
@@ -11,12 +18,13 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class WishlistViewImpl extends Composite {
+public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements WishlistView {
 
 	private static WishlistViewUiBinder uiBinder = GWT.create(WishlistViewUiBinder.class);
 	
 	interface WishlistViewUiBinder extends UiBinder<Widget, WishlistViewImpl> {
 	}
+	@UiField HTMLPanel root;
 	@UiField RadioButton sortDeptRadioButton;
 	@UiField RadioButton sortTermRadioButton;
 	@UiField RadioButton sortCourseNumberRadioButton;
@@ -33,8 +41,6 @@ public class WishlistViewImpl extends Composite {
 	@UiField Button viewCourseDetailsButton;
 	@UiField Button editWishlistButton;
 	@UiField Button requestNewScheduleButton;
-
-
 
 	public WishlistViewImpl() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -158,6 +164,55 @@ public class WishlistViewImpl extends Composite {
 
 	public void setRequestNewScheduleButton(Button requestNewScheduleButton) {
 		this.requestNewScheduleButton = requestNewScheduleButton;
+	}
+
+	@Override
+	public void setPresenter(WishlistPresenter presenter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HasWidgets getViewRootPanel() {
+		// TODO Auto-generated method stub
+		return this.getRoot();
+	}
+
+	@Override
+	public void showSortButtonErrorMessage(String INVALID_SEARCH_BUTTON) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showViewCourseDetailsButtonErrorMessage(String VIEW_COURSE_DETAILS_BUTTON) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showEditWishlistButtonErrorMessage(String EDIT_WISHLISTBUTTON) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Widget getWidgetContainer() {
+		return this;
+	}
+
+	public HTMLPanel getRoot() {
+		return root;
+	}
+
+	public void setRoot(HTMLPanel root) {
+		this.root = root;
 	}
 	
 	
