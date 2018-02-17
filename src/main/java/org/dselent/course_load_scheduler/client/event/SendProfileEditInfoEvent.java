@@ -1,11 +1,15 @@
 package org.dselent.course_load_scheduler.client.event;
 
 import org.dselent.course_load_scheduler.client.action.SendProfileEditInfoAction;
+import org.dselent.course_load_scheduler.client.event_handler.SendAccountsEventHandler;
 import org.dselent.course_load_scheduler.client.event_handler.SendProfileEditInfoEventHandler;
+import org.dselent.course_load_scheduler.client.event_handler.SendProfileEventHandler;
+
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 
-public class SendProfileEditInfoEvent {
+public class SendProfileEditInfoEvent extends GwtEvent<SendProfileEditInfoEventHandler>{
 	
 	public static Type<SendProfileEditInfoEventHandler> TYPE = new Type<SendProfileEditInfoEventHandler>();
 

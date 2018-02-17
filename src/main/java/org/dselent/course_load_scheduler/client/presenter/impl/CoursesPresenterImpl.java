@@ -24,6 +24,7 @@ import org.dselent.course_load_scheduler.client.action.SendViewFullWishlistActio
 import org.dselent.course_load_scheduler.client.event.SendAddToWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendApplyChangesEvent;
 import org.dselent.course_load_scheduler.client.event.SendCancelChangesEvent;
+import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateCourseEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
@@ -713,6 +714,9 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 	}
 
-
+	@Override
+	public void onSendCourses(SendCoursesEvent evt) {
+		go(evt.getAction().getPanel());
+	}	
 
 }

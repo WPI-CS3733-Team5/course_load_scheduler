@@ -1,11 +1,13 @@
 package org.dselent.course_load_scheduler.client.event;
 
 import org.dselent.course_load_scheduler.client.action.SendProfileEditWishlistAction;
+import org.dselent.course_load_scheduler.client.event_handler.SendAccountsEventHandler;
 import org.dselent.course_load_scheduler.client.event_handler.SendProfileEditWishlistEventHandler;
 
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
-public class SendProfileEditWishlistEvent {
+public class SendProfileEditWishlistEvent extends GwtEvent<SendProfileEditWishlistEventHandler>{
 
 	public static Type<SendProfileEditWishlistEventHandler> TYPE = new Type<SendProfileEditWishlistEventHandler>();
 
