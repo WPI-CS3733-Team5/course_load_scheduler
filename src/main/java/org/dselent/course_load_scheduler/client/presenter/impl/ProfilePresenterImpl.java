@@ -8,6 +8,7 @@ import org.dselent.course_load_scheduler.client.action.SendProfileEditWishlistAc
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEditInfoEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEditWishlistEvent;
+import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
@@ -82,5 +83,8 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 		eventBus.fireEvent(spewe);
 	}
 
-
+	@Override
+	public void onSendProfile(SendProfileEvent evt) {
+		go(evt.getAction().getPanel());
+	}
 }

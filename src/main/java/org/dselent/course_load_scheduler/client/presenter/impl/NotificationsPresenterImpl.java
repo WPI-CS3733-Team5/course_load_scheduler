@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.dselent.course_load_scheduler.client.action.SendFetchListAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveNotificationListEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
+import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
 import org.dselent.course_load_scheduler.client.model.Notifications;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
@@ -93,6 +94,11 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 			view.getLblSubject().setText("N/A");
 			view.getLblTitle().setText("N/A");
 		}
+	}
+	
+	@Override
+	public void onSendNotifications(SendNotificationsEvent evt) {
+		go(evt.getAction().getPanel());
 	}
 
 }

@@ -4,6 +4,7 @@ import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
+import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
@@ -226,6 +227,11 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			view.getButtonApply().setEnabled(true);
 			view.getButtonCancel().setEnabled(true);
 		}
+	}
+	
+	@Override
+	public void onSendAccounts(SendAccountsEvent evt) {
+		go(evt.getAction().getPanel());
 	}
 
 }

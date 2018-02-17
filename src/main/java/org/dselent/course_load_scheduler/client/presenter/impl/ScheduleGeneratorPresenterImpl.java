@@ -8,6 +8,7 @@ import java.util.List;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
+import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
@@ -295,5 +296,10 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			SendGenerateEvent sge = new SendGenerateEvent(sga);
 			eventBus.fireEvend(sge);
 		}
+	}
+	
+	@Override
+	public void onSendSchedules(SendSchedulesEvent evt) {
+		go(evt.getAction().getPanel());
 	}
 }

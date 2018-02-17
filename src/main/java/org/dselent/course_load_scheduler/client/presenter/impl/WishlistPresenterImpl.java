@@ -8,6 +8,7 @@ import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewCourseDetailsEvent;
+import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
@@ -157,5 +158,8 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		
 	}
 	
-
+	@Override
+	public void onSendWishlist(SendWishlistEvent evt) {
+		go(evt.getAction().getPanel());
+	}
 }

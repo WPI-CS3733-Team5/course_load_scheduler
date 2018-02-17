@@ -287,47 +287,11 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		SendLogoutAction sla = new SendLogoutAction(login.getView().getViewRootPanel());
 		SendLogoutEvent sle = new SendLogoutEvent(sla);
 		eventBus.fireEvent(sle);
-	}
-	
-	//TODO move to ProfilePresenterImpl
-	@Override
-	public void onSendProfile(SendProfileEvent evt) {
-		go(evt.getAction().getPanel());
-	}
-	
-	//TODO move to NotificationsPresenterImpl
-	@Override
-	public void onSendNotifications(SendNotificationsEvent evt) {
-		go(evt.getAction().getPanel());
-	}
-	
-	//TODO move to WishlistPresenterImpl
-	@Override
-	public void onSendWishlist(SendWishlistEvent evt) {
-		go(evt.getAction().getPanel());
-	}
+	}	
 	
 	//TODO move to CoursesPresenterImpl
 	@Override
 	public void onSendCourses(SendCoursesEvent evt) {
 		go(evt.getAction().getPanel());
-	}
-	
-	//TODO move to AccountsPresenterImpl
-	@Override
-	public void onSendAccounts(SendAccountsEvent evt) {
-		go(evt.getAction().getPanel());
-	}
-	
-	//TODO move to SchedulesPresenterImpl
-	@Override
-	public void onSendSchedules(SendSchedulesEvent evt) {
-		go(evt.getAction().getPanel());
-	}
-	
-	//TODO move to LoginPresenterImpl
-	@Override
-	public void onSendLogout(SendLogoutEvent evt) {
-		go(evt.getAction().getPanel());
-	}
+	}	
 }
