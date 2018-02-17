@@ -41,6 +41,16 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 		view.getDropdownNonAdmin().setEnabled(active);
 		view.getEnterEmail().setEnabled(active);
 	}
+	private void clearUserFields() {
+		view.getEnterUserName().setText("");
+		view.getEnterFirstName().setText("");
+		view.getEnterLastName().setText("");
+		view.getEnterDepartment().setText("");
+		view.getEnterRank().setText("");
+		view.getEnterCourseLoad().setText("");
+		view.getEnterOffice().setText("");
+		view.getEnterEmail().setText("");
+	}
 	@Override
 	public void go(HasWidgets container) {
 		// TODO Auto-generated method stub
@@ -92,9 +102,33 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	@Override
 	public void applyChanges() {
 		if (editInProgress) {
+			editInProgress = false;
+			enableUserFields(false);
+			view.getButtonApply().setEnabled(false);
+			view.getButtonCancel().setEnabled(false);
+			
+			String username = view.getEnterUserName().getText();
+			String firstName = view.getEnterFirstName().getText();
+			String lastName = view.getEnterLastName().getText();
+			String department = view.getEnterDepartment().getText();
+			Integer rank = view.getEnterRank().getValue();
+			Integer courseLoad = view.getEnterCourseLoad().getValue();
+			String office = view.getEnterOffice().getText();
+			String email = view.getEnterEmail().getText();
+			
+			
 			
 		}
 		else if (creationInProgress) {
+			String username = view.getEnterUserName().getText();
+			String firstName = view.getEnterFirstName().getText();
+			String lastName = view.getEnterLastName().getText();
+			String department = view.getEnterDepartment().getText();
+			Integer rank = view.getEnterRank().getValue();
+			Integer courseLoad = view.getEnterCourseLoad().getValue();
+			String office = view.getEnterOffice().getText();
+			String email = view.getEnterEmail().getText();
+			
 			
 		}
 	}
@@ -103,12 +137,14 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	public void cancelChanges() {
 		if (editInProgress) {
 			editInProgress = false;
+			clearUserFields();
 			enableUserFields(false);
 			view.getButtonApply().setEnabled(false);
 			view.getButtonCancel().setEnabled(false);
 		}
 		else if (creationInProgress) {
 			creationInProgress = false;
+			clearUserFields();
 			enableUserFields(false);
 			view.getButtonApply().setEnabled(false);
 			view.getButtonCancel().setEnabled(false);
@@ -117,7 +153,7 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 
 	@Override
 	public void removeAccount() {
-		String item = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
+		String itemToRemove = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
 		
 		
 	}
@@ -127,6 +163,7 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 		if (!creationInProgress && !editInProgress) {
 			creationInProgress = true;
 			enableUserFields(true);
+			clearUserFields();
 			view.getButtonApply().setEnabled(true);
 			view.getButtonCancel().setEnabled(true);
 		}

@@ -21,10 +21,12 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
-public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> {
+public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements AccountsView{
 
 	private static AccountsViewUiBinder uiBinder = GWT.create(AccountsViewUiBinder.class);
+	
 	interface AccountsViewUiBinder extends UiBinder<Widget, AccountsViewImpl> {}
+	
 	@UiField Label labelUserName;
 	@UiField TextBox enterUserName;
 	@UiField Label labelFirstName;
