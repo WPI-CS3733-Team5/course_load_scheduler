@@ -1,6 +1,7 @@
 package org.dselent.course_load_scheduler.client.event_handler;
 
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveNotificationListEvent;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
@@ -13,7 +14,6 @@ import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 
 /**
  * Adapter class for convenience
@@ -27,7 +27,9 @@ import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
  */
 public abstract class EventHandlerAdapter
 implements InvalidLoginEventHandler, 
-			SendLoginEventHandler,
+			SendLoginEventHandler, 
+			SendFetchListEventHandler, 
+			ReceiveNotificationListEventHandler,
 			SendAcceptScheduleEventHandler,
 			SendRequestDifferentScheduleEventHandler,
 			SendHomeFilterEventHandler,
@@ -47,6 +49,8 @@ implements InvalidLoginEventHandler,
 	public void onSendLogin(SendLoginEvent evt) {}
 	
 	@Override
+	public void onNotificationListReceipt(ReceiveNotificationListEvent evt) {}
+
 	public void onSendAcceptSchedule(SendAcceptScheduleEvent evt) {}
 	
 	@Override
