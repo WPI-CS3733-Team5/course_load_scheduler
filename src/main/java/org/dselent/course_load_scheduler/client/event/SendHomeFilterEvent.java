@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendHomeFilterEvent extends GwtEvent<SendHomeFilterEventHandler>{
 	
-	public static Type<SendHomeFilterEventHandler> TYPE = new TYPE<SendHomeFilterEventHandler>();
+	public static Type<SendHomeFilterEventHandler> TYPE = new Type<SendHomeFilterEventHandler>();
 	
 	private SendHomeFilterAction action;
 	

@@ -4,6 +4,7 @@ import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -39,5 +40,7 @@ public interface HomeView {
 	public  Widget getWidgetContainer();
 
 	public void setParent(HomePresenterImpl homePresenterImpl);
+
+	public HasWidgets getViewRootPanel();
 
 }

@@ -1,7 +1,19 @@
 package org.dselent.course_load_scheduler.client.event_handler;
 
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
+import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
+import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
+import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
+import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
+import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
+import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
+import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
+import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
+import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
+import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
+import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
+import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 
 /**
  * Adapter class for convenience
@@ -14,11 +26,56 @@ import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
  * 
  */
 public abstract class EventHandlerAdapter
-implements InvalidLoginEventHandler, SendLoginEventHandler
+implements InvalidLoginEventHandler, 
+			SendLoginEventHandler,
+			SendAcceptScheduleEventHandler,
+			SendRequestDifferentScheduleEventHandler,
+			SendHomeFilterEventHandler,
+			SendHomeEventHandler,
+			SendProfileEventHandler,
+			SendNotificationsEventHandler,
+			SendWishlistEventHandler,
+			SendCoursesEventHandler,
+			SendAccountsEventHandler,
+			SendSchedulesEventHandler,
+			SendLogoutEventHandler
 {
 	@Override
 	public void onInvalidLogin(InvalidLoginEvent evt) {}
 	
 	@Override
 	public void onSendLogin(SendLoginEvent evt) {}
+	
+	@Override
+	public void onSendAcceptSchedule(SendAcceptScheduleEvent evt) {}
+	
+	@Override
+	public void onSendRequestDifferentSchedule(SendRequestDifferentScheduleEvent evt) {}
+	
+	@Override
+	public void onSendHomeFilter(SendHomeFilterEvent evt) {}
+	
+	@Override
+	public void onSendHome(SendHomeEvent evt) {}
+	
+	@Override
+	public void onSendProfile(SendProfileEvent evt) {}
+	
+	@Override
+	public void onSendNotifications(SendNotificationsEvent evt) {}
+	
+	@Override
+	public void onSendWishlist(SendWishlistEvent evt) {}
+	
+	@Override
+	public void onSendCourses(SendCoursesEvent evt) {}
+	
+	@Override
+	public void onSendAccounts(SendAccountsEvent evt) {}
+	
+	@Override
+	public void onSendSchedules(SendSchedulesEvent evt) {}
+	
+	@Override
+	public void onSendLogout(SendLogoutEvent evt) {}
 }

@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendProfileEvent extends GwtEvent<SendProfileEventHandler>{
 	
-	public static Type<SendProfileEventHandler> TYPE = new TYPE<SendProfileEventHandler>();
+	public static Type<SendProfileEventHandler> TYPE = new Type<SendProfileEventHandler>();
 	
 	private SendProfileAction action;
 	

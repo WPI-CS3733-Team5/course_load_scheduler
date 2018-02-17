@@ -14,6 +14,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 
@@ -23,6 +24,7 @@ public class HomeViewImpl extends BaseViewImpl<HomePresenter> implements HomeVie
 	interface HomeViewUiBinder extends UiBinder<Widget, HomeViewImpl> {}
 	private HomePresenterImpl parent;
 
+	@UiField HTMLPanel mainPanel;
 	@UiField ListBox termDropDown;
 	@UiField ListBox usernameDropDown;
 	@UiField Button apply;
@@ -90,12 +92,12 @@ public class HomeViewImpl extends BaseViewImpl<HomePresenter> implements HomeVie
 
 	@Override
 	public Widget getWidgetContainer() {
-		return null;
+		return this;
 	}
 
 	@Override
 	public HasWidgets getViewRootPanel() {
-		return null;
+		return mainPanel;
 	}
 	
 	@UiHandler("apply")

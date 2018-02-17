@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendLogoutEvent extends GwtEvent<SendLogoutEventHandler>{
 	
-	public static Type<SendLogoutEventHandler> TYPE = new TYPE<SendLogoutEventHandler>();
+	public static Type<SendLogoutEventHandler> TYPE = new Type<SendLogoutEventHandler>();
 	
 	private SendLogoutAction action;
 	
