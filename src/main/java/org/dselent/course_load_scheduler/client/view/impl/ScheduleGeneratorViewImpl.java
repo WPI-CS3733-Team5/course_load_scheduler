@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
+//created by David M.
+
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
 import org.dselent.course_load_scheduler.client.view.ScheduleGeneratorView;
 

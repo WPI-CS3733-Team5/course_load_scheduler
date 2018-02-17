@@ -1,6 +1,10 @@
 package org.dselent.course_load_scheduler.client.presenter;
 
+//created by David M.
+
 import java.util.List;
+
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 
 public interface ScheduleSelectPresenter extends BasePresenter{
 	IndexPresenter getParentPresenter();
@@ -12,8 +16,8 @@ public interface ScheduleSelectPresenter extends BasePresenter{
 	Integer getYear();
 	void setYear(Integer year);
 	
-	List<CourseInfo> getCourseList();
-	void setCourseList(List<CourseInfo> courseList);
+	List<SectionInfo> getCourseList();
+	void setCourseList(List<SectionInfo> courseList);
 	
 	List<ScheduleInfo> getScheduleList();
 	void setScheduleList(List<ScheduleInfo> scheduleList);
