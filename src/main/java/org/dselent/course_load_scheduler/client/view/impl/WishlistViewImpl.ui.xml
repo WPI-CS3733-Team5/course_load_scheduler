@@ -1,0 +1,53 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:AbsolutePanel height="366px">
+			<g:at top="44" left="7">
+				<g:RadioButton name="new name" text="Sort:" ui:field="sortDeptRadioButton"/>
+			</g:at>
+			<g:at top="44" left="56">
+				<g:ListBox ui:field="deptCmbx"/>
+			</g:at>
+			<g:at top="44" left="168">
+				<g:ListBox width="65px" height="24px" ui:field="termCmbx"/>
+			</g:at>
+			<g:at top="44" left="119">
+				<g:RadioButton name="new name" width="49px" height="19px" text="Sort:" ui:field="sortTermRadioButton"/>
+			</g:at>
+			<g:at top="43" left="281">
+				<g:ListBox width="65px" height="24px" ui:field="courseNumberCmbx"/>
+			</g:at>
+			<g:at top="43" left="232">
+				<g:RadioButton name="new name" width="49px" height="19px" text="Sort:" ui:field="sortCourseNumberRadioButton"/>
+			</g:at>
+			<g:at top="69" left="17">
+				<g:ListBox visibleItemCount="5" width="80px" height="188px" ui:field="courseListBox"/>
+			</g:at>
+			<g:at top="69" left="103">
+				<g:ListBox visibleItemCount="5" width="76px" height="188px" ui:field="timesListBox"/>
+			</g:at>
+			<g:at top="70" left="186">
+				<g:ListBox visibleItemCount="5" width="76px" height="187px" ui:field="locationListBox"/>
+			</g:at>
+			<g:at top="69" left="360">
+				<g:Button text="View Course Details" width="90px" height="43px" ui:field="viewCourseDetailsButton"/>
+			</g:at>
+			<g:at top="118" left="360">
+				<g:Button ui:field="editWishlistButton">Edit Wishlist</g:Button>
+			</g:at>
+			<g:at top="152" left="360">
+				<g:Button width="90px" height="58px" ui:field="requestNewScheduleButton">Request New Schedule</g:Button>
+			</g:at>
+			<g:at top="40" left="350">
+				<g:Button ui:field="sortButton">Sort</g:Button>
+			</g:at>
+			<g:at top="69" left="270">
+				<g:ListBox visibleItemCount="5" width="76px" height="188px" ui:field="termListBox"/>
+			</g:at>
+		</g:AbsolutePanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 
