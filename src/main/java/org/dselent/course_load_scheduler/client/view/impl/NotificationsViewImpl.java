@@ -2,7 +2,6 @@ package org.dselent.course_load_scheduler.client.view.impl;
 
 
 import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
-import org.dselent.course_load_scheduler.client.view.NotificationsView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -22,7 +21,7 @@ import com.google.gwt.user.client.ui.TextArea;
  * @author Leo Gonsalves
  *
  */
-public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> implements NotificationsView{
+public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> {
 
 	private static NotificationsViewUiBinder uiBinder = GWT.create(NotificationsViewUiBinder.class);
 	@UiField Button btnAccept;
