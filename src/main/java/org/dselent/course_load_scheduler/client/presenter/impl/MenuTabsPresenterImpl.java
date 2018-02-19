@@ -148,6 +148,16 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	public void setParentPresenter(IndexPresenter parentPresenter) {
 		this.parentPresenter = parentPresenter;		
 	}
+	
+	@Override
+	public void setUser(UserInfo user) {
+		this.user = user;
+	}
+	
+	@Override
+	public UserInfo getUser() {
+		return this.user;
+	}
 
 	@Override
 	public void home() {

@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.presenter;
 
+import org.dselent.course_load_scheduler.client.model.UserInfo;
+
 import com.google.gwt.user.client.ui.Button;
 
 
@@ -15,4 +17,6 @@ public interface MenuTabsPresenter extends BasePresenter
 	void accounts();
 	void schedules();
 	void logout();
+	void setUser(UserInfo user);
+	public UserInfo getUser();
 }

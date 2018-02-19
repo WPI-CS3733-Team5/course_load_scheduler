@@ -5,6 +5,7 @@ import org.dselent.course_load_scheduler.client.action.SendRequestNewScheduleAct
 import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
 import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
+import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewCourseDetailsEvent;
@@ -158,6 +159,11 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	
 	@Override
 	public void onSendWishlist(SendWishlistEvent evt) {
+		go(evt.getAction().getPanel());
+	}
+	
+	@Override
+	public void onSendRequestDifferentSchedule(SendRequestDifferentScheduleEvent evt) {
 		go(evt.getAction().getPanel());
 	}
 }

@@ -173,17 +173,8 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		eventBus.fireEvent(srdse);
 	}
 	
-	//TODO move to WishlistPresenterImpl
-	@Override
-	public void onSendRequestDifferentSchedule(SendRequestDifferentScheduleEvent evt) {
-		go(evt.getAction().getPanel());
-	}
-	
 	@Override
 	public void onSendHome(SendHomeEvent evt) {
 		go(evt.getAction().getPanel());
 	}
-	
-	//TODO Have some type of onReceiveLoginEvent to go to home screen and make menuTabs visible
-	//this will call indexPresenter to set menuTabs visible
 }
