@@ -26,7 +26,6 @@ public class SendRemoveAccountEvent extends GwtEvent<SendRemoveAccountEventHandl
 	
 	@Override
 	public Type<SendRemoveAccountEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
 		return TYPE;
 	}
 

@@ -16,7 +16,6 @@ public class SendProfileEditInfoEvent extends GwtEvent<SendProfileEditInfoEventH
 	private SendProfileEditInfoAction action;
 	
 	public SendProfileEditInfoEvent(SendProfileEditInfoAction action) {
-		// TODO Auto-generated constructor stub
 		this.setAction(action);
 	}
 

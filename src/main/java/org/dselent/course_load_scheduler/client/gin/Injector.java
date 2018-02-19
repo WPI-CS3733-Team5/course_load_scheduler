@@ -1,12 +1,25 @@
 package org.dselent.course_load_scheduler.client.gin;
 
+import org.dselent.course_load_scheduler.client.presenter.impl.AccountsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.CoursesPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
-import org.dselent.course_load_scheduler.client.presenter.impl.TabTestPresenterImpl;
-import org.dselent.course_load_scheduler.client.view.TabTestView;
+import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
+import org.dselent.course_load_scheduler.client.view.impl.AccountsViewImpl;
+import org.dselent.course_load_scheduler.client.view.impl.CoursesViewImpl;
+import org.dselent.course_load_scheduler.client.view.impl.HomeViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.IndexViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.LoginViewImpl;
-import org.dselent.course_load_scheduler.client.view.impl.TabTest;
+import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
+import org.dselent.course_load_scheduler.client.view.impl.NotificationsViewImpl;
+import org.dselent.course_load_scheduler.client.view.impl.ProfileViewImpl;
+import org.dselent.course_load_scheduler.client.view.impl.ScheduleGeneratorViewImpl;
+import org.dselent.course_load_scheduler.client.view.impl.WishlistViewImpl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -36,10 +49,25 @@ public interface Injector extends Ginjector
     // presenters
     public IndexPresenterImpl getIndexPresenter();
     public LoginPresenterImpl getLoginPresenter();
-    //public TabTestPresenterImpl getTestTabPresenter();
+    public MenuTabsPresenterImpl getMenuTabsPresenterImpl();
+    public AccountsPresenterImpl getAccountsPresenterImpl();
+    public CoursesPresenterImpl getCoursesPresenterImpl();
+    public HomePresenterImpl getHomePresenterImpl();
+    public NotificationsPresenterImpl getNotificationsPresenterImpl();
+    public ProfilePresenterImpl getProfilePresenterImpl();
+    public ScheduleGeneratorPresenterImpl getScheduleGeneratorPresenterImpl();
+    public WishlistPresenterImpl getWishlistPresenterImpl();
+     
     
     //views
     public IndexViewImpl getIndexView();
     public LoginViewImpl getLoginView();
-    //public TabTest getTabTestView();
+    public MenuTabsImpl getMenuTabsView();
+    public AccountsViewImpl getAccountsView();
+    public CoursesViewImpl getCoursesView();
+    public HomeViewImpl getHomeView();
+    public NotificationsViewImpl getNotificationsView();
+    public ProfileViewImpl getProfileView();
+    public ScheduleGeneratorViewImpl getScheduleGeneratorView();
+    public WishlistViewImpl getWishlistView();
 }

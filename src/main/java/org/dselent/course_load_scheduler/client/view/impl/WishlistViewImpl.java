@@ -168,13 +168,12 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 
 	@Override
 	public void setPresenter(WishlistPresenter presenter) {
-		// TODO Auto-generated method stub
+		this.presenter = presenter;
 		
 	}
 
 	@Override
 	public HasWidgets getViewRootPanel() {
-		// TODO Auto-generated method stub
 		return this.getRoot();
 	}
 

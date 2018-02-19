@@ -5,4 +5,6 @@ public interface IndexPresenter extends BasePresenter
 {
 	public void showLoadScreen();
 	public void hideLoadScreen();
+	public void showMenuTabs();
+	public void hideMenuTabs();
 }

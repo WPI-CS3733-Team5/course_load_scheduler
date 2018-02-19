@@ -1,11 +1,14 @@
 package org.dselent.course_load_scheduler.client;
 
 import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.presenter.MenuTabsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.TabTestPresenterImpl;
 import org.dselent.course_load_scheduler.client.view.IndexView;
 import org.dselent.course_load_scheduler.client.view.examples.ExamplesPanel;
+import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
 import org.dselent.course_load_scheduler.client.view.impl.TabTest;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -63,17 +66,21 @@ public class CourseLoadScheduler implements EntryPoint
 		
 		LoginPresenterImpl loginPresenter = injector.getLoginPresenter();
 		loginPresenter.init();
+		loginPresenter.go(indexView.getViewRootPanel());
 		
 		//TabTestPresenterImpl tabTestPresenter = injector.getTestTabPresenter();
 		//tabTestPresenter.init();
 		
 		//LoginView loginView = loginPresenter.getView();	
 		
-		//indexPresenter.go(RootPanel.get("indexContainer"));
-		//indexPresenter.go(root);
-		//tabTestPresenter.go(indexView.getViewRootPanel());
+		indexPresenter.go(root);
+		//MenuTabsPresenter.go(indexView.getViewRootPanel());
 		
-		TabTest tt = new TabTest();
-		root.add(tt);
+		//MenuTabsPresenterImpl menuTabs = injector.getMenuTabsPresenter();
+		//menuTabs.init();
+		//menuTabs.go(indexView.getViewRootPanel());
+		
+		//TabTest tt = new TabTest();
+		//root.add(tt);
 	}
 }

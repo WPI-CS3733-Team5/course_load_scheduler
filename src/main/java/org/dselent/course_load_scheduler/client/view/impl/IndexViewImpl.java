@@ -76,5 +76,10 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	{
 		return mainPanel;
 	}
+	
+	@Override
+	public MenuTabsImpl getMenuTabsImpl() {
+		return menuTabsImpl;
+	}
 
 }

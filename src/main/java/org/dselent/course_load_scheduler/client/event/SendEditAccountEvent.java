@@ -25,7 +25,6 @@ public class SendEditAccountEvent extends GwtEvent<SendEditAccountEventHandler>{
 	}
 	@Override
 	public Type<SendEditAccountEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
 		return TYPE;
 	}
 

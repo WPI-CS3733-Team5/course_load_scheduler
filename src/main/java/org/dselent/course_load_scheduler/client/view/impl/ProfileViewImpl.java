@@ -1,6 +1,7 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
+import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
 
 import com.google.gwt.core.client.GWT;
@@ -10,12 +11,17 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements ProfileView {
 
 	private static ProfileViewUiBinder uiBinder = GWT.create(ProfileViewUiBinder.class);
+	interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {}
+	private ProfilePresenterImpl parent;
+	
+	@UiField HTMLPanel profileRoot;
 	@UiField Label username;
 	@UiField Label jobTitle;
 	@UiField Label phoneNumber;
@@ -24,9 +30,9 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	@UiField Button editPersonalInfoButton;
 	@UiField Button editWishlistButton;
 
-	interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {
+	public ProfileViewImpl() {
+		initWidget(uiBinder.createAndBindUi(this));
 	}
-
 
 	public static ProfileViewUiBinder getUiBinder() {
 		return uiBinder;
@@ -121,8 +127,12 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	public void setEditWishlistButton(Button editCourseWishlistButton) {
 		this.editWishlistButton = editCourseWishlistButton;
 	}
+	
 
-
+	@Override
+	public Button getEditWishlistButton() {
+		return this.editWishlistButton;
+	}
 
 	@UiHandler("editPersonalInfoButton")
 	void onEditPersonalInfoButtonClicked(ClickEvent event) 
@@ -140,31 +150,23 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 
 	@Override
 	public void setPresenter(ProfilePresenter presenter) {
-		// TODO Auto-generated method stub
-		
+		this.presenter = presenter;		
 	}
 
 
 
 	@Override
 	public Widget getWidgetContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 
 
 	@Override
 	public HasWidgets getViewRootPanel() {
-		// TODO Auto-generated method stub
-		return null;
+		return profileRoot;
 	}
 
 
 
-	@Override
-	public Button getEditWishlistButton() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

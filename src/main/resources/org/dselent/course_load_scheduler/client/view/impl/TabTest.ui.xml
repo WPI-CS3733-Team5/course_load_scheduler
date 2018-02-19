@@ -17,7 +17,14 @@
 			<g:header>HTML Panel</g:header>
 			<d:MenuTabsImpl />
 		</g:tab>
-
+		<g:tab>
+			<g:header>Accounts</g:header>
+			<d:AccountsViewImpl/>
+		</g:tab>
+		<g:tab>
+			<g:header>Profile</g:header>
+			<d:ProfileViewImpl />
+		</g:tab>
 		<g:tab>
 			<g:header>Vertical Panel</g:header>
 			<d:ScheduleGeneratorViewImpl/>

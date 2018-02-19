@@ -14,7 +14,6 @@ public class SendProfileEditWishlistEvent extends GwtEvent<SendProfileEditWishli
 	private SendProfileEditWishlistAction action;
 
 	public SendProfileEditWishlistEvent(SendProfileEditWishlistAction action) {
-		// TODO Auto-generated constructor stub
 		this.setAction(action);
 	}
 

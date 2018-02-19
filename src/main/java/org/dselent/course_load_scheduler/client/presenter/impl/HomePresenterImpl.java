@@ -77,6 +77,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 			}
 		}
 		
+		parentPresenter.showMenuTabs();
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
@@ -182,4 +183,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	public void onSendHome(SendHomeEvent evt) {
 		go(evt.getAction().getPanel());
 	}
+	
+	//TODO Have some type of onReceiveLoginEvent to go to home screen and make menuTabs visible
+	//this will call indexPresenter to set menuTabs visible
 }

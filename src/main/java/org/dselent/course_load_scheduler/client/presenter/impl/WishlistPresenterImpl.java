@@ -49,10 +49,8 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 
 	@Override
 	public IndexPresenter getParentPresenter() {
-		// TODO Auto-generated method stub
 		return parentPresenter;
 	}
-	////////////////////////////
 
 	@Override
 	public void setParentPresenter(IndexPresenter parentPresenter) {

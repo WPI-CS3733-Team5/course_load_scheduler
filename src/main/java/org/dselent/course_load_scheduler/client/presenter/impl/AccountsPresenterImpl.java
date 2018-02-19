@@ -68,26 +68,22 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	@Override
 	public void go(HasWidgets container) {
-		// TODO Auto-generated method stub
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
 
 	@Override
 	public AccountsView getView() {
-		// TODO Auto-generated method stub
 		return this.view;
 	}
 
 	@Override
 	public IndexPresenter getParentPresenter() {
-		// TODO Auto-generated method stub
 		return parentPresenter;
 	}
 
 	@Override
 	public void setParentPresenter(IndexPresenter parentPresenter) {
-		// TODO Auto-generated method stub
 		this.parentPresenter = parentPresenter;
 	}
 

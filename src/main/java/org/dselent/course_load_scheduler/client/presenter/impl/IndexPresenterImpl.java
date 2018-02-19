@@ -55,4 +55,15 @@ public class IndexPresenterImpl extends BasePresenterImpl implements IndexPresen
 		view.getLoadingImage().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 		view.getGlassLoadingPanel().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 	}
+	
+	@Override
+	public void showMenuTabs()
+	{
+		view.getMenuTabsImpl().getElement().getStyle().setVisibility(Style.Visibility.VISIBLE);
+	}
+
+	@Override
+	public void hideMenuTabs() {
+		view.getMenuTabsImpl().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
+	}
 }
