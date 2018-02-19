@@ -17,6 +17,4 @@ public interface MenuTabsPresenter extends BasePresenter
 	void accounts();
 	void schedules();
 	void logout();
-	void setUser(UserInfo user);
-	public UserInfo getUser();
 }

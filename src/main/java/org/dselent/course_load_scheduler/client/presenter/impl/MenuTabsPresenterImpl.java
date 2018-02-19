@@ -33,7 +33,6 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private IndexPresenter parentPresenter;
 	private MenuTabs view;
-	private UserInfo user;
 	private HomePresenterImpl home;
 	private ProfilePresenterImpl profile;
 	private WishlistPresenterImpl wishlist;
@@ -125,10 +124,11 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 
 	@Override
 	public void go(HasWidgets container) {
-		if(user.getUserRole() == 1) {
+		if(parentPresenter.getActiveUser().getUserRole() == 1) {
 			view.getAccountsButton().setVisible(false);
 			view.getSchedulesButton().setVisible(false);
 		}
+		view.getUsername().setText(parentPresenter.getActiveUser().getUserName());
 		
 		container.clear();
 		container.add(view.getWidgetContainer());
@@ -147,16 +147,6 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	@Override
 	public void setParentPresenter(IndexPresenter parentPresenter) {
 		this.parentPresenter = parentPresenter;		
-	}
-	
-	@Override
-	public void setUser(UserInfo user) {
-		this.user = user;
-	}
-	
-	@Override
-	public UserInfo getUser() {
-		return this.user;
 	}
 
 	@Override
@@ -206,7 +196,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendNotifications() 
 	{
-		SendFetchListAction sfla = new SendFetchListAction(user.getId());
+		SendFetchListAction sfla = new SendFetchListAction(parentPresenter.getActiveUser().getId());
 		SendFetchListEvent sfle = new SendFetchListEvent(sfla, this);
 		eventBus.fireEvent(sfle);
 	}

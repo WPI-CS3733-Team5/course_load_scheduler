@@ -28,7 +28,6 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	private boolean acceptScheduleInProgress;
 	private boolean requestDifferentScheduleInProgress;
 	private boolean applyFilterInProgress;
-	private UserInfo userInfo;
 	private ArrayList<UserInfo> userInfoList;
 	
 	@Inject
@@ -66,9 +65,9 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	
 	@Override
 	public void go(HasWidgets container) {
-		if(userInfo.getUserRole() == 1) {
+		if(parentPresenter.getActiveUser().getUserRole() == 1) {
 			view.getUserDropDown().clear();
-			view.getUserDropDown().addItem(userInfo.getUserName());
+			view.getUserDropDown().addItem(parentPresenter.getActiveUser().getUserName());
 		} else
 		{
 			view.getUserDropDown().clear();
