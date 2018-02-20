@@ -1,40 +1,6 @@
 package org.dselent.course_load_scheduler.client.event_handler;
 
-import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
-import org.dselent.course_load_scheduler.client.event.ReceiveNotificationListEvent;
-import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
-import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
-import org.dselent.course_load_scheduler.client.event.SendAddToWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendApplyChangesEvent;
-import org.dselent.course_load_scheduler.client.event.SendCancelChangesEvent;
-import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
-import org.dselent.course_load_scheduler.client.event.SendCreateCourseEvent;
-import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
-import org.dselent.course_load_scheduler.client.event.SendEditCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
-import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
-import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
-import org.dselent.course_load_scheduler.client.event.SendMeetingTimesEvent;
-import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup1ApplyEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup1CancelEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup2ApplyEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup2CancelEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup2EndTimeEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup2StartTimeEvent;
-import org.dselent.course_load_scheduler.client.event.SendPopup3ApplyEvent;
-import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
-import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
-import org.dselent.course_load_scheduler.client.event.SendRemoveCourseEvent;
-import org.dselent.course_load_scheduler.client.event.SendRemoveSelectedFromWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
-import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
-import org.dselent.course_load_scheduler.client.event.SendSectionTypeEvent;
-import org.dselent.course_load_scheduler.client.event.SendSortCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
+import org.dselent.course_load_scheduler.client.event.*;
 
 /**
  * Adapter class for convenience
@@ -82,7 +48,8 @@ implements InvalidLoginEventHandler,
 			SendPopup2EndTimeEventHandler,
 			SendPopup2ApplyEventHandler,
 			SendPopup2CancelEventHandler,
-			SendPopup3ApplyEventHandler
+			SendPopup3ApplyEventHandler,
+			ReceiveLoginEventHandler
 			
 {
 	@Override
@@ -188,4 +155,7 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onSendPopup3Apply(SendPopup3ApplyEvent evt) {}
+	
+	@Override
+	public void onReceiveLogin(ReceiveLoginEvent evt) {}
 }
