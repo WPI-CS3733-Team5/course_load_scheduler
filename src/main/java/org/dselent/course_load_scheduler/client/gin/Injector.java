@@ -70,4 +70,7 @@ public interface Injector extends Ginjector
     public ProfileViewImpl getProfileView();
     public ScheduleGeneratorViewImpl getScheduleGeneratorView();
     public WishlistViewImpl getWishlistView();
+    
+    // services
+    public UserServiceImpl getUserService();
 }

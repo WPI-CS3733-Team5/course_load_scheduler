@@ -108,4 +108,7 @@ public class InjectorModule extends AbstractGinModule
 	    return new LoginPresenter(parentPresenter);
 	}
 	*/
+	
+		// services
+	bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
 }
