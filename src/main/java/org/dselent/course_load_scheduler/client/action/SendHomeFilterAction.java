@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendHomeFilterAction {
+public class SendHomeFilterAction extends Action {
 	private String userName;
 	private String term;
 	

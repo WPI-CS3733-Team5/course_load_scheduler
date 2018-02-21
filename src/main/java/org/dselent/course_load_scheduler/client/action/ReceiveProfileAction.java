@@ -1,7 +1,5 @@
 package org.dselent.course_load_scheduler.client.action;
 
-import java.util.ArrayList;
-
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 
 public class ReceiveProfileAction extends Action{

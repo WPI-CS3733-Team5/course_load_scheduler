@@ -2,11 +2,13 @@ package org.dselent.course_load_scheduler.client.event;
 
 import org.dselent.course_load_scheduler.client.action.SendEditCoursesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendEditCoursesEventHandler;
-
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
-
-public class SendEditCoursesEvent extends GwtEvent<SendEditCoursesEventHandler>{
+/**
+ * Note: Event modified to match standardization
+ * 
+ * @author Leo
+ *
+ */
+public class SendEditCoursesEvent extends BaseEvent<SendEditCoursesAction, SendEditCoursesEventHandler>{
 	
 public static Type<SendEditCoursesEventHandler> TYPE = new Type<SendEditCoursesEventHandler>();
 	
@@ -14,7 +16,7 @@ public static Type<SendEditCoursesEventHandler> TYPE = new Type<SendEditCoursesE
 	
 	public SendEditCoursesEvent(SendEditCoursesAction action)
 	{
-		this.action = action;
+		super(action);
 	}
 	
 	public SendEditCoursesAction getAction()

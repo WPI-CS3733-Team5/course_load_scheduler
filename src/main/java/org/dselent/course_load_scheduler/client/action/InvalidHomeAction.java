@@ -9,7 +9,7 @@ public class InvalidHomeAction extends Action{
 	
 	public InvalidHomeAction()
 	{
-		reasonList = new ArrayList();
+		reasonList = new ArrayList<>();
 	}
 	
 	public InvalidHomeAction(List<String> reasonList)
