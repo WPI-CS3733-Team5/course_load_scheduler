@@ -1,8 +1,8 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
-import org.dselent.course_load_scheduler.client.action.SendProfileEditWishlistAction;
-import org.dselent.course_load_scheduler.client.event.SendProfileEditWishlistEvent;
+import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
+import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
@@ -56,8 +56,8 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	}
 	
 	private void sendProfileEditWishlist() {
-		SendProfileEditWishlistAction spewa = new SendProfileEditWishlistAction();
-		SendProfileEditWishlistEvent spewe = new SendProfileEditWishlistEvent(spewa);
+		SendWishlistAction spewa = new SendWishlistAction(view.getViewRootPanel());
+		SendWishlistEvent spewe = new SendWishlistEvent(spewa);
 		eventBus.fireEvent(spewe);
 	}
 

@@ -3,7 +3,6 @@ package org.dselent.course_load_scheduler.client.view.impl;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -24,9 +23,7 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	
 	@UiField HTMLPanel profileRoot;
 	@UiField Label username;
-	@UiField Label jobTitle;
 	@UiField Label phoneNumber;
-	@UiField Label office;
 	@UiField Label email;
 	@UiField Button editWishlistButton;
 
@@ -56,20 +53,7 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 		this.username = username;
 	}
 
-
-
-	public Label getJobTitle() {
-		return jobTitle;
-	}
-
-
-
-	public void setJobTitle(Label jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
-
-
+	
 	public Label getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -79,19 +63,6 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	public void setPhoneNumber(Label phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-
-
-	public Label getOffice() {
-		return office;
-	}
-
-
-
-	public void setOffice(Label office) {
-		this.office = office;
-	}
-
 
 
 	public Label getEmail() {
