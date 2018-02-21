@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
@@ -232,5 +233,4 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	public void onSendAccounts(SendAccountsEvent evt) {
 		go(evt.getAction().getPanel());
 	}
-
 }

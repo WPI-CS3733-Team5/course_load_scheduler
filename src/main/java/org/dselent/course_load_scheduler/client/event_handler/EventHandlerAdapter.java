@@ -16,7 +16,6 @@ public abstract class EventHandlerAdapter
 implements InvalidLoginEventHandler, 
 			SendLoginEventHandler, 
 			SendFetchListEventHandler, 
-			ReceiveNotificationListEventHandler,
 			SendAcceptScheduleEventHandler,
 			SendRequestDifferentScheduleEventHandler,
 			SendHomeFilterEventHandler,
@@ -49,7 +48,11 @@ implements InvalidLoginEventHandler,
 			SendPopup2ApplyEventHandler,
 			SendPopup2CancelEventHandler,
 			SendPopup3ApplyEventHandler,
-			ReceiveLoginEventHandler
+			ReceiveLoginEventHandler,
+			ReceiveNotificationListEventHandler,
+			ReceiveHomeEventHandler
+			
+
 			
 {
 	@Override

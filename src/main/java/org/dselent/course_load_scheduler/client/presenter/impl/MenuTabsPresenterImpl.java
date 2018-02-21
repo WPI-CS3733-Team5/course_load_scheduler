@@ -90,37 +90,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	@Override
 	public void bind()
 	{
-		HandlerRegistration homeRegistration;
-		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, this);
-		eventBusRegistration.put(SendHomeEvent.TYPE, homeRegistration);
+
 		
-		HandlerRegistration profileRegistration;
-		profileRegistration = eventBus.addHandler(SendProfileEvent.TYPE, this);
-		eventBusRegistration.put(SendProfileEvent.TYPE, profileRegistration);
-		
-		HandlerRegistration notificationsRegistration;
-		notificationsRegistration = eventBus.addHandler(SendFetchListEvent.TYPE, this);
-		eventBusRegistration.put(SendFetchListEvent.TYPE, notificationsRegistration);
-		
-		HandlerRegistration wishlistRegistration;
-		wishlistRegistration = eventBus.addHandler(SendWishlistEvent.TYPE, this);
-		eventBusRegistration.put(SendWishlistEvent.TYPE, wishlistRegistration);
-		
-		HandlerRegistration coursesRegistration;
-		coursesRegistration = eventBus.addHandler(SendCoursesEvent.TYPE, this);
-		eventBusRegistration.put(SendCoursesEvent.TYPE, coursesRegistration);
-		
-		HandlerRegistration accountsRegistration;
-		accountsRegistration = eventBus.addHandler(SendAccountsEvent.TYPE, this);
-		eventBusRegistration.put(SendAccountsEvent.TYPE, accountsRegistration);
-		
-		HandlerRegistration schedulesRegistration;
-		schedulesRegistration = eventBus.addHandler(SendSchedulesEvent.TYPE, this);
-		eventBusRegistration.put(SendSchedulesEvent.TYPE, schedulesRegistration);
-		
-		HandlerRegistration logoutRegistration;
-		logoutRegistration = eventBus.addHandler(SendLogoutEvent.TYPE, this);
-		eventBusRegistration.put(SendLogoutEvent.TYPE, logoutRegistration);
 	}
 
 	@Override

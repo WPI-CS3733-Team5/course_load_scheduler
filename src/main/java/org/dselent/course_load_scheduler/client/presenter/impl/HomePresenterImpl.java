@@ -2,13 +2,15 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import java.util.ArrayList;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendAcceptScheduleAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeFilterAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestDifferentScheduleAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
+import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
@@ -46,6 +48,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	{
 		bind();
 		//TODO Does the initialization of userInfoList happen here? If so, how is that done? If not, where and how?
+		// Handler method expecting to recieve event with data, 
 	}
 	
 	@Override
@@ -181,7 +184,12 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	}
 	
 	@Override
-	public void onSendHome(SendHomeEvent evt) {
-		go(evt.getAction().getPanel());
+	public void onReceiveHome(ReceiveHomeEvent evt)
+	{
+		HasWidgets container = evt.getContainer();
+		ReceiveHomeAction rha = evt.getAction();
+		userInfoList = rha.getModel();
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}
 }
