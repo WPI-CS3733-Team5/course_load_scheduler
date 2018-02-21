@@ -151,7 +151,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 
 	@Override
-	public void home() {
+	public void home() { //TODO walk through exact process from button click to home screen being displayed
 		if(!homeInProgress)
 		{
 			homeInProgress = true;

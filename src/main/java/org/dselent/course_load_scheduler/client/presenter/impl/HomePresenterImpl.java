@@ -45,6 +45,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	public void init()
 	{
 		bind();
+		//TODO Does the initialization of userInfoList happen here? If so, how is that done? If not, where and how?
 	}
 	
 	@Override
@@ -75,6 +76,13 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 				view.getUserDropDown().addItem(i.getUserName());
 			}
 		}
+		
+		view.getTermDropDown().addItem("A");
+		view.getTermDropDown().addItem("B");
+		view.getTermDropDown().addItem("C");
+		view.getTermDropDown().addItem("D");
+		view.getTermDropDown().addItem("E1");
+		view.getTermDropDown().addItem("E2");
 		
 		parentPresenter.showMenuTabs();
 		container.clear();
