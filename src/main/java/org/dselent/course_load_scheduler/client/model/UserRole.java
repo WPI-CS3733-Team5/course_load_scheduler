@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class UserRole extends Model
-{	
+{	/*
 	// attributes
 	
 	private Integer id;
@@ -184,5 +184,5 @@ public class UserRole extends Model
 		builder.append(deleted);
 		builder.append("]");
 		return builder.toString();
-	}
+	}*/
 }

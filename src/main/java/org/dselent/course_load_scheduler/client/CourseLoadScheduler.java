@@ -75,8 +75,8 @@ public class CourseLoadScheduler implements EntryPoint
 		
 		//LoginView loginView = loginPresenter.getView();	
 		
-		ExamplePresenterImpl examplePresenter = injector.getExamplePresenter();
-		examplePresenter.init();
+		//ExamplePresenterImpl examplePresenter = injector.getExamplePresenter();
+		//examplePresenter.init();
 		
 		UserServiceImpl userService = injector.getUserService();
 		userService.init();

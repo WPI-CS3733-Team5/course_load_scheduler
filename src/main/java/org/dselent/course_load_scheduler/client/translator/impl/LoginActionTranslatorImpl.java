@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
-import org.dselent.course_load_scheduler.client.model.User;
+import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveLoginKeys;
 import org.dselent.course_load_scheduler.client.send.jsonkeys.SendLoginKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
@@ -50,15 +50,15 @@ public class LoginActionTranslatorImpl implements ActionTranslator<SendLoginActi
 		// TODO look into time conversion more
 		// put into JSONHelper?
 		
-		User user = new User();
+		UserInfo user = new UserInfo();
 		user.setId(id);
 		user.setUserName(userName);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
-		user.setUserStateId(userStateId);
-		user.setCreatedAt(new Date(createdAt));
-		user.setUpdatedAt(new Date(updatedAt));
+		//user.setUserStateId(userStateId);
+		//user.setCreatedAt(new Date(createdAt));
+		//user.setUpdatedAt(new Date(updatedAt));
 		
 		// possibly use builder pattern if it is a lot of data
 		ReceiveLoginAction action = new ReceiveLoginAction(user);	

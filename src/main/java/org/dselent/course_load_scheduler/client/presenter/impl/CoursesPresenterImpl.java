@@ -7,7 +7,6 @@ import org.dselent.course_load_scheduler.client.action.SendApplyChangesAction;
 import org.dselent.course_load_scheduler.client.action.SendCancelChangesAction;
 import org.dselent.course_load_scheduler.client.action.SendCreateCourseAction;
 import org.dselent.course_load_scheduler.client.action.SendEditCoursesAction;
-import org.dselent.course_load_scheduler.client.action.SendHomeFilterAction;
 import org.dselent.course_load_scheduler.client.action.SendMeetingTimesAction;
 import org.dselent.course_load_scheduler.client.action.SendPopup1ApplyAction;
 import org.dselent.course_load_scheduler.client.action.SendPopup1CancelAction;
@@ -17,7 +16,6 @@ import org.dselent.course_load_scheduler.client.action.SendPopup2StartTimeAction
 import org.dselent.course_load_scheduler.client.action.SendPopup3ApplyAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveCourseAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveSelectedFromWishlistAction;
-import org.dselent.course_load_scheduler.client.action.SendRequestDifferentScheduleAction;
 import org.dselent.course_load_scheduler.client.action.SendSectionTypeAction;
 import org.dselent.course_load_scheduler.client.action.SendSortCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendViewFullWishlistAction;
@@ -27,7 +25,6 @@ import org.dselent.course_load_scheduler.client.event.SendCancelChangesEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateCourseEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendMeetingTimesEvent;
 import org.dselent.course_load_scheduler.client.event.SendPopup1ApplyEvent;
 import org.dselent.course_load_scheduler.client.event.SendPopup1CancelEvent;
@@ -38,11 +35,9 @@ import org.dselent.course_load_scheduler.client.event.SendPopup2StartTimeEvent;
 import org.dselent.course_load_scheduler.client.event.SendPopup3ApplyEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveCourseEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveSelectedFromWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSectionTypeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
-import org.dselent.course_load_scheduler.client.model.Model;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
 import org.dselent.course_load_scheduler.client.view.CoursesView;
@@ -180,14 +175,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	{
 		return view;
 	}
-	
-	// Currently no model
-	@Override
-	public Model getModel()
-	{
-		return null;
-	}
-	
+		
 	@Override
 	public void showPopupPanel1()
 	{

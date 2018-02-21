@@ -5,7 +5,7 @@ import java.time.Instant;
 
 
 public class UserState extends Model
-{	
+{	/*
 	// attributes
 	
 	private Integer id;
@@ -185,5 +185,5 @@ public class UserState extends Model
 		builder.append(deleted);
 		builder.append("]");
 		return builder.toString();
-	}
+	}*/
 }

@@ -15,7 +15,7 @@ public class ActiveUser extends Model
 	private String lastName;
 	private String email;
 	private Integer accountState;
-	private Instant loginTime;
+	//private Instant loginTime;
 	
 	// methods
 	
@@ -61,12 +61,12 @@ public class ActiveUser extends Model
 	public void setAccountState(Integer accountState) {
 		this.accountState = accountState;
 	}
-	public Instant getLoginTime() {
+	/*public Instant getLoginTime() {
 		return loginTime;
 	}
 	public void setLoginTime(Instant loginTime) {
 		this.loginTime = loginTime;
-	}
+	}*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,7 +76,7 @@ public class ActiveUser extends Model
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((loginTime == null) ? 0 : loginTime.hashCode());
+		//result = prime * result + ((loginTime == null) ? 0 : loginTime.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
 		return result;
@@ -115,11 +115,11 @@ public class ActiveUser extends Model
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (loginTime == null) {
+		/*if (loginTime == null) {
 			if (other.loginTime != null)
 				return false;
 		} else if (!loginTime.equals(other.loginTime))
-			return false;
+			return false;*/
 		if (userName == null) {
 			if (other.userName != null)
 				return false;
@@ -135,7 +135,7 @@ public class ActiveUser extends Model
 	@Override
 	public String toString() {
 		return "ActiveUser [id=" + id + ", userRole=" + userRole + ", userName=" + userName + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", accountState=" + accountState + ", loginTime="
-				+ loginTime + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", accountState=" + accountState/* + ", loginTime="
+				+ loginTime*/ + "]";
 	}	
 }

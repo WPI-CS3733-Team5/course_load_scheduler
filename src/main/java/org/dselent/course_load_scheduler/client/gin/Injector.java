@@ -2,6 +2,7 @@ package org.dselent.course_load_scheduler.client.gin;
 
 import org.dselent.course_load_scheduler.client.presenter.impl.AccountsPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.CoursesPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.ExamplePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
@@ -10,6 +11,7 @@ import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPres
 import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
+import org.dselent.course_load_scheduler.client.service.impl.UserServiceImpl;
 import org.dselent.course_load_scheduler.client.view.impl.AccountsViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.CoursesViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.HomeViewImpl;
@@ -57,8 +59,8 @@ public interface Injector extends Ginjector
     public ProfilePresenterImpl getProfilePresenterImpl();
     public ScheduleGeneratorPresenterImpl getScheduleGeneratorPresenterImpl();
     public WishlistPresenterImpl getWishlistPresenterImpl();
+    //public ExamplePresenterImpl getExamplePresenter();
      
-    
     //views
     public IndexViewImpl getIndexView();
     public LoginViewImpl getLoginView();
