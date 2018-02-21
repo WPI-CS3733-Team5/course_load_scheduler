@@ -1,8 +1,16 @@
 package org.dselent.course_load_scheduler.client.service.impl;
 
+import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
+import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
+import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
+import org.dselent.course_load_scheduler.client.action.SendProfileAction;
+import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
+import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
+import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
@@ -78,6 +86,72 @@ public class MenuServiceImpl extends BaseServiceImpl implements UserService
 		SendHomeCallback homeCallback = new SendHomeCallback(eventBus, evt.getContainer());
 		
 		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.HOME, homeCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendProfile(SendProfileEvent evt) {
+		SendProfileAction action = evt.getAction();
+		SendProfileActionTranslatorImpl profileActionTranslator = new SendProfileActionTranslatorImpl();
+		JSONObject json = profileActionTranslator.translateToJson(action);
+		SendProfileCallback profileCallback = new SendProfileCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.PROFILE, profileCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendWishlist(SendWishlistEvent evt) {
+		SendWishlistAction action = evt.getAction();
+		SendWishlistActionTranslatorImpl wishlistActionTranslator = new SendWishlistActionTranslatorImpl();
+		JSONObject json = wishlistActionTranslator.translateToJson(action);
+		SendWishlistCallback wishlistCallback = new SendWishlistCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.WISHLIST, wishlistCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendCourses(SendCoursesEvent evt) {
+		SendCoursesAction action = evt.getAction();
+		SendCoursesActionTranslatorImpl coursesActionTranslator = new SendCoursesActionTranslatorImpl();
+		JSONObject json = coursesActionTranslator.translateToJson(action);
+		SendCoursesCallback coursesCallback = new SendCoursesCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.COURSES, coursesCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendAccounts(SendAccountsEvent evt) {
+		SendAccountsAction action = evt.getAction();
+		SendAccountsActionTranslatorImpl accountsActionTranslator = new SendAccountsActionTranslatorImpl();
+		JSONObject json = accountsActionTranslator.translateToJson(action);
+		SendAccountsCallback accountsCallback = new SendAccountsCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.ACCOUNTS, accountsCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendSchedules(SendSchedulesEvent evt) {
+		SendSchedulesAction action = evt.getAction();
+		SendSchedulesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesActionTranslatorImpl();
+		JSONObject json = schedulesActionTranslator.translateToJson(action);
+		SendSchedulesCallback schedulesCallback = new SendSchedulesCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.SCHEDULES, schedulesCallback, json);
+		request.send();
+	}
+	
+	@Override
+	public void onSendLogout(SendLogoutEvent evt) {
+		SendLogoutAction action = evt.getAction();
+		SendLogoutActionTranslatorImpl logoutActionTranslator = new SendLogoutActionTranslatorImpl();
+		JSONObject json = logoutActionTranslator.translateToJson(action);
+		SendLogoutCallback logoutCallback = new SendLogoutCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.LOGOUT, logoutCallback, json);
 		request.send();
 	}
 	
