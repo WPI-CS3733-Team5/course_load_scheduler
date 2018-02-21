@@ -573,7 +573,7 @@ public class JSONHelper
 	{
 		List<String> pKeys = JSONArrayToStringList(array);
 
-		String[] keys = Util.makeStringArray(pKeys);
+		String[] keys = Utils.makeStringArray(pKeys);
 
 		return keys;
 	}
@@ -635,9 +635,9 @@ public class JSONHelper
 
 		// HTML-escape the "json" data. This protects us from when we receive a response from
 		// a proxy server that returns an html page.
-		sb.append(Util.NL)
+		sb.append(Utils.NL)
 			.append(ToStringHelper.variableToString("JSON", HTMLCleanser.escapeHtml(json)))
-			.append(Util.NL)
+			.append(Utils.NL)
 			.append(ToStringHelper.stringToUTF8Values(json));
 
 		// If the parse failed, we want to see exactly what came over.
@@ -653,9 +653,9 @@ public class JSONHelper
 	public static JSONException getJsonException(JSONValue json, String message)
 	{
 		StringBuilder sb = new StringBuilder("Invalid JSON content:");
-		sb.append(Util.NL);
+		sb.append(Utils.NL);
 		sb.append(message);
-		sb.append(Util.NL);
+		sb.append(Utils.NL);
 		sb.append(ToStringHelper.variableToString("JSON", json.toString()));
 
 		return new JSONException(sb.toString());
@@ -664,9 +664,9 @@ public class JSONHelper
 	public static JSONException getJsonException(JSONValue jo, String key, String msg)
 	{
 		StringBuilder sb = new StringBuilder("Invalid JSON content:");
-		sb.append(Util.NL);
+		sb.append(Utils.NL);
 		sb.append(ToStringHelper.variableToString(msg, key));
-		sb.append(Util.NL);
+		sb.append(Utils.NL);
 		sb.append(ToStringHelper.variableToString("JSON", jo.toString()));
 
 		throw new JSONException(sb.toString());

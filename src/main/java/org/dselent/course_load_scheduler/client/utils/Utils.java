@@ -14,7 +14,7 @@ import java.util.Stack;
 /**
  * <code>Util</code> contains a variety of constants and static utility methods.
  */
-public class Util
+public class Utils
 {
   public final static List<String> ENABLED_LIST =  Arrays.asList("true", "on", "enabled", "yes");
   public final static List<String> DISABLED_LIST =  Arrays.asList(null, "", "false", "off", "disabled", "no");
@@ -71,7 +71,7 @@ public class Util
   {
     String value = properties.get(propertyName);
 
-    return Util.isEnabled(value);
+    return Utils.isEnabled(value);
   }
   
   public static boolean isDisabled(String value)
@@ -172,7 +172,7 @@ public class Util
   
   public static void preventNullOrEmpty(String name, String value) throws IllegalArgumentException
   {
-    if(Util.isNullOrEmpty(value))
+    if(Utils.isNullOrEmpty(value))
     {
       throw new IllegalArgumentException(name + " is empty or null"); 
     }
@@ -185,7 +185,7 @@ public class Util
 
   public static void preventNullOrEmpty(List<? extends Object> list, String msg) throws IllegalArgumentException
   {
-    if(Util.isNullOrEmpty(list))
+    if(Utils.isNullOrEmpty(list))
     {
       throw new IllegalArgumentException(msg); 
     }
@@ -347,7 +347,7 @@ public class Util
     do
     {
       // Get a random number from 0 to count.
-      int rInt = Util.getRandom(count);
+      int rInt = Utils.getRandom(count);
       
       E curElt = tempList.get(rInt);
       
@@ -602,7 +602,7 @@ public class Util
 
   public static String getSimpleClassType(String fullName, boolean allowNullOrEmpty)
   {
-    if (Util.isNullOrEmpty(fullName))
+    if (Utils.isNullOrEmpty(fullName))
     {
       if(allowNullOrEmpty)
       {

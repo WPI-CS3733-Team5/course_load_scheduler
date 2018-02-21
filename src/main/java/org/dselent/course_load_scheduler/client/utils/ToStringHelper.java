@@ -136,14 +136,14 @@
  
      if(indent)
      {
-       sb.append(Util.INDENT);
+       sb.append(Utils.INDENT);
      }
  
      sb.append(result);
  
      if(nl)
      {
-       sb.append(Util.NL);
+       sb.append(Utils.NL);
      }
  
      return sb;
@@ -158,14 +158,14 @@
  
      if(indent)
      {
-       sb.append(Util.INDENT);
+       sb.append(Utils.INDENT);
      }
  
      sb.append(result);
  
      if(nl)
      {
-       sb.append(Util.NL);
+       sb.append(Utils.NL);
      }
  
      return sb;
@@ -210,7 +210,7 @@
        
        if((simpleClassNameList != null) && (simpleClassNameList.contains(key)))
        {
-         sb = variableToString(sb, indent, key, Util.getSimpleClassType(map.get(key)), nl);
+         sb = variableToString(sb, indent, key, Utils.getSimpleClassType(map.get(key)), nl);
        }
        else
        {
