@@ -3,7 +3,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveLoginEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
-import org.dselent.course_load_scheduler.client.model.User;
+import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.ExamplePresenter;
 import org.dselent.course_load_scheduler.client.view.ExampleView;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 public class ExamplePresenterImpl extends BasePresenterImpl implements ExamplePresenter
 {
 	private ExampleView view;
-	private User userModel;
+	private UserInfo userModel;
 
 	@Inject
 	public ExamplePresenterImpl(ExampleView view)
@@ -46,9 +46,12 @@ public class ExamplePresenterImpl extends BasePresenterImpl implements ExamplePr
 		view.getFirstNameField().setText(userModel.getFirstName());
 		view.getLastNameField().setText(userModel.getLastName());
 		view.getEmailField().setText(userModel.getEmail());
+		
+		/*
 		view.getUserStateIdField().setText(Integer.toString(userModel.getUserStateId()));
 		view.getCreatedAtField().setText(userModel.getCreatedAt().toString());
 		view.getUpdatedAtField().setText(userModel.getUpdatedAt().toString());
+		*/
 		
 		container.clear();
 		container.add(view.getWidgetContainer());
