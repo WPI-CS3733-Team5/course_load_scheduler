@@ -221,8 +221,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendAccounts()
 	{
-		SendAccountsAction saa = new SendAccountsAction(view.getViewRootPanel());
-		SendAccountsEvent sae = new SendAccountsEvent(saa);
+		SendAccountsAction saa = new SendAccountsAction();
+		SendAccountsEvent sae = new SendAccountsEvent(saa, view.getViewRootPanel());
 		eventBus.fireEvent(sae);
 	}
 
