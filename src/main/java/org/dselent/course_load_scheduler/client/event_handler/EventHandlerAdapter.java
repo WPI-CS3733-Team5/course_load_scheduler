@@ -49,7 +49,7 @@ implements InvalidLoginEventHandler,
 			SendPopup2CancelEventHandler,
 			SendPopup3ApplyEventHandler,
 			ReceiveLoginEventHandler,
-			ReceiveNotificationListEventHandler,
+			ReceiveNotificationEventHandler,
 			ReceiveHomeEventHandler
 			
 
@@ -62,7 +62,7 @@ implements InvalidLoginEventHandler,
 	public void onSendLogin(SendLoginEvent evt) {}
 	
 	@Override
-	public void onNotificationListReceipt(ReceiveNotificationListEvent evt) {}
+	public void onNotificationListReceipt(ReceiveNotificationEvent evt) {}
 
 	public void onSendAcceptSchedule(SendAcceptScheduleEvent evt) {}
 	

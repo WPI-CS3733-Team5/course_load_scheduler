@@ -3,7 +3,8 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.ArrayList;
  
 import org.dselent.course_load_scheduler.client.action.SendFetchListAction;
-import org.dselent.course_load_scheduler.client.event.ReceiveNotificationListEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveNotificationEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
 import org.dselent.course_load_scheduler.client.model.Notifications;
@@ -48,21 +49,20 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 		HandlerRegistration registration;
 		
 		// Add these two lines of code for other handlers
-		registration = eventBus.addHandler(ReceiveNotificationListEvent.TYPE, this);
-		eventBusRegistration.put(ReceiveNotificationListEvent.TYPE, registration);
+		registration = eventBus.addHandler(ReceiveNotificationEvent.TYPE, this);
+		eventBusRegistration.put(ReceiveNotificationEvent.TYPE, registration);
 	}
 	
 	@Override
 	public void go(HasWidgets container) {
-		//TODO load information onto UI
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
 	
 	@Override
-	public void onNotificationListReceipt(ReceiveNotificationListEvent evt) {
+	public void onNotificationListReceipt(ReceiveNotificationEvent evt) {
 		listNotifications = evt.getAction().getNotificationList();
-		go(evt.getPresenter().getView().getViewRootPanel());
+		go(evt.getContainer());
 	}
 
 	@Override

@@ -3,8 +3,7 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendNotificationsEventHandler;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent; 
 
 public class SendNotificationsEvent extends GwtEvent<SendNotificationsEventHandler>{
 	
