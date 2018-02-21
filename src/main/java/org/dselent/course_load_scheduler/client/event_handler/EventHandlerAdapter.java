@@ -50,7 +50,8 @@ implements InvalidLoginEventHandler,
 			SendPopup3ApplyEventHandler,
 			ReceiveLoginEventHandler,
 			ReceiveNotificationEventHandler,
-			ReceiveHomeEventHandler
+			ReceiveHomeEventHandler,
+			ReceiveProfileEventHandler
 			
 
 			
@@ -164,4 +165,7 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onReceiveHome(ReceiveHomeEvent evt) {}
+
+	@Override
+	public void onReceiveProfile(ReceiveProfileEvent evt) {}
 }
