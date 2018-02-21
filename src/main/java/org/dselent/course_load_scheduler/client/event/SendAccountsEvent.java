@@ -10,8 +10,6 @@ public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAcco
 	
 	public static Type<SendAccountsEventHandler> TYPE = new Type<SendAccountsEventHandler>();
 	
-	private SendAccountsAction action;
-	
 	public SendAccountsEvent(SendAccountsAction action, HasWidgets panel)
 	{
 		super(action, panel);
@@ -29,3 +27,4 @@ public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAcco
 		handler.onSendAccounts(this);
 	}
 }
+
