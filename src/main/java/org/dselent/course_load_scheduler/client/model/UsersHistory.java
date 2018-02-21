@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class UsersHistory extends Model
-{	
+{	/*
 	// attributes
 	
 	private Integer id;
@@ -302,5 +302,5 @@ public class UsersHistory extends Model
 		builder.append(createdAt);
 		builder.append("]");
 		return builder.toString();
-	}
+	}*/
 }

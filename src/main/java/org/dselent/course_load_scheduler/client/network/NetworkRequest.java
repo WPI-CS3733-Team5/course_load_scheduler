@@ -1,4 +1,4 @@
-package org.dselent.course_load_scheduler.network;
+package org.dselent.course_load_scheduler.client.network;
 
 import java.util.ArrayList;
  import java.util.List;
@@ -41,7 +41,7 @@ import java.util.ArrayList;
  
  	public NetworkRequest(String url, AsyncCallback<JSONValue> callback, JSONValue requestData)
  	{
- 		String allUrl = NetworkRequestStrings.SERVER_LOCATION   NetworkRequestStrings.BASE_REQUEST   url;
+ 		String allUrl = NetworkRequestStrings.SERVER_LOCATION + NetworkRequestStrings.BASE_REQUEST + url;
  		requestBuilder = new RequestBuilder(RequestBuilder.POST, allUrl);
  		
  		requestBuilder.setHeader("Content-Type","application/json");
@@ -73,7 +73,7 @@ import java.util.ArrayList;
  		}
  		else
  		{
- 			IllegalStateException ise = new IllegalStateException("In "   this.requestBuilder.getUrl()   " request: empty requestData");
+ 			IllegalStateException ise = new IllegalStateException("In " + this.requestBuilder.getUrl() + " request: empty requestData");
  			callback.onFailure(ise);
  		}
  	}

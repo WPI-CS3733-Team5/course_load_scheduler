@@ -11,7 +11,7 @@ public class UsersRolesLink extends Model
 	private Integer id;
 	private Integer userId;
 	private Integer roleId;
-	private Instant createdAt;
+	//private Instant createdAt;
 	private Boolean deleted;
 
 	// methods
@@ -45,7 +45,7 @@ public class UsersRolesLink extends Model
 	{
 		this.roleId = roleId;
 	}
-
+/*
 	public Instant getCreatedAt()
 	{
 		return createdAt;
@@ -63,7 +63,7 @@ public class UsersRolesLink extends Model
 			this.createdAt = createdAt.toInstant();
 		}
 	}
-
+*/
 	public Boolean isDeleted()
 	{
 		return deleted;
@@ -79,7 +79,7 @@ public class UsersRolesLink extends Model
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		//result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + ((deleted == null) ? 0 : deleted.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((roleId == null) ? 0 : roleId.hashCode());
@@ -103,7 +103,7 @@ public class UsersRolesLink extends Model
 			return false;
 		}
 		UsersRolesLink other = (UsersRolesLink) obj;
-		if (createdAt == null)
+		/*if (createdAt == null)
 		{
 			if (other.createdAt != null)
 			{
@@ -113,7 +113,7 @@ public class UsersRolesLink extends Model
 		else if (!createdAt.equals(other.createdAt))
 		{
 			return false;
-		}
+		}*/
 		if (deleted == null)
 		{
 			if (other.deleted != null)
@@ -172,7 +172,7 @@ public class UsersRolesLink extends Model
 		builder.append(", roleId=");
 		builder.append(roleId);
 		builder.append(", createdAt=");
-		builder.append(createdAt);
+		//builder.append(createdAt);
 		builder.append(", deleted=");
 		builder.append(deleted);
 		builder.append("]");
