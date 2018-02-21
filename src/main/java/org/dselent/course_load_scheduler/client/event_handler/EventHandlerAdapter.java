@@ -161,4 +161,7 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onReceiveLogin(ReceiveLoginEvent evt) {}
+	
+	@Override
+	public void onReceiveHome(ReceiveHomeEvent evt) {}
 }

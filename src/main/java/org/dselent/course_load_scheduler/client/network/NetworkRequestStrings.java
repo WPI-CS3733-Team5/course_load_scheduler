@@ -6,6 +6,7 @@ public final class NetworkRequestStrings
 	public static final String BASE_REQUEST = "course_load_scheduler/";
 	public static String LOGIN = "user/login";
 	public static String HOME = "userInfo/getAll";
+	public static String PROFILE = "userInfo/GetOneUser";
 	
 	private NetworkRequestStrings() {};
 }

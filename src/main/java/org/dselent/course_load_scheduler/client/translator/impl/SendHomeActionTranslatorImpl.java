@@ -6,6 +6,7 @@ import java.util.Date;
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveHomeKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
 
@@ -29,14 +30,14 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 		ArrayList<UserInfo> userInfoList = new ArrayList<UserInfo>();
 		for(UserInfo i: userListObject) {
 			Integer id = JSONHelper.getIntValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.ID));
-			String userName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.USER_NAME));
-			String firstName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.FIRST_NAME));
-			String lastName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.LAST_NAME));
-			String email = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.EMAIL));
-			Integer accountState = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.ACCOUNT_STATE));
-			Date createdAt = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.CREATED_AT));
-			Date updatedAt = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.UPDATED_AT));
-			Date loginTime = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(RequestHomeKeys.LOGIN_TIME));
+			String userName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.USER_NAME));
+			String firstName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.FIRST_NAME));
+			String lastName = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.LAST_NAME));
+			String email = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.EMAIL));
+			Integer accountState = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.ACCOUNT_STATE));
+			Date createdAt = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.CREATED_AT));
+			Date updatedAt = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.UPDATED_AT));
+			Date loginTime = JSONHelper.getStringValue(i, JSONHelper.convertKeyName(ReceiveHomeKeys.LOGIN_TIME));
 		
 			UserInfo user = new UserInfo();
 			user.setId(id);
