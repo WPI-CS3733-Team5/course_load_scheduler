@@ -2,7 +2,7 @@ package org.dselent.course_load_scheduler.client.action;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendHomeAction {
+public class SendHomeAction extends Action{
 	
 	HasWidgets panel;
 	

@@ -9,6 +9,7 @@ import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.event.DisplayEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
@@ -162,7 +163,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private void sendHome()
 	{
 		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
-		SendHomeEvent she = new SendHomeEvent(sha);
+		SendHomeEvent she = new SendHomeEvent(sha, this.home.getView().getViewRootPanel());
 		eventBus.fireEvent(she);
 	}
 
