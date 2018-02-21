@@ -11,11 +11,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 
-public class SendHomeEvent extends DisplayEvent{
+public class SendHomeEvent extends DisplayEvent<SendHomeAction, SendHomeEventHandler>{
 
 	public static Type<SendHomeEventHandler> TYPE = new Type<SendHomeEventHandler>();
 		
-	public SendHomeEvent(Action action, HasWidgets container)
+	public SendHomeEvent(SendHomeAction action, HasWidgets container)
 	{
 		super(action, container);
 	}
@@ -30,16 +30,5 @@ public class SendHomeEvent extends DisplayEvent{
 	protected void dispatch(SendHomeEventHandler handler)
 	{
 		handler.onSendHome(this);
-	}
-
-	@Override
-	protected void dispatch(EventHandler handler) {
-		//TODO
-	}
-
-	@Override
-	protected void dispatch(Object handler) {
-		// TODO Auto-generated method stub
-		
 	}
 }
