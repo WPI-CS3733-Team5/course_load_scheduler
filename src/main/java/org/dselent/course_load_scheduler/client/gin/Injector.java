@@ -57,8 +57,8 @@ public interface Injector extends Ginjector
     public ProfilePresenterImpl getProfilePresenterImpl();
     public ScheduleGeneratorPresenterImpl getScheduleGeneratorPresenterImpl();
     public WishlistPresenterImpl getWishlistPresenterImpl();
+    public ExamplePresenterImpl getExamplePresenter();
      
-    
     //views
     public IndexViewImpl getIndexView();
     public LoginViewImpl getLoginView();

@@ -80,6 +80,7 @@ public class InjectorModule extends AbstractGinModule
         bind(ScheduleGeneratorPresenter.class).to(ScheduleGeneratorPresenterImpl.class).in(Singleton.class);
         bind(ScheduleSelectPresenter.class).to(ScheduleSelectPresenterImpl.class).in(Singleton.class);
         bind(WishlistPresenter.class).to(WishlistPresenterImpl.class).in(Singleton.class);
+        bind(ExamplePresenter.class).to(ExamplePresenterImpl.class).in(Singleton.class);
         
         //bind(TabTestPresenter.class).to(TabTestPresenterImpl.class).in(Singleton.class);
 
@@ -95,6 +96,7 @@ public class InjectorModule extends AbstractGinModule
         bind(ScheduleGeneratorView.class).to(ScheduleGeneratorViewImpl.class).in(Singleton.class);
         bind(ScheduleSelectView.class).to(ScheduleSelectViewImpl.class).in(Singleton.class);
         bind(WishlistView.class).to(WishlistViewImpl.class).in(Singleton.class);
+        bind(ExampleView.class).to(ExampleViewImpl.class).in(Singleton.class);
         
         //bind(TabTestView.class).to(TabTest.class).in(Singleton.class);
 
