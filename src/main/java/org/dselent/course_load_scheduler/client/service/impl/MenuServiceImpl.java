@@ -10,6 +10,7 @@ import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
+import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;

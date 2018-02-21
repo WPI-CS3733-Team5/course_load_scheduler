@@ -1,8 +1,12 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
+import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
@@ -15,6 +19,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	private IndexPresenter parentPresenter;
 	private ProfileView view;
 	private boolean editWishlistClickInProgress;
+	private UserInfo user;
 
 	@Inject
 	public ProfilePresenterImpl(IndexPresenter parentPresenter, ProfileView view)
@@ -74,5 +79,15 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 
 	public void setEditWishlistClickInProgress(boolean editWishlistClickInProgress) {
 		this.editWishlistClickInProgress = editWishlistClickInProgress;
+	}
+	
+	@Override
+	public void onReceiveProfile(ReceiveProfileEvent evt)
+	{
+		HasWidgets container = evt.getContainer();
+		ReceiveProfileAction rpa = evt.getAction();
+		this.user = rpa.getModel();
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}
 }
