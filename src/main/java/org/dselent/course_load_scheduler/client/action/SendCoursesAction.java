@@ -2,12 +2,11 @@ package org.dselent.course_load_scheduler.client.action;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendCoursesAction {
+public class SendCoursesAction extends Action {
 	
 	HasWidgets panel;
 	
-	public SendCoursesAction(HasWidgets panel) {
-		this.panel = panel;
+	public SendCoursesAction() {
 	}
 	
 	@Override

@@ -232,8 +232,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendCourses()
 	{
-		SendCoursesAction sca = new SendCoursesAction(view.getViewRootPanel());
-		SendCoursesEvent sce = new SendCoursesEvent(sca);
+		SendCoursesAction sca = new SendCoursesAction();
+		SendCoursesEvent sce = new SendCoursesEvent(sca, view.getViewRootPanel());
 		eventBus.fireEvent(sce);
 	}
 
