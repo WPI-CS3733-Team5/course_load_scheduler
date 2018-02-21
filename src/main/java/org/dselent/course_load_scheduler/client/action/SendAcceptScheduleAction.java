@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendAcceptScheduleAction {
+public class SendAcceptScheduleAction extends Action {
 	private String userName;
 	private String term;
 	

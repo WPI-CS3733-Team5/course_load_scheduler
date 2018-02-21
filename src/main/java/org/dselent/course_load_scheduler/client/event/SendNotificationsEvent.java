@@ -3,22 +3,16 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendNotificationsEventHandler;
 
-import com.google.gwt.event.shared.GwtEvent; 
+import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendNotificationsEvent extends GwtEvent<SendNotificationsEventHandler>{
+public class SendNotificationsEvent extends DisplayEvent<SendNotificationsAction, SendNotificationsEventHandler>{
 	
 	public static Type<SendNotificationsEventHandler> TYPE = new Type<SendNotificationsEventHandler>();
 	
-	private SendNotificationsAction action;
 	
-	public SendNotificationsEvent(SendNotificationsAction action)
+	public SendNotificationsEvent(SendNotificationsAction action, HasWidgets panel)
 	{
-		this.action = action;
-	}
-	
-	public SendNotificationsAction getAction()
-	{
-		return action;
+		super(action, panel);
 	}
 	
 	@Override

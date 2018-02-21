@@ -5,15 +5,16 @@ import org.dselent.course_load_scheduler.client.event_handler.SendAccountsEventH
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
+
 public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAccountsEventHandler>{
 	
 	public static Type<SendAccountsEventHandler> TYPE = new Type<SendAccountsEventHandler>();
-		
+	
 	public SendAccountsEvent(SendAccountsAction action, HasWidgets panel)
 	{
 		super(action, panel);
 	}
-
+	
 	@Override
 	public Type<SendAccountsEventHandler> getAssociatedType()
 	{
@@ -26,3 +27,4 @@ public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAcco
 		handler.onSendAccounts(this);
 	}
 }
+

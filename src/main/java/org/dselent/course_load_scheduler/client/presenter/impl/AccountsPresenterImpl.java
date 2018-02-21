@@ -5,21 +5,15 @@ import javax.inject.Inject;
 import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
-import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
-import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
-import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
-import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.view.AccountsView;
-import org.dselent.course_load_scheduler.client.view.BaseView;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -231,6 +225,6 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	
 	@Override
 	public void onSendAccounts(SendAccountsEvent evt) {
-		go(evt.getAction().getPanel());
+		go(evt.getContainer());
 	}
 }
