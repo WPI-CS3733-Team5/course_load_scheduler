@@ -19,6 +19,7 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 
 	private static ProfileViewUiBinder uiBinder = GWT.create(ProfileViewUiBinder.class);
 	interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {}
+	@SuppressWarnings("unused")
 	private ProfilePresenterImpl parent;
 	
 	@UiField HTMLPanel profileRoot;
@@ -27,7 +28,6 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	@UiField Label phoneNumber;
 	@UiField Label office;
 	@UiField Label email;
-	@UiField Button editPersonalInfoButton;
 	@UiField Button editWishlistButton;
 
 	public ProfileViewImpl() {
@@ -106,18 +106,6 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 
 
 
-	public Button getEditPersonalInfoButton() {
-		return editPersonalInfoButton;
-	}
-
-
-
-	public void setEditPersonalInfoButton(Button editPersonalInfoButton) {
-		this.editPersonalInfoButton = editPersonalInfoButton;
-	}
-
-
-
 	public Button getEditCourseWishlistButton() {
 		return editWishlistButton;
 	}
@@ -134,12 +122,7 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 		return this.editWishlistButton;
 	}
 
-	@UiHandler("editPersonalInfoButton")
-	void onEditPersonalInfoButtonClicked(ClickEvent event) 
-	{
-		presenter.editInfo();
-	}
-	
+		
 	@UiHandler("editWishlistButton")
 	void oneditCourseWishlistButtonClicked(ClickEvent evt)
 	{

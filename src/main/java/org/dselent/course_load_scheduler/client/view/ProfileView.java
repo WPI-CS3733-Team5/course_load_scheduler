@@ -6,6 +6,5 @@ import com.google.gwt.user.client.ui.Button;
 
 public interface ProfileView extends BaseView<ProfilePresenter>
 {
-	Button getEditPersonalInfoButton();
 	Button getEditWishlistButton();
 }

@@ -1,21 +1,11 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dselent.course_load_scheduler.client.action.SendProfileEditInfoAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileEditWishlistAction;
-import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
-import org.dselent.course_load_scheduler.client.event.SendProfileEditInfoEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEditWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
-import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
-import org.dselent.course_load_scheduler.client.view.BaseView;
-import org.dselent.course_load_scheduler.client.view.LoginView;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
@@ -24,7 +14,6 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 {
 	private IndexPresenter parentPresenter;
 	private ProfileView view;
-	private boolean editInfoClickInProgress;
 	private boolean editWishlistClickInProgress;
 
 	@Inject
@@ -33,8 +22,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 		this.view = view;
 		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
-		editInfoClickInProgress = false;
-		editWishlistClickInProgress = false;
+		setEditWishlistClickInProgress(false);
 	}
 	
 	
@@ -61,17 +49,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 		this.parentPresenter = parentPresenter;
 	}
 
-	@Override
-	public void editInfo() {
-		sendProfileEditInfo();
-	}
 	
-	private void sendProfileEditInfo() {
-		SendProfileEditInfoAction speia = new SendProfileEditInfoAction();
-		SendProfileEditInfoEvent speie = new SendProfileEditInfoEvent(speia);
-		eventBus.fireEvent(speie);
-	}
-
 	@Override
 	public void editWishlist() {
 		sendProfileEditWishlist();
@@ -86,5 +64,15 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	@Override
 	public void onSendProfile(SendProfileEvent evt) {
 		go(evt.getAction().getPanel());
+	}
+
+
+	public boolean isEditWishlistClickInProgress() {
+		return editWishlistClickInProgress;
+	}
+
+
+	public void setEditWishlistClickInProgress(boolean editWishlistClickInProgress) {
+		this.editWishlistClickInProgress = editWishlistClickInProgress;
 	}
 }
