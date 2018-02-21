@@ -8,9 +8,7 @@
 		<g:VerticalPanel>
 			<g:Image width="142px" height="143px"/>
 			<g:Label text="Last, First Name (username)" ui:field="username"/>
-			<g:Label text="Job Title" ui:field="jobTitle"/>
 			<g:Label text="Phone: (123) 345-5678" ui:field="phoneNumber"/>
-			<g:Label text="Office: FL123" ui:field="office"/>
 			<g:Label text="flastname@wp.edu" ui:field="email"/>
 			<g:Button ui:field="editWishlistButton" text="Edit Wishlist">Edit Course Wishlist</g:Button>
 		</g:VerticalPanel>
