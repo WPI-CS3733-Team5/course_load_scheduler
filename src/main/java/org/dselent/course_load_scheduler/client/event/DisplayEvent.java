@@ -1,7 +1,6 @@
 package org.dselent.course_load_scheduler.client.event;
 
 import org.dselent.course_load_scheduler.client.action.Action;
-import org.dselent.course_load_scheduler.client.event_handler.ReceiveLoginEventHandler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.ui.HasWidgets;

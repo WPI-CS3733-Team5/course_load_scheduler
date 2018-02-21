@@ -6,6 +6,14 @@ import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 
 import com.google.gwt.event.shared.GwtEvent;
 
+/**
+ * 	Former class used for receiving a list of notifications from server
+ * 
+ * 	THIS CLASS HAS BEEN DEPRECATED
+ * 
+ * @author Leo
+ *
+ */
 public class ReceiveNotificationListEvent extends GwtEvent<ReceiveNotificationListEventHandler> {
 	public BasePresenter getPresenter() {
 		return presenter;

@@ -2,10 +2,7 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import java.util.ArrayList;
  
-import org.dselent.course_load_scheduler.client.action.SendFetchListAction;
-import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveNotificationEvent;
-import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
 import org.dselent.course_load_scheduler.client.model.Notifications;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
@@ -22,7 +19,6 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 
 	private IndexPresenter parentPresenter;
 	private NotificationsView view;
-	private boolean taskInProgress;
 	private Notifications curNotification;
 	private ArrayList<Notifications> listNotifications;
 	
@@ -32,7 +28,6 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 		this.view = view;
 		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
-		taskInProgress = false;
 		curNotification = null;
 		listNotifications = new ArrayList<Notifications>();
 	}
@@ -98,7 +93,7 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 	
 	@Override
 	public void onSendNotifications(SendNotificationsEvent evt) {
-		go(evt.getAction().getPanel());
+		go(evt.getContainer());
 	}
 
 }

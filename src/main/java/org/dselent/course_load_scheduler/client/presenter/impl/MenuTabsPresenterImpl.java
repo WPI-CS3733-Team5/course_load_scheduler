@@ -168,9 +168,9 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendNotifications() 
 	{
-		SendFetchListAction sfla = new SendFetchListAction(parentPresenter.getActiveUser().getId());
-		SendFetchListEvent sfle = new SendFetchListEvent(sfla, this);
-		eventBus.fireEvent(sfle);
+		SendNotificationsAction a = new SendNotificationsAction();
+		SendNotificationsEvent e = new SendNotificationsEvent(a, view.getViewRootPanel());
+		eventBus.fireEvent(e);
 	}
 
 	@Override
@@ -221,8 +221,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	
 	private void sendAccounts()
 	{
-		SendAccountsAction saa = new SendAccountsAction(view.getViewRootPanel());
-		SendAccountsEvent sae = new SendAccountsEvent(saa);
+		SendAccountsAction saa = new SendAccountsAction();
+		SendAccountsEvent sae = new SendAccountsEvent(saa, view.getViewRootPanel());
 		eventBus.fireEvent(sae);
 	}
 
