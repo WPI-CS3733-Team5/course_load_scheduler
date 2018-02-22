@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendPopup2StartTimeAction {
+public class SendPopup2StartTimeAction extends Action {
 	
 	private String startTime;
 	

@@ -1,5 +1,5 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendPopup1CancelAction {
+public class SendPopup1CancelAction extends Action {
 
 }
