@@ -3,7 +3,7 @@ package org.dselent.course_load_scheduler.client.action;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 
-public class SendCreateAccountAction {
+public class SendCreateAccountAction extends Action{
 	private UserInfo user;
 	private InstructorInfo instructor;
 	

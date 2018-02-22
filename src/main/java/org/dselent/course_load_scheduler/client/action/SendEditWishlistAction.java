@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendEditWishlistAction 
+public class SendEditWishlistAction  extends Action
 {
 	public SendEditWishlistAction()
 	{
@@ -9,7 +9,7 @@ public class SendEditWishlistAction
 
 	@Override
 	public String toString() {
-		return "SendEditWishlistAction []";
+		return "SendEditWishlistAction";
 	}
 	
 }

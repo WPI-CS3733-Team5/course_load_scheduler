@@ -5,18 +5,24 @@ import org.dselent.course_load_scheduler.client.event_handler.SendFetchListEvent
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
+
+/**
+ * DEPRECATED
+ * 
+ * @author Leo
+ *
+ */
 public class SendFetchListEvent extends GwtEvent<SendFetchListEventHandler> {
-	private BasePresenter presenter;
-	private SendFetchListAction action;
+//	private BasePresenter presenter;
+//	private SendFetchListAction action;
 	public static Type<SendFetchListEventHandler> TYPE = new Type<SendFetchListEventHandler>();
 	
 
 	public SendFetchListEvent(SendFetchListAction sendFetchListAction, BasePresenter presenter) {
-		super();
-		action = sendFetchListAction;
-		this.presenter = presenter;
+//		super();
+//		action = sendFetchListAction;
+//		this.presenter = presenter;
 	}
 
 	@Override
