@@ -3,9 +3,12 @@ package org.dselent.course_load_scheduler.client.translator.impl;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveAccountsAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
-import org.dselent.course_load_scheduler.client.action.SendHomeAction;
+import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveInstructorInfoKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveUserInfoKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
@@ -14,26 +17,28 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONValue;
 
-public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAction, ReceiveHomeAction>
+public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAccountsAction, ReceiveAccountsAction>
 {
-
 	@Override
-	public JSONObject translateToJson(SendHomeAction object) {
+	public JSONObject translateToJson(SendAccountsAction object) {
 		JSONObject jsonObject = new JSONObject();
 		return jsonObject;
 	}
 
 	@Override
-	public ReceiveHomeAction translateToAction(JSONObject json) {
+	public ReceiveAccountsAction translateToAction(JSONObject json) {
 		JSONValue jsonObject = json.get("success");
 		JSONObject userListObject = jsonObject.isArray().get(0).isObject();
+		JSONObject instructorListObject = jsonObject.isArray().get(0).isObject();
 		
 		
 		JSONArray userInfoArray = userListObject.isArray();
+		JSONArray instructorInfoArray = instructorListObject.isArray();
 		
 		ArrayList<UserInfo> userInfoList = new ArrayList<UserInfo>();
+		ArrayList<InstructorInfo> instructorInfoList = new ArrayList<InstructorInfo>();
 
-		for(int i = 0; i < jsonObject.isArray().size(); i++) {
+		for(int i = 0; i < userListObject.isArray().size(); i++) {
 			Integer id = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.ID));
 			String userName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_NAME));
 			String firstName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
@@ -59,7 +64,26 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			userInfoList.add(user);
 		}
 		
-		ReceiveHomeAction action = new ReceiveHomeAction(userInfoList);
+		for(int i = 0; i < instructorListObject.isArray().size(); i++) {
+			Integer id = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
+			Integer rank = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));
+			Integer courseLoad = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.COURSE_LOAD));
+			Integer phoneNumber = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.PHONE_NUMBER));
+			String office = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.OFFICE));
+			Integer userInfoId = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.USER_INFO_ID));
+
+			InstructorInfo instructor = new InstructorInfo();
+			instructor.setId(id);
+			instructor.setRank(rank);
+			instructor.setCourseLoad(courseLoad);
+			instructor.setPhoneNumber(phoneNumber);
+			instructor.setOffice(office);
+			instructor.setUserInfoId(userInfoId);
+			
+			instructorInfoList.add(instructor);
+		}
+		
+		ReceiveAccountsAction action = new ReceiveAccountsAction(userInfoList, instructorInfoList);
 		
 		return action;
 		

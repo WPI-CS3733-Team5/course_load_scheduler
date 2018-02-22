@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.receive.jsonkeys;
 
-public enum ReceiveHomeKeys {
+public enum ReceiveUserInfoKeys {
 		ID,
 		USER_NAME,
 		FIRST_NAME,

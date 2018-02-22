@@ -1,14 +1,19 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
+import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
@@ -25,6 +30,9 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	
 	private boolean editInProgress;
 	private boolean creationInProgress;
+	
+	private ArrayList<UserInfo> userInfoList;
+	private ArrayList<InstructorInfo> instructorInfoList;
 	
 	@Inject
 	public AccountsPresenterImpl(IndexPresenter parentPresenter, AccountsView view) {
@@ -224,7 +232,12 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	
 	@Override
-	public void onSendAccounts(SendAccountsEvent evt) {
-		go(evt.getContainer());
+	public void onReceiveAccounts(ReceiveAccountsEvent evt) {
+		HasWidgets container = evt.getContainer();
+		ReceiveAccountsAction raa = evt.getAction();
+		userInfoList = raa.getUserinfoList();
+		instructorInfoList = raa.getInstructorInfoList();
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}
 }

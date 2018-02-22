@@ -8,6 +8,7 @@ import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.callback.SendAccountsCallback;
 import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
@@ -26,6 +27,7 @@ import org.dselent.course_load_scheduler.client.network.NetworkRequest;
 import org.dselent.course_load_scheduler.client.network.NetworkRequestStrings;
 import org.dselent.course_load_scheduler.client.service.MenuService;
 import org.dselent.course_load_scheduler.client.translator.impl.LoginActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
@@ -89,7 +91,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = homeActionTranslator.translateToJson(action);
 		SendHomeCallback homeCallback = new SendHomeCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.HOME, homeCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_AND_INSTRUCTOR_INFO, homeCallback, json);
 		request.send();
 	}
 	
@@ -100,7 +102,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = profileActionTranslator.translateToJson(action);
 		SendProfileCallback profileCallback = new SendProfileCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.PROFILE, profileCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ONE_USER_AND_INSTRUCTOR_INFO, profileCallback, json);
 		request.send();
 	}
 	
@@ -122,7 +124,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = coursesActionTranslator.translateToJson(action);
 		SendCoursesCallback coursesCallback = new SendCoursesCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.COURSES, coursesCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, coursesCallback, json);
 		request.send();
 	}
 	
@@ -133,7 +135,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = accountsActionTranslator.translateToJson(action);
 		SendAccountsCallback accountsCallback = new SendAccountsCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.ACCOUNTS, accountsCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_AND_INSTRUCTOR_INFO, accountsCallback, json);
 		request.send();
 	}
 	
