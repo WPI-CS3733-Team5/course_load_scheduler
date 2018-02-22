@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendRemoveAccountAction {
+public class SendRemoveAccountAction extends Action {
 	private String accountInfo;
 	
 	public SendRemoveAccountAction(String accountInfo) {

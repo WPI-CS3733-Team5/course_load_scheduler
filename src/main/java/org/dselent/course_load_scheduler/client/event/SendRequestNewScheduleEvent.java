@@ -5,19 +5,12 @@ import org.dselent.course_load_scheduler.client.event_handler.SendRequestNewSche
 
 import com.google.gwt.event.shared.GwtEvent;
 
-public class SendRequestNewScheduleEvent extends GwtEvent<SendRequestNewScheduleEventHandler>{
+public class SendRequestNewScheduleEvent extends BaseEvent<SendRequestNewScheduleAction, SendRequestNewScheduleEventHandler>{
 		public static Type<SendRequestNewScheduleEventHandler> TYPE = new Type<SendRequestNewScheduleEventHandler>();
-		
-		private SendRequestNewScheduleAction action;
-		
+				
 		public SendRequestNewScheduleEvent(SendRequestNewScheduleAction action)
 		{
-			this.action = action;
-		}
-		
-		public SendRequestNewScheduleAction getAction()
-		{
-			return action;
+			super(action);
 		}
 		
 		/*

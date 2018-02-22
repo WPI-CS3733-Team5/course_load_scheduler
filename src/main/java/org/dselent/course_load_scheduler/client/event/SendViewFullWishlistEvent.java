@@ -1,10 +1,11 @@
 package org.dselent.course_load_scheduler.client.event;
 
+//Same as SendWishlistEvent, TODO is to deprecate this and change all calls to SendWishlistEvent
+
 import org.dselent.course_load_scheduler.client.action.SendViewFullWishlistAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendViewFullWishlistEventHandler;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class SendViewFullWishlistEvent extends GwtEvent<SendViewFullWishlistEventHandler>{
 	
