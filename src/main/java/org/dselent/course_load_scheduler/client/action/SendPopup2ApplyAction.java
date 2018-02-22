@@ -1,7 +1,7 @@
 package org.dselent.course_load_scheduler.client.action;
 
 
-public class SendPopup2ApplyAction {
+public class SendPopup2ApplyAction extends Action {
 	
 	private String meetingTimes;
 	private String meetingDays;

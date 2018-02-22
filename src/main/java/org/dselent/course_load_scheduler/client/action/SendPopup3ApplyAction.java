@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendPopup3ApplyAction {
+public class SendPopup3ApplyAction extends Action {
 	
 	private String apply;
 	

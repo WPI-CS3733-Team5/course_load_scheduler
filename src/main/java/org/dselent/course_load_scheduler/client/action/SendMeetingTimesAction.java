@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendMeetingTimesAction {
+public class SendMeetingTimesAction extends Action {
 	
 private String meetingTimes;
 	
