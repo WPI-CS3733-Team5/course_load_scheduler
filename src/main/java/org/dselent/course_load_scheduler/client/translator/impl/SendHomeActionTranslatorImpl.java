@@ -39,7 +39,7 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			String firstName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.FIRST_NAME));
 			String lastName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.LAST_NAME));
 			String email = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.EMAIL));
-			Integer accountState = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.ACCOUNT_STATE));
+			Integer accountState = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.ACCOUNT_STATE));
 			Date createdAt = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.CREATED_AT));
 			Date updatedAt = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.UPDATED_AT));
 			Date loginTime = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveHomeKeys.LOGIN_TIME));

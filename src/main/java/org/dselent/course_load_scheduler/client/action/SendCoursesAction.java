@@ -6,7 +6,8 @@ public class SendCoursesAction extends Action {
 	
 	HasWidgets panel;
 	
-	public SendCoursesAction() {
+	public SendCoursesAction(HasWidgets panel) {
+		this.panel = panel;
 	}
 	
 	@Override

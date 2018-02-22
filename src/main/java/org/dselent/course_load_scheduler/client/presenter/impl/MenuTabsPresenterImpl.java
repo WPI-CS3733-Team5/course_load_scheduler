@@ -29,6 +29,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private MenuTabs view;
 	private HomePresenterImpl home;
 	private ProfilePresenterImpl profile;
+	private NotificationsPresenterImpl notifications;
 	private WishlistPresenterImpl wishlist;
 	private CoursesPresenterImpl courses;
 	private AccountsPresenterImpl accounts;
@@ -48,6 +49,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 			MenuTabs view, 
 			HomePresenterImpl home, 
 			ProfilePresenterImpl profile,  
+			NotificationsPresenterImpl notifications,
 			WishlistPresenterImpl wishlist, 
 			CoursesPresenterImpl courses,
 			AccountsPresenterImpl accounts,
@@ -59,6 +61,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		view.setPresenter(this);
 		this.home = home;
 		this.profile = profile;
+		this.notifications = notifications;
 		this.wishlist = wishlist;
 		this.courses = courses;
 		this.accounts = accounts;
@@ -115,11 +118,12 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 
 	@Override
-	public void home() { //TODO walk through exact process from button click to home screen being displayed
+	public void home() { 
 		if(!homeInProgress)
 		{
 			homeInProgress = true;
 			view.getHomeButton().setEnabled(false);
+			parentPresenter.showLoadScreen();
 			sendHome();
 		}
 	}
@@ -127,7 +131,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private void sendHome()
 	{
 		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
-		SendHomeEvent she = new SendHomeEvent(sha, this.home.getView().getViewRootPanel());
+		SendHomeEvent she = new SendHomeEvent(sha, home.getView().getViewRootPanel());
 		eventBus.fireEvent(she);
 	}
 
@@ -137,14 +141,15 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			profileInProgress = true;
 			view.getProfileButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendProfile();
 		}
 	}
 	
 	private void sendProfile() {
 		SendProfileAction spa = new SendProfileAction(view.getViewRootPanel());
-		SendProfileEvent spe = new SendProfileEvent(spa);
+		SendProfileEvent spe = new SendProfileEvent(spa, profile.getView().getViewRootPanel());
 		eventBus.fireEvent(spe);
 	}
 
@@ -154,15 +159,16 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			notificationsInProgress = true;
 			view.getNotificationsButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendNotifications();
 		}
 	}
 	
 	private void sendNotifications() 
 	{
-		SendNotificationsAction a = new SendNotificationsAction();
-		SendNotificationsEvent e = new SendNotificationsEvent(a, view.getViewRootPanel());
+		SendNotificationsAction a = new SendNotificationsAction(view.getViewRootPanel());
+		SendNotificationsEvent e = new SendNotificationsEvent(a, notifications.getView().getViewRootPanel());
 		eventBus.fireEvent(e);
 	}
 
@@ -172,14 +178,15 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			wishlistInProgress = true;
 			view.getWishlistButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendWishlist();
 		}
 	}
 	
 	private void sendWishlist() {
 		SendWishlistAction swa = new SendWishlistAction(view.getViewRootPanel());
-		SendWishlistEvent swe = new SendWishlistEvent(swa);
+		SendWishlistEvent swe = new SendWishlistEvent(swa, wishlist.getView().getViewRootPanel());
 		eventBus.fireEvent(swe);
 	}
 
@@ -189,15 +196,16 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			coursesInProgress = true;
 			view.getCoursesButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendCourses();
 		}
 	}
 	
 	private void sendCourses()
 	{
-		SendCoursesAction sca = new SendCoursesAction();
-		SendCoursesEvent sce = new SendCoursesEvent(sca, view.getViewRootPanel());
+		SendCoursesAction sca = new SendCoursesAction(view.getViewRootPanel());
+		SendCoursesEvent sce = new SendCoursesEvent(sca, courses.getView().getViewRootPanel());
 		eventBus.fireEvent(sce);
 	}
 
@@ -207,15 +215,16 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			accountsInProgress = true;
 			view.getAccountsButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendAccounts();
 		}
 	}
 	
 	private void sendAccounts()
 	{
-		SendAccountsAction saa = new SendAccountsAction();
-		SendAccountsEvent sae = new SendAccountsEvent(saa, view.getViewRootPanel());
+		SendAccountsAction saa = new SendAccountsAction(view.getViewRootPanel());
+		SendAccountsEvent sae = new SendAccountsEvent(saa, accounts.getView().getViewRootPanel());
 		eventBus.fireEvent(sae);
 	}
 
@@ -225,7 +234,8 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			schedulesInProgress = true;
 			view.getSchedulesButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendSchedules();
 		}
 	}
@@ -233,7 +243,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	private void sendSchedules()
 	{
 		SendSchedulesAction ssa = new SendSchedulesAction(view.getViewRootPanel());
-		SendSchedulesEvent sse = new SendSchedulesEvent(ssa);
+		SendSchedulesEvent sse = new SendSchedulesEvent(ssa, schedules.getView().getViewRootPanel());
 		eventBus.fireEvent(sse);
 	}
 
@@ -243,14 +253,15 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		{
 			logoutInProgress = true;
 			view.getLogoutButton().setEnabled(false);
-			
+			parentPresenter.showLoadScreen();
+
 			sendLogout();
 		}
 	}
 	
 	private void sendLogout() {
 		SendLogoutAction sla = new SendLogoutAction(view.getViewRootPanel());
-		SendLogoutEvent sle = new SendLogoutEvent(sla);
+		SendLogoutEvent sle = new SendLogoutEvent(sla, login.getView().getViewRootPanel());
 		eventBus.fireEvent(sle);
 	}		
 }

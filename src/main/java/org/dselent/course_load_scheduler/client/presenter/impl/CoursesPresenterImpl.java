@@ -1,7 +1,10 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendAddToWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendApplyChangesAction;
 import org.dselent.course_load_scheduler.client.action.SendCancelChangesAction;
@@ -19,6 +22,7 @@ import org.dselent.course_load_scheduler.client.action.SendRemoveSelectedFromWis
 import org.dselent.course_load_scheduler.client.action.SendSectionTypeAction;
 import org.dselent.course_load_scheduler.client.action.SendSortCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendViewFullWishlistAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendAddToWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendApplyChangesEvent;
 import org.dselent.course_load_scheduler.client.event.SendCancelChangesEvent;
@@ -38,8 +42,11 @@ import org.dselent.course_load_scheduler.client.event.SendRemoveSelectedFromWish
 import org.dselent.course_load_scheduler.client.event.SendSectionTypeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
-import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
+import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.view.CoursesView;
 
 import com.google.gwt.dom.client.Style;
@@ -54,8 +61,8 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPresenter {
 	
+	private IndexPresenter parentPresenter;
 	private CoursesView view;
-	private UserInfo user;
 	private boolean requestSortCoursesInProgress;
 	private boolean requestAddToWishlistInProgress;
 	private boolean requestEditCoursesInProgress;
@@ -74,12 +81,13 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	private boolean requestPopup2ApplyInProgress;
 	private boolean requestPopup2CancelInProgress;
 	private boolean requestPopup3ApplyInProgress;
-
-
+	private ArrayList<CourseInfo> courseList;
+	private ArrayList<SectionInfo> sectionList;
 
 	@Inject
-	public CoursesPresenterImpl(CoursesView view)
+	public CoursesPresenterImpl(IndexPresenter parentPresenter, CoursesView view)
 	{
+		this.parentPresenter = parentPresenter;
 		this.view = view;
 		view.setPresenter(this);
 	}
@@ -219,17 +227,11 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	}
 	
 	@Override
-	public UserInfo getUser() {
-		return user;
-	}
-	
-	
-	@Override
 	public void go(HasWidgets container) {
 		container.clear();
 		container.add(view.getWidgetContainer());
 		
-		if(user.getUserRole() == 1) {
+		if(parentPresenter.getActiveUser().getUserRole() == 1) {
 			view.getEditButton().setVisible(false);
 			view.getApplyChangesButton().setVisible(false);
 			view.getRemoveCourseButton().setVisible(false);
@@ -706,5 +708,15 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	public void onSendCourses(SendCoursesEvent evt) {
 		go(evt.getAction().getPanel());
 	}	
-
+	
+	@Override
+	public void onReceiveCourses(ReceiveCoursesEvent evt)
+	{
+		HasWidgets container = evt.getContainer();
+		ReceiveCoursesAction rca = evt.getAction();
+		courseList = rca.getCourses();
+		sectionList = rca.getSections();
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+	}
 }

@@ -37,7 +37,6 @@ public interface CoursesPresenter extends BasePresenter {
 	public void requestPopup2Cancel();
 	public void requestPopup3Apply(RadioButton popup3YesRadio, RadioButton popup3NoRadio);
 	
-	UserInfo getUser();
 	/*
 	public void requestAddToWishlistInProgress();
 	public void requestEditCoursesInProgress();

@@ -8,6 +8,7 @@ import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
 import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
@@ -23,15 +24,16 @@ import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.network.NetworkRequest;
 import org.dselent.course_load_scheduler.client.network.NetworkRequestStrings;
-import org.dselent.course_load_scheduler.client.service.UserService;
+import org.dselent.course_load_scheduler.client.service.MenuService;
 import org.dselent.course_load_scheduler.client.translator.impl.LoginActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
 
-public class MenuServiceImpl extends BaseServiceImpl implements UserService
+public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 {
 	public MenuServiceImpl()
 	{

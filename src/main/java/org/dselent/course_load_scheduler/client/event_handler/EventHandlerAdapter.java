@@ -51,7 +51,8 @@ implements InvalidLoginEventHandler,
 			ReceiveLoginEventHandler,
 			ReceiveNotificationEventHandler,
 			ReceiveHomeEventHandler,
-			ReceiveProfileEventHandler
+			ReceiveProfileEventHandler,
+			ReceiveCoursesEventHandler
 			
 
 			
@@ -168,4 +169,7 @@ implements InvalidLoginEventHandler,
 
 	@Override
 	public void onReceiveProfile(ReceiveProfileEvent evt) {}
+	
+	@Override
+	public void onReceiveCourses(ReceiveCoursesEvent evt) {}
 }
