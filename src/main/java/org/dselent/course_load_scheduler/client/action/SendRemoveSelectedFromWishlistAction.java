@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendRemoveSelectedFromWishlistAction {
+public class SendRemoveSelectedFromWishlistAction extends Action {
 	
 	private String courseNumber;
 	private String meetingTimes;

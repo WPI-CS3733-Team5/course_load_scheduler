@@ -1,5 +1,7 @@
 package org.dselent.course_load_scheduler.client.action;
 
+//Same as SendWishlistAction, TODO is to deprecate this and change all calls to SendWishlistAction
+
 public class SendViewFullWishlistAction {
 	
 	private String courseNumber;

@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.action;
 
-public class SendSortWishlistAction 
+public class SendSortWishlistAction extends Action
 {
 	private String dept;
 	private String term;

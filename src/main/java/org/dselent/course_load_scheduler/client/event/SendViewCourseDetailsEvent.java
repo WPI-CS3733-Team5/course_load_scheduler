@@ -1,28 +1,18 @@
 package org.dselent.course_load_scheduler.client.event;
 
 import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
-//import org.dselent.course_load_scheduler.client.event_handler.SendLoginEventHandler;
 import org.dselent.course_load_scheduler.client.event_handler.SendViewCourseDetailsEventHandler;
 
-import com.google.gwt.event.shared.GwtEvent;
-
-//import org.dselent.course_load_scheduler.client.action.SendSortAction;
-//import org.dselent.course_load_scheduler.client.event_handler.SendSortEventHandler;
-
-public class SendViewCourseDetailsEvent extends GwtEvent<SendViewCourseDetailsEventHandler>{
+import com.google.gwt.user.client.ui.HasWidgets;
+public class SendViewCourseDetailsEvent extends DisplayEvent<SendViewCourseDetailsAction, SendViewCourseDetailsEventHandler>{
 		public static Type<SendViewCourseDetailsEventHandler> TYPE = new Type<SendViewCourseDetailsEventHandler>();
-		
-		private SendViewCourseDetailsAction action;
-		
-		public SendViewCourseDetailsEvent(SendViewCourseDetailsAction action)
+				
+		public SendViewCourseDetailsEvent(SendViewCourseDetailsAction action, HasWidgets panel)
 		{
-			this.action = action;
+			
+			super(action, panel);
 		}
-		
-		public SendViewCourseDetailsAction getAction()
-		{
-			return action;
-		}
+	
 		
 		/*
 		 * 
