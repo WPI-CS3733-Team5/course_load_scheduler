@@ -61,12 +61,14 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		view.setPresenter(this);
 		this.home = home;
 		this.profile = profile;
+		this.profile.setMenuTabs(this);
 		this.notifications = notifications;
 		this.wishlist = wishlist;
 		this.courses = courses;
 		this.accounts = accounts;
 		this.schedules = schedules;
 		this.login = login;
+		this.login.setMenuTabs(this);
 		homeInProgress = false;
 		profileInProgress = false;
 		notificationsInProgress = false;
@@ -128,7 +130,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		}
 	}
 	
-	private void sendHome()
+	public void sendHome()
 	{
 		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
 		SendHomeEvent she = new SendHomeEvent(sha, home.getView().getViewRootPanel());
@@ -184,7 +186,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		}
 	}
 	
-	private void sendWishlist() {
+	public void sendWishlist() {
 		SendWishlistAction swa = new SendWishlistAction(view.getViewRootPanel());
 		SendWishlistEvent swe = new SendWishlistEvent(swa, wishlist.getView().getViewRootPanel());
 		eventBus.fireEvent(swe);
@@ -260,6 +262,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendLogout() {
+		this.parentPresenter.setActiveUserState(0);
 		SendLogoutAction sla = new SendLogoutAction(view.getViewRootPanel());
 		SendLogoutEvent sle = new SendLogoutEvent(sla, login.getView().getViewRootPanel());
 		eventBus.fireEvent(sle);

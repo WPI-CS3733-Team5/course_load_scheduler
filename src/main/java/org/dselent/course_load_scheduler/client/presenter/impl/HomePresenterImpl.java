@@ -3,14 +3,17 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.ArrayList;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
+import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendAcceptScheduleAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeFilterAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestDifferentScheduleAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.ActiveUser;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;

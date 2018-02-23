@@ -108,7 +108,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	{
 		
 		SendViewCourseDetailsAction svcda = new SendViewCourseDetailsAction(course);
-		SendViewCourseDetailsEvent svcde = new SendViewCourseDetailsEvent(svcda);
+		SendViewCourseDetailsEvent svcde = new SendViewCourseDetailsEvent(svcda, this.getView().getViewRootPanel());
 		eventBus.fireEvent(svcde);
 		
 	}

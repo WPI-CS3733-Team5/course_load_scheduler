@@ -54,6 +54,12 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	{
 		this.parentPresenter = parentPresenter;
 	}
+	
+	@Override
+	public void setMenuTabs(MenuTabsPresenterImpl menuTabs)
+	{
+		this.menuTabs = menuTabs;
+	}
 
 	
 	@Override
@@ -62,9 +68,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	}
 	
 	private void sendProfileEditWishlist() {
-		SendWishlistAction spewa = new SendWishlistAction(view.getViewRootPanel());
-		SendWishlistEvent spewe = new SendWishlistEvent(spewa, menuTabsPresenterImpl.getWishlistPresenterImpl.getView().getViewRootPanel()); //TODO figure this mapping out
-		eventBus.fireEvent(spewe);
+		menuTabs.sendWishlist();
 	}
 
 	@Override

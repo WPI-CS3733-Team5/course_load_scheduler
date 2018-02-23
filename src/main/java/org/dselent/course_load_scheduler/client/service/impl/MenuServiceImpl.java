@@ -12,6 +12,7 @@ import org.dselent.course_load_scheduler.client.callback.SendAccountsCallback;
 import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
+import org.dselent.course_load_scheduler.client.callback.SendLogoutCallback;
 import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
 import org.dselent.course_load_scheduler.client.callback.SendSchedulesCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendSchedulesUsersCallback;
@@ -32,6 +33,7 @@ import org.dselent.course_load_scheduler.client.translator.impl.LoginActionTrans
 import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendLogoutActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesCouresesActionTranslatorImpl;
 
@@ -164,9 +166,6 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		SendLogoutActionTranslatorImpl logoutActionTranslator = new SendLogoutActionTranslatorImpl();
 		JSONObject json = logoutActionTranslator.translateToJson(action);
 		SendLogoutCallback logoutCallback = new SendLogoutCallback(eventBus, evt.getContainer());
-		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.LOGOUT, logoutCallback, json);
-		request.send();
 	}
 	
 }

@@ -47,6 +47,11 @@ public class IndexPresenterImpl extends BasePresenterImpl implements IndexPresen
 	}
 	
 	@Override
+	public void setActiveUserState(Integer state) {
+		this.activeUser.setAccountState(state);
+	}
+	
+	@Override
 	public void showLoadScreen()
 	{
 		// thank you stackoverflow

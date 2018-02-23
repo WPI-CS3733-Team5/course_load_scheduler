@@ -10,4 +10,5 @@ public interface IndexPresenter extends BasePresenter
 	public void hideMenuTabs();
 	public ActiveUser getActiveUser();
 	public void setActiveUser(ActiveUser user);
+	void setActiveUserState(Integer state);
 }
