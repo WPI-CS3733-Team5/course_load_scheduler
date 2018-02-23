@@ -3,13 +3,23 @@ package org.dselent.course_load_scheduler.client.translator.impl;
 import java.util.ArrayList;
 import org.dselent.course_load_scheduler.client.action.ReceiveCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
+<<<<<<< HEAD
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
+=======
+import org.dselent.course_load_scheduler.client.action.SendHomeAction;
+import org.dselent.course_load_scheduler.client.action.SendProfileAction;
+>>>>>>> c755efa946b0aa51c98fade43d02e7c150fa626d
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
-import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
+<<<<<<< HEAD
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCalendarsKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCoursesKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveLabsKeys;
+=======
+import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCoursesKeys;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveProfileKeys;
+>>>>>>> c755efa946b0aa51c98fade43d02e7c150fa626d
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveSectionsKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
@@ -30,6 +40,7 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 	public ReceiveCoursesAction translateToAction(JSONObject json) {
 		JSONValue jsonObject = json.get("success");
 		JSONObject coursesObject = jsonObject.isArray().get(0).isObject();
+<<<<<<< HEAD
 		JSONObject sectionsObject = jsonObject.isArray().get(1).isObject();
 		JSONObject calendarObject = jsonObject.isArray().get(2).isObject();
 		JSONObject labObject = jsonObject.isArray().get(3).isObject();
@@ -38,11 +49,15 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 		JSONArray sectionsArray = sectionsObject.isArray();
 		JSONArray calendarArray = calendarObject.isArray();
 		JSONArray labArray = labObject.isArray();
+=======
+		JSONObject sectionsObject = jsonObject.isArray().get(0).isObject();
+		
+		JSONArray coursesArray = coursesObject.isArray();
+		JSONArray sectionsArray = sectionsObject.isArray();
+>>>>>>> c755efa946b0aa51c98fade43d02e7c150fa626d
 		
 		ArrayList<CourseInfo> courses = new ArrayList<>();
 		ArrayList<SectionInfo> sections = new ArrayList<>();
-		ArrayList<CalendarInfo> calendars = new ArrayList<>();
-		ArrayList<LabInfo> labs = new ArrayList<>();
 		
 		for(int i = 0; i < coursesArray.size(); i++) {
 			
@@ -99,6 +114,7 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 			sections.add(section);
 		}
 		
+<<<<<<< HEAD
 		for(int i = 0; i < calendarArray.isArray().size(); i++)
 		{
 			
@@ -146,6 +162,9 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 		}
 		
 		ReceiveCoursesAction action = new ReceiveCoursesAction(courses, sections, calendars, labs);
+=======
+		ReceiveCoursesAction action = new ReceiveCoursesAction(courses, sections);
+>>>>>>> c755efa946b0aa51c98fade43d02e7c150fa626d
 		return action;
 	}
 }
