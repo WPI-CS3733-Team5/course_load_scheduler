@@ -28,9 +28,9 @@ public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAc
 	@Override
 	public ReceiveAccountsAction translateToAction(JSONObject json) {
 		JSONValue jsonObject = json.get("success");
-		JSONObject userListObject = jsonObject.isArray().get(0).isObject();
-		JSONObject instructorListObject = jsonObject.isArray().get(0).isObject();
 		
+		JSONObject userListObject = jsonObject.isArray().get(0).isObject();
+		JSONObject instructorListObject = jsonObject.isArray().get(1).isObject();
 		
 		JSONArray userInfoArray = userListObject.isArray();
 		JSONArray instructorInfoArray = instructorListObject.isArray();
@@ -38,16 +38,17 @@ public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAc
 		ArrayList<UserInfo> userInfoList = new ArrayList<UserInfo>();
 		ArrayList<InstructorInfo> instructorInfoList = new ArrayList<InstructorInfo>();
 
-		for(int i = 0; i < userListObject.isArray().size(); i++) {
-			Integer id = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.ID));
-			String userName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_NAME));
-			String firstName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
-			String lastName = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
-			String email = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
-			Integer accountState = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
-			Date createdAt = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.CREATED_AT));
-			Date updatedAt = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.UPDATED_AT));
-			Date loginTime = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveUserInfoKeys.LOGIN_TIME));
+		for(int i = 0; i < userInfoArray.isArray().size(); i++) {
+			
+			JSONObject tempUser = userInfoArray.get(i).isObject();
+			
+			Integer id = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ID));
+			String userName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_NAME));
+			String firstName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
+			String lastName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
+			String email = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
+			Integer accountState = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
+
 		
 			UserInfo user = new UserInfo();
 			user.setId(id);
@@ -56,21 +57,20 @@ public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAc
 			user.setLastName(lastName);
 			user.setEmail(email);
 			user.setAccountState(accountState);
-			user.setLoginTime(loginTime);
-			user.setUpdatedAt(updatedAt);
-			user.setAccountState(accountState);
-			user.setCreatedAt(createdAt);
 			
 			userInfoList.add(user);
 		}
 		
-		for(int i = 0; i < instructorListObject.isArray().size(); i++) {
-			Integer id = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
-			Integer rank = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));
-			Integer courseLoad = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.COURSE_LOAD));
-			Integer phoneNumber = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.PHONE_NUMBER));
-			String office = JSONHelper.getStringValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.OFFICE));
-			Integer userInfoId = JSONHelper.getIntValue(userInfoArray.get(i), JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.USER_INFO_ID));
+		for(int i = 0; i < instructorInfoArray.isArray().size(); i++) {
+			
+			JSONObject tempInstructor = instructorInfoArray.get(i).isObject();
+			
+			Integer id = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
+			Integer rank = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));
+			Integer courseLoad = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.COURSE_LOAD));
+			Integer phoneNumber = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.PHONE_NUMBER));
+			String office = JSONHelper.getStringValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.OFFICE));
+			Integer userInfoId = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.USER_INFO_ID));
 
 			InstructorInfo instructor = new InstructorInfo();
 			instructor.setId(id);
