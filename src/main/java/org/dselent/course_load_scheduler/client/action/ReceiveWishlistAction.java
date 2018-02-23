@@ -1,12 +1,15 @@
 package org.dselent.course_load_scheduler.client.action;
 
+import org.dselent.course_load_scheduler.client.model.CalendarInfo;
+import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.WishlistLinks;
 
 public class ReceiveWishlistAction extends Action
 {
 	private WishlistLinks model;
 
-	public ReceiveWishlistAction(WishlistLinks wishlist)
+	public ReceiveWishlistAction(WishlistLinks wishlist, CalendarInfo calendar, SectionInfo section, CourseInfo course)
 	{
 		this.model = wishlist;
 	}

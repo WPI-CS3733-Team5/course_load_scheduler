@@ -9,14 +9,10 @@ import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
-import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
-import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
-import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCalendarsKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCoursesKeys;
-import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveLabsKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveProfileKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveSectionsKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
@@ -39,18 +35,12 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 		JSONValue jsonObject = json.get("success");
 		JSONObject coursesObject = jsonObject.isArray().get(0).isObject();
 		JSONObject sectionsObject = jsonObject.isArray().get(0).isObject();
-		JSONObject calendarObject = jsonObject.isArray().get(0).isObject();
-		JSONObject labObject = jsonObject.isArray().get(0).isObject();
 		
 		JSONArray coursesArray = coursesObject.isArray();
 		JSONArray sectionsArray = sectionsObject.isArray();
-		JSONArray calendarArray = jsonObject.isArray();
-		JSONArray labArray = jsonObject.isArray();
 		
 		ArrayList<CourseInfo> courses = new ArrayList<>();
 		ArrayList<SectionInfo> sections = new ArrayList<>();
-		ArrayList<CalendarInfo> calendars = new ArrayList<>();
-		ArrayList<LabInfo> labs = new ArrayList<>();
 		
 		for(int i = 0; i < coursesObject.size(); i++) {
 			Integer id = JSONHelper.getIntValue(coursesArray.get(i), JSONHelper.convertKeyName(ReceiveCoursesKeys.ID));
@@ -101,47 +91,7 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 			sections.add(section);
 		}
 		
-		for(int i = 0; i < calendars.size(); i++)
-		{
-			Integer id = JSONHelper.getIntValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.ID));
-			Integer year = JSONHelper.getIntValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.YEAR));
-			String semester = JSONHelper.getStringValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.SEMESTER));
-			String days = JSONHelper.getStringValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.DAYS));
-			Integer startTime = JSONHelper.getIntValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.START_TIME));
-			Integer endTime = JSONHelper.getIntValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.END_TIME));
-			Integer term = JSONHelper.getIntValue(calendarArray.get(i), JSONHelper.convertKeyName(ReceiveCalendarsKeys.TERM));
-
-			CalendarInfo calendar = new CalendarInfo();
-			calendar.setId(id);
-			calendar.setYear(year);
-			calendar.setSemester(semester);
-			calendar.setStartTime(startTime);
-			calendar.setEndTime(endTime);
-			calendar.setTerm(term);
-			
-			calendars.add(calendar);
-			
-		}
-		
-		for(int i = 0; i < labs.size(); i++)
-		{
-			Integer id = JSONHelper.getIntValue(labArray.get(i), JSONHelper.convertKeyName(ReceiveLabsKeys.ID));
-			Integer sectionInfoId = JSONHelper.getIntValue(labArray.get(i), JSONHelper.convertKeyName(ReceiveLabsKeys.SECTION_INFO_ID));
-			Integer instructorInfoId = JSONHelper.getIntValue(labArray.get(i), JSONHelper.convertKeyName(ReceiveLabsKeys.INSTRUCTOR_INFO_ID));
-			String location = JSONHelper.getStringValue(labArray.get(i), JSONHelper.convertKeyName(ReceiveLabsKeys.LOCATION));
-			Integer calendarInfoId = JSONHelper.getIntValue(labArray.get(i), JSONHelper.convertKeyName(ReceiveLabsKeys.CALENDAR_INFO_ID));
-			
-			LabInfo lab = new LabInfo();
-			lab.setId(id);
-			lab.setSectionInfoId(sectionInfoId);
-			lab.setInstructorInfoId(instructorInfoId);
-			lab.setLocation(location);
-			lab.setCalendarInfoId(calendarInfoId);
-			
-			labs.add(lab);
-		}
-		
-		ReceiveCoursesAction action = new ReceiveCoursesAction(courses, sections, calendars, labs);
+		ReceiveCoursesAction action = new ReceiveCoursesAction(courses, sections);
 		return action;
 	}
 }
