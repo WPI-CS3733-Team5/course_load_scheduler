@@ -14,6 +14,12 @@ import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.ActiveUser;
+import org.dselent.course_load_scheduler.client.model.CalendarInfo;
+import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
+import org.dselent.course_load_scheduler.client.model.LabInfo;
+import org.dselent.course_load_scheduler.client.model.ScheduleLinks;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
@@ -34,7 +40,13 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	private boolean requestDifferentScheduleInProgress;
 	private boolean applyFilterInProgress;
 	private ArrayList<UserInfo> userInfoList;
-	
+	private ArrayList<InstructorInfo> instructorInfoList;
+	private ArrayList<ScheduleLinks> scheduleLinksList;
+	private ArrayList<CourseInfo> courseInfoList;
+	private ArrayList<SectionInfo> sectionInfoList;
+	private ArrayList<LabInfo> labInfoList;
+	private ArrayList<CalendarInfo> calendarInfoList;
+
 	@Inject
 	public HomePresenterImpl(IndexPresenter parentPresenter, HomeView view)
 	{
@@ -191,7 +203,14 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	{
 		HasWidgets container = evt.getContainer();
 		ReceiveHomeAction rha = evt.getAction();
-		userInfoList = rha.getModel();
+		instructorInfoList = rha.getInstructors();
+		userInfoList = rha.getUsers();
+		courseInfoList = rha.getCourses();
+		sectionInfoList = rha.getSections();
+		labInfoList = rha.getLabs();
+		calendarInfoList = rha.getCalendars();
+		scheduleLinksList = rha.getSchedules();
+		
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}

@@ -96,7 +96,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = homeActionTranslator.translateToJson(action);
 		SendHomeCallback homeCallback = new SendHomeCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_AND_INSTRUCTOR_INFO, homeCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_INSTRUCTOR_COURSE_SECTION_LAB_CALENDAR_SCHEDULE_INFO, homeCallback, json);
 		request.send();
 	}
 	
