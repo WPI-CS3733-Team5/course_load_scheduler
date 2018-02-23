@@ -6,7 +6,6 @@ import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveUserInfoKeys;
-import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveProfileKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
 
@@ -33,9 +32,6 @@ public class SendProfileActionTranslatorImpl implements ActionTranslator<SendPro
 		String lastName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
 		String email = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
 		Integer accountState = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
-		Date createdAt = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.CREATED_AT));
-		Date updatedAt = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.UPDATED_AT));
-		Date loginTime = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LOGIN_TIME));
 
 		user.setId(id);
 		user.setUserName(userName);
@@ -43,10 +39,6 @@ public class SendProfileActionTranslatorImpl implements ActionTranslator<SendPro
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setAccountState(accountState);
-		user.setLoginTime(loginTime);
-		user.setUpdatedAt(updatedAt);
-		user.setAccountState(accountState);
-		user.setCreatedAt(createdAt);
 		
 		ReceiveProfileAction action = new ReceiveProfileAction(user);
 		return action;
