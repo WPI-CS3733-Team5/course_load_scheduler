@@ -1,14 +1,9 @@
 package org.dselent.course_load_scheduler.client.callback;
 
-import org.dselent.course_load_scheduler.client.action.InvalidHomeAction;
-import org.dselent.course_load_scheduler.client.action.InvalidProfileAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
-import org.dselent.course_load_scheduler.client.event.InvalidHomeEvent;
 import org.dselent.course_load_scheduler.client.event.InvalidProfileEvent;
-import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveProfileEvent;
-import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
 
@@ -33,7 +28,7 @@ public class SendProfileCallback extends DisplayCallback<JSONValue>{
 			sb.append("\n");
 		}
 		
-		InvalidProfileAction iha = new InvalidProfileAction(sb.toString());
+		InvalidGenericAction iha = new InvalidGenericAction(sb.toString());
 		InvalidProfileEvent ihe = new InvalidProfileEvent(iha);
 		eventBus.fireEvent(ihe);		
 	}

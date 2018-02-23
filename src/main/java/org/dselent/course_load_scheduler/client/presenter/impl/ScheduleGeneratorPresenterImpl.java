@@ -5,12 +5,21 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesCoursesAction;
+import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesUsersAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveSchedulesCoursesEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveSchedulesUsersEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
+import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
+import org.dselent.course_load_scheduler.client.model.LabInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
@@ -32,6 +41,16 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	private List<CourseInfo> courseList;
 	private List<CourseInfo> requestedList;
 	private Boolean taskInProgress;
+	
+	private ArrayList<CourseInfo> courses;
+	private ArrayList<SectionInfo> sections;
+	private ArrayList<LabInfo> labs;
+	private ArrayList<CalendarInfo> calendars;
+	private ArrayList<UserInfo> users;
+	private ArrayList<InstructorInfo> instructors;
+	
+	private boolean usersPopulated = false;
+	private boolean coursesPopulated = false;
 	
 	@Inject
 	public ScheduleGeneratorPresenterImpl(IndexPresenter parentPresenter, ScheduleGeneratorView view)
@@ -92,6 +111,8 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	@Override
 	public void go(HasWidgets container)
 	{
+		usersPopulated = false;
+		coursesPopulated = false;
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
@@ -301,7 +322,30 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	}
 	
 	@Override
-	public void onSendSchedules(SendSchedulesEvent evt) {
-		go(evt.getAction().getPanel());
+	public void onReceiveSchedulesUsers(ReceiveSchedulesUsersEvent evt) {
+		HasWidgets container = evt.getContainer();
+		ReceiveSchedulesUsersAction rsua = evt.getAction();
+		users = rsua.getUsers();
+		instructors = rsua.getInstructors();
+		usersPopulated = true;
+		if(usersPopulated && coursesPopulated) {
+			go(container);
+			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		}
+	}
+	
+	@Override
+	public void onReceiveSchedulesCourses(ReceiveSchedulesCoursesEvent evt) {
+		HasWidgets container = evt.getContainer();
+		ReceiveSchedulesCoursesAction rsca = evt.getAction();
+		courses = rsca.getCourses();
+		sections = rsca.getSections();
+		labs = rsca.getLabs();
+		calendars = rsca.getCalendars();
+		coursesPopulated = true;
+		if(usersPopulated && coursesPopulated) {
+			go(container);
+			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		}
 	}
 }

@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.callback;
 
-import org.dselent.course_load_scheduler.client.action.InvalidHomeAction;
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.event.InvalidHomeEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
@@ -29,7 +29,7 @@ public class SendHomeCallback extends DisplayCallback<JSONValue>
 			sb.append("\n");
 		}
 		
-		InvalidHomeAction iha = new InvalidHomeAction(sb.toString());
+		InvalidGenericAction iha = new InvalidGenericAction(sb.toString());
 		InvalidHomeEvent ihe = new InvalidHomeEvent(iha);
 		eventBus.fireEvent(ihe);
 		

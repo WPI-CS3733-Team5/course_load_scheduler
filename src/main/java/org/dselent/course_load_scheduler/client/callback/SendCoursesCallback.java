@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.callback;
 
-import org.dselent.course_load_scheduler.client.action.InvalidCoursesAction;
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveCoursesAction;
 import org.dselent.course_load_scheduler.client.event.InvalidCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveCoursesEvent;
@@ -29,7 +29,7 @@ public class SendCoursesCallback extends DisplayCallback<JSONValue>
 			sb.append("\n");
 		}
 		
-		InvalidCoursesAction ica = new InvalidCoursesAction(sb.toString());
+		InvalidGenericAction ica = new InvalidGenericAction(sb.toString());
 		InvalidCoursesEvent ice = new InvalidCoursesEvent(ica);
 		eventBus.fireEvent(ice);		
 	}

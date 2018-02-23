@@ -43,7 +43,9 @@ import org.dselent.course_load_scheduler.client.event.SendSectionTypeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
@@ -83,6 +85,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	private boolean requestPopup3ApplyInProgress;
 	private ArrayList<CourseInfo> courseList;
 	private ArrayList<SectionInfo> sectionList;
+	private ArrayList<CalendarInfo> calendarList;
+	private ArrayList<LabInfo> labList;
 
 	@Inject
 	public CoursesPresenterImpl(IndexPresenter parentPresenter, CoursesView view)
@@ -716,6 +720,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		ReceiveCoursesAction rca = evt.getAction();
 		courseList = rca.getCourses();
 		sectionList = rca.getSections();
+		calendarList = rca.getCalendars();
+		labList = rca.getLabs();
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}

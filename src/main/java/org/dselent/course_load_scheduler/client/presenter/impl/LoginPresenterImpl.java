@@ -2,7 +2,8 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.dselent.course_load_scheduler.client.action.InvalidLoginAction;
+
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
 import org.dselent.course_load_scheduler.client.errorstring.InvalidLoginStrings;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
@@ -116,7 +117,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 			}
 			else
 			{
-				InvalidLoginAction ila = new InvalidLoginAction(invalidReasonList);
+				InvalidGenericAction ila = new InvalidGenericAction(invalidReasonList);
 				InvalidLoginEvent ile = new InvalidLoginEvent(ila);
 				eventBus.fireEvent(ile);
 			}
@@ -161,7 +162,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 		view.getLoginButton().setEnabled(true);
 		loginClickInProgress = false;
 		
-		InvalidLoginAction ila = evt.getAction();
+		InvalidGenericAction ila = evt.getAction();
 		view.showErrorMessages(ila.toString());
 	}
 	

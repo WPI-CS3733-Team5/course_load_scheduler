@@ -13,6 +13,8 @@ import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
 import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
+import org.dselent.course_load_scheduler.client.callback.SendSchedulesCoursesCallback;
+import org.dselent.course_load_scheduler.client.callback.SendSchedulesUsersCallback;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
@@ -31,6 +33,7 @@ import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActi
 import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesCouresesActionTranslatorImpl;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
@@ -142,12 +145,17 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	@Override
 	public void onSendSchedules(SendSchedulesEvent evt) {
 		SendSchedulesAction action = evt.getAction();
-		SendSchedulesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesActionTranslatorImpl();
+		SendSchedulesCouresesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesCouresesActionTranslatorImpl();
 		JSONObject json = schedulesActionTranslator.translateToJson(action);
-		SendSchedulesCallback schedulesCallback = new SendSchedulesCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.SCHEDULES, schedulesCallback, json);
-		request.send();
+		SendSchedulesCoursesCallback coursesCallback = new SendSchedulesCoursesCallback(eventBus, evt.getContainer());
+		SendSchedulesUsersCallback usersCallback = new SendSchedulesUsersCallback(eventBus, evt.getContainer());
+		
+		NetworkRequest requestCourses = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, coursesCallback, json);
+		NetworkRequest requestUsers = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, usersCallback, json);
+
+		requestCourses.send();
+		requestUsers.send();
 	}
 	
 	@Override

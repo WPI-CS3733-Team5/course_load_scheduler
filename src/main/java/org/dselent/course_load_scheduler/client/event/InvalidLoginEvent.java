@@ -1,6 +1,6 @@
 package org.dselent.course_load_scheduler.client.event;
 
-import org.dselent.course_load_scheduler.client.action.InvalidLoginAction;
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.event_handler.InvalidLoginEventHandler;
 
 
@@ -11,11 +11,11 @@ import org.dselent.course_load_scheduler.client.event_handler.InvalidLoginEventH
  * @author dselent
  *
  */
-public class InvalidLoginEvent extends BaseEvent<InvalidLoginAction, InvalidLoginEventHandler>
+public class InvalidLoginEvent extends BaseEvent<InvalidGenericAction, InvalidLoginEventHandler>
 {
 	public static Type<InvalidLoginEventHandler> TYPE = new Type<InvalidLoginEventHandler>();
 	
-	public InvalidLoginEvent(InvalidLoginAction action)
+	public InvalidLoginEvent(InvalidGenericAction action)
 	{
 		super(action);
 	}

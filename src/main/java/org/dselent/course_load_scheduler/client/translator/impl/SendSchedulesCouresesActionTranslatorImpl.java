@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveCoursesAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
-import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
-import org.dselent.course_load_scheduler.client.action.SendHomeAction;
-import org.dselent.course_load_scheduler.client.action.SendProfileAction;
+import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesCoursesAction;
+import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesUsersAction;
+import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCalendarsKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCoursesKeys;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveInstructorInfoKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveLabsKeys;
-import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveProfileKeys;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveSectionsKeys;
+import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveUserInfoKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
 
@@ -26,31 +26,35 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONValue;
 
-public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCoursesAction, ReceiveCoursesAction> {
-	
+public class SendSchedulesCouresesActionTranslatorImpl implements ActionTranslator<SendSchedulesAction, ReceiveSchedulesCoursesAction>
+{
+
 	@Override
-	public JSONObject translateToJson(SendCoursesAction object) {
+	public JSONObject translateToJson(SendSchedulesAction object) {
 		JSONObject jsonObject = new JSONObject();
 		return jsonObject;
 	}
 
 	@Override
-	public ReceiveCoursesAction translateToAction(JSONObject json) {
+	public ReceiveSchedulesCoursesAction translateToAction(JSONObject json) {
 		JSONValue jsonObject = json.get("success");
+		
 		JSONObject coursesObject = jsonObject.isArray().get(0).isObject();
 		JSONObject sectionsObject = jsonObject.isArray().get(0).isObject();
 		JSONObject calendarObject = jsonObject.isArray().get(0).isObject();
 		JSONObject labObject = jsonObject.isArray().get(0).isObject();
-		
+
 		JSONArray coursesArray = coursesObject.isArray();
 		JSONArray sectionsArray = sectionsObject.isArray();
 		JSONArray calendarArray = jsonObject.isArray();
 		JSONArray labArray = jsonObject.isArray();
-		
+
 		ArrayList<CourseInfo> courses = new ArrayList<>();
 		ArrayList<SectionInfo> sections = new ArrayList<>();
 		ArrayList<CalendarInfo> calendars = new ArrayList<>();
 		ArrayList<LabInfo> labs = new ArrayList<>();
+		
+		
 		
 		for(int i = 0; i < coursesObject.size(); i++) {
 			Integer id = JSONHelper.getIntValue(coursesArray.get(i), JSONHelper.convertKeyName(ReceiveCoursesKeys.ID));
@@ -141,7 +145,8 @@ public class SendCoursesActionTranslatorImpl implements ActionTranslator<SendCou
 			labs.add(lab);
 		}
 		
-		ReceiveCoursesAction action = new ReceiveCoursesAction(courses, sections, calendars, labs);
+		ReceiveSchedulesCoursesAction action = new ReceiveSchedulesCoursesAction(courses, sections, calendars, labs);
 		return action;
 	}
+	
 }

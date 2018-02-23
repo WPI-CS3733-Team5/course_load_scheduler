@@ -7,20 +7,24 @@ import org.dselent.course_load_scheduler.client.model.CourseInfo;
 import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 
-public class ReceiveCoursesAction extends Action{
-
+public class ReceiveSchedulesCoursesAction extends Action{
+	
 	private ArrayList<CourseInfo> courses;
 	private ArrayList<SectionInfo> sections;
 	private ArrayList<CalendarInfo> calendars;
 	private ArrayList<LabInfo> labs;
 	
-	public ReceiveCoursesAction(ArrayList<CourseInfo> courses, ArrayList<SectionInfo> sections, ArrayList<CalendarInfo> calendars, ArrayList<LabInfo> labs) {
+	public ReceiveSchedulesCoursesAction(ArrayList<CourseInfo> courses, 
+			ArrayList<SectionInfo> sections, 
+			ArrayList<CalendarInfo> calendars, 
+			ArrayList<LabInfo> labs) {
 		this.courses = courses;
 		this.sections = sections;
 		this.calendars = calendars;
 		this.labs = labs;
 	}
 
+	
 	public ArrayList<CourseInfo> getCourses() {
 		return courses;
 	}
@@ -55,7 +59,10 @@ public class ReceiveCoursesAction extends Action{
 
 	@Override
 	public String toString() {
-		return "ReceiveCoursesAction [courses=" + courses + ", sections=" + sections + ", calendars=" + calendars
-				+ ", labs=" + labs + "]";
+		return "ReceiveSchedulesAction [courses=" + courses
+				+ ", sections=" + sections + ", calendars=" + calendars + ", labs=" + labs + "]";
 	}
+	
+	
+
 }

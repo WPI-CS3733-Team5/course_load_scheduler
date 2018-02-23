@@ -1,14 +1,14 @@
 package org.dselent.course_load_scheduler.client.event;
 
-import org.dselent.course_load_scheduler.client.action.InvalidCoursesAction;
+import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.event_handler.InvalidCoursesEventHandler;
 
-public class InvalidCoursesEvent extends BaseEvent<InvalidCoursesAction, InvalidCoursesEventHandler>
+public class InvalidCoursesEvent extends BaseEvent<InvalidGenericAction, InvalidCoursesEventHandler>
 {
 
 	public static Type<InvalidCoursesEventHandler> TYPE = new Type<InvalidCoursesEventHandler>();
 	
-	public InvalidCoursesEvent(InvalidCoursesAction action) {
+	public InvalidCoursesEvent(InvalidGenericAction action) {
 		super(action);
 	}
 

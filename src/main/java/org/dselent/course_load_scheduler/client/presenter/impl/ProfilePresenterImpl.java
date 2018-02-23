@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePresenter
 {
 	private IndexPresenter parentPresenter;
+	private MenuTabsPresenterImpl menuTabs;
 	private ProfileView view;
 	private boolean editWishlistClickInProgress;
 	private UserInfo user;
@@ -62,7 +63,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	
 	private void sendProfileEditWishlist() {
 		SendWishlistAction spewa = new SendWishlistAction(view.getViewRootPanel());
-		SendWishlistEvent spewe = new SendWishlistEvent(spewa);
+		SendWishlistEvent spewe = new SendWishlistEvent(spewa, menuTabsPresenterImpl.getWishlistPresenterImpl.getView().getViewRootPanel()); //TODO figure this mapping out
 		eventBus.fireEvent(spewe);
 	}
 

@@ -3,20 +3,20 @@ package org.dselent.course_load_scheduler.client.action;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InvalidCoursesAction extends Action{
+public class InvalidGenericAction extends Action{
 private List<String> reasonList;
 	
-	public InvalidCoursesAction()
+	public InvalidGenericAction()
 	{
 		reasonList = new ArrayList<>();
 	}
 	
-	public InvalidCoursesAction(List<String> reasonList)
+	public InvalidGenericAction(List<String> reasonList)
 	{
 		this.reasonList = reasonList;
 	}
 	
-	public InvalidCoursesAction(String reason)
+	public InvalidGenericAction(String reason)
 	{
 		reasonList = new ArrayList<>();
 		reasonList.add(reason);
