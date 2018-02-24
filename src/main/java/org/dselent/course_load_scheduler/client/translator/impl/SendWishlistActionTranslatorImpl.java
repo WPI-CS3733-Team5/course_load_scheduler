@@ -6,7 +6,6 @@ import org.dselent.course_load_scheduler.client.action.ReceiveWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
-import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.WishlistLinks;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveCalendarsKeys;
@@ -52,9 +51,10 @@ public class SendWishlistActionTranslatorImpl implements ActionTranslator<SendWi
 
 		for(int i = 0; i < wishlistArray.size(); i++) {
 			JSONObject tempWishlists = wishlistArray.isArray().get(i).isObject();
-			Integer id = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveWishlistKeys.ID));
-			Integer instructorInfoId= JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveWishlistKeys.INSTRUCTOR_INFO_ID));
-			Integer sectionInfoId = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveWishlistKeys.SECTION_INFO_ID));
+
+			Integer id = JSONHelper.getIntValue(tempWishlists, JSONHelper.convertKeyName(ReceiveWishlistKeys.ID));
+			Integer instructorInfoId= JSONHelper.getIntValue(tempWishlists, JSONHelper.convertKeyName(ReceiveWishlistKeys.INSTRUCTOR_INFO_ID));
+			Integer sectionInfoId = JSONHelper.getIntValue(tempWishlists, JSONHelper.convertKeyName(ReceiveWishlistKeys.SECTION_INFO_ID));
 
 			WishlistLinks wishlist = new WishlistLinks();
 			wishlist.setId(id);
@@ -65,10 +65,12 @@ public class SendWishlistActionTranslatorImpl implements ActionTranslator<SendWi
 		}
 
 		for(int i = 0; i < calendarArray.size(); i++) {
-			Integer startTime = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveCalendarsKeys.START_TIME));
-			Integer endTime = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveCalendarsKeys.END_TIME));
-			Integer term = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveCalendarsKeys.TERM));
-			Integer year = JSONHelper.getIntValue(wishlistObject, JSONHelper.convertKeyName(ReceiveCalendarsKeys.YEAR));
+			JSONObject tempCalendars = calendarArray.isArray().get(i).isObject();
+
+			Integer startTime = JSONHelper.getIntValue(tempCalendars, JSONHelper.convertKeyName(ReceiveCalendarsKeys.START_TIME));
+			Integer endTime = JSONHelper.getIntValue(tempCalendars, JSONHelper.convertKeyName(ReceiveCalendarsKeys.END_TIME));
+			Integer term = JSONHelper.getIntValue(tempCalendars, JSONHelper.convertKeyName(ReceiveCalendarsKeys.TERM));
+			Integer year = JSONHelper.getIntValue(tempCalendars, JSONHelper.convertKeyName(ReceiveCalendarsKeys.YEAR));
 
 			CalendarInfo calendar = new CalendarInfo();
 			calendar.setStartTime(startTime);
@@ -78,22 +80,27 @@ public class SendWishlistActionTranslatorImpl implements ActionTranslator<SendWi
 
 			calendars.add(calendar);
 		}
-		for(int i = 0; i < sectionArray.size(); i++) {
-			String location = JSONHelper.getStringValue(wishlistObject, JSONHelper.convertKeyName(ReceiveSectionsKeys.LOCATION));
-			
+		for(int i = 0; i < sectionsArray.size(); i++) {
+			JSONObject tempSections = calendarArray.isArray().get(i).isObject();
+
+			String location = JSONHelper.getStringValue(tempSections, JSONHelper.convertKeyName(ReceiveSectionsKeys.LOCATION));
+
 			SectionInfo section = new SectionInfo();
 			section.setLocation(location);
-			
+
 			sections.add(section);
 		}
-		
-		for(int i = 0; i < courseArray.size(); i++) {
-		String courseName = JSONHelper.getStringValue(wishlistObject, JSONHelper.convertKeyName(ReceiveCoursesKeys.COURSE_NAME));
 
-		CourseInfo course = new CourseInfo();
-		course.setCourseName(courseName);
-		
-		courses.add(course);
+		for(int i = 0; i < courseArray.size(); i++) {
+
+			JSONObject tempCourses = calendarArray.isArray().get(i).isObject();
+
+			String courseName = JSONHelper.getStringValue(tempCourses, JSONHelper.convertKeyName(ReceiveCoursesKeys.COURSE_NAME));
+
+			CourseInfo course = new CourseInfo();
+			course.setCourseName(courseName);
+
+			courses.add(course);
 		}
 
 		ReceiveWishlistAction action = new ReceiveWishlistAction(wishlists,calendars,sections,courses);
