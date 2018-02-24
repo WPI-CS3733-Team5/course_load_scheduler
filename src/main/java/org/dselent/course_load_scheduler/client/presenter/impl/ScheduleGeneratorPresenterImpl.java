@@ -5,10 +5,12 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesCoursesAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesUsersAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveSchedulesCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveSchedulesUsersEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
@@ -524,31 +526,45 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		}
 	}
 	
-	@Override
-	public void onReceiveSchedulesUsers(ReceiveSchedulesUsersEvent evt) {
-		HasWidgets container = evt.getContainer();
-		ReceiveSchedulesUsersAction rsua = evt.getAction();
-		users = rsua.getUsers();
-		instructors = rsua.getInstructors();
-		usersPopulated = true;
-		if(usersPopulated && coursesPopulated) {
-			go(container);
-			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
-		}
-	}
+//	@Override
+//	public void onReceiveSchedulesUsers(ReceiveSchedulesUsersEvent evt) {
+//		HasWidgets container = evt.getContainer();
+//		ReceiveSchedulesUsersAction rsua = evt.getAction();
+//		users = rsua.getUsers();
+//		instructors = rsua.getInstructors();
+//		usersPopulated = true;
+//		if(usersPopulated && coursesPopulated) {
+//			go(container);
+//			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+//		}
+//	}
+//	
+//	@Override
+//	public void onReceiveSchedulesCourses(ReceiveSchedulesCoursesEvent evt) {
+//		HasWidgets container = evt.getContainer();
+//		ReceiveSchedulesCoursesAction rsca = evt.getAction();
+//		courses = rsca.getCourses();
+//		sections = rsca.getSections();
+//		labs = rsca.getLabs();
+//		calendars = rsca.getCalendars();
+//		coursesPopulated = true;
+//		if(usersPopulated && coursesPopulated) {
+//			go(container);
+//			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+//		}
+//	}
 	
 	@Override
-	public void onReceiveSchedulesCourses(ReceiveSchedulesCoursesEvent evt) {
+	public void onReceiveSchedules(ReceiveHomeEvent evt) {
 		HasWidgets container = evt.getContainer();
-		ReceiveSchedulesCoursesAction rsca = evt.getAction();
-		courses = rsca.getCourses();
-		sections = rsca.getSections();
-		labs = rsca.getLabs();
-		calendars = rsca.getCalendars();
-		coursesPopulated = true;
-		if(usersPopulated && coursesPopulated) {
-			go(container);
-			Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
-		}
+		ReceiveHomeAction rha = evt.getAction();
+		users = rha.getUsers();
+		instructors = rha.getInstructors();
+		courses = rha.getCourses();
+		sections = rha.getSections();
+		labs = rha.getLabs();
+		calendars = rha.getCalendars();
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}
 }

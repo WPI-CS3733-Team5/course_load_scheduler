@@ -151,13 +151,10 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = schedulesActionTranslator.translateToJson(action);
 		
 		SendSchedulesCoursesCallback coursesCallback = new SendSchedulesCoursesCallback(eventBus, evt.getContainer());
-		SendSchedulesUsersCallback usersCallback = new SendSchedulesUsersCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest requestCourses = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, coursesCallback, json);
-		NetworkRequest requestUsers = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, usersCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_INSTRUCTOR_COURSE_SECTION_LAB_CALENDAR_SCHEDULE_INFO, coursesCallback, json);
 
-		requestCourses.send();
-		requestUsers.send();
+		request.send();
 	}
 	
 	@Override
