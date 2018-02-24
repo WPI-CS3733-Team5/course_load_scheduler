@@ -24,6 +24,7 @@ import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
+import org.dselent.course_load_scheduler.client.utils.Pair;
 import org.dselent.course_load_scheduler.client.view.BaseView;
 import org.dselent.course_load_scheduler.client.view.HomeView;
 
@@ -62,8 +63,6 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	public void init()
 	{
 		bind();
-		//TODO Does the initialization of userInfoList happen here? If so, how is that done? If not, where and how?
-		// Handler method expecting to recieve event with data, 
 	}
 	
 	@Override
@@ -130,23 +129,173 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 			
 			String term = termBox.getItemText(termBox.getSelectedIndex());
 			String username = userBox.getItemText(userBox.getSelectedIndex());
-			sendApplyFilter(term, username);
+			view.getCalendarList().clear();
+			applyFilter(term, username);
 		}
 	}
 	
-	private void sendApplyFilter(String term, String username)
+	private boolean applyFilter(String termString, String username)
 	{
-		SendHomeFilterAction shfa = new SendHomeFilterAction(term, username);
-		SendHomeFilterEvent shfe = new SendHomeFilterEvent(shfa);
-		eventBus.fireEvent(shfe);
+		parentPresenter.showLoadScreen();
+		
+		int term = termToInt(termString);
+		UserInfo user = new UserInfo();
+		InstructorInfo instructor = new InstructorInfo();
+		instructor.setId(0);
+				
+		ArrayList<SectionInfo> sections = new ArrayList<>();
+		ArrayList<LabInfo> labs = new ArrayList<>();
+		
+		ArrayList<Pair<Pair<CourseInfo, SectionInfo>, CalendarInfo>> coursesAndSectionsAndCalendars = new ArrayList<>();
+		ArrayList<Pair<Pair<CourseInfo, LabInfo>, CalendarInfo>> coursesAndLabsAndCalendars = new ArrayList<>();
+		
+		for(int i = 0; i < userInfoList.size(); i++) {
+			if(userInfoList.get(i).getUserName().equals(username)) {
+				user = userInfoList.get(i);
+				break;
+			}
+		}
+		
+		for(int i = 0; i < instructorInfoList.size(); i++) {
+			if(instructorInfoList.get(i).getUserInfoId() == user.getId()) {
+				instructor = instructorInfoList.get(i);
+				break;
+			}
+		}
+		
+		if(instructor.getId() == 0) {
+			view.getCalendarList().addItem("The selected user has no schedule");
+			return false;
+		}
+		
+		for(int i = 0; i < scheduleLinksList.size(); i++) {
+			if(scheduleLinksList.get(i).getInstructorInfoId() == instructor.getId()) {
+				for(int b = 0; b < sectionInfoList.size(); b++) {
+					if(scheduleLinksList.get(i).getSectionInfoId() == sectionInfoList.get(b).getId()) {
+						sections.add(sectionInfoList.get(b));
+						break;
+					}
+				}
+			}
+			break;
+		}
+		
+		for(int i = 0; i < labInfoList.size(); i++) {
+			if(labInfoList.get(i).getInstructorInfoId() == instructor.getId()) {
+				labs.add(labInfoList.get(i));
+			}
+		}
+		
+		
+		for(int i = 0; i < sections.size(); i++) {
+			for(int b = 0; b < courseInfoList.size(); b++) {
+				if(courseInfoList.get(b).getId() == sections.get(i).getCourseInfoId()) {
+					for(int c = 0; c < calendarInfoList.size(); c++) {
+						if(calendarInfoList.get(c).getId() == sections.get(i).getCalendarInfoId() && calendarInfoList.get(c).getTerm() == term) {
+							Pair<CourseInfo, SectionInfo> tempPair1 = new Pair(courseInfoList.get(b), sections.get(i));
+							Pair<Pair<CourseInfo, SectionInfo>, CalendarInfo> temp2 = new Pair(tempPair1, calendarInfoList.get(c));
+							coursesAndSectionsAndCalendars.add(temp2);
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}
+		
+		for(int i = 0; i < sections.size(); i++) {
+			for(int b = 0; b < labs.size(); b ++) {
+				if(labs.get(b).getSectionInfoId() == sections.get(i).getId()) {
+					for(int c = 0; c < courseInfoList.size(); c++) {
+						if(courseInfoList.get(c).getId() == sections.get(i).getCourseInfoId()) {
+							for(int d = 0; d < calendarInfoList.size(); d++) {
+								if(calendarInfoList.get(d).getId() == labs.get(b).getCalendarInfoId() && calendarInfoList.get(d).getTerm() == term) {
+									Pair<CourseInfo, LabInfo> temp1 = new Pair(courseInfoList.get(c), labs.get(b));
+									Pair<Pair<CourseInfo, LabInfo>, CalendarInfo> temp2= new Pair(temp1, calendarInfoList.get(d));
+									coursesAndLabsAndCalendars.add(temp2);
+									break;
+								}
+							}
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}
+		
+		for(int i = 0; i < coursesAndSectionsAndCalendars.size(); i++) {
+			view.getCalendarList().addItem(coursesAndSectionsAndCalendars.get(i).getValue1().getValue1().getCourseName() + 
+					" Section Number: " + 
+					termToString(coursesAndSectionsAndCalendars.get(i).getValue2().getTerm()) + 
+					coursesAndSectionsAndCalendars.get(i).getValue1().getValue2().getSectionNumber() + 
+					coursesAndSectionsAndCalendars.get(i).getValue2().getYear() + 
+					" Schedule: " +
+					coursesAndSectionsAndCalendars.get(i).getValue2().getDays() +
+					" " +
+					coursesAndSectionsAndCalendars.get(i).getValue2().getStartTime() +
+					" - " +
+					coursesAndSectionsAndCalendars.get(i).getValue2().getEndTime());
+		}
+		for(int i = 0; i < coursesAndLabsAndCalendars.size(); i++) {
+			view.getCalendarList().addItem(coursesAndLabsAndCalendars.get(i).getValue1().getValue1().getCourseName() +
+					" Lab: " +
+					termToString(coursesAndLabsAndCalendars.get(i).getValue2().getTerm()) +
+					coursesAndLabsAndCalendars.get(i).getValue2().getYear() + 
+					"X Schedule:" +
+					coursesAndLabsAndCalendars.get(i).getValue2().getDays() + 
+					" " +
+					coursesAndLabsAndCalendars.get(i).getValue2().getStartTime() + 
+					" - " +
+					coursesAndLabsAndCalendars.get(i).getValue2().getEndTime());
+		}
+		
+		parentPresenter.hideLoadScreen();
+		applyFilterInProgress = false;
+		view.getApply().setEnabled(true);
+		
+		return true;
 	}
 	
-	@Override
-	public void onSendHomeFilter(SendHomeFilterEvent evt) {
-		String term = evt.getAction().getTerm();
-		String username = evt.getAction().getUserName();
-		//TODO do stuff with term and username to filter results
-		view.getCalendarList().addItem("");
+	private int termToInt(String termString) {
+		
+		int term = 0;
+		
+		if(termString.equals("A")) term = 1;
+		if(termString.equals("B")) term = 2;
+		if(termString.equals("C")) term = 3;
+		if(termString.equals("D")) term = 4;
+		if(termString.equals("E1")) term = 5;
+		if(termString.equals("E2")) term = 6;
+		
+		return term;
+	}
+	
+	private String termToString (Integer termInt) {
+		String term = "ERROR";
+
+		switch(termInt) {
+		case 1:
+			term = "A";
+			break;
+		case 2:
+			term = "B";
+			break;
+		case 3:
+			term = "C";
+			break;
+		case 4: 
+			term = "D";
+			break;
+		case 5:
+			term = "E1";
+			break;
+		case 6:
+			term = "E2";
+			break;
+		}
+		
+		return term;
 	}
 	
 	@Override

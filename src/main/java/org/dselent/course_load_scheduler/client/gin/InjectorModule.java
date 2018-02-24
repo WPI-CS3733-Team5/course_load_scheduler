@@ -2,7 +2,6 @@ package org.dselent.course_load_scheduler.client.gin;
 
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
-import org.dselent.course_load_scheduler.client.presenter.ExamplePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.LoginPresenter;
@@ -10,11 +9,9 @@ import org.dselent.course_load_scheduler.client.presenter.MenuTabsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
-import org.dselent.course_load_scheduler.client.presenter.ScheduleSelectPresenter;
 import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.AccountsPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.CoursesPresenterImpl;
-import org.dselent.course_load_scheduler.client.presenter.impl.ExamplePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
@@ -22,7 +19,6 @@ import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenter
 import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
-import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleSelectPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
 import org.dselent.course_load_scheduler.client.service.UserService;
 import org.dselent.course_load_scheduler.client.service.impl.UserServiceImpl;
@@ -35,7 +31,6 @@ import org.dselent.course_load_scheduler.client.view.MenuTabs;
 import org.dselent.course_load_scheduler.client.view.NotificationsView;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
 import org.dselent.course_load_scheduler.client.view.ScheduleGeneratorView;
-import org.dselent.course_load_scheduler.client.view.ScheduleSelectView;
 import org.dselent.course_load_scheduler.client.view.WishlistView;
 import org.dselent.course_load_scheduler.client.view.impl.AccountsViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.CoursesViewImpl;
@@ -46,7 +41,6 @@ import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
 import org.dselent.course_load_scheduler.client.view.impl.NotificationsViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.ProfileViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.ScheduleGeneratorViewImpl;
-import org.dselent.course_load_scheduler.client.view.impl.ScheduleSelectViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.WishlistViewImpl;
 
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -77,7 +71,6 @@ public class InjectorModule extends AbstractGinModule
         bind(NotificationsPresenter.class).to(NotificationsPresenterImpl.class).in(Singleton.class);
         bind(ProfilePresenter.class).to(ProfilePresenterImpl.class).in(Singleton.class);
         bind(ScheduleGeneratorPresenter.class).to(ScheduleGeneratorPresenterImpl.class).in(Singleton.class);
-        bind(ScheduleSelectPresenter.class).to(ScheduleSelectPresenterImpl.class).in(Singleton.class);
         bind(WishlistPresenter.class).to(WishlistPresenterImpl.class).in(Singleton.class);
         //bind(ExamplePresenter.class).to(ExamplePresenterImpl.class).in(Singleton.class);
         
@@ -93,7 +86,6 @@ public class InjectorModule extends AbstractGinModule
         bind(NotificationsView.class).to(NotificationsViewImpl.class).in(Singleton.class);
         bind(ProfileView.class).to(ProfileViewImpl.class).in(Singleton.class);
         bind(ScheduleGeneratorView.class).to(ScheduleGeneratorViewImpl.class).in(Singleton.class);
-        bind(ScheduleSelectView.class).to(ScheduleSelectViewImpl.class).in(Singleton.class);
         bind(WishlistView.class).to(WishlistViewImpl.class).in(Singleton.class);
         //bind(ExampleView.class).to(ExampleViewImpl.class).in(Singleton.class);
         

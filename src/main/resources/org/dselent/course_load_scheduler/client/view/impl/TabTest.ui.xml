@@ -30,10 +30,6 @@
 			<d:ScheduleGeneratorViewImpl/>
 		</g:tab>
 		<g:tab>
-			<g:header>Horizontal Panel</g:header>
-			<d:ScheduleSelectViewImpl />
-		</g:tab>
-		<g:tab>
 			<g:header>DockLayout Panel</g:header>
 			<d:NotificationsViewImpl />
 		</g:tab>
