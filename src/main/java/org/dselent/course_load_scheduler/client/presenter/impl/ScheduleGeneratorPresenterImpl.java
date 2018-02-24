@@ -21,6 +21,7 @@ import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
+import org.dselent.course_load_scheduler.client.model.WishlistLinks;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
 import org.dselent.course_load_scheduler.client.view.LoginView;
@@ -38,9 +39,9 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	private Integer yearOne;
 	private Integer yearTwo;
 	private UserInfo currentUser;
-	private List<CourseInfo> courseList;
-	private List<CourseInfo> requestedList;
 	private Boolean taskInProgress;
+	
+	private ArrayList<SectionInfo> scheduleInProgress;
 	
 	private ArrayList<CourseInfo> courses;
 	private ArrayList<SectionInfo> sections;
@@ -48,6 +49,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	private ArrayList<CalendarInfo> calendars;
 	private ArrayList<UserInfo> users;
 	private ArrayList<InstructorInfo> instructors;
+	private ArrayList<WishlistLinks> wishlist;
 	
 	private boolean usersPopulated = false;
 	private boolean coursesPopulated = false;
@@ -63,9 +65,14 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		yearOne = null;
 		yearTwo = null;
 		currentUser = null;
-		courseList = null;
-		requestedList = null;
 		taskInProgress = false;
+		courses = null;
+		sections = null;
+		labs = null;
+		calendars = null;
+		users = null;
+		instructors = null;
+		wishlist = null;
 	}
 	
 	@Override
@@ -154,15 +161,66 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		this.yearTwo = year;
 	}
 	
-	public UserInfo getUserInfo() {
+	public UserInfo getCurrentUser() {
 		return currentUser;
 	}
-	public void setUserInfo(UserInfo user) {
+	public void setCurrentUser(UserInfo user) {
 		this.currentUser = user;
 	}
+	
+	public ArrayList<CourseInfo> getCourses(){
+		return courses;
+	}
+	public void setCourses(ArrayList<CourseInfo> courses) {
+		this.courses = courses;
+	}
+	
+	public ArrayList<SectionInfo> getSections(){
+		return sections;
+	}
+	public void setSections(ArrayList<SectionInfo> sections) {
+		this.sections = sections;
+	}
+	
+	public ArrayList<LabInfo> getLabs(){
+		return labs;
+	}
+	public void setLabs(ArrayList<LabInfo> labs) {
+		this.labs = labs;
+	}
+	
+	public ArrayList<CalendarInfo> getCalendars(){
+		return calendars;
+	}
+	public void setCalendars(ArrayList<CalendarInfo> calendars) {
+		this.calendars = calendars;
+	}
+	
+	public ArrayList<UserInfo> getUsers(){
+		return users;
+	}
+	public void setUsers(ArrayList<UserInfo> users) {
+		this.users = users;
+	}
+	
+	public ArrayList<InstructorInfo> getInstructors(){
+		return instructors;
+	}
+	public void setInstructors(ArrayList<InstructorInfo> instructors) {
+		this.instructors = instructors;
+	}
+	
+	public ArrayList<WishlistLinks> getWishlist(){
+		return wishlist;
+	}
+	public void setWishlist(ArrayList<WishlistLinks> wishlist) {
+		this.wishlist = wishlist;
+	}
+	
 	public void verifyUser(String user) throws EmptyStringException{
 		checkEmptyString(user);
 	}
+	
 	//set the active user and make their wishlist active
 	public void setUserSubject(String toSet) {
 		boolean validUser = true;
@@ -174,35 +232,77 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		}
 		
 		if(validUser) {
-			sendUserRequest(toSet);
-			sendWishlistRequest(toSet);
-		}else {
-		//	InvalidUserAction iua = new InvalidUserAction(toSet);
-		//	InvalidUserEvent iue = new InvalidUserEvent(iua);
-		//	eventBus.fireEvent(iue);
-		}
+			//temporary variables to store user info and identify unique results
+			boolean uniqueFirst = true;
+			boolean uniqueLast = true;
+			UserInfo userTempFull = null;
+			UserInfo userTempFirst = null;
+			UserInfo userTempLast = null;
+			
+			//search user list
+			for(UserInfo u:users) {
+				// set active user according to input if userName, firstNamelastName, or firstName lastName matches
+				if((toSet == u.getFirstName() + u.getLastName())
+						|| toSet == u.getFirstName() + " " + u.getLastName()
+						|| toSet == u.getUserName()) {
+					userTempFull = u;
+				}
+				// set active user according to input if only one lastName or firstName matches
+				else if (toSet == u.getFirstName()){
+					if(userTempFirst == null) {
+						userTempFirst = u;
+					}else {
+						uniqueFirst = false;
+					}
+				}else if (toSet == u.getLastName()) {
+					if(userTempLast == null) {
+						userTempLast = u;
+					}else {
+						uniqueLast = false;
+					}
+				}
+			}
+			
+			//populate current user field based on result of search
+			//will remain null if no valid result or multiple valid results are present
+			if(userTempFull == null) {
+				if(uniqueFirst) {
+					currentUser = userTempFirst;
+				}else if(uniqueLast) {
+					currentUser = userTempLast;
+				}else {
+					currentUser = null;
+				}
+			}else {
+				currentUser = userTempFull;
+			}
+			
+			//if a valid user has been selected, and they are identified as an instructor, request their wishlist
+			if(currentUser != null) {
+				boolean isInstructor = false;
+				InstructorInfo instTemp;
+				
+				for(InstructorInfo i:instructors) {
+					if(i.getUserInfoId() == currentUser.getId()) {
+						isInstructor = true;
+						instTemp = i;
+					}
+				}
+				
+				SendFullWishlistAction act = new SendFullWishlistAction(instTemp);
+				SendFullWishlistEvent evt = new SendFullWishlistEvent(act);
+				eventBus.fireEvent(evt);
+			}
+		}else {}
 	}
-	public void sendUserRequest(String user) {
-	//	SendUserInfoAction suia = new SendUserInfoAction(user);
-	//	SendUserInfoEvent suie = new SendUserInfoEvent(suia);
-	//	eventBus.fireEvent(suie);
-	}
-	public void sendWishlistRequest(String user) {
-	//	SendWishlistAction swa = new SendWishlistAction(user);
-	//	SendWishlistEvent swe = new SendWishlistEvent(swa);
-	//	eventBus.fireEvent(swe);
-	}
-	
-	public List<CourseInfo> getCourseList(){
-		return courseList;
-	}
-	public void setCourseList(List<CourseInfo> courseList) {
-		this.courseList = courseList;
-	}
+
+	//helper method
 	public void verifyCourse(String course) throws EmptyStringException{
 		checkEmptyString(course);
 	}
-	public void addToCourseList(String toAdd) {	
+	
+	//add a section to the schedule based on input in the course box
+	public void addToSchedule(String toAdd) {	
 		boolean validCourse = true;
 		
 		try {
@@ -211,29 +311,94 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			validCourse = false;
 		}
 		
-		if(validCourse) {
-			sendCourseRequest(toAdd);
-		}else {
-		//	InvalidCourseAction ica = new InvalidCourseAction(toAdd);
-		//	InvalidCourseEvent ice = new InvalidCourseEvent(ica);
-		//	eventBus.fireEvent(ice);
+		if(validCourse) {			
+			String dept;
+			String num;
+			String name;
+			String sect;
+	
+			for(SectionInfo s:sections) {
+				for(CourseInfo c:courses) {
+					if(c.getId() == s.getCourseInfoId()) {
+						dept = c.getDepartment();
+						num = Integer.toString(c.getCourseNumber());
+						name = c.getCourseName();
+						sect = Integer.toString(s.getSectionNumber());
+					}
+					
+				}
+				if(toAdd.equals(dept + num + sect) || toAdd.equals(dept + " " + num + " " + sect)
+						|| toAdd.equals(name + sect) || toAdd.equals(name + " " + sect)) {
+					scheduleInProgress.add(s);
+					refreshSchedule();
+				}
+			}
+		}else {}
+	}
+
+	//convert selections in the list box to a list of SectionInfo models
+	public ArrayList<SectionInfo> parseSelected(){
+		ArrayList<SectionInfo> output = new ArrayList<SectionInfo>();
+		String selected;
+		String dept;
+		String num;
+		String sect;
+		
+		//cycle through all items in the schedule list
+		for(int i = 0; i < view.getCourseList().getItemCount(); i++) {
+			if(view.getCourseList().isItemSelected(i)) {
+				//if an item is selected, break its header down into substrings
+				selected = view.getCourseList().getItemText(i);
+				dept = selected.substring(0,2);
+				num = selected.substring(3,7);
+				sect = selected.substring(8,10);
+				
+				//search the sections list for a section with the appropriate details
+				for(SectionInfo s:sections) {
+					for(CourseInfo c:courses) {
+						if(s.getCourseInfoId() == c.getId()
+								&&c.getDepartment().equals(dept) 
+								&& Integer.toString(c.getCourseNumber()).equals(num)
+								&& Integer.toString(s.getSectionNumber()).equals(sect)) {
+							output.add(s);
+						}
+					}
+				}
+				
+				//reset selector variables for safety
+				selected = null;
+				dept = null;
+				num = null;
+				sect = null;
+			}
 		}
+		
+		return output;
 	}
-	public void sendCourseRequest(String course) {
-	//	SendCourseInfoAction scia = new SendCourseInfoAction(course);
-	//	SendCourseInfoEvent scie = new SendCourseInfoEvent(scia);
-	//	eventBus.fireEvent(scie);
-	}
-	public void removeFromCourseList(List<CourseInfo> removeList) {
-		for(CourseInfo C: removeList) {
-			for(CourseInfo D: courseList) {
-				if(C.equals(D)) {
-					courseList.remove(D);
+	
+	//remove all items on a given list from the schedule
+	public void removeFromSchedule(List<SectionInfo> removeList) {
+		for(SectionInfo r: removeList) {
+			for(SectionInfo s: scheduleInProgress) {
+				if(s.equals(r)) {
+					scheduleInProgress.remove(r);
 				}
 			}
 		}
+		
+		refreshSchedule();
 	}
 	
+	//remove all selected items from the schedule list
+	public void removeSelected() {
+		if(!taskInProgress) {
+			taskInProgress = true;
+			removeFromSchedule(parseSelected());
+			taskInProgress = false;
+		}
+	}
+	
+	//helper method, does what it says on the tin
 	private void checkEmptyString(String string) throws EmptyStringException
 	{
 		if(string == null || string.equals(""))
@@ -242,27 +407,35 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		}
 	}
 	
+	//add all sections in the wishlist to the schedule in progress
 	public void addRequested() {
 		if(!taskInProgress) {
 			taskInProgress = true;
-			for(CourseInfo c: requestedList) {
-				view.getCourseList().addItem(c.getCourseName());
+			for(WishlistLinks w: wishlist) {
+				for(SectionInfo s:sections) {
+					if(s.getId() == w.getSectionInfoId()) {
+						scheduleInProgress.add(s);
+					}
+				}
 			}
+			refreshSchedule();
 			taskInProgress = false;
 		}
 	}
+	
+	//set all wishlist courses in the schedule in progress as selected
 	public void selectRequested() {
 		if(!taskInProgress) {
 			taskInProgress = true;
 			for(int i = 0; i < view.getCourseList().getItemCount(); i++) {
-				for(int j = 0; j < requestedList.size(); j++) {
-					if(requestedList.get(j).getCourseName() == view.getCourseList().getItemText(i)) {
-						view.getCourseList().setItemSelected(i, true);
-					}
+				if(view.getCourseList().getItemText(i).contains("(Requested)")) {
+					view.getCourseList().setItemSelected(i, true);
 				}
 			}
 		}
 	}
+	
+	//if you can't suss out what this one does it might be time for another cup o' joe
 	public void selectAll() {
 		if(!taskInProgress) {
 			taskInProgress = true;
@@ -272,24 +445,54 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			taskInProgress = false;
 		}
 	}
-	public void removeSelected() {
-		if(!taskInProgress) {
-			taskInProgress = true;
-			for(int i = 0; i < view.getCourseList().getItemCount(); i++) {
-				if(view.getCourseList().isItemSelected(i)) {
-					view.getCourseList().removeItem(i);
-				}
-			}
-			taskInProgress = false;
-		}
-	}
+	
+	//nuke the schedule from orbit, it's the only way to be sure
 	public void removeAll() {
 		if(!taskInProgress) {
 			taskInProgress = true;
-			view.getCourseList().clear();
+			scheduleInProgress.clear();
+			refreshSchedule();
 			taskInProgress = false;			
 		}
 	}
+	
+	//clears the schedule list and repopulates it based on the stored sections
+	public void refreshSchedule() {
+		view.getCourseList().clear();
+		
+		for(SectionInfo s:scheduleInProgress) {
+			view.getCourseList().addItem(writeSection(s));
+		}
+	}
+	
+	//write course info for a section to a string for placement in the list box
+	public String writeSection(SectionInfo sectionIn) {
+		String name;
+		String dept;
+		String num;
+		boolean requested;
+		
+		for(WishlistLinks w:wishlist) {
+			if(w.getSectionInfoId() == sectionIn.getId()) {
+				requested = true;
+			}
+		}
+		
+		for(CourseInfo c: courses) {
+			if(sectionIn.getCourseInfoId() == c.getId()) {
+				name = c.getCourseName();
+				dept = c.getDepartment();
+				num = Integer.toString(c.getCourseNumber());
+			}
+		}
+		
+		if(requested) {
+			return dept + " " + num + ", " + name + " (Requested)";
+		}else {
+			return dept + " " + num + ", " + name;
+		}
+	}
+	
 	public void cancel() {
 		if(!taskInProgress)
 		{
