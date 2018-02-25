@@ -167,9 +167,22 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 	}
 
 	public void setRequestNewScheduleButton(Button requestNewScheduleButton) {
+
 		this.requestNewScheduleButton = requestNewScheduleButton;
 	}
-
+	
+	public TextBox getCourseNumberTextBox() {
+		
+		return courseNumber;
+		
+	}
+	
+	public void setCourseNumberTextBox(TextBox courseNumberTextBox) {
+		
+		this.courseNumber = courseNumberTextBox;
+		
+	}
+	
 	@Override
 	public void setPresenter(WishlistPresenter presenter) {
 		this.presenter = presenter;
@@ -203,7 +216,7 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 	
 	public void sortButtonClicked(ClickEvent evt) {
 		
-		presenter.sort(getSortTermRadioButton(), getCourseListBox(), getTermListBox(), courseNumber());
+		presenter.sort(getSortTermRadioButton(), getCourseListBox(), getTermListBox(), getCourseNumberTextBox());
 		
 	}
 	

@@ -37,7 +37,7 @@
 				<g:Button text="View Course Details" width="90px" height="43px" ui:field="viewCourseDetailsButton"/>
 			</g:at>
 			<g:at top="118" left="360">
-				<g:Button ui:field="editWishlistButton">Edit Wishlist</g:Button>
+				<g:Button width="90px" height="58px" ui:field="editWishlistButton">Edit Wishlist</g:Button>
 			</g:at>
 			<g:at top="152" left="360">
 				<g:Button width="90px" height="58px" ui:field="requestNewScheduleButton">Request New Schedule</g:Button>
@@ -47,6 +47,10 @@
 			</g:at>
 			<g:at top="69" left="270">
 				<g:ListBox visibleItemCount="5" width="76px" height="188px" ui:field="termListBox"/>
+			</g:at>
+			
+			<g:at top="178" left="360">
+				<g:TextBox width="90px" height="58px" ui:field="courseNumber"/>
 			</g:at>
 		</g:AbsolutePanel>
 	</g:HTMLPanel>
