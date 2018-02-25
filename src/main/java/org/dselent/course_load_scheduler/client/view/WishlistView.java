@@ -2,6 +2,7 @@ package org.dselent.course_load_scheduler.client.view;
 
 import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
+import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
 
 //import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
 import com.google.gwt.user.client.ui.Button;
@@ -13,49 +14,51 @@ import com.google.gwt.user.client.ui.ListBox;
 public interface WishlistView extends BaseView<WishlistPresenter>{
 	
 	//radio buttons
-	RadioButton getSortDeptRadioButton();
-	void setSortDeptRadioButton(RadioButton sortDeptRadioButton);
+	public RadioButton getSortDeptRadioButton();
+	public void setSortDeptRadioButton(RadioButton sortDeptRadioButton);
 	
-	RadioButton getSortTermRadioButton();
-	void setSortTermRadioButton(RadioButton sortTermRadioButton);
+	public RadioButton getSortTermRadioButton();
+	public void setSortTermRadioButton(RadioButton sortTermRadioButton);
 	
-	RadioButton getSortCourseNumberRadioButton();
-	void setSortCourseNumberRadioButton(RadioButton sortTermCourseNumberRadioButton);
+	public RadioButton getSortCourseNumberRadioButton();
+	public void setSortCourseNumberRadioButton(RadioButton sortTermCourseNumberRadioButton);
 	
 	//List Boxes
-	ListBox getDeptCmbx();
-	void setDeptCmbx(ListBox deptCmbx);
+	public ListBox getDeptCmbx();
+	public void setDeptCmbx(ListBox deptCmbx);
 	
-	ListBox getTermCmbx();
-	void setTermCmbx(ListBox termCmbx);
+	public ListBox getTermCmbx();
+	public void setTermCmbx(ListBox termCmbx);
 	
-	ListBox getCourseNumberCmbx();
-	void setCourseNumberCmbx(ListBox courseNumberCmbx);
+	public ListBox getCourseNumberCmbx();
+	public void setCourseNumberCmbx(ListBox courseNumberCmbx);
 	
-	ListBox getCourseListBox();
-	void setCourseListBox(ListBox courseListBox);
+	public ListBox getCourseListBox();
+	public void setCourseListBox(ListBox courseListBox);
 	
-	ListBox getTimesListBox();
-	void setTimesListBox(ListBox timesListBox);
+	public ListBox getTimesListBox();
+	public void setTimesListBox(ListBox timesListBox);
 	
-	ListBox getLocationListBox();
-	void setLocationListBox(ListBox locationListBox);
+	public ListBox getLocationListBox();
+	public void setLocationListBox(ListBox locationListBox);
 	
-	ListBox getTermListBox();
-	void setTermListBox(ListBox termListBox);
+	public ListBox getTermListBox();
+	public void setTermListBox(ListBox termListBox);
+	
+	public void setParent(WishlistPresenterImpl wishlistPresenterImpl);
 	
 	//Buttons. The "String errorMessage" may need to be changed to more appropriate names
-	Button getSortButton();
-	void showSortButtonErrorMessage(String INVALID_SEARCH_BUTTON);
+	public Button getSortButton();
+	public void showSortButtonErrorMessage(String INVALID_SEARCH_BUTTON);
 	
-	Button getViewCourseDetailsButton();
-	void showViewCourseDetailsButtonErrorMessage(String VIEW_COURSE_DETAILS_BUTTON);
+	public Button getViewCourseDetailsButton();
+	public void showViewCourseDetailsButtonErrorMessage(String VIEW_COURSE_DETAILS_BUTTON);
 	
-	Button getEditWishlistButton();
+	public Button getEditWishlistButton();
 	void showEditWishlistButtonErrorMessage(String EDIT_WISHLISTBUTTON);
 	
-	Button getRequestNewScheduleButton();
-	void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN);
+	public Button getRequestNewScheduleButton();
+	public void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN);
 	
 	Widget getWidgetContainer();
 	

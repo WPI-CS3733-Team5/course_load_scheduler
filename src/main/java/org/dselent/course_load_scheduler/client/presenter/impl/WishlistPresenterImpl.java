@@ -1,5 +1,9 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import org.dselent.course_load_scheduler.client.action.SendEditWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestNewScheduleAction;
 import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
@@ -10,6 +14,8 @@ import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEven
 import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewCourseDetailsEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
+import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
@@ -32,13 +38,29 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	private boolean viewCourseDetails;
 	private boolean requestNewSchedule;
 	private boolean editWishlist;
-;
+	private ArrayList<InstructorInfo> instructorInfoList;
+	private ArrayList<SectionInfo> sectionInfoList;
+	
+	@Inject
+	public WishlistPresenterImpl(IndexPresenter parentPresenter, WishlistView view ) {
+		this.view = view;
+		this.parentPresenter = parentPresenter;
+		view.setParent(this);
+		
+		
+	}
+
 	
 	@Override
 	public void go(HasWidgets container) {
-		container.clear();
-		container.add(view.getWidgetContainer());
 		
+		for(int i = 0; i < instructorInfoList.size(); i++) {
+			
+			view.getDeptCmbx().addItem(instructorInfoList.get(i).getDepartment());
+			
+		}
+
+
 	}
 
 	@Override
@@ -59,7 +81,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		
 	}
 	
-	
+
 
 	@Override
 	public void sort(RadioButton name, ListBox department, ListBox term, TextBox courseNumber) 
