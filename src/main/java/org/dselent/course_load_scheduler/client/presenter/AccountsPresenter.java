@@ -4,10 +4,12 @@ public interface AccountsPresenter extends BasePresenter{
 	IndexPresenter getParentPresenter();
 	void setParentPresenter(IndexPresenter parentPresenter);
 	
+	void applySort();
 	void editCourse();
 	void applyChanges();
 	void cancelChanges();
 	void removeAccount();
 	void createAccount();
+	void populateAccountsViewer();
 	
 }

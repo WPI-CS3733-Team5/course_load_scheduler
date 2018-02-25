@@ -17,7 +17,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements ProfileView {
 
 	private static ProfileViewUiBinder uiBinder = GWT.create(ProfileViewUiBinder.class);
-	interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {}
+	public interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {}
 	@SuppressWarnings("unused")
 	private ProfilePresenterImpl parent;
 	
@@ -36,53 +36,53 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	}
 
 
-
+	
 	public static void setUiBinder(ProfileViewUiBinder uiBinder) {
 		ProfileViewImpl.uiBinder = uiBinder;
 	}
 
 
-
+	@Override
 	public Label getUsername() {
 		return username;
 	}
 
 
-
+	@Override
 	public void setUsername(Label username) {
 		this.username = username;
 	}
 
-	
+	@Override
 	public Label getPhoneNumber() {
 		return phoneNumber;
 	}
 
 
-
+	@Override
 	public void setPhoneNumber(Label phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-
+	@Override
 	public Label getEmail() {
 		return email;
 	}
 
 
-
+	@Override
 	public void setEmail(Label email) {
 		this.email = email;
 	}
 
 
-
+	@Override
 	public Button getEditCourseWishlistButton() {
 		return editWishlistButton;
 	}
 
 
-
+	@Override
 	public void setEditWishlistButton(Button editCourseWishlistButton) {
 		this.editWishlistButton = editCourseWishlistButton;
 	}

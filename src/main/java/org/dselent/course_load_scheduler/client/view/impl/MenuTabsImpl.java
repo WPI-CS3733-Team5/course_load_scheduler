@@ -5,10 +5,12 @@ import org.dselent.course_load_scheduler.client.view.MenuTabs;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -136,5 +138,48 @@ public class MenuTabsImpl extends BaseViewImpl<MenuTabsPresenter> implements Men
 	public void setBaseContainer(HTMLPanel baseContainer) {
 		this.baseContainer = baseContainer;
 	}
+	
+	@UiHandler("homeButton")
+	void onHomeClicked(ClickEvent evt)
+	{
+		presenter.home();
+	}
+	
+	@UiHandler("profileButton")
+	void onProfileClicked(ClickEvent evt)
+	{
+		presenter.profile();
+	}
+	
+	@UiHandler("notificationsButton")
+	void onNotificationsClicked(ClickEvent evt)
+	{
+		presenter.notifications();
+	}
+	
+	@UiHandler("wishlistButton")
+	void onWishlistClicked(ClickEvent evt)
+	{
+		presenter.wishlist();
+	}
+	
+	@UiHandler("coursesButton")
+	void onCoursesClicked(ClickEvent evt)
+	{
+		presenter.courses();
+	}
+	
+	@UiHandler("accountsButton")
+	void onAccountsClicked(ClickEvent evt)
+	{
+		presenter.accounts();
+	}
+	
+	@UiHandler("schedulesButton")
+	void onSchedulesClicked(ClickEvent evt)
+	{
+		presenter.schedules();
+	}
+	
 
 }

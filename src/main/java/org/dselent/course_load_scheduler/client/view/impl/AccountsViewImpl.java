@@ -5,7 +5,6 @@ import org.dselent.course_load_scheduler.client.view.AccountsView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -35,12 +34,13 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	@UiField Button buttonApply;
 	@UiField Button buttonCancel;
 	@UiField Button buttonRemove;
+	@UiField Button buttonViewAccount;
 	@UiField Button buttonCreate;
 	@UiField Label labelSort;
 	@UiField RadioButton radioSortDepartment;
 	@UiField RadioButton radioSortName;
-	@UiField RadioButton radioSortUserName;
 	@UiField HorizontalPanel radioPanel;
+	@UiField Button buttonSort;
 	@UiField Grid fullGrid;
 	@UiField ListBox listAccounts;
 	@UiField Grid gridEditing;
@@ -137,14 +137,6 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 
 	public void setRadioSortName(RadioButton radioSortName) {
 		this.radioSortName = radioSortName;
-	}
-
-	public RadioButton getRadioSortUserName() {
-		return radioSortUserName;
-	}
-
-	public void setRadioSortUserName(RadioButton radioSortUserName) {
-		this.radioSortUserName = radioSortUserName;
 	}
 
 	public HorizontalPanel getRadioPanel() {
@@ -290,6 +282,22 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	public Label getLabelEmail() {
 		return labelEmail;
 	}
+	
+	public Button getButtonViewAccount() {
+		return buttonViewAccount;
+	}
+
+	public void setButtonViewAccount(Button buttonViewAccount) {
+		this.buttonViewAccount = buttonViewAccount;
+	}
+
+	public Button getButtonSort() {
+		return buttonSort;
+	}
+
+	public void setButtonSort(Button buttonSort) {
+		this.buttonSort = buttonSort;
+	}
 
 	@Override
 	public void setPresenter(AccountsPresenter presenter) {
@@ -305,6 +313,12 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	@Override
 	public HasWidgets getViewRootPanel() {
 		return this.fullGrid;
+	}
+	
+	@UiHandler("buttonSort")
+	void onButtonSortClicked(ClickEvent evt)
+	{
+		presenter.applySort();
 	}
 	
 	@UiHandler("buttonEdit")
@@ -332,5 +346,12 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	{
 		presenter.createAccount();
 	}
+	@UiHandler("buttonViewAccount")
+	void onbuttonViewAccountClicked(ClickEvent evt)
+	{
+		presenter.populateAccountsViewer();
+	}
+
+	
 	
 }

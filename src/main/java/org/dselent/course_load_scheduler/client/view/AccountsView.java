@@ -32,8 +32,6 @@ public interface AccountsView extends BaseView<AccountsPresenter>{
 	public void setRadioSortDepartment(RadioButton radioSortDepartment);
 	public RadioButton getRadioSortName();
 	public void setRadioSortName(RadioButton radioSortName);
-	public RadioButton getRadioSortUserName();
-	public void setRadioSortUserName(RadioButton radioSortUserName);
 	public HorizontalPanel getRadioPanel();
 	public void setRadioPanel(HorizontalPanel radioPanel);
 	public Grid getFullGrid();
@@ -60,6 +58,8 @@ public interface AccountsView extends BaseView<AccountsPresenter>{
 	public void setDropdownNonAdmin(MenuItem dropdownNonAdmin);
 	public TextBox getEnterEmail();
 	public void setEnterEmail(TextBox enterEmail);
+	public Button getButtonSort();
+	public void setButtonSort(Button buttonSort);
 	public Label getLabelUserName();
 	public Label getLabelFirstName();
 	public Label getLabelSort();
