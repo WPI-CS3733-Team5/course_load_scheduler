@@ -182,10 +182,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 		view.showErrorMessages(ila.toString());
 	}
 	
-	@Override
-	public void onReceiveLogout(ReceiveLogoutEvent evt) {
-		HasWidgets container = evt.getContainer();
-		ReceiveLogoutAction rha = evt.getAction();
+	public void onReceiveLogout(HasWidgets container) {
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}

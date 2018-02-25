@@ -262,9 +262,6 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendLogout() {
-		this.parentPresenter.setActiveUserState(0);
-		SendLogoutAction sla = new SendLogoutAction(view.getViewRootPanel());
-		SendLogoutEvent sle = new SendLogoutEvent(sla, login.getView().getViewRootPanel());
-		eventBus.fireEvent(sle);
+		this.login.onReceiveLogout(view.getViewRootPanel());
 	}		
 }

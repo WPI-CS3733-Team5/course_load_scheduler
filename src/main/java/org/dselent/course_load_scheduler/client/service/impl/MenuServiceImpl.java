@@ -36,6 +36,7 @@ import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTr
 import org.dselent.course_load_scheduler.client.translator.impl.SendLogoutActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesCouresesActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendWishlistActionTranslatorImpl;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
@@ -156,13 +157,4 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 
 		request.send();
 	}
-	
-	@Override
-	public void onSendLogout(SendLogoutEvent evt) {
-		SendLogoutAction action = evt.getAction();
-		SendLogoutActionTranslatorImpl logoutActionTranslator = new SendLogoutActionTranslatorImpl();
-		JSONObject json = logoutActionTranslator.translateToJson(action);
-		SendLogoutCallback logoutCallback = new SendLogoutCallback(eventBus, evt.getContainer());
-	}
-	
 }

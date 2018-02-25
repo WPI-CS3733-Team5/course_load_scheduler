@@ -19,6 +19,7 @@ public class ReceiveHomeEvent extends DisplayEvent<ReceiveHomeAction, ReceiveHom
 		return TYPE;
 	}
 	
+	@Override
 	protected void dispatch(ReceiveHomeEventHandler handler)
 	{
 		handler.onReceiveHome(this);
