@@ -1,8 +1,6 @@
 package org.dselent.course_load_scheduler.client.translator.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
@@ -92,7 +90,6 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			Integer id = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
 			Integer rank = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));
 			Integer courseLoad = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.COURSE_LOAD));
-			Integer phoneNumber = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.PHONE_NUMBER));
 			String office = JSONHelper.getStringValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.OFFICE));
 			Integer userInfoId = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.USER_INFO_ID));
 		
@@ -100,7 +97,6 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			instructor.setId(id);
 			instructor.setRank(rank);
 			instructor.setCourseLoad(courseLoad);
-			instructor.setPhoneNumber(phoneNumber);
 			instructor.setOffice(office);
 			instructor.setUserInfoId(userInfoId);
 			

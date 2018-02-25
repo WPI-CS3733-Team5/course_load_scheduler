@@ -11,7 +11,6 @@ public class InstructorInfo extends Model
 	private Integer id;
 	private Integer rank;
 	private Integer courseLoad;
-	private Integer phoneNumber;
 	private String office;
 	private Integer userInfoId;
 	
@@ -33,12 +32,7 @@ public class InstructorInfo extends Model
 	public void setCourseLoad(Integer courseLoad) {
 		this.courseLoad = courseLoad;
 	}
-	public Integer getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(Integer phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+	
 	public String getOffice() {
 		return office;
 	}
@@ -67,7 +61,6 @@ public class InstructorInfo extends Model
 		result = prime * result + ((department == null) ? 0 : department.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((office == null) ? 0 : office.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
 		result = prime * result + ((userInfoId == null) ? 0 : userInfoId.hashCode());
 		return result;
@@ -102,11 +95,6 @@ public class InstructorInfo extends Model
 				return false;
 		} else if (!office.equals(other.office))
 			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
 		if (rank == null) {
 			if (other.rank != null)
 				return false;
@@ -122,8 +110,7 @@ public class InstructorInfo extends Model
 	
 	@Override
 	public String toString() {
-		return "InstructorInfo [id=" + id + ", rank=" + rank + ", courseLoad=" + courseLoad + ", phoneNumber="
-				+ phoneNumber + ", office=" + office + ", userInfoId=" + userInfoId + ", department=" + department
+		return "InstructorInfo [id=" + id + ", rank=" + rank + ", courseLoad=" + courseLoad + ", office=" + office + ", userInfoId=" + userInfoId + ", department=" + department
 				+ "]";
 	}
 	

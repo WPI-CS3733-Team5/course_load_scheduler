@@ -90,7 +90,6 @@ public class SendSchedulesActionTranslatorImpl implements ActionTranslator<SendS
 				Integer id = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
 				Integer rank = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));
 				Integer courseLoad = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.COURSE_LOAD));
-				Integer phoneNumber = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.PHONE_NUMBER));
 				String office = JSONHelper.getStringValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.OFFICE));
 				Integer userInfoId = JSONHelper.getIntValue(tempInstructor, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.USER_INFO_ID));
 			
@@ -98,7 +97,6 @@ public class SendSchedulesActionTranslatorImpl implements ActionTranslator<SendS
 				instructor.setId(id);
 				instructor.setRank(rank);
 				instructor.setCourseLoad(courseLoad);
-				instructor.setPhoneNumber(phoneNumber);
 				instructor.setOffice(office);
 				instructor.setUserInfoId(userInfoId);
 				
