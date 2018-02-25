@@ -34,6 +34,10 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	
 	@Override
 	public void go(HasWidgets container) {
+		
+		view.getEmail().setText("Email: " + user.getEmail());
+		view.getUsername().setText(user.getFirstName() + " " + user.getLastName() + " " + user.getUserName());
+		
 		container.clear();
 		container.add(view.getWidgetContainer());		
 	}
