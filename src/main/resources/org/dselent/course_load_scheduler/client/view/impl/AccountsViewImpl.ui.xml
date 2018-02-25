@@ -13,9 +13,11 @@
 				<g:customCell>
 					<g:HorizontalPanel ui:field="radioPanel">
 						<g:RadioButton name="new name" text="Department" ui:field="radioSortDepartment"/>
-						<g:RadioButton name="new name" text="Name" ui:field="radioSortName"/>
-						<g:RadioButton name="new name" text="UserName" ui:field="radioSortUserName"/>
+						<g:RadioButton name="new name" text="Alphabetical" ui:field="radioSortName"/>
 					</g:HorizontalPanel>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="buttonSort" text="Sort Accounts" width="130px"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -122,7 +124,10 @@
 			</g:row>
 			<g:row>
 				<g:customCell>
-					<g:Button ui:field="buttonCreate" text="Create Account"/>
+					<g:Button ui:field="buttonViewAccount" text="View Account"/>
+				</g:customCell>
+				<g:customCell>
+					<g:Button ui:field="buttonCreate" text="Create New Account"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>

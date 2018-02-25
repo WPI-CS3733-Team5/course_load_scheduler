@@ -9,7 +9,6 @@ import org.dselent.course_load_scheduler.client.action.SendCreateAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveAccountAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveAccountsEvent;
-import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCreateAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditAccountEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveAccountEvent;
@@ -18,6 +17,7 @@ import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
+import org.dselent.course_load_scheduler.client.utils.Pair;
 import org.dselent.course_load_scheduler.client.view.AccountsView;
 
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -28,8 +28,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	private IndexPresenter parentPresenter;
 	private AccountsView view;
 	
+	private boolean applySortInProgress;
 	private boolean editInProgress;
 	private boolean creationInProgress;
+	private boolean populateAccountsInProgress;
 	
 	private ArrayList<UserInfo> userInfoList;
 	private ArrayList<InstructorInfo> instructorInfoList;
@@ -38,8 +40,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	public AccountsPresenterImpl(IndexPresenter parentPresenter, AccountsView view) {
 		this.parentPresenter = parentPresenter;
 		this.view = view;
+		applySortInProgress = false;
 		editInProgress = false;
 		creationInProgress = false;
+		populateAccountsInProgress = false;
 
 		enableUserFields(false);
 		view.getButtonApply().setEnabled(false);
@@ -71,8 +75,149 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	@Override
 	public void go(HasWidgets container) {
+//		for(int i = 0; i < departments.size(); i++) {
+//			view.getRadioSortDepartment();
+//		}
+		
+		view.getRadioSortDepartment().setValue(true);
+		view.getRadioSortName().setValue(false);
+		
+		accountsFilter(view.getRadioSortDepartment().getValue(), view.getRadioSortName().getValue());
+		
 		container.clear();
 		container.add(view.getWidgetContainer());
+	}
+	
+	private void accountsFilter(Boolean departmentsRadioButton, Boolean nameRadioButton) {
+		parentPresenter.showLoadScreen();
+		if(departmentsRadioButton) {
+			filterByDepartment();
+		} else {
+			filterByAlphabetical();
+		}
+		parentPresenter.hideLoadScreen();
+	}
+	
+	private void filterByDepartment() {
+		ArrayList<String> departments = new ArrayList<>();
+		
+		for(int i = 0; i < instructorInfoList.size(); i++) {
+			boolean onList = false;
+			for(int b = 0; b < departments.size(); b++) {
+				if(instructorInfoList.get(i).getDepartment().equals(departments.get(b))){
+					onList = true;
+				}
+			}
+			if(!onList) {
+				departments.add(instructorInfoList.get(i).getDepartment());
+			}
+		}
+		
+		java.util.Collections.sort(departments);
+				
+		ArrayList<UserInfo> alphaUserInfoList = alphabatize(userInfoList);
+		
+		ArrayList<Pair<InstructorInfo, UserInfo>> instructorsAndUsers = new ArrayList<>();
+
+		for(int i = 0; i < alphaUserInfoList.size(); i++) {
+			Boolean hasInstructor = false;
+			for(int b = 0; b < instructorInfoList.size(); b++) {
+				if(instructorInfoList.get(b).getUserInfoId() == alphaUserInfoList.get(i).getId()) {
+					Pair<InstructorInfo, UserInfo> temp = new Pair(instructorInfoList.get(b), alphaUserInfoList.get(i));
+					instructorsAndUsers.add(temp);
+					hasInstructor = true;
+					break;
+				}
+			}
+			if(!hasInstructor) {
+				Pair<InstructorInfo, UserInfo> temp2 = new Pair(new InstructorInfo(), alphaUserInfoList.get(i));
+				instructorsAndUsers.add(temp2);
+			}
+			hasInstructor = false;
+		}
+		
+		ArrayList<Pair<InstructorInfo, UserInfo>> sortedInstructorsAndUsers = new ArrayList<>();
+				
+		for(int i = 0; i < departments.size(); i++) {
+			for(int b = 0; i < instructorsAndUsers.size(); b++) {
+				if(departments.get(i).equals(instructorsAndUsers.get(b).getValue1().getDepartment())) {
+					sortedInstructorsAndUsers.add(instructorsAndUsers.get(b));
+				}
+			}
+		}
+		
+		for(int i = 0; i < instructorsAndUsers.size(); i++) {
+			if(instructorsAndUsers.get(i).getValue1().getDepartment().isEmpty()) {
+				sortedInstructorsAndUsers.add(instructorsAndUsers.get(i));
+			}
+		}
+		
+		for(int i = 0; i < sortedInstructorsAndUsers.size(); i++) {
+			view.getListAccounts().addItem(sortedInstructorsAndUsers.get(i).getValue2().getUserName()
+					+ " --- "
+					+ sortedInstructorsAndUsers.get(i).getValue2().getFirstName()
+					+ " "
+					+ sortedInstructorsAndUsers.get(i).getValue2().getLastName()
+					+ " "
+					+ sortedInstructorsAndUsers.get(i).getValue1().getDepartment());
+		}
+	}
+	
+	private void filterByAlphabetical() {
+		
+		ArrayList<UserInfo> alphaUserInfoList = alphabatize(userInfoList);
+		
+		ArrayList<Pair<InstructorInfo, UserInfo>> instructorsAndUsers = new ArrayList<>();
+
+		for(int i = 0; i < alphaUserInfoList.size(); i++) {
+			Boolean hasInstructor = false;
+			for(int b = 0; b < instructorInfoList.size(); b++) {
+				if(instructorInfoList.get(b).getUserInfoId() == alphaUserInfoList.get(i).getId()) {
+					Pair<InstructorInfo, UserInfo> temp = new Pair(instructorInfoList.get(b), alphaUserInfoList.get(i));
+					instructorsAndUsers.add(temp);
+					hasInstructor = true;
+					break;
+				}
+			}
+			if(!hasInstructor) {
+				Pair<InstructorInfo, UserInfo> temp2 = new Pair(new InstructorInfo(), alphaUserInfoList.get(i));
+				instructorsAndUsers.add(temp2);
+			}
+			hasInstructor = false;
+		}
+		
+		for(int i = 0; i < instructorsAndUsers.size(); i++) {
+			view.getListAccounts().addItem(instructorsAndUsers.get(i).getValue2().getUserName()
+					+ " --- "
+					+ instructorsAndUsers.get(i).getValue2().getFirstName()
+					+ " "
+					+ instructorsAndUsers.get(i).getValue2().getLastName()
+					+ " "
+					+ instructorsAndUsers.get(i).getValue1().getDepartment());
+		}
+	}
+	
+	private ArrayList<UserInfo> alphabatize(ArrayList<UserInfo> unsortedUsers){
+		ArrayList<UserInfo> sortedUsers = new ArrayList<>();
+		
+		ArrayList<String> usernames = new ArrayList<>();
+		
+		for(int i = 0; i < unsortedUsers.size(); i++) {
+			usernames.add(unsortedUsers.get(i).getUserName());
+		}
+		
+		java.util.Collections.sort(usernames);
+		
+		for(int i = 0; i < usernames.size(); i++) {
+			for(int a = 0; a < unsortedUsers.size(); a++) {
+				if(usernames.get(i).equals(unsortedUsers.get(a).getUserName())) {
+					sortedUsers.add(unsortedUsers.get(a));
+					break;
+				}
+			}
+		}
+		
+		return sortedUsers;
 	}
 
 	@Override
@@ -111,6 +256,17 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	
 	@Override
+	public void applySort() {
+		if(!applySortInProgress) {
+			applySortInProgress = true;
+			view.getButtonApply().setEnabled(false);
+			accountsFilter(view.getRadioSortDepartment().getValue(), view.getRadioSortName().getValue());
+			view.getButtonApply().setEnabled(true);
+			applySortInProgress = false;
+		}
+	}
+	
+	@Override
 	public void editCourse() {
 		if (!editInProgress && !creationInProgress) {
 			editInProgress = true;
@@ -119,6 +275,64 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			view.getButtonCancel().setEnabled(true);
 			
 		}
+	}
+	
+	@Override
+	public void populateAccountsViewer() {
+		if(!populateAccountsInProgress) {
+			populateAccountsInProgress = true;
+			view.getButtonSort().setEnabled(false);
+			populateViewer(view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex()));
+			view.getButtonSort().setEnabled(true);
+			populateAccountsInProgress = false;
+		}
+	}
+	
+	private void populateViewer(String parsableString) {
+		String username = "";
+		
+		for(int i = 0; i < parsableString.length(); i++) {
+			if(parsableString.charAt(i) != ' ') {
+				username = username + parsableString.charAt(i);
+			} else {
+				break;
+			}
+		}
+		
+		UserInfo user = new UserInfo();
+		InstructorInfo instructor = new InstructorInfo();
+		
+		for(int i = 0; i < userInfoList.size(); i++) {
+			if(userInfoList.get(i).getUserName().equals(username)) {
+				user = userInfoList.get(i);
+				break;
+			}
+		}
+		
+		boolean noInstructor = true;
+		for(int i = 0; i < instructorInfoList.size(); i++) {
+			if(instructorInfoList.get(i).getUserInfoId() == user.getId()) {
+				instructor = instructorInfoList.get(i);
+				noInstructor = false;
+				break;
+			}
+		}
+		if(noInstructor) {
+			instructor.setDepartment("N/A");
+			instructor.setCourseLoad(0);
+			instructor.setOffice("N/A");
+			instructor.setRank(0);
+		}
+		
+		view.getEnterFirstName().setText(user.getFirstName());
+		view.getEnterCourseLoad().setText(instructor.getCourseLoad().toString());
+		view.getEnterDepartment().setText(instructor.getDepartment());
+		view.getEnterEmail().setText(user.getEmail());
+		view.getEnterFirstName().setText(user.getFirstName());
+		view.getEnterLastName().setText(user.getLastName());
+		view.getEnterOffice().setText(instructor.getOffice());
+		view.getEnterRank().setText(instructor.getRank().toString());
+		view.getEnterUserName().setText(user.getUserName());
 	}
 
 	@Override

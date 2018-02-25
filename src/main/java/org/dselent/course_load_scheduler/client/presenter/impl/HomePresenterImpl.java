@@ -130,11 +130,11 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 			String term = termBox.getItemText(termBox.getSelectedIndex());
 			String username = userBox.getItemText(userBox.getSelectedIndex());
 			view.getCalendarList().clear();
-			applyFilter(term, username);
+			goFilter(term, username);
 		}
 	}
 	
-	private boolean applyFilter(String termString, String username)
+	private boolean goFilter(String termString, String username)
 	{
 		parentPresenter.showLoadScreen();
 		
