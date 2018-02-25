@@ -3,6 +3,7 @@ package org.dselent.course_load_scheduler.client.action;
 import java.util.ArrayList;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.WishlistLinks;
 
@@ -12,14 +13,17 @@ public class ReceiveWishlistAction extends Action{
 	private ArrayList<CalendarInfo> calendars;
 	private ArrayList<SectionInfo> sections;
 	private ArrayList<CourseInfo> courses;
+	private ArrayList<LabInfo> labs;
 
-		public ReceiveWishlistAction(ArrayList<WishlistLinks> wishlists, ArrayList<CalendarInfo> calendars, ArrayList<SectionInfo> sections, ArrayList<CourseInfo> courses)
+		public ReceiveWishlistAction(ArrayList<WishlistLinks> wishlists, ArrayList<CalendarInfo> calendars, ArrayList<SectionInfo> sections, ArrayList<CourseInfo> courses, ArrayList<LabInfo> labs)
 	{
 		this.setWishlists(wishlists);
 		this.setCalendars(calendars);
 		this.setSections(sections);
 		this.setCourses(courses);
+		this.setLabs(labs);
 	}
+
 
 		public ArrayList<WishlistLinks> getWishlists() {
 		return wishlists;
@@ -66,10 +70,23 @@ public class ReceiveWishlistAction extends Action{
 	public void setCourses(ArrayList<CourseInfo> courses) {
 		this.courses = courses;
 	}
+	
+	public ArrayList<LabInfo> getLabs() {
+		return labs;
+	}
+
+
+
+	public void setLabs(ArrayList<LabInfo> labs) {
+		this.labs = labs;
+	}
+	
+
+	
 	@Override
 	public String toString()
 	{
-		return "ReceiveWishlistAction [wishlists=" + wishlists + ", calendars=" + calendars+ ", sections=" + sections+ ", courses=" + courses + "]";
+		return "ReceiveWishlistAction [wishlists=" + wishlists + ", calendars=" + calendars+ ", sections=" + sections+ ", courses=" + courses + ",  labs=" + labs +"]";
 	}
 }
 

@@ -188,4 +188,6 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	public void onSendRequestDifferentSchedule(SendRequestDifferentScheduleEvent evt) {
 		go(evt.getAction().getPanel());
 	}
+	
+	
 }
