@@ -4,17 +4,23 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import org.dselent.course_load_scheduler.client.action.ReceiveWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendEditWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestNewScheduleAction;
 import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
+import org.dselent.course_load_scheduler.client.event.ReceiveWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendViewCourseDetailsEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
+import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.CalendarInfo;
+import org.dselent.course_load_scheduler.client.model.CourseInfo;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
+import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
@@ -27,11 +33,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
+public class WishlistPresenterImpl extends BasePresenterImpl implements WishlistPresenter {
 
-
-
-public class WishlistPresenterImpl extends BasePresenterImpl implements WishlistPresenter{
-	
 	private IndexPresenter parentPresenter;
 	private WishlistView view;
 	private boolean sort;
@@ -40,32 +43,32 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	private boolean editWishlist;
 	private ArrayList<InstructorInfo> instructorInfoList;
 	private ArrayList<SectionInfo> sectionInfoList;
-	
+	private ArrayList<CalendarInfo> calendarInfoList;
+	private ArrayList<CourseInfo> courseInfoList;
+	private ArrayList<LabInfo> labInfoList;
+
 	@Inject
-	public WishlistPresenterImpl(IndexPresenter parentPresenter, WishlistView view ) {
+	public WishlistPresenterImpl(IndexPresenter parentPresenter, WishlistView view) {
 		this.view = view;
 		this.parentPresenter = parentPresenter;
 		view.setParent(this);
-		
-		
+
 	}
 
-	
 	@Override
 	public void go(HasWidgets container) {
-		
-		for(int i = 0; i < instructorInfoList.size(); i++) {
-			
-			view.getDeptCmbx().addItem(instructorInfoList.get(i).getDepartment());
-			
-		}
 
+		for (int i = 0; i < instructorInfoList.size(); i++) {
+
+			view.getDeptCmbx().addItem(instructorInfoList.get(i).getDepartment());
+
+		}
 
 	}
 
 	@Override
-	//wisihlitview getview
-	
+	// wisihlitview getview
+
 	public BaseView<? extends BasePresenter> getView() {
 		return (BaseView<? extends BasePresenter>) this.view;
 	}
@@ -78,116 +81,145 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	@Override
 	public void setParentPresenter(IndexPresenter parentPresenter) {
 		this.parentPresenter = parentPresenter;
-		
-	}
-	
 
+	}
 
 	@Override
-	public void sort(RadioButton name, ListBox department, ListBox term, TextBox courseNumber) 
-	{
-		if(!sort)
-		{
-			
+	public void sort(RadioButton name, ListBox department, ListBox term, TextBox courseNumber) {
+		if (!sort) {
+
 			sort = true;
 			view.getSortButton().setEnabled(false);
-			
-			
+
 			String department1 = department.getItemText(department.getSelectedIndex());
 			String term1 = term.getItemText(term.getSelectedIndex());
 			String courseNumber1 = courseNumber.getSelectedText();
 			sendSort(department1, term1, courseNumber1);
-			
+
 		}
-		
+
 	}
-	
-	private void sendSort(String dept, String term, String courseNum)
-	{
-		
+
+	private void sendSort(String dept, String term, String courseNum) {
+
 		SendSortWishlistAction ssa = new SendSortWishlistAction(dept, term, courseNum);
 		SendSortWishlistEvent sse = new SendSortWishlistEvent(ssa);
 		eventBus.fireEvent(sse);
-		
+
 	}
 
 	@Override
 	public void viewCourseDetails(ListBox course) {
-		if(!viewCourseDetails)
-		{
-			
+		if (!viewCourseDetails) {
+
 			viewCourseDetails = true;
 			view.getViewCourseDetailsButton();
-			
+
 			String course1 = course.getItemText(course.getSelectedIndex());
 			sendViewCourseDetails(course1);
-			
+
 		}
-		
+
 	}
-	
-	private void sendViewCourseDetails(String course)
-	{
-		
+
+	private void sendViewCourseDetails(String course) {
+
 		SendViewCourseDetailsAction svcda = new SendViewCourseDetailsAction(course);
 		SendViewCourseDetailsEvent svcde = new SendViewCourseDetailsEvent(svcda, this.getView().getViewRootPanel());
 		eventBus.fireEvent(svcde);
-		
+
 	}
 
 	@Override
 	public void editWishlist() {
-		if(!editWishlist)
-		{
-			
+		if (!editWishlist) {
+
 			editWishlist = true;
 			view.getEditWishlistButton();
-			
+
 			sendEditWishList();
-			
-		}		
+
+		}
 	}
-	
-	private void sendEditWishList()
-	{
-		
+
+	private void sendEditWishList() {
+
 		SendEditWishlistAction svcda = new SendEditWishlistAction();
 		SendEditWishlistEvent svcde = new SendEditWishlistEvent(svcda);
 		eventBus.fireEvent(svcde);
-		
+
 	}
-	
 
 	@Override
 	public void requestNewSchedule() {
-		if(!requestNewSchedule) 
-		{
+		if (!requestNewSchedule) {
 			requestNewSchedule = true;
 			view.getRequestNewScheduleButton();
-			
+
 			sendRequestNewSchedule();
 		}
-		
+
 	}
-	
-	private void sendRequestNewSchedule()
-	{
-		
+
+	private void sendRequestNewSchedule() {
+
 		SendRequestNewScheduleAction srnsa = new SendRequestNewScheduleAction();
 		SendRequestNewScheduleEvent srnse = new SendRequestNewScheduleEvent(srnsa);
 		eventBus.fireEvent(srnse);
-		
+
 	}
-	
+
 	@Override
 	public void onSendWishlist(SendWishlistEvent evt) {
 		go(evt.getAction().getPanel());
 	}
-	
+
 	@Override
 	public void onSendRequestDifferentSchedule(SendRequestDifferentScheduleEvent evt) {
 		go(evt.getAction().getPanel());
 	}
-	
-	
+
+	public ArrayList<SectionInfo> getSectionInfoList() {
+		return sectionInfoList;
+	}
+
+	public void setSectionInfoList(ArrayList<SectionInfo> sectionInfoList) {
+		this.sectionInfoList = sectionInfoList;
+	}
+
+	public ArrayList<CalendarInfo> getCalendarInfoList() {
+		return calendarInfoList;
+	}
+
+	public void setCalendarInfoList(ArrayList<CalendarInfo> calendarInfoList) {
+		this.calendarInfoList = calendarInfoList;
+	}
+
+	public ArrayList<CourseInfo> getCourseInfoList() {
+		return courseInfoList;
+	}
+
+	public void setCourseInfoList(ArrayList<CourseInfo> courseInfoList) {
+		this.courseInfoList = courseInfoList;
+	}
+
+	public ArrayList<LabInfo> getLabInfoList() {
+		return labInfoList;
+	}
+
+	public void setLabInfoList(ArrayList<LabInfo> labInfoList) {
+		this.labInfoList = labInfoList;
+	}
+
+	public void onReceiveWishlist(ReceiveWishlistEvent evt) {
+		HasWidgets container = evt.getContainer();
+		ReceiveWishlistAction rwa = evt.getAction();
+		setSectionInfoList(rwa.getSections());
+		setCalendarInfoList(rwa.getCalendars());
+		setCourseInfoList(rwa.getCourses());
+		setLabInfoList(rwa.getLabs());
+		
+		go(container);
+		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+	}
 }

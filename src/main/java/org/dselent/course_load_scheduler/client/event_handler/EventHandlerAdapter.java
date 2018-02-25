@@ -57,7 +57,6 @@ implements InvalidLoginEventHandler,
 			ReceiveAccountsEventHandler,
 			ReceiveSchedulesEventHandler,
 			ReceiveWishlistForUserEventHandler
-			
 
 			
 {
