@@ -5,15 +5,18 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveSchedulesAction;
+import org.dselent.course_load_scheduler.client.action.ReceiveWishlistForUserAction;
+import org.dselent.course_load_scheduler.client.action.SendGenerateAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
-import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
-import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
+import org.dselent.course_load_scheduler.client.action.SendWishlistForUserAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveSchedulesEvent;
+import org.dselent.course_load_scheduler.client.event.ReceiveWishlistForUserEvent;
+import org.dselent.course_load_scheduler.client.event.SendGenerateEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
-import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
+import org.dselent.course_load_scheduler.client.event.SendWishlistForUserEvent;
 import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
+import org.dselent.course_load_scheduler.client.exceptions.ScheduleConflictException;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
@@ -21,24 +24,25 @@ import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
-import org.dselent.course_load_scheduler.client.model.WishlistLinks;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
-import org.dselent.course_load_scheduler.client.view.LoginView;
 import org.dselent.course_load_scheduler.client.view.ScheduleGeneratorView;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
 public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements ScheduleGeneratorPresenter{
+	private static final EventHandler SendGenerateEventHandler = null;
 	private IndexPresenter parentPresenter;
 	private ScheduleGeneratorView view;
-	private String termOne;
-	private String termTwo;
+	private Integer termOne;
+	private Integer termTwo;
 	private Integer yearOne;
 	private Integer yearTwo;
 	private UserInfo currentUser;
+	private InstructorInfo instructor;
 	private Boolean taskInProgress;
 	
 	private ArrayList<SectionInfo> scheduleInProgress;
@@ -49,7 +53,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	private ArrayList<CalendarInfo> calendars;
 	private ArrayList<UserInfo> users;
 	private ArrayList<InstructorInfo> instructors;
-	private ArrayList<WishlistLinks> wishlist;
+	private ArrayList<SectionInfo> wishlist;
 	
 	@Inject
 	public ScheduleGeneratorPresenterImpl(IndexPresenter parentPresenter, ScheduleGeneratorView view)
@@ -81,36 +85,20 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	@Override
 	public void bind()
 	{
-		/*
+		
 		HandlerRegistration homeRegistration;
-		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, SendHomeEventHandler);
+		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, this);
 		eventBusRegistration.put(SendHomeEvent.TYPE, homeRegistration);
 		
-		HandlerRegistration invalidUserRegistration;
-		invalidUserRegistration = eventBus.addHandler(InvalidUserEvent.TYPE, InvalidUserEventHandler);
-		eventBusRegistration.put(InvalidUserEvent.TYPE, invalidUserRegistration);
-		
-		HandlerRegistration invalidCourseRegistration;
-		invalidCourseRegistration = eventBus.addHandler(InvalidCourseEvent.TYPE, InvalidCourseEventHandler);
-		eventBusRegistration.put(InvalidCourseEvent.TYPE, invalidCourseRegistration);
-		
-		HandlerRegistration sendUserInfoEventRegistration;
-		sendUserInfoEventRegistration = eventBus.addHandler(SendUserInfoEvent.TYPE, SendUserInfoEventHandler);
-		eventBusRegistration.put(SendUserInfoEvent.TYPE, sendUserInfoEventRegistration);
-		
-		HandlerRegistration sendCourseInfoEventRegistration;
-		sendCourseInfoEventRegistration = eventBus.addHandler(SendCourseInfoEvent.TYPE, SendCourseInfoEventHandler);
-		eventBusRegistration.put(SendCourseInfoEvent.TYPE, sendCourseInfoEventRegistration);
-		
 		HandlerRegistration sendWishlistEventRegistration;
-		sendWishlistEventRegistration = eventBus.addHandler(SendWishlistEvent.TYPE, SendWishlistEventHandler);
-		eventBusRegistration.put(SendWishlistEvent.TYPE, sendWishlistEventRegistration);
+		sendWishlistEventRegistration = eventBus.addHandler(SendWishlistForUserEvent.TYPE, this);
+		eventBusRegistration.put(SendWishlistForUserEvent.TYPE, sendWishlistEventRegistration);
 		
 		HandlerRegistration sendGenerateEventRegistration;
-		sendGenerateEventRegistration = eventBus.addHandler(SendGenerateEvent.TYPE, SendGenerateEventHandler);
+		sendGenerateEventRegistration = eventBus.addHandler(SendGenerateEvent.TYPE, this);
 		eventBusRegistration.put(SendGenerateEvent.TYPE, sendGenerateEventRegistration);
-		*/
-		}
+		
+	}
 		
 	@Override
 	public void go(HasWidgets container)
@@ -130,16 +118,16 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		this.parentPresenter = parentPresenter;
 	}
 	
-	public String getTermOne() {
+	public Integer getTermOne() {
 		return termOne;
 	}
-	public void setTermOne(String term) {
+	public void setTermOne(Integer term) {
 		this.termOne = term;
 	}
-	public String getTermTwo() {
+	public Integer getTermTwo() {
 		return termTwo;
 	}
-	public void setTermTwo(String term) {
+	public void setTermTwo(Integer term) {
 		this.termTwo = term;
 	}
 	
@@ -161,6 +149,13 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	}
 	public void setCurrentUser(UserInfo user) {
 		this.currentUser = user;
+	}
+	
+	public InstructorInfo getInstructor() {
+		return instructor;
+	}
+	public void setInstructor(InstructorInfo instructor) {
+		this.instructor = instructor;
 	}
 	
 	public ArrayList<CourseInfo> getCourses(){
@@ -205,10 +200,10 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		this.instructors = instructors;
 	}
 	
-	public ArrayList<WishlistLinks> getWishlist(){
+	public ArrayList<SectionInfo> getWishlist(){
 		return wishlist;
 	}
-	public void setWishlist(ArrayList<WishlistLinks> wishlist) {
+	public void setWishlist(ArrayList<SectionInfo> wishlist) {
 		this.wishlist = wishlist;
 	}
 	
@@ -274,19 +269,15 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			
 			//if a valid user has been selected, and they are identified as an instructor, request their wishlist
 			if(currentUser != null) {
-				boolean isInstructor = false;
-				InstructorInfo instTemp;
 				
 				for(InstructorInfo i:instructors) {
 					if(i.getUserInfoId() == currentUser.getId()) {
-						isInstructor = true;
-						instTemp = i;
+						instructor = i;
+						SendWishlistForUserAction act = new SendWishlistForUserAction(currentUser.getUserName());
+						SendWishlistForUserEvent evt = new SendWishlistForUserEvent(act, view.getViewRootPanel());
+						eventBus.fireEvent(evt);
 					}
 				}
-				
-				SendFullWishlistAction act = new SendFullWishlistAction(instTemp);
-				SendFullWishlistEvent evt = new SendFullWishlistEvent(act);
-				eventBus.fireEvent(evt);
 			}
 		}else {}
 	}
@@ -307,10 +298,10 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		}
 		
 		if(validCourse) {			
-			String dept;
-			String num;
-			String name;
-			String sect;
+			String dept = null;
+			String num = null;
+			String name = null;
+			String sect = null;
 	
 			for(SectionInfo s:sections) {
 				for(CourseInfo c:courses) {
@@ -394,7 +385,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	}
 	
 	//helper method, does what it says on the tin
-	private void checkEmptyString(String string) throws EmptyStringException
+	public void checkEmptyString(String string) throws EmptyStringException
 	{
 		if(string == null || string.equals(""))
 		{
@@ -406,12 +397,8 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	public void addRequested() {
 		if(!taskInProgress) {
 			taskInProgress = true;
-			for(WishlistLinks w: wishlist) {
-				for(SectionInfo s:sections) {
-					if(s.getId() == w.getSectionInfoId()) {
-						scheduleInProgress.add(s);
-					}
-				}
+			for(SectionInfo w: wishlist) {
+				scheduleInProgress.add(w);
 			}
 			refreshSchedule();
 			taskInProgress = false;
@@ -462,13 +449,13 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	
 	//write course info for a section to a string for placement in the list box
 	public String writeSection(SectionInfo sectionIn) {
-		String name;
-		String dept;
-		String num;
-		boolean requested;
+		String name = null;
+		String dept = null;
+		String num = null;
+		boolean requested = false;
 		
-		for(WishlistLinks w:wishlist) {
-			if(w.getSectionInfoId() == sectionIn.getId()) {
+		for(SectionInfo w:wishlist) {
+			if(w.getId() == sectionIn.getId()) {
 				requested = true;
 			}
 		}
@@ -492,30 +479,51 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		if(!taskInProgress)
 		{
 			taskInProgress = true;			
-			//sendHome();
+			sendHome();
 		}
 	}
-	//private void sendHome()
-	//{
-	//	SendHomeAction sha = new SendHomeAction();
-	//	SendHomeEvent she = new SendHomeEvent(sha);
-	//	eventBus.fireEvent(she);
-	//}
+	public void sendHome()
+	{
+		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
+		SendHomeEvent she = new SendHomeEvent(sha, parentPresenter.getView().getViewRootPanel());
+		eventBus.fireEvent(she);
+	}
 	public void generate() {
 		if(!taskInProgress) {
 			taskInProgress = true;
 			
-			List<String> selected = null;
+			ArrayList<CalendarInfo> calOut = new ArrayList<>();
 			
-			for(int i = 0; i < view.getCourseList().getItemCount(); i++) {
-				if(view.getCourseList().isItemSelected(i)) {
-					selected.add(view.getCourseList().getItemText(i));
+			for(SectionInfo s:scheduleInProgress) {
+				for(CalendarInfo c:calendars) {
+					if(c.getId() == s.getCalendarInfoId()) {
+						calOut.add(c);
+					}
 				}
 			}
 			
-		//	SendGenerateAction sga = new SendGenerateAction(selected, currentUser);
-		//	SendGenerateEvent sge = new SendGenerateEvent(sga);
-		//	eventBus.fireEvend(sge);
+			try {
+				for(CalendarInfo c1:calOut) {
+					for(CalendarInfo c2:calOut) {
+						if(calOut.indexOf(c1) != calOut.indexOf(c2)) {
+							if(c1.getYear() == c2.getYear()
+									&& c1.getSemester().contentEquals(c2.getSemester())
+									&& c1.getTerm() == c2.getTerm()
+									&& c1.getDays().contentEquals(c2.getDays())
+									&& (c1.getStartTime() < c2.getEndTime()
+											|| c1.getEndTime() > c2.getStartTime())) {
+								throw new ScheduleConflictException();
+							}
+						}
+					}
+					
+					SendGenerateAction act = new SendGenerateAction(instructor, scheduleInProgress, calOut);
+					SendGenerateEvent evt = new SendGenerateEvent(act, view.getViewRootPanel());
+					eventBus.fireEvent(evt);
+				}
+			}catch(ScheduleConflictException e) {
+				
+			}
 		}
 	}
 	
@@ -531,5 +539,11 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		calendars = rha.getCalendars();
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+	}
+	
+	@Override
+	public void onReceiveWishlistForUser(ReceiveWishlistForUserEvent evt) {
+		ReceiveWishlistForUserAction act = evt.getAction();
+		wishlist = act.getSections();
 	}
 }

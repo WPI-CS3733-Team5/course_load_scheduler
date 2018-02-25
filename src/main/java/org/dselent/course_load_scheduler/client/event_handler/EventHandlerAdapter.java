@@ -47,13 +47,16 @@ implements InvalidLoginEventHandler,
 			SendPopup2ApplyEventHandler,
 			SendPopup2CancelEventHandler,
 			SendPopup3ApplyEventHandler,
+			SendGenerateEventHandler,
+			SendWishlistForUserEventHandler,
 			ReceiveLoginEventHandler,
 			ReceiveNotificationEventHandler,
 			ReceiveHomeEventHandler,
 			ReceiveProfileEventHandler,
 			ReceiveCoursesEventHandler,
 			ReceiveAccountsEventHandler,
-			ReceiveSchedulesEventHandler
+			ReceiveSchedulesEventHandler,
+			ReceiveWishlistForUserEventHandler
 			
 
 			
@@ -160,6 +163,12 @@ implements InvalidLoginEventHandler,
 	public void onSendPopup3Apply(SendPopup3ApplyEvent evt) {}
 	
 	@Override
+	public void onSendGenerate(SendGenerateEvent evt) {}
+	
+	@Override
+	public void onSendWishlistForUser(SendWishlistForUserEvent evt) {}
+	
+	@Override
 	public void onReceiveLogin(ReceiveLoginEvent evt) {}
 	
 	@Override
@@ -177,4 +186,8 @@ implements InvalidLoginEventHandler,
 	@Override
 	public void onReceiveSchedules(ReceiveSchedulesEvent evt) {		
 	}
+	
+	@Override
+	public void onReceiveWishlistForUser(ReceiveWishlistForUserEvent evt) {}
+	
 }
