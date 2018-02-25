@@ -1,13 +1,12 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
-import org.dselent.course_load_scheduler.client.presenter.NotificationsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.WishlistPresenter;
-import org.dselent.course_load_scheduler.client.view.NotificationsView;
+import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
 import org.dselent.course_load_scheduler.client.view.WishlistView;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -16,14 +15,17 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ListBox;
 
 public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements WishlistView {
 
 	private static WishlistViewUiBinder uiBinder = GWT.create(WishlistViewUiBinder.class);
 	
-	interface WishlistViewUiBinder extends UiBinder<Widget, WishlistViewImpl> {
-	}
+	interface WishlistViewUiBinder extends UiBinder<Widget, WishlistViewImpl> {}
+	
+	private WishlistPresenterImpl parent;
+	
 	@UiField HTMLPanel root;
 	@UiField RadioButton sortDeptRadioButton;
 	@UiField RadioButton sortTermRadioButton;
@@ -41,6 +43,8 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 	@UiField Button viewCourseDetailsButton;
 	@UiField Button editWishlistButton;
 	@UiField Button requestNewScheduleButton;
+	
+	@UiField TextBox courseNumber;
 
 	public WishlistViewImpl() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -171,6 +175,8 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 		this.presenter = presenter;
 		
 	}
+	
+	//////////
 
 	@Override
 	public HasWidgets getViewRootPanel() {
@@ -194,10 +200,16 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void sortButtonClicked(ClickEvent evt) {
+		
+		presenter.sort(getSortTermRadioButton(), getCourseListBox(), getTermListBox(), courseNumber());
+		
+	}
 
 	@Override
 	public void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN) {
-		// TODO Auto-generated method stub
+		presenter.requestNewSchedule();
 		
 	}
 
@@ -213,6 +225,14 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 	public void setRoot(HTMLPanel root) {
 		this.root = root;
 	}
+
+	@Override
+	public void setParent(WishlistPresenterImpl wishlistPresenterImpl) {
+		this.parent = wishlistPresenterImpl;
+		
+	}
+	
+	////////
 	
 	
 }
