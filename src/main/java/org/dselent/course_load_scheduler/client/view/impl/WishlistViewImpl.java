@@ -206,9 +206,28 @@ public class WishlistViewImpl extends BaseViewImpl<WishlistPresenter> implements
 		presenter.sort(getSortTermRadioButton(), getCourseListBox(), getTermListBox(), courseNumber());
 		
 	}
+	
+	public void viewCourseDetailsButton(ClickEvent evt) {
+		
+		presenter.viewCourseDetails(getCourseListBox());
+		
+	}
+	
+	public void editWishlist() {
+		
+		presenter.editWishlist();
+		
+	}
+	
+	public void requestNewScheduleButton(ClickEvent evt) {
+		
+		presenter.requestNewSchedule();
+		
+	}
 
 	@Override
 	public void showRequestNewScheduleButton(String REQUEST_NEW_SCHEDULE_BUTOTN) {
+		
 		presenter.requestNewSchedule();
 		
 	}
