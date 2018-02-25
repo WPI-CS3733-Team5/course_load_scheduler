@@ -3,7 +3,6 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
-import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
@@ -11,7 +10,6 @@ import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
-import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendNotificationsEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
@@ -262,9 +260,6 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendLogout() {
-		this.parentPresenter.setActiveUserState(0);
-		SendLogoutAction sla = new SendLogoutAction(view.getViewRootPanel());
-		SendLogoutEvent sle = new SendLogoutEvent(sla, login.getView().getViewRootPanel());
-		eventBus.fireEvent(sle);
+		this.login.onReceiveLogout(view.getViewRootPanel());
 	}		
 }

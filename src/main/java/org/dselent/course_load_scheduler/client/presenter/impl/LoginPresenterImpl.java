@@ -5,14 +5,11 @@ import java.util.List;
 
 import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
 import org.dselent.course_load_scheduler.client.errorstring.InvalidLoginStrings;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveLoginEvent;
-import org.dselent.course_load_scheduler.client.event.ReceiveLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
-import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.ActiveUser;
@@ -182,10 +179,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 		view.showErrorMessages(ila.toString());
 	}
 	
-	@Override
-	public void onReceiveLogout(ReceiveLogoutEvent evt) {
-		HasWidgets container = evt.getContainer();
-		ReceiveLogoutAction rha = evt.getAction();
+	public void onReceiveLogout(HasWidgets container) {
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}

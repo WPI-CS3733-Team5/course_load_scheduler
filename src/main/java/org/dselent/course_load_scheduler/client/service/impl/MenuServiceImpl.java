@@ -4,7 +4,6 @@ import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
-import org.dselent.course_load_scheduler.client.action.SendLogoutAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
@@ -12,17 +11,14 @@ import org.dselent.course_load_scheduler.client.callback.SendAccountsCallback;
 import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
-import org.dselent.course_load_scheduler.client.callback.SendLogoutCallback;
 import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
-import org.dselent.course_load_scheduler.client.callback.SendSchedulesCoursesCallback;
-import org.dselent.course_load_scheduler.client.callback.SendSchedulesUsersCallback;
+import org.dselent.course_load_scheduler.client.callback.SendSchedulesCallback;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
-import org.dselent.course_load_scheduler.client.event.SendLogoutEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
@@ -33,9 +29,9 @@ import org.dselent.course_load_scheduler.client.translator.impl.LoginActionTrans
 import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
-import org.dselent.course_load_scheduler.client.translator.impl.SendLogoutActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
-import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesCouresesActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesActionTranslatorImpl;
+import org.dselent.course_load_scheduler.client.translator.impl.SendWishlistActionTranslatorImpl;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
@@ -83,10 +79,6 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		HandlerRegistration schedulesRegistration;
 		schedulesRegistration = eventBus.addHandler(SendSchedulesEvent.TYPE, this);
 		eventBusRegistration.put(SendSchedulesEvent.TYPE, schedulesRegistration);
-		
-		HandlerRegistration logoutRegistration;
-		logoutRegistration = eventBus.addHandler(SendLogoutEvent.TYPE, this);
-		eventBusRegistration.put(SendLogoutEvent.TYPE, logoutRegistration);
 	}
 	
 	@Override
@@ -147,22 +139,13 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	@Override
 	public void onSendSchedules(SendSchedulesEvent evt) {
 		SendSchedulesAction action = evt.getAction();
-		SendSchedulesCouresesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesCouresesActionTranslatorImpl();
+		SendSchedulesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesActionTranslatorImpl();
 		JSONObject json = schedulesActionTranslator.translateToJson(action);
 		
-		SendSchedulesCoursesCallback coursesCallback = new SendSchedulesCoursesCallback(eventBus, evt.getContainer());
+		SendSchedulesCallback schedulesCallback = new SendSchedulesCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_INSTRUCTOR_COURSE_SECTION_LAB_CALENDAR_SCHEDULE_INFO, coursesCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_USER_INSTRUCTOR_COURSE_SECTION_LAB_CALENDAR_SCHEDULE_INFO, schedulesCallback, json);
 
 		request.send();
 	}
-	
-	@Override
-	public void onSendLogout(SendLogoutEvent evt) {
-		SendLogoutAction action = evt.getAction();
-		SendLogoutActionTranslatorImpl logoutActionTranslator = new SendLogoutActionTranslatorImpl();
-		JSONObject json = logoutActionTranslator.translateToJson(action);
-		SendLogoutCallback logoutCallback = new SendLogoutCallback(eventBus, evt.getContainer());
-	}
-	
 }

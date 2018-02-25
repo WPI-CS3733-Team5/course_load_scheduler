@@ -26,7 +26,6 @@ implements InvalidLoginEventHandler,
 			SendCoursesEventHandler,
 			SendAccountsEventHandler,
 			SendSchedulesEventHandler,
-			SendLogoutEventHandler,
 			SendCreateAccountEventHandler,
 			SendEditAccountEventHandler,
 			SendRemoveAccountEventHandler,
@@ -54,9 +53,7 @@ implements InvalidLoginEventHandler,
 			ReceiveProfileEventHandler,
 			ReceiveCoursesEventHandler,
 			ReceiveAccountsEventHandler,
-			ReceiveSchedulesCoursesEventHandler,
-			ReceiveSchedulesUsersEventHandler,
-			ReceiveLogoutEventHandler
+			ReceiveSchedulesEventHandler
 			
 
 			
@@ -98,9 +95,6 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onSendSchedules(SendSchedulesEvent evt) {}
-	
-	@Override
-	public void onSendLogout(SendLogoutEvent evt) {}
 	
 	@Override
 	public void onSendCreateAccount(SendCreateAccountEvent evt) {}
@@ -179,12 +173,8 @@ implements InvalidLoginEventHandler,
 
 	@Override
 	public void onReceiveAccounts(ReceiveAccountsEvent evt) {}
-	
-	@Override
-	public void onReceiveSchedulesCourses(ReceiveSchedulesCoursesEvent evt) {}
-	
-	@Override
-	public void onReceiveSchedulesUsers(ReceiveSchedulesUsersEvent evt) {}
 
-	public void onReceiveLogout(ReceiveLogoutEvent evt) {}
+	@Override
+	public void onReceiveSchedules(ReceiveSchedulesEvent evt) {		
+	}
 }
