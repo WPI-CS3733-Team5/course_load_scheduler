@@ -148,7 +148,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	private void sendProfile() {
-		SendProfileAction spa = new SendProfileAction(view.getViewRootPanel());
+		SendProfileAction spa = new SendProfileAction(view.getViewRootPanel(), parentPresenter.getActiveUser().getId());
 		SendProfileEvent spe = new SendProfileEvent(spa, profile.getView().getViewRootPanel());
 		eventBus.fireEvent(spe);
 	}
