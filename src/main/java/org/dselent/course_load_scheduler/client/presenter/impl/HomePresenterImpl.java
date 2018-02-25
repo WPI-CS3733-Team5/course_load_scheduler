@@ -141,6 +141,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		}
 	}
 	
+	//filters schedule shown on screen based on selected term and username
 	private boolean goFilter(String termString, String username)
 	{
 		parentPresenter.showLoadScreen();
