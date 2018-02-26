@@ -62,6 +62,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 		this.profile.setMenuTabs(this);
 		this.notifications = notifications;
 		this.wishlist = wishlist;
+		this.wishlist.setMenuTabs(this);
 		this.courses = courses;
 		this.accounts = accounts;
 		this.schedules = schedules;

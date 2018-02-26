@@ -75,9 +75,6 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	@Override
 	public void go(HasWidgets container) {
-//		for(int i = 0; i < departments.size(); i++) {
-//			view.getRadioSortDepartment();
-//		}
 		
 		view.getRadioSortDepartment().setValue(true);
 		view.getRadioSortName().setValue(false);
