@@ -17,9 +17,7 @@ import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTr
 import org.dselent.course_load_scheduler.client.translator.impl.SendWishlistForUserActionTranslatorImpl;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.user.client.ui.HasWidgets;
 
 public class GeneratorServiceImpl extends BaseServiceImpl implements GeneratorService{
 	public GeneratorServiceImpl() {}
@@ -63,7 +61,7 @@ public class GeneratorServiceImpl extends BaseServiceImpl implements GeneratorSe
 		JSONObject json = generateActionTranslator.translateToJson(act);
 		SendGenerateCallback generateCallback = new SendGenerateCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GENERATE_SCHEDULE, generateCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.CREATE_SCHEDULE_SET_INSTRUCTOR, generateCallback, json);
 		request.send();
 	}
 	
@@ -74,7 +72,7 @@ public class GeneratorServiceImpl extends BaseServiceImpl implements GeneratorSe
 		JSONObject json = generateWishlistTranslator.translateToJson(act);
 		SendWishlistForUserCallback wishlistCallback = new SendWishlistForUserCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_WISHLIST_FOR_USER, wishlistCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_WISHLIST_SECTIONS_FOR_USER, wishlistCallback, json);
 		request.send();
 	}
 }

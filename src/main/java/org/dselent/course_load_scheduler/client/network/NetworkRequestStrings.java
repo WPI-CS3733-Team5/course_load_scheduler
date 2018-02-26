@@ -9,6 +9,8 @@ public final class NetworkRequestStrings
 	public static final String GET_ONE_USER_AND_INSTRUCTOR_INFO = "userInfo/GetOneUser";
 	public static final String GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO = "courses/getAllCourses";
 	public static final String GET_ALL_USER_INSTRUCTOR_COURSE_SECTION_LAB_CALENDAR_SCHEDULE_INFO = "userInfo/theBigOne";
+	public static final String GET_ALL_WISHLIST_SECTIONS_FOR_USER = "sectionInfo/getAllWishlistSectionGivenUser";
+	public static final String CREATE_SCHEDULE_SET_INSTRUCTOR = "scheduleInfo/createScheduleSetInstructor";
 	
 	private NetworkRequestStrings() {};
 }
