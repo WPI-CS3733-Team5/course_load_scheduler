@@ -57,7 +57,9 @@ implements InvalidLoginEventHandler,
 			ReceiveAccountsEventHandler,
 			ReceiveSchedulesEventHandler,
 			ReceiveWishlistForUserEventHandler,
-			ReceiveGenerateEventHandler
+			ReceiveGenerateEventHandler,
+			UpdateNotificationEventHandler,
+			SendAcceptScheduleNotificationEventHandler
 {
 	@Override
 	public void onInvalidLogin(InvalidLoginEvent evt) {}
@@ -182,13 +184,18 @@ implements InvalidLoginEventHandler,
 	public void onReceiveAccounts(ReceiveAccountsEvent evt) {}
 
 	@Override
-	public void onReceiveSchedules(ReceiveSchedulesEvent evt) {		
-	}
+	public void onReceiveSchedules(ReceiveSchedulesEvent evt) {}
 	
 	@Override
 	public void onReceiveWishlistForUser(ReceiveWishlistForUserEvent evt) {}
 	
 	@Override
 	public void onReceiveGenerate(ReceiveGenerateEvent evt) {}
+	
+	@Override
+	public void onUpdateNotification(UpdateNotificationEvent evt) {}
+	
+	@Override
+	public void onSendAcceptScheduleNotificationEvent(SendAcceptScheduleNotificationEvent evt) {}
 	
 }

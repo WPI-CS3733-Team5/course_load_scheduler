@@ -6,6 +6,7 @@ public class Notifications extends Model{
 	private String message;
 	private Integer fromUserInfoId;
 	private Integer toUserInfoId;
+	
 	public Integer getId() {
 		return id;
 	}
