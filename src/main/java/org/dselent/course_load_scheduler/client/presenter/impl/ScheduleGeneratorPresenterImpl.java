@@ -28,13 +28,11 @@ import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ScheduleGeneratorPresenter;
 import org.dselent.course_load_scheduler.client.view.ScheduleGeneratorView;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
 public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements ScheduleGeneratorPresenter{
-	private static final EventHandler SendGenerateEventHandler = null;
 	private IndexPresenter parentPresenter;
 	private ScheduleGeneratorView view;
 	private Integer termOne;
@@ -310,6 +308,9 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 			String num = null;
 			String name = null;
 			String sect = null;
+			
+			SectionInfo tempSect = null;
+			CalendarInfo tempCal = null;
 	
 			for(SectionInfo s:sections) {
 				for(CourseInfo c:courses) {
@@ -323,9 +324,23 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 				}
 				if(toAdd.equals(dept + num + sect) || toAdd.equals(dept + " " + num + " " + sect)
 						|| toAdd.equals(name + sect) || toAdd.equals(name + " " + sect)) {
-					scheduleInProgress.add(s);
-					refreshSchedule();
+					tempSect = s;
 				}
+			}
+			
+			//logic to exclude sections outside the given term and year range
+			for(CalendarInfo c:calendars) {
+				if(c.getId() == tempSect.getCalendarInfoId()) {
+					tempCal = c;
+				}
+			}
+			
+			if(tempCal.getYear() >= yearOne 
+					&& tempCal.getYear() <= yearTwo
+					&&tempCal.getTerm() >= termOne 
+					&& tempCal.getTerm() <= termTwo) {
+				scheduleInProgress.add(tempSect);
+				refreshSchedule();
 			}
 		}else {}
 	}

@@ -1,6 +1,7 @@
 package org.dselent.course_load_scheduler.client.view;
 
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
+import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 
 import com.google.gwt.user.client.ui.Button;
@@ -11,7 +12,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
 
-public interface HomeView {
+public interface HomeView extends BaseView<HomePresenter>{
 	
 	public Button getApply();
 	
