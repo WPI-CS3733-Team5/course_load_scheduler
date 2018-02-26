@@ -11,6 +11,7 @@ import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
+import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
@@ -30,6 +31,7 @@ import org.dselent.course_load_scheduler.client.utils.Pair;
 import org.dselent.course_load_scheduler.client.view.BaseView;
 import org.dselent.course_load_scheduler.client.view.WishlistView;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -57,6 +59,14 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		this.parentPresenter = parentPresenter;
 		view.setParent(this);
 
+	}
+	
+	@Override
+	public void bind()
+	{
+		HandlerRegistration receiveWishlist;
+		receiveWishlist = eventBus.addHandler(ReceiveWishlistEvent.TYPE,  this);
+		eventBusRegistration.put(ReceiveWishlistEvent.TYPE, receiveWishlist);
 	}
 
 	@Override
