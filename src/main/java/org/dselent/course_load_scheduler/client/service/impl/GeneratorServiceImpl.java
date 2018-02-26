@@ -61,7 +61,7 @@ public class GeneratorServiceImpl extends BaseServiceImpl implements GeneratorSe
 		JSONObject json = generateActionTranslator.translateToJson(act);
 		SendGenerateCallback generateCallback = new SendGenerateCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.CREATE_SCHEDULE_SET_INSTRUCTOR, generateCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.CREATE_SCHEDULE, generateCallback, json);
 		request.send();
 	}
 	
