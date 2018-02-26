@@ -3,6 +3,7 @@ package org.dselent.course_load_scheduler.client.service.impl;
 import org.dselent.course_load_scheduler.client.action.SendGenerateAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistForUserAction;
+import org.dselent.course_load_scheduler.client.callback.SendGenerateCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
 import org.dselent.course_load_scheduler.client.callback.SendWishlistForUserCallback;
 import org.dselent.course_load_scheduler.client.event.SendGenerateEvent;
@@ -11,6 +12,7 @@ import org.dselent.course_load_scheduler.client.event.SendWishlistForUserEvent;
 import org.dselent.course_load_scheduler.client.network.NetworkRequest;
 import org.dselent.course_load_scheduler.client.network.NetworkRequestStrings;
 import org.dselent.course_load_scheduler.client.service.GeneratorService;
+import org.dselent.course_load_scheduler.client.translator.impl.SendGenerateActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendWishlistForUserActionTranslatorImpl;
 

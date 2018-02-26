@@ -6,6 +6,7 @@ import org.dselent.course_load_scheduler.client.action.ReceiveWishlistForUserAct
 import org.dselent.course_load_scheduler.client.action.SendWishlistForUserAction;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveSectionsKeys;
+import org.dselent.course_load_scheduler.client.send.jsonkeys.SendLoginKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
 
@@ -14,9 +15,14 @@ import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.json.client.JSONArray;
 
 public class SendWishlistForUserActionTranslatorImpl implements ActionTranslator<SendWishlistForUserAction, ReceiveWishlistForUserAction>{
+	public SendWishlistForUserActionTranslatorImpl() {}
+	
 	@Override
-	public JSONObject translateToJson(SendWishlistForUserAction obj) {
+	public JSONObject translateToJson(SendWishlistForUserAction act) {
 		JSONObject jsonObject = new JSONObject();
+		
+		JSONHelper.putStringValue(jsonObject, JSONHelper.convertKeyName(SendLoginKeys.USER_NAME), act.getUser());
+		
 		return jsonObject;
 	}
 

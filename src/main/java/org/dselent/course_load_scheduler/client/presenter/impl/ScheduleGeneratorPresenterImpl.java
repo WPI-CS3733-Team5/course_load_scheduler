@@ -517,7 +517,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 						}
 					}
 					
-					SendGenerateAction act = new SendGenerateAction(instructor, scheduleInProgress, calOut);
+					SendGenerateAction act = new SendGenerateAction(instructor, scheduleInProgress);
 					SendGenerateEvent evt = new SendGenerateEvent(act, view.getViewRootPanel());
 					eventBus.fireEvent(evt);
 				}

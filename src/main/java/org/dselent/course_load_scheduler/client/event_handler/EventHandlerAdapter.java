@@ -56,9 +56,8 @@ implements InvalidLoginEventHandler,
 			ReceiveCoursesEventHandler,
 			ReceiveAccountsEventHandler,
 			ReceiveSchedulesEventHandler,
-			ReceiveWishlistForUserEventHandler
-			
-
+			ReceiveWishlistForUserEventHandler,
+			ReceiveGenerateEventHandler
 			
 {
 	@Override
@@ -189,5 +188,8 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onReceiveWishlistForUser(ReceiveWishlistForUserEvent evt) {}
+	
+	@Override
+	public void onReceiveGenerate(ReceiveGenerateEvent evt) {}
 	
 }
