@@ -1,6 +1,8 @@
 package org.dselent.course_load_scheduler.client;
 
 import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.presenter.impl.AccountsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.CoursesPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ExamplePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.MenuTabsPresenter;
@@ -8,7 +10,12 @@ import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImp
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
 import org.dselent.course_load_scheduler.client.service.impl.UserServiceImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.MenuTabsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.TabTestPresenterImpl;
+import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
+import org.dselent.course_load_scheduler.client.view.HomeView;
 import org.dselent.course_load_scheduler.client.view.IndexView;
 import org.dselent.course_load_scheduler.client.view.examples.ExamplesPanel;
 import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
@@ -65,14 +72,35 @@ public class CourseLoadScheduler implements EntryPoint
 		
 		IndexPresenterImpl indexPresenter = injector.getIndexPresenter(); // on-demand injection
 		indexPresenter.init();
-		IndexView indexView = indexPresenter.getView();		
-		
-		LoginPresenterImpl loginPresenter = injector.getLoginPresenter();
-		loginPresenter.init();
-		loginPresenter.go(indexView.getViewRootPanel());
+		IndexView indexView = indexPresenter.getView();	
 		
 		HomePresenterImpl homePresenter = injector.getHomePresenterImpl();
 		homePresenter.init();
+		
+		CoursesPresenterImpl coursePresenter = injector.getCoursesPresenterImpl();
+		coursePresenter.init();
+		
+		WishlistPresenterImpl wishlistPresenter = injector.getWishlistPresenterImpl();
+		wishlistPresenter.init();
+		
+		ScheduleGeneratorPresenterImpl schedulerGeneratorPresenter = injector.getScheduleGeneratorPresenterImpl();
+		schedulerGeneratorPresenter.init();
+		
+		AccountsPresenterImpl accountsPresenter = injector.getAccountsPresenterImpl();
+		accountsPresenter.init();
+		
+		MenuTabsPresenterImpl menuTabs = injector.getMenuTabsPresenterImpl();
+		menuTabs.init();
+		
+		NotificationsPresenterImpl notificationPresenter = injector.getNotificationsPresenterImpl();
+		notificationPresenter.init();
+		
+		ProfilePresenterImpl profilePresenter = injector.getProfilePresenterImpl();
+		profilePresenter.init();
+				
+		LoginPresenterImpl loginPresenter = injector.getLoginPresenter();
+		loginPresenter.init();
+		loginPresenter.go(indexView.getViewRootPanel());
 		
 		//TabTestPresenterImpl tabTestPresenter = injector.getTestTabPresenter();
 		//tabTestPresenter.init();
