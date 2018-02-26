@@ -7,6 +7,7 @@ import org.dselent.course_load_scheduler.client.action.SendNotificationsAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
+import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
@@ -18,6 +19,7 @@ import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.MenuTabsPresenter;
 import org.dselent.course_load_scheduler.client.view.MenuTabs;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
@@ -85,11 +87,7 @@ public class MenuTabsPresenterImpl extends BasePresenterImpl implements MenuTabs
 	}
 	
 	@Override
-	public void bind()
-	{
-
-		
-	}
+	public void bind(){}
 
 	@Override
 	public void go(HasWidgets container) {
