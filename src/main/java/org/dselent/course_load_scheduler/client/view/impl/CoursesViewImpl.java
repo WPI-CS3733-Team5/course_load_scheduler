@@ -4,20 +4,20 @@ import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
 import org.dselent.course_load_scheduler.client.view.CoursesView;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.MenuItem;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.Widget;
 
 public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements CoursesView {
 	
@@ -29,24 +29,11 @@ public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements 
 	@UiField HTMLPanel mainPanel;
 	@UiField Label sortByLabel;
 	@UiField RadioButton departmentRadioButton;
-	@UiField MenuBar departmentMenuBar;
-	@UiField MenuItem departmentMenuItem;
-	@UiField MenuItem CSMenuItem;
-	@UiField MenuItem ECEMenuItem;
-	@UiField MenuItem IMGDMenuItem;
-	@UiField MenuItem RBEMenuItem;
-	@UiField MenuItem MAMenuItem;
+	@UiField ListBox departmentDropDown;
 	@UiField RadioButton termRadioButton;
-	@UiField MenuBar termMenuBar;
-	@UiField MenuItem termMenuItem;
-	@UiField MenuItem termA;
-	@UiField MenuItem termB;
-	@UiField MenuItem termC;
-	@UiField MenuItem termD;
-	@UiField MenuItem termE1;
-	@UiField MenuItem termE2;
+	@UiField ListBox termDropDown;
 	@UiField RadioButton courseNumberRadioButton;
-	@UiField Label courseNumberLabel;
+	@UiField TextBox courseNumberTextBox;
 	@UiField Button sortButton;
 	@UiField ListBox coursesListBox;
 	@UiField Label wishlistLabel;
@@ -113,76 +100,24 @@ public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements 
 		return departmentRadioButton;
 	}
 
-	public MenuBar getDepartmentMenuBar() {
-		return departmentMenuBar;
-	}
-
-	public MenuItem getDepartmentMenuItem() {
-		return departmentMenuItem;
-	}
-
-	public MenuItem getCSMenuItem() {
-		return CSMenuItem;
-	}
-
-	public MenuItem getECEMenuItem() {
-		return ECEMenuItem;
-	}
-
-	public MenuItem getIMGDMenuItem() {
-		return IMGDMenuItem;
-	}
-
-	public MenuItem getRBEMenuItem() {
-		return RBEMenuItem;
-	}
-
-	public MenuItem getMAMenuItem() {
-		return MAMenuItem;
+	public ListBox getDepartmentDropDown() {
+		return departmentDropDown;
 	}
 
 	public RadioButton getTermRadioButton() {
 		return termRadioButton;
 	}
 
-	public MenuBar getTermMenuBar() {
-		return termMenuBar;
-	}
-
-	public MenuItem getTermMenuItem() {
-		return termMenuItem;
-	}
-
-	public MenuItem getTermA() {
-		return termA;
-	}
-
-	public MenuItem getTermB() {
-		return termB;
-	}
-
-	public MenuItem getTermC() {
-		return termC;
-	}
-
-	public MenuItem getTermD() {
-		return termD;
-	}
-
-	public MenuItem getTermE1() {
-		return termE1;
-	}
-
-	public MenuItem getTermE2() {
-		return termE2;
+	public ListBox getTermDropDown() {
+		return termDropDown;
 	}
 
 	public RadioButton getCourseNumberRadioButton() {
 		return courseNumberRadioButton;
 	}
 
-	public Label getCourseNumberLabel() {
-		return courseNumberLabel;
+	public TextBox getCourseNumberTextBox() {
+		return courseNumberTextBox;
 	}
 
 	public Button getSortButton() {
@@ -293,69 +228,19 @@ public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements 
 		this.departmentRadioButton = departmentRadioButton;
 	}
 
-	public void setDepartmentMenuBar(MenuBar departmentMenuBar) {
-		this.departmentMenuBar = departmentMenuBar;
+	public void setDepartmentDropDown(ListBox departmentDropDown) {
+		this.departmentDropDown = departmentDropDown;
 	}
 
-	public void setDepartmentMenuItem(MenuItem departmentMenuItem) {
-		this.departmentMenuItem = departmentMenuItem;
-	}
-
-	public void setCSMenuItem(MenuItem cSMenuItem) {
-		CSMenuItem = cSMenuItem;
-	}
-
-	public void setECEMenuItem(MenuItem eCEMenuItem) {
-		ECEMenuItem = eCEMenuItem;
-	}
-
-	public void setIMGDMenuItem(MenuItem iMGDMenuItem) {
-		IMGDMenuItem = iMGDMenuItem;
-	}
-
-	public void setRBEMenuItem(MenuItem rBEMenuItem) {
-		RBEMenuItem = rBEMenuItem;
-	}
-
-	public void setMAMenuItem(MenuItem mAMenuItem) {
-		MAMenuItem = mAMenuItem;
-	}
 
 	public void setTermRadioButton(RadioButton termRadioButton) {
 		this.termRadioButton = termRadioButton;
 	}
 
-	public void setTermMenuBar(MenuBar termMenuBar) {
-		this.termMenuBar = termMenuBar;
+	public void setTermDropDown(ListBox termDropDown) {
+		this.termDropDown = termDropDown;
 	}
 
-	public void setTermMenuItem(MenuItem termMenuItem) {
-		this.termMenuItem = termMenuItem;
-	}
-
-	public void setTermA(MenuItem termA) {
-		this.termA = termA;
-	}
-
-	public void setTermB(MenuItem termB) {
-		this.termB = termB;
-	}
-
-	public void setTermC(MenuItem termC) {
-		this.termC = termC;
-	}
-
-	public void setTermD(MenuItem termD) {
-		this.termD = termD;
-	}
-
-	public void setTermE1(MenuItem termE1) {
-		this.termE1 = termE1;
-	}
-
-	public void setTermE2(MenuItem termE2) {
-		this.termE2 = termE2;
-	}
 
 	public void setCourseNumberRadioButton(RadioButton courseNumberRadioButton) {
 		this.courseNumberRadioButton = courseNumberRadioButton;
@@ -684,6 +569,92 @@ public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements 
 	public void setPopupPanel3(PopupPanel popupPanel3) {
 		
 		this.popupPanel3 = popupPanel3;
+	}
+	
+	
+	
+	@UiHandler("sortButton")
+	void onSortClicked(ClickEvent evt)
+	{
+		presenter.requestSortCourses(departmentDropDown, termDropDown, courseNumberTextBox);
+	}
+	
+	@UiHandler("createCourseButton")
+	void onCreateCourseClicked(ClickEvent evt)
+	{
+		presenter.requestCreateCourse(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("removeSelectedFromWishlistButton")
+	void onRemoveSelectedFromWishlistClicked(ClickEvent evt)
+	{
+		presenter.requestRemoveSelectedFromWishlist(wishlistListbox);
+	}
+	
+	@UiHandler("viewFullWishlistButton")
+	void onViewFullWishlistClicked(ClickEvent evt)
+	{
+		presenter.requestViewFullWishlist(wishlistListbox);
+	}
+	
+	@UiHandler("addToWishlistButton")
+	void onAddToWishlistClicked(ClickEvent evt)
+	{
+		presenter.requestAddToWishlist(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("editButton")
+	void onEditClicked(ClickEvent evt)
+	{
+		presenter.requestSendEditCourses(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("applyChangesButton")
+	void onApplyChangesClicked(ClickEvent evt)
+	{
+		presenter.requestApplyChanges(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("cancelChangesButton")
+	void onCancelChangesClicked(ClickEvent evt)
+	{
+		presenter.requestCancelChanges(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("removeCourseButton")
+	void onRemoveCourseClicked(ClickEvent evt)
+	{
+		presenter.requestRemoveCourse(departmentTextBox, courseNumberSideTextBox, courseSectionTextBox, sectionTypeTextBox, termTextBox, meetingTimesTextBox, locationTextBox);
+	}
+	
+	@UiHandler("popup1ApplyButton")
+	void onPopup1ApplyClicked(ClickEvent evt)
+	{
+		presenter.requestPopup1Apply(popup1LectureRadio, popup1LabRadio, popup1SpecialRadio);
+	}
+	
+	@UiHandler("popup1CancelButton")
+	void onPopup1CancelClicked(ClickEvent evt)
+	{
+		presenter.requestPopup1Cancel();
+	}
+	
+	@UiHandler("popup2ApplyButton")
+	void onPopup2ApplyClicked(ClickEvent evt)
+	{
+		presenter.requestPopup2Apply(popup2SundayCheckbox, popup2MondayCheckbox, popup2TuesdayCheckbox, popup2WednesdayCheckbox, popup2ThursdayCheckbox, popup2FridayCheckbox, popup2SaturdayCheckbox, popup2StartTimeTextBox, popup2EndTimeTextBox);
+	}
+	
+	@UiHandler("popup2CancelButton")
+	void onPopup2CancelClicked(ClickEvent evt)
+	{
+		presenter.requestPopup2Cancel();
+	}
+	
+	@UiHandler("popup3ApplyButton")
+	void onPopup3ApplyClicked(ClickEvent evt)
+	{
+		presenter.requestPopup3Apply(popup3YesRadio, popup3NoRadio);
 	}
 
 }

@@ -45,19 +45,20 @@ import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
+import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
+import org.dselent.course_load_scheduler.client.utils.Quintuple;
 import org.dselent.course_load_scheduler.client.view.CoursesView;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -83,10 +84,14 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	private boolean requestPopup2ApplyInProgress;
 	private boolean requestPopup2CancelInProgress;
 	private boolean requestPopup3ApplyInProgress;
+	private boolean populateCoursesInProgress;
+	private boolean populateWishlistInProgress;
 	private ArrayList<CourseInfo> courseList;
 	private ArrayList<SectionInfo> sectionList;
 	private ArrayList<CalendarInfo> calendarList;
 	private ArrayList<LabInfo> labList;
+	private ArrayList<InstructorInfo> instructorInfoList;
+	private ArrayList<UserInfo> userInfoList;
 
 	@Inject
 	public CoursesPresenterImpl(IndexPresenter parentPresenter, CoursesView view)
@@ -94,6 +99,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		this.parentPresenter = parentPresenter;
 		this.view = view;
 		view.setPresenter(this);
+		
+		
 	}
 	
 	
@@ -232,23 +239,472 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	
 	@Override
 	public void go(HasWidgets container) {
+		
+		view.getDepartmentRadioButton().setValue(true);
+		view.getTermRadioButton().setValue(false);
+		view.getCourseNumberRadioButton().setValue(false);
+		
+		clearCoursesTextBoxes();
+		
+		view.getTermDropDown().addItem("A");
+		view.getTermDropDown().addItem("B");
+		view.getTermDropDown().addItem("C");
+		view.getTermDropDown().addItem("D");
+		view.getTermDropDown().addItem("E1");
+		view.getTermDropDown().addItem("E2");
+		
+		view.getDepartmentDropDown().addItem("CS");
+		view.getDepartmentDropDown().addItem("IMGD");
+		view.getDepartmentDropDown().addItem("ECE");
+		view.getDepartmentDropDown().addItem("RBE");
+		view.getDepartmentDropDown().addItem("MA");
+		
+		view.getCourseNumberTextBox().setText("Course Number");
+		
+		
+		coursesFilter(view.getDepartmentRadioButton().getValue(), view.getTermRadioButton().getValue(), view.getCourseNumberRadioButton().getValue());
+		
 		container.clear();
 		container.add(view.getWidgetContainer());
 		
 		if(parentPresenter.getActiveUser().getUserRole() == 1) {
-			view.getEditButton().setVisible(false);
-			view.getApplyChangesButton().setVisible(false);
-			view.getRemoveCourseButton().setVisible(false);
-			view.getCreateCourseButton().setVisible(false);
-			//view.getSectionTypeTextBox().setVisible(false);
-			//view.getMeetingTimesTextBox().setVisible(false);
+			editButtons(false);
+		}
+	}
+	
+	private void editButtons(Boolean editing) {
+		
+		view.getEditButton().setEnabled(!editing);
+		view.getApplyChangesButton().setEnabled(editing);
+		view.getCancelChangesButton().setEnabled(editing);
+		view.getRemoveCourseButton().setEnabled(editing);
+		view.getMeetingTimesTextBox().setEnabled(editing);
+		view.getSectionTypeTextBox().setEnabled(editing);
+		
+	}
+	
+	private void clearCoursesTextBoxes() {
+		view.getDepartmentTextBox().setText("");
+		view.getCourseNumberSideTextBox().setText("");
+		view.getCourseSectionTextBox().setText("");
+		view.getSectionTypeTextBox().setText("");
+		view.getTermTextBox().setText("");
+		view.getMeetingTimesTextBox().setText("");
+		view.getLocationTextBox().setText("");
+
+	}
+	
+	
+	private void coursesFilter(Boolean departmentsRadioButton, Boolean termRadioButton, Boolean courseNumberRadioButton) {
+		parentPresenter.showLoadScreen();
+		if(departmentsRadioButton) {
+			filterByDepartment();
+		}
+		else if(termRadioButton) {
+			filterByTerm();
+		}
+		else {
+			filterByCourseNumber();
+		}
+		parentPresenter.hideLoadScreen();
+	}
+	
+	private void filterByDepartment() {
+		ArrayList<String> departments = new ArrayList<>();
+		
+		for(int i = 0; i < instructorInfoList.size(); i++) {
+			boolean onList = false;
+			for(int b = 0; b < departments.size(); b++) {
+				if(instructorInfoList.get(i).getDepartment().equals(departments.get(b))){
+					onList = true;
+				}
+			}
+			if(!onList) {
+				departments.add(instructorInfoList.get(i).getDepartment());
+			}
+		}
+		
+		java.util.Collections.sort(departments);
+		
+		ArrayList<Integer> sections = new ArrayList<>();
+		
+		for(int i = 0; i < sectionList.size(); i++) {
+			boolean onList = false;
+			for(int b = 0; b < sections.size(); b++) {
+				if(sectionList.get(i).getSectionNumber().equals(sections.get(b))){
+					onList = true;
+				}
+			}
+			if(!onList) {
+				sections.add(sectionList.get(i).getSectionNumber());
+			}
+		}
+	
+		java.util.Collections.sort(sections);
+				
+		ArrayList<CourseInfo> alphaCourseList = alphabatizeCourses(courseList);
+		ArrayList<UserInfo> alphaUserList = alphabatizeUsers(userInfoList);
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> quintupleList = new ArrayList<>();
+
+		for(int i = 0; i < alphaCourseList.size(); i++) {
+			Boolean hasCourse = false;
+			for(int a = 0; a < alphaUserList.size(); a++) {
+				for(int b = 0; b < instructorInfoList.size(); b++) {
+					if(instructorInfoList.get(b).getUserInfoId() == alphaUserList.get(i).getId()) {
+						Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp = new Quintuple(instructorInfoList.get(b), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+						quintupleList.add(temp);
+						hasCourse = true;
+						break;
+					}
+				}
+				if(!hasCourse) {
+					Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp2 = new Quintuple(new InstructorInfo(), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+					quintupleList.add(temp2);
+				}
+			}
+			
+			hasCourse = false;
+		}
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> sortedQuintuple = new ArrayList<>();
+				
+		for(int i = 0; i < departments.size(); i++) {
+			for(int b = 0; i < quintupleList.size(); b++) {
+				if(departments.get(i).equals(quintupleList.get(b).getValue1().getDepartment())) {
+					sortedQuintuple.add(quintupleList.get(b));
+				}
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			if(quintupleList.get(i).getValue1().getDepartment().isEmpty()) {
+				sortedQuintuple.add(quintupleList.get(i));
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			view.getCoursesListBox().addItem(quintupleList.get(i).getValue3().getDepartment()
+					+" "
+					+ quintupleList.get(i).getValue3().getCourseNumber()
+					+ " --- "
+					+ quintupleList.get(i).getValue4().getSectionNumber()
+					+ " "
+					+ quintupleList.get(i).getValue5().getDays()
+					+ " "
+					+ quintupleList.get(i).getValue5().getStartTime()
+					+ " "
+					+ quintupleList.get(i).getValue5().getEndTime()
+					+ " "
+					+ quintupleList.get(i).getValue2().getLastName()
+					+ " "
+					+ quintupleList.get(i).getValue2().getFirstName());
 		}
 	}
 	
 	
+	// Filter by Term
+	
+	private void filterByTerm() {
+		ArrayList<Integer> terms = new ArrayList<>();
+		
+		for(int i = 0; i < calendarList.size(); i++) {
+			boolean onList = false;
+			for(int b = 0; b < terms.size(); b++) {
+				if(calendarList.get(i).getTerm().equals(terms.get(b))){
+					onList = true;
+				}
+			}
+			if(!onList) {
+				terms.add(calendarList.get(i).getTerm());
+			}
+		}
+		
+		java.util.Collections.sort(terms);
+		
+		ArrayList<Integer> sections = new ArrayList<>();
+		
+			for(int i = 0; i < sectionList.size(); i++) {
+				boolean onList = false;
+				for(int b = 0; b < sections.size(); b++) {
+					if(sectionList.get(i).getSectionNumber().equals(sections.get(b))){
+						onList = true;
+					}
+				}
+				if(!onList) {
+					sections.add(sectionList.get(i).getSectionNumber());
+				}
+			}
+		
+		java.util.Collections.sort(sections);
+						
+		ArrayList<CourseInfo> alphaCourseList = alphabatizeCourses(courseList);
+		ArrayList<UserInfo> alphaUserList = alphabatizeUsers(userInfoList);
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> quintupleList = new ArrayList<>();
+
+		for(int i = 0; i < alphaCourseList.size(); i++) {
+			Boolean hasCourse = false;
+			for(int a = 0; a < alphaUserList.size(); a++) {
+				for(int b = 0; b < instructorInfoList.size(); b++) {
+					if(instructorInfoList.get(b).getUserInfoId() == alphaUserList.get(i).getId()) {
+						Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp = new Quintuple(instructorInfoList.get(b), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+						quintupleList.add(temp);
+						hasCourse = true;
+						break;
+					}
+				}
+				if(!hasCourse) {
+					Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp2 = new Quintuple(new InstructorInfo(), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+					quintupleList.add(temp2);
+				}
+			}
+			
+			hasCourse = false;
+		}
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> sortedQuintuple = new ArrayList<>();
+				
+		for(int i = 0; i < terms.size(); i++) {
+			for(int b = 0; i < quintupleList.size(); b++) {
+				if(terms.get(i).equals(quintupleList.get(b).getValue5().getTerm())) {
+					sortedQuintuple.add(quintupleList.get(b));
+				}
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			if(quintupleList.get(i).getValue5().getTerm().toString().isEmpty()) {
+				sortedQuintuple.add(quintupleList.get(i));
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			view.getCoursesListBox().addItem(quintupleList.get(i).getValue3().getDepartment()
+					+" "
+					+ quintupleList.get(i).getValue3().getCourseNumber()
+					+ " --- "
+					+ quintupleList.get(i).getValue4().getSectionNumber()
+					+ " "
+					+ quintupleList.get(i).getValue5().getDays()
+					+ " "
+					+ quintupleList.get(i).getValue5().getStartTime()
+					+ " "
+					+ quintupleList.get(i).getValue5().getEndTime()
+					+ " "
+					+ quintupleList.get(i).getValue2().getLastName()
+					+ " "
+					+ quintupleList.get(i).getValue2().getFirstName());
+		}
+	}
+	
+	
+	
+	
+	// Filter By CourseNumber
+	
+	private void filterByCourseNumber() {
+		ArrayList<Integer> courseNumbers = new ArrayList<>();
+		
+		for(int i = 0; i < courseList.size(); i++) {
+			boolean onList = false;
+			for(int b = 0; b < courseNumbers.size(); b++) {
+				if(courseList.get(i).getCourseNumber().equals(courseNumbers.get(b))){
+					onList = true;
+				}
+			}
+			if(!onList) {
+				courseNumbers.add(courseList.get(i).getCourseNumber());
+			}
+		}
+		
+		java.util.Collections.sort(courseNumbers);
+						
+		ArrayList<CourseInfo> alphaCourseList = alphabatizeCourses(courseList);
+		ArrayList<UserInfo> alphaUserList = alphabatizeUsers(userInfoList);
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> quintupleList = new ArrayList<>();
+
+		for(int i = 0; i < alphaCourseList.size(); i++) {
+			Boolean hasCourse = false;
+			for(int a = 0; a < alphaUserList.size(); a++) {
+				for(int b = 0; b < instructorInfoList.size(); b++) {
+					if(instructorInfoList.get(b).getUserInfoId() == alphaUserList.get(i).getId()) {
+						Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp = new Quintuple(instructorInfoList.get(b), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+						quintupleList.add(temp);
+						hasCourse = true;
+						break;
+					}
+				}
+				if(!hasCourse) {
+					Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo> temp2 = new Quintuple(new InstructorInfo(), alphaUserList.get(a), alphaCourseList.get(i), sectionList, calendarList);
+					quintupleList.add(temp2);
+				}
+			}
+			
+			hasCourse = false;
+		}
+		
+		ArrayList<Quintuple<InstructorInfo, UserInfo, CourseInfo, SectionInfo, CalendarInfo>> sortedQuintuple = new ArrayList<>();
+				
+		for(int i = 0; i < courseNumbers.size(); i++) {
+			for(int b = 0; i < quintupleList.size(); b++) {
+				if(courseNumbers.get(i).equals(quintupleList.get(b).getValue3().getCourseNumber())) {
+					sortedQuintuple.add(quintupleList.get(b));
+				}
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			if(quintupleList.get(i).getValue1().getDepartment().isEmpty()) {
+				sortedQuintuple.add(quintupleList.get(i));
+			}
+		}
+		
+		for(int i = 0; i < quintupleList.size(); i++) {
+			view.getCoursesListBox().addItem(quintupleList.get(i).getValue3().getDepartment()
+					+" "
+					+ quintupleList.get(i).getValue3().getCourseNumber()
+					+ " --- "
+					+ quintupleList.get(i).getValue4().getSectionNumber()
+					+ " "
+					+ quintupleList.get(i).getValue5().getDays()
+					+ " "
+					+ quintupleList.get(i).getValue5().getStartTime()
+					+ " "
+					+ quintupleList.get(i).getValue5().getEndTime()
+					+ " "
+					+ quintupleList.get(i).getValue2().getLastName()
+					+ " "
+					+ quintupleList.get(i).getValue2().getFirstName());
+		}
+	}
+	
+	//End of logic for Sorting the CoursesListBox
+	
+	
 	//
 	@Override
-	public void requestSortCourses(MenuBar departmentMenuBar, MenuBar termMenuBar, Label courseNumberLabel) {
+	public void populateCoursesViewer() {
+		if(!populateCoursesInProgress) {
+			populateCoursesInProgress = true;
+			view.getSortButton().setEnabled(false);
+			populateViewer(view.getCoursesListBox().getValue(view.getCoursesListBox().getSelectedIndex()));
+			view.getSortButton().setEnabled(true);
+			populateCoursesInProgress = false;
+		}
+	}
+	
+	//Logic to populate the courses textBoxes
+	private void populateViewer(String parsableString) {
+		String department = "";
+		
+		for(int i = 0; i < parsableString.length(); i++) {
+			if(parsableString.charAt(i) != ' ') {
+				department = department + parsableString.charAt(i);
+			} else {
+				break;
+			}
+		}
+		
+		CourseInfo course = new CourseInfo();
+		SectionInfo section = new SectionInfo();
+		CalendarInfo calendar = new CalendarInfo();
+		
+		for(int i = 0; i < courseList.size(); i++) {
+			if(courseList.get(i).getDepartment().equals(department) && (courseList.get(i).getCourseNumber().toString().equals(view.getCourseNumberSideTextBox().getSelectedText()))) {
+				course = courseList.get(i);
+				break;
+			}
+		}
+		
+		for(int i = 0; i < sectionList.size(); i++) {
+			if((sectionList.get(i).getSectionNumber().equals(termToInt(view.getCourseSectionTextBox().getSelectedText()))) && (sectionList.get(i).getSectionType().equals(view.getSectionTypeTextBox().getSelectedText())) && (sectionList.get(i).getCourseInfoId().equals(course.getId()))) {
+				section = sectionList.get(i);
+				break;
+			}
+		}
+		
+		for (int i = 0; i < calendarList.size(); i++) {
+			if(calendarList.get(i).getId().equals(section.getId())) {
+				calendar = calendarList.get(i);
+				break;
+			}
+		}
+		
+		
+		view.getDepartmentTextBox().setText(course.getDepartment());
+		view.getCourseNumberSideTextBox().setText(course.getCourseNumber().toString());
+		view.getCourseSectionTextBox().setText(section.getSectionNumber().toString());
+		view.getSectionTypeTextBox().setText(section.getSectionType());
+		view.getTermTextBox().setText(termToString(calendar.getTerm()));
+		view.getMeetingTimesTextBox().setText(meetingTimes(calendar.getDays(), calendar.getStartTime(), calendar.getEndTime()));
+		view.getLocationTextBox().setText(section.getLocation());
+	}
+
+	//get Meeting Times string of "Days" " " "start" "-" "end")
+	private String meetingTimes(String days, Integer startTime, Integer endTime) {
+		
+		String meetingTimes = "";
+		
+		meetingTimes = meetingTimes + days;
+		meetingTimes = meetingTimes + " ";
+		meetingTimes = meetingTimes + startTime.toString();
+		meetingTimes = meetingTimes + "-";
+		meetingTimes = meetingTimes + endTime.toString();
+		
+		return meetingTimes;
+		
+	}
+	
+	
+	//converting term to String
+	private String termToString (Integer termInt) {
+		String term = "ERROR";
+
+		switch(termInt) {
+		case 1:
+			term = "A";
+			break;
+		case 2:
+			term = "B";
+			break;
+		case 3:
+			term = "C";
+			break;
+		case 4: 
+			term = "D";
+			break;
+		case 5:
+			term = "E1";
+			break;
+		case 6:
+			term = "E2";
+			break;
+		}
+		
+		return term;
+	}
+	
+	//turn the term string into an int. 
+		private int termToInt(String termString) {
+			
+			int term = 0;
+			
+			if(termString.equals("A")) term = 1;
+			if(termString.equals("B")) term = 2;
+			if(termString.equals("C")) term = 3;
+			if(termString.equals("D")) term = 4;
+			if(termString.equals("E1")) term = 5;
+			if(termString.equals("E2")) term = 6;
+			
+			return term;
+		}
+	
+	
+	//
+	@Override
+	public void requestSortCourses(ListBox departmentMenuBar, ListBox termMenuBar, TextBox courseNumberTextBox) {
 		if(!requestSortCoursesInProgress) {
 			
 			requestSortCoursesInProgress = true;
@@ -256,7 +712,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 			
 			String department = departmentMenuBar.getElement().getInnerText();
 			String term = termMenuBar.getElement().getInnerText();
-			String courseNumber = courseNumberLabel.toString();
+			String courseNumber = courseNumberTextBox.toString();
 			
 			sendSortCourses(department, courseNumber, term);
 		}
@@ -307,7 +763,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestEditCoursesInProgress) {
 			
 			requestEditCoursesInProgress = true;
-			view.getEditButton().setEnabled(false);
+			editButtons(true);
 			
 			String department = departmentTextBox.getText();
 			String courseNumber = courseNumberTextBox.getText();
@@ -335,7 +791,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestApplyChangesInProgress) {
 			
 			requestApplyChangesInProgress = true;
-			view.getApplyChangesButton().setEnabled(false);
+			editButtons(false);
 			
 			String department = departmentTextBox.getText();
 			String courseNumber = courseNumberTextBox.getText();
@@ -363,7 +819,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestCancelChangesInProgress) {
 			
 			requestCancelChangesInProgress = true;
-			view.getCancelChangesButton().setEnabled(false);
+			editButtons(false);
 			
 			String department = departmentTextBox.getText();
 			String courseNumber = courseNumberTextBox.getText();
@@ -391,7 +847,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestRemoveCourseInProgress) {
 			
 			requestRemoveCourseInProgress = true;
-			view.getRemoveCourseButton().setEnabled(false);
+			editButtons(false);
 			
 			String department = departmentTextBox.getText();
 			String courseNumber = courseNumberTextBox.getText();
@@ -499,7 +955,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestSectionTypeInProgress) {
 			
 			requestSectionTypeInProgress = true;
-			view.getSectionTypeTextBox().setEnabled(false);//TODO
+			editButtons(false);
 			
 			String sectionType = sectionTypeTextBox.getText();
 			
@@ -513,6 +969,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		SendSectionTypeAction ssta = new SendSectionTypeAction(sectionType);
 		SendSectionTypeEvent sste = new SendSectionTypeEvent(ssta);
 		eventBus.fireEvent(sste);	
+		showPopupPanel1();
 		
 	}
 	
@@ -521,7 +978,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestMeetingTimesInProgress) {
 			
 			requestMeetingTimesInProgress = true;
-			view.getMeetingTimesTextBox().setEnabled(false);//TODO
+			editButtons(false);
 			
 			String meetingTimes = meetingTimesTextBox.getText();
 			
@@ -535,6 +992,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		SendMeetingTimesAction smta = new SendMeetingTimesAction(meetingTimes);
 		SendMeetingTimesEvent smte = new SendMeetingTimesEvent(smta);
 		eventBus.fireEvent(smte);	
+		showPopupPanel2();
 		
 	}
 	
@@ -566,7 +1024,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 		SendPopup1ApplyAction spaa = new SendPopup1ApplyAction(sectionType);
 		SendPopup1ApplyEvent spae = new SendPopup1ApplyEvent(spaa);
-		eventBus.fireEvent(spae);	
+		eventBus.fireEvent(spae);
+		hidePopupPanel1();
 		
 	}
 	
@@ -586,7 +1045,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 		SendPopup1CancelAction spaa = new SendPopup1CancelAction();
 		SendPopup1CancelEvent spae = new SendPopup1CancelEvent(spaa);
-		eventBus.fireEvent(spae);	
+		eventBus.fireEvent(spae);
+		hidePopupPanel1();
 		
 	}
 	
@@ -595,9 +1055,9 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestPopup2StartTimeInProgress) {
 			
 			requestPopup2StartTimeInProgress = true;
-			view.getPopup2StartTimeTextBox().setEnabled(false);//TODO
+			view.getPopup2StartTimeTextBox().setEnabled(false);
 			
-			String startTime = null;			
+			String startTime = popup2StartTimeTextBox.getText();			
 			
 			sendPopup2StartTimeTextBox(startTime);
 		}
@@ -617,9 +1077,9 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestPopup2EndTimeInProgress) {
 			
 			requestPopup2EndTimeInProgress = true;
-			view.getPopup2EndTimeTextBox().setEnabled(false);//TODO
+			view.getPopup2EndTimeTextBox().setEnabled(false);
 			
-			String endTime = null;			
+			String endTime = popup2EndTimeTextBox.getText();			
 			
 			sendPopup2EndTimeTextBox(endTime);
 		}
@@ -639,12 +1099,37 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		if(!requestPopup2ApplyInProgress) {
 			
 			requestPopup2ApplyInProgress = true;
-			view.getPopup2ApplyButton().setEnabled(false);//TODO
+			view.getPopup2ApplyButton().setEnabled(false);
 			
 			String meetingDays = null;
 			String meetingTimes = null;
 			
-				
+			if(popup2SundayCheckbox.getValue()) {
+				meetingDays = meetingDays + "S";
+			}
+			if(popup2MondayCheckbox.getValue()) {
+				meetingDays = meetingDays + "M";
+			}
+			if(popup2TuesdayCheckbox.getValue()) {
+				meetingDays = meetingDays + "T";
+			}
+			if(popup2WednesdayCheckBox.getValue()) {
+				meetingDays = meetingDays + "W";
+			}
+			if(popup2ThursdayCheckbox.getValue()) {
+				meetingDays = meetingDays + "R";
+			}
+			if(popup2FridayCheckbox.getValue()) {
+				meetingDays = meetingDays + "F";
+			}
+			if(popup2SaturdayCheckbox.getValue()) {
+				meetingDays = meetingDays + "S";
+			}
+		
+			
+			meetingTimes = meetingTimes + popup2StartTimeTextBox.getText();
+			meetingTimes = meetingTimes + "-";
+			meetingTimes = meetingTimes + popup2EndTimeTextBox.getText();
 			
 			sendPopup2Apply(meetingTimes, meetingDays);
 		}
@@ -656,6 +1141,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		SendPopup2ApplyAction spaa = new SendPopup2ApplyAction(meetingTimes, meetingDays);
 		SendPopup2ApplyEvent spae = new SendPopup2ApplyEvent(spaa);
 		eventBus.fireEvent(spae);	
+		hidePopupPanel2();
 		
 	}
 	
@@ -676,6 +1162,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		SendPopup2CancelAction spca = new SendPopup2CancelAction();
 		SendPopup2CancelEvent spce = new SendPopup2CancelEvent(spca);
 		eventBus.fireEvent(spce);	
+		hidePopupPanel2();
 		
 	}
 	
@@ -691,7 +1178,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 			if(popup3YesRadio.getValue() == true)
 				apply = popup3YesRadio.getText();
 			
-			if(popup3NoRadio.getValue() == false)
+			if(popup3NoRadio.getValue() == true)
 				apply = popup3NoRadio.getText();
 			
 			
@@ -705,6 +1192,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		SendPopup3ApplyAction spaa = new SendPopup3ApplyAction(apply);
 		SendPopup3ApplyEvent spae = new SendPopup3ApplyEvent(spaa);
 		eventBus.fireEvent(spae);	
+		hidePopupPanel3();
 		
 	}
 
@@ -725,4 +1213,55 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}
+	
+	
+	//Alphabatize by CourseName
+	private ArrayList<CourseInfo> alphabatizeCourses(ArrayList<CourseInfo> unsortedCourses){
+		ArrayList<CourseInfo> sortedCourses = new ArrayList<>();
+		
+		ArrayList<String> courseName = new ArrayList<>();
+		
+		for(int i = 0; i < unsortedCourses.size(); i++) {
+			courseName.add(unsortedCourses.get(i).getCourseName());
+		}
+		
+		java.util.Collections.sort(courseName);
+		
+		for(int i = 0; i < courseName.size(); i++) {
+			for(int a = 0; a < unsortedCourses.size(); a++) {
+				if(courseName.get(i).equals(unsortedCourses.get(a).getCourseName())) {
+					sortedCourses.add(unsortedCourses.get(a));
+					break;
+				}
+			}
+		}
+		
+		return sortedCourses;
+	}
+	
+	//Alphabatize by UserName
+	private ArrayList<UserInfo> alphabatizeUsers(ArrayList<UserInfo> unsortedUsers){
+		ArrayList<UserInfo> sortedUsers = new ArrayList<>();
+		
+		ArrayList<String> usernames = new ArrayList<>();
+		
+		for(int i = 0; i < unsortedUsers.size(); i++) {
+			usernames.add(unsortedUsers.get(i).getUserName());
+		}
+		
+		java.util.Collections.sort(usernames);
+		
+		for(int i = 0; i < usernames.size(); i++) {
+			for(int a = 0; a < unsortedUsers.size(); a++) {
+				if(usernames.get(i).equals(unsortedUsers.get(a).getUserName())) {
+					sortedUsers.add(unsortedUsers.get(a));
+					break;
+				}
+			}
+		}
+		
+		return sortedUsers;
+	}
+	
+	
 }
