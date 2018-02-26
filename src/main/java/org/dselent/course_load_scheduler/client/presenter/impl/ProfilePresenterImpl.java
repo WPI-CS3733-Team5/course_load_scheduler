@@ -1,16 +1,16 @@
 package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveProfileAction;
-import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
-import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
+
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
 
@@ -32,14 +32,29 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 		view.setPresenter(this);
 		setEditWishlistClickInProgress(false);
 	}
-	
-	
+
+	@Override
+	public void init()
+	{
+		bind();
+	}
+
+	@Override
+	public void bind()
+	{
+		HandlerRegistration onReceiveProfile;
+		onReceiveProfile = eventBus.addHandler(SendProfileEvent.TYPE, this);
+		eventBusRegistration.put(SendProfileEvent.TYPE, onReceiveProfile);
+		
+	}
+
+
 	@Override
 	public void go(HasWidgets container) {
-		
+
 		view.getEmail().setText("Email: " + user.getEmail());
 		view.getUsername().setText(user.getFirstName() + " " + user.getLastName() + " " + user.getUserName());
-		
+
 		container.clear();
 		container.add(view.getWidgetContainer());		
 	}
@@ -54,25 +69,25 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	{
 		return parentPresenter;
 	}
-	
+
 	@Override
 	public void setParentPresenter(IndexPresenter parentPresenter)
 	{
 		this.parentPresenter = parentPresenter;
 	}
-	
+
 	@Override
 	public void setMenuTabs(MenuTabsPresenterImpl menuTabs)
 	{
 		this.menuTabs = menuTabs;
 	}
 
-	
+
 	@Override
 	public void editWishlist() {
 		sendProfileEditWishlist();
 	}
-	
+
 	private void sendProfileEditWishlist() {
 		menuTabs.sendWishlist();
 	}
@@ -91,15 +106,25 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	public void setEditWishlistClickInProgress(boolean editWishlistClickInProgress) {
 		this.editWishlistClickInProgress = editWishlistClickInProgress;
 	}
-	
+
 	@Override
 	public void onReceiveProfile(ReceiveProfileEvent evt)
 	{
 		HasWidgets container = evt.getContainer();
 		ReceiveProfileAction rpa = evt.getAction();
 		this.user = rpa.getUser();
-		this.instructor = rpa.getInstructor();
+		this.setInstructor(rpa.getInstructor());
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+	}
+
+
+	public InstructorInfo getInstructor() {
+		return instructor;
+	}
+
+
+	public void setInstructor(InstructorInfo instructor) {
+		this.instructor = instructor;
 	}
 }
