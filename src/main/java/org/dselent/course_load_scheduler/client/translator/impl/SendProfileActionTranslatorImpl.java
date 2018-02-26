@@ -41,14 +41,14 @@ public class SendProfileActionTranslatorImpl implements ActionTranslator<SendPro
 		String firstName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
 		String lastName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
 		String email = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
-		Integer accountState = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
+		Integer userStateId = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_STATE_ID));
 
 		user.setId(id);
 		user.setUserName(userName);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
-		user.setAccountState(accountState);
+		user.setUserStateId(userStateId);
 		
 		Integer id2 = JSONHelper.getIntValue(instructorObject, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID));
 		Integer rank = JSONHelper.getIntValue(instructorObject, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.RANK));

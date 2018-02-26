@@ -16,7 +16,7 @@ public class UserInfo extends Model
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Integer accountState;
+	private Integer userStateId;
 
 	// methods
 	
@@ -56,18 +56,18 @@ public class UserInfo extends Model
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getAccountState() {
-		return accountState;
+	public Integer getUserStateId() {
+		return userStateId;
 	}
-	public void setAccountState(Integer accountState) {
-		this.accountState = accountState;
+	public void setUserStateId(Integer userStateId) {
+		this.userStateId = userStateId;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((accountState == null) ? 0 : accountState.hashCode());
+		result = prime * result + ((userStateId == null) ? 0 : userStateId.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -85,10 +85,10 @@ public class UserInfo extends Model
 		if (getClass() != obj.getClass())
 			return false;
 		UserInfo other = (UserInfo) obj;
-		if (accountState == null) {
-			if (other.accountState != null)
+		if (userStateId == null) {
+			if (other.userStateId != null)
 				return false;
-		} else if (!accountState.equals(other.accountState))
+		} else if (!userStateId.equals(other.userStateId))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -126,7 +126,7 @@ public class UserInfo extends Model
 	@Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", userRole=" + userRole + ", userName=" + userName + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", accountState=" + accountState + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", userStateId=" + userStateId + "]";
 	}
 	
 	

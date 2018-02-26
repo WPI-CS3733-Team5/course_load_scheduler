@@ -90,6 +90,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		homeRegistration = eventBus.addHandler(SendHomeEvent.TYPE, this);
 		eventBusRegistration.put(SendHomeEvent.TYPE, homeRegistration);
 		
+		/*
 		HandlerRegistration sendWishlistEventRegistration;
 		sendWishlistEventRegistration = eventBus.addHandler(SendWishlistForUserEvent.TYPE, this);
 		eventBusRegistration.put(SendWishlistForUserEvent.TYPE, sendWishlistEventRegistration);
@@ -97,7 +98,14 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 		HandlerRegistration sendGenerateEventRegistration;
 		sendGenerateEventRegistration = eventBus.addHandler(SendGenerateEvent.TYPE, this);
 		eventBusRegistration.put(SendGenerateEvent.TYPE, sendGenerateEventRegistration);
+		*/
+		HandlerRegistration receiveScheduleRegistration;
+		receiveScheduleRegistration = eventBus.addHandler(ReceiveSchedulesEvent.TYPE, this);
+		eventBusRegistration.put(ReceiveSchedulesEvent.TYPE, receiveScheduleRegistration);
 		
+		HandlerRegistration receiveWishlistRegistration;
+		receiveWishlistRegistration = eventBus.addHandler(ReceiveWishlistForUserEvent.TYPE, this);
+		eventBusRegistration.put(ReceiveWishlistForUserEvent.TYPE, receiveWishlistRegistration);
 	}
 		
 	@Override
