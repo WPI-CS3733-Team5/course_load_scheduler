@@ -1,10 +1,8 @@
 package org.dselent.course_load_scheduler.client.translator.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveAccountsAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
@@ -47,7 +45,7 @@ public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAc
 			String firstName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
 			String lastName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
 			String email = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
-			Integer accountState = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
+			Integer userStateId = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_STATE_ID));
 
 		
 			UserInfo user = new UserInfo();
@@ -56,7 +54,7 @@ public class SendAccountsActionTranslatorImpl implements ActionTranslator<SendAc
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setEmail(email);
-			user.setAccountState(accountState);
+			user.setUserStateId(userStateId);
 			
 			userInfoList.add(user);
 		}
