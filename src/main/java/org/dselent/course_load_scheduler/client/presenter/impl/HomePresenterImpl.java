@@ -79,6 +79,10 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		HandlerRegistration applyRegistration;
 		applyRegistration = eventBus.addHandler(SendHomeFilterEvent.TYPE,  this);
 		eventBusRegistration.put(SendHomeFilterEvent.TYPE, applyRegistration);
+		
+		HandlerRegistration onReceiveHome;
+		onReceiveHome = eventBus.addHandler(ReceiveHomeEvent.TYPE,  this);
+		eventBusRegistration.put(ReceiveHomeEvent.TYPE, onReceiveHome);
 	}
 	
 	@Override

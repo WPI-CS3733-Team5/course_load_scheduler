@@ -70,7 +70,7 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			String firstName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.FIRST_NAME));
 			String lastName = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.LAST_NAME));
 			String email = JSONHelper.getStringValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.EMAIL));
-			Integer accountState = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.ACCOUNT_STATE));
+			Integer userStateId = JSONHelper.getIntValue(tempUser, JSONHelper.convertKeyName(ReceiveUserInfoKeys.USER_STATE_ID));
 			
 			UserInfo user = new UserInfo();
 			user.setId(id);
@@ -78,7 +78,7 @@ public class SendHomeActionTranslatorImpl implements ActionTranslator<SendHomeAc
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setEmail(email);
-			user.setAccountState(accountState);
+			user.setUserStateId(userStateId);
 			
 			userInfoList.add(user);
 		}

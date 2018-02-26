@@ -6,7 +6,7 @@ public enum ReceiveUserInfoKeys {
 		FIRST_NAME,
 		LAST_NAME,
 		EMAIL,
-		ACCOUNT_STATE,
+		USER_STATE_ID,
 		CREATED_AT,
 		UPDATED_AT,
 		LOGIN_TIME
