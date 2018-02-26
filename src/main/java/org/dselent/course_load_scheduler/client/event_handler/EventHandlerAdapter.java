@@ -58,7 +58,6 @@ implements InvalidLoginEventHandler,
 			ReceiveSchedulesEventHandler,
 			ReceiveWishlistForUserEventHandler,
 			ReceiveGenerateEventHandler
-			
 {
 	@Override
 	public void onInvalidLogin(InvalidLoginEvent evt) {}

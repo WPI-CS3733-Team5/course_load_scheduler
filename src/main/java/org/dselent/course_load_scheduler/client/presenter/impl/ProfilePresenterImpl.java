@@ -6,6 +6,7 @@ import org.dselent.course_load_scheduler.client.event.ReceiveProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
+import org.dselent.course_load_scheduler.client.model.InstructorInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
@@ -21,6 +22,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	private ProfileView view;
 	private boolean editWishlistClickInProgress;
 	private UserInfo user;
+	private InstructorInfo instructor;
 
 	@Inject
 	public ProfilePresenterImpl(IndexPresenter parentPresenter, ProfileView view)
@@ -95,7 +97,8 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	{
 		HasWidgets container = evt.getContainer();
 		ReceiveProfileAction rpa = evt.getAction();
-		this.user = rpa.getModel();
+		this.user = rpa.getUser();
+		this.instructor = rpa.getInstructor();
 		go(container);
 		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
 	}

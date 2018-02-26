@@ -3,29 +3,25 @@ package org.dselent.course_load_scheduler.client.service.impl;
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
 import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
-import org.dselent.course_load_scheduler.client.action.SendLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
 import org.dselent.course_load_scheduler.client.action.SendWishlistAction;
 import org.dselent.course_load_scheduler.client.callback.SendAccountsCallback;
 import org.dselent.course_load_scheduler.client.callback.SendCoursesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendHomeCallback;
-import org.dselent.course_load_scheduler.client.callback.SendLoginCallback;
 import org.dselent.course_load_scheduler.client.callback.SendProfileCallback;
 import org.dselent.course_load_scheduler.client.callback.SendSchedulesCallback;
-import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
+import org.dselent.course_load_scheduler.client.callback.SendWishlistCallback;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
-import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
 import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
 import org.dselent.course_load_scheduler.client.network.NetworkRequest;
 import org.dselent.course_load_scheduler.client.network.NetworkRequestStrings;
 import org.dselent.course_load_scheduler.client.service.MenuService;
-import org.dselent.course_load_scheduler.client.translator.impl.LoginActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
@@ -110,7 +106,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		JSONObject json = wishlistActionTranslator.translateToJson(action);
 		SendWishlistCallback wishlistCallback = new SendWishlistCallback(eventBus, evt.getContainer());
 		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.WISHLIST, wishlistCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, wishlistCallback, json);
 		request.send();
 	}
 	

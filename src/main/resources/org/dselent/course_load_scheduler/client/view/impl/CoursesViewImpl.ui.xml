@@ -2,27 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-
-	.loading-glass-panel
-	{
-		position:fixed;
-		width:100%;
-		height:100%;
-	}
 		
-	.gwt-popup-panel-glass
+	.hidden
 	{
-		background-color:rgb(0, 0, 0);
-		opacity:0.8;
-	}
-		
-	.loading-image
-	{
-		position:fixed;
-		display:block;
-    	margin-left:50%;
-    	margin-right:50%;
-    	z-index: 1;
     	visibility:hidden;
 	}
 	
@@ -44,40 +26,21 @@
 											<g:RadioButton name="new name" ui:field="departmentRadioButton"/>
 										</g:customCell>
 										<g:customCell>
-											<g:MenuBar ui:field="departmentMenuBar">
-												<g:MenuItem text="Department" ui:field="departmentMenuItem">
-													<g:MenuBar vertical="true">
-														<g:MenuItem text="CS" ui:field="CSMenuItem"/>
-														<g:MenuItem text="ECE" ui:field="ECEMenuItem"/>
-														<g:MenuItem text="IMGD" ui:field="IMGDMenuItem"/>
-														<g:MenuItem text="RBE" ui:field="RBEMenuItem"/>
-														<g:MenuItem text="MA" ui:field="MAMenuItem"/>
-													</g:MenuBar>
-												</g:MenuItem>
-											</g:MenuBar>
+											<g:ListBox ui:field="departmentDropDown">
+											</g:ListBox>
 										</g:customCell>
 										<g:customCell>
 											<g:RadioButton name="new name" ui:field="termRadioButton"/>
 										</g:customCell>
 										<g:customCell>
-											<g:MenuBar ui:field="termMenuBar">
-												<g:MenuItem text="Term" ui:field="termMenuItem">
-													<g:MenuBar vertical="true">
-														<g:MenuItem text="A" ui:field="termA"/>
-														<g:MenuItem text="B" ui:field="termB"/>
-														<g:MenuItem text="C" ui:field="termC"/>
-														<g:MenuItem text="D" ui:field="termD"/>
-														<g:MenuItem text="E1" ui:field="termE1"/>
-														<g:MenuItem text="E2" ui:field="termE2"/>
-													</g:MenuBar>
-												</g:MenuItem>
-											</g:MenuBar>
+											<g:ListBox ui:field="termDropDown">
+											</g:ListBox>
 										</g:customCell>
 										<g:customCell>
 											<g:RadioButton name="new name" ui:field="courseNumberRadioButton"/>
 										</g:customCell>
 										<g:customCell>
-											<g:Label text="Course Number:" width="94px" ui:field="courseNumberLabel"/>
+											<g:TextBox text="Course Number:" width="94px" ui:field="courseNumberTextBox"/>
 										</g:customCell>
 										<g:customCell>
 											<g:Button ui:field="sortButton">Sort</g:Button>
@@ -235,7 +198,7 @@
 		</g:Grid>
 
 	</g:HTMLPanel> 
-	<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px"> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
+	<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px" addStyleNames="{style.hidden}">
 		<g:Grid width="911px" height="475px">
 			<g:row>
 				<g:customCell>
@@ -289,7 +252,7 @@
 			</g:row>
 		</g:Grid>
 	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel2" width="148px">
+	<g:PopupPanel ui:field="popupPanel2" width="148px" addStyleNames="{style.hidden}">
 		<g:Grid width="122px" height="100%">
 			<g:row>
 				<g:customCell>
@@ -396,7 +359,7 @@
 			</g:row>
 		</g:Grid> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
 	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel3" width="296px">
+	<g:PopupPanel ui:field="popupPanel3" width="296px" addStyleNames="{style.hidden}">
 		<g:Grid width="285px" height="100%">
 			<g:row>
 				<g:customCell>
@@ -434,7 +397,7 @@
 					</g:Grid>
 				</g:customCell>
 			</g:row>
-		</g:Grid> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
+		</g:Grid>
 	</g:PopupPanel>
 </g:HorizontalPanel>
 
