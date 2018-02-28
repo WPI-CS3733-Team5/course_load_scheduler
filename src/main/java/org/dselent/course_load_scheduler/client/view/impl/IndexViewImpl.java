@@ -27,8 +27,8 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	@UiField
 	PopupPanel glassLoadingPanel;
 	
-	@UiField
-	MenuTabsImpl menuTabsImpl;
+//	@UiField
+//	MenuTabsImpl menuTabsImpl;
 	
 	public IndexViewImpl()
 	{
@@ -77,9 +77,9 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 		return mainPanel;
 	}
 	
-	@Override
-	public MenuTabsImpl getMenuTabsImpl() {
-		return menuTabsImpl;
-	}
+//	@Override
+//	public MenuTabsImpl getMenuTabsImpl() {
+//		return menuTabsImpl;
+//	}
 
 }

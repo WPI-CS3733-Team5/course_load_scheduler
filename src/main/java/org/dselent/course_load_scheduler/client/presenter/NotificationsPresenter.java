@@ -4,4 +4,7 @@ public interface NotificationsPresenter extends BasePresenter {
 	IndexPresenter getParentPresenter();
 	void setParentPresenter(IndexPresenter parentPresenter);
 	public void selectNotification(int index);
+	public void archiveNotification();
+	public void rejectScheduleRequest();
+	public void acceptScheduleRequest();
 }
