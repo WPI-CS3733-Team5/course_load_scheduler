@@ -25,7 +25,7 @@
 				<g:RadioButton name="new name" width="49px" height="19px" text="Sort:" ui:field="sortCourseNumberRadioButton"/>
 			</g:at>
 			<g:at top="69" left="17">
-				<g:ListBox visibleItemCount="5" width="80px" height="188px" ui:field="courseListBox"/>
+				<g:ListBox visibleItemCount="5" width="86px" height="188px" ui:field="courseListBox"/>
 			</g:at>
 			<g:at top="69" left="103">
 				<g:ListBox visibleItemCount="5" width="76px" height="188px" ui:field="timesListBox"/>
@@ -39,7 +39,7 @@
 			<g:at top="118" left="360">
 				<g:Button width="90px" height="58px" ui:field="editWishlistButton">Edit Wishlist</g:Button>
 			</g:at>
-			<g:at top="160" left="360">
+			<g:at top="166" left="360">
 				<g:Button width="90px" height="58px" ui:field="requestNewScheduleButton">Request New Schedule</g:Button>
 			</g:at>
 			<g:at top="40" left="350">
@@ -49,7 +49,7 @@
 				<g:ListBox visibleItemCount="5" width="76px" height="188px" ui:field="termListBox"/>
 			</g:at>
 			
-			<g:at top="188" left="360">
+			<g:at top="200" left="360">
 				<g:TextBox width="90px" height="25px" ui:field="courseNumber"/>
 			</g:at>
 		</g:AbsolutePanel>
