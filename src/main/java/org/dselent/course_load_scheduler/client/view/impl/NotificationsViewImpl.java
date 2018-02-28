@@ -38,13 +38,29 @@ public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> 
 
 	interface NotificationsViewUiBinder extends UiBinder<Widget, NotificationsViewImpl> {}
 
-	public NotificationsViewImpl() {
-		initWidget(uiBinder.createAndBindUi(this));
+	
+	@UiHandler("btnArchive")
+	void onBtnArchiveClick(ClickEvent event) {
+		presenter.archiveNotification();
 	}
 
+	@UiHandler("btnReject")
+	void onBtnRejectClick(ClickEvent event) {
+		presenter.rejectScheduleRequest();
+	}
+	
 	@UiHandler("btnAccept")
 	void onBtnAcceptClick(ClickEvent event) {
-		
+		presenter.acceptScheduleRequest();
+	}
+	
+	@Override
+	public void setPresenter(NotificationsPresenter presenter) {
+		this.presenter = presenter;
+	}
+	
+	public NotificationsViewImpl() {
+		initWidget(uiBinder.createAndBindUi(this));
 	}
 
 	public Button getBtnAccept() {
@@ -54,11 +70,6 @@ public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> 
 	public void setBtnAccept(Button btnAccept) {
 		this.btnAccept = btnAccept;
 	}
-
-	@UiHandler("btnReject")
-	void onBtnRejectClick(ClickEvent event) {
-		
-	}
 	
 	public Button getBtnReject() {
 		return btnReject;
@@ -66,11 +77,6 @@ public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> 
 
 	public void setBtnReject(Button btnReject) {
 		this.btnReject = btnReject;
-	}
-
-	@UiHandler("btnArchive")
-	void onBtnArchiveClick(ClickEvent event) {
-		
 	}
 	
 	public Button getBtnArchive() {
@@ -116,12 +122,6 @@ public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> 
 
 	public void setListNotification(ListBox listNotification) {
 		this.listNotification = listNotification;
-	}
-
-	@Override
-	public void setPresenter(NotificationsPresenter presenter) {
-		this.presenter = presenter;
-		
 	}
 
 	@Override
