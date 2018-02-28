@@ -5,21 +5,33 @@ import org.dselent.course_load_scheduler.client.event_handler.ReceiveNotificatio
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class ReceiveNotificationEvent extends DisplayEvent<ReceiveNotificationAction, ReceiveNotificationEventHandler> {
-
-	public ReceiveNotificationEvent(ReceiveNotificationAction action, HasWidgets panel) {
-		super(action, panel);
-	}
-
+public class ReceiveNotificationEvent extends DisplayEvent<ReceiveNotificationEventHandler>
+{
 	public static Type<ReceiveNotificationEventHandler> TYPE = new Type<ReceiveNotificationEventHandler>();
 
+	private ReceiveNotificationAction receiveNotificationAction;
+	
+	public ReceiveNotificationEvent(ReceiveNotificationAction receiveNotificationAction, HasWidgets panel)
+	{
+		super(panel);
+		this.receiveNotificationAction = receiveNotificationAction;
+	}
+
+
 	@Override
-	public Type<ReceiveNotificationEventHandler> getAssociatedType() {
+	public Type<ReceiveNotificationEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(ReceiveNotificationEventHandler handler) {
+	protected void dispatch(ReceiveNotificationEventHandler handler)
+	{
 		handler.onNotificationListReceipt(this);
+	}
+
+	public ReceiveNotificationAction getReceiveNotificationAction()
+	{
+		return receiveNotificationAction;
 	}
 }

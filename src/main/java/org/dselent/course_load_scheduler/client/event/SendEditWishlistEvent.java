@@ -3,29 +3,33 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendEditWishlistAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendEditWishlistEventHandler;
 
-public class SendEditWishlistEvent extends BaseEvent<SendEditWishlistAction, SendEditWishlistEventHandler>{
-		public static Type<SendEditWishlistEventHandler> TYPE = new Type<SendEditWishlistEventHandler>();
-	
-		public SendEditWishlistEvent(SendEditWishlistAction action)
-		{
-			super(action);
-		}
-	
-		/*
-		 * 
-		 */
-		@Override
-		public Type<SendEditWishlistEventHandler> getAssociatedType()
-		{
-			return TYPE;
-		}
+import com.google.gwt.event.shared.GwtEvent;
 
-		/*
-		 * 
-		 */
-		@Override
-		protected void dispatch(SendEditWishlistEventHandler handler)
-		{
-			handler.onSendEditWishlist(this);
-		}
+public class SendEditWishlistEvent extends GwtEvent<SendEditWishlistEventHandler>
+{
+	public static Type<SendEditWishlistEventHandler> TYPE = new Type<SendEditWishlistEventHandler>();
+	
+	private SendEditWishlistAction sendEditWishlistAction;
+	
+	public SendEditWishlistEvent(SendEditWishlistAction sendEditWishlistAction)
+	{
+		this.sendEditWishlistAction = sendEditWishlistAction;
 	}
+
+	@Override
+	public Type<SendEditWishlistEventHandler> getAssociatedType()
+	{
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(SendEditWishlistEventHandler handler)
+	{
+		handler.onSendEditWishlist(this);
+	}
+
+	public SendEditWishlistAction getSendEditWishlistAction()
+	{
+		return sendEditWishlistAction;
+	}
+}

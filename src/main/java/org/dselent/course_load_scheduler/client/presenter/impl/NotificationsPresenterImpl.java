@@ -25,12 +25,11 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 	private NotificationsView view;
 	private Notifications curNotification;
 	private ArrayList<Notifications> listNotifications;
-	
  
 	@Inject
-	public NotificationsPresenterImpl(IndexPresenter parentPresenter, NotificationsView view) {
+	public NotificationsPresenterImpl(NotificationsView view)
+	{
 		this.view = view;
-		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
 		curNotification = null;
 		listNotifications = new ArrayList<Notifications>();
@@ -60,7 +59,7 @@ public class NotificationsPresenterImpl extends BasePresenterImpl implements Not
 	
 	@Override
 	public void onNotificationListReceipt(ReceiveNotificationEvent evt) {
-		listNotifications = evt.getAction().getNotificationList();
+		listNotifications = evt.getReceiveNotificationAction().getNotificationList();
 		go(evt.getContainer());
 	}
 

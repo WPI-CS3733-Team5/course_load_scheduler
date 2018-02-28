@@ -2,7 +2,8 @@ package org.dselent.course_load_scheduler.client.model;
 
 // created by David M.
 
-public class CourseInfo {
+public class CourseInfo extends Model
+{
 	private Integer id;
 	private String courseName;
 	private Integer requiredFrequencyPerTerm;

@@ -67,7 +67,7 @@ public class ExamplePresenterImpl extends BasePresenterImpl implements ExamplePr
 	public void onReceiveLogin(ReceiveLoginEvent evt)
 	{
 		HasWidgets container = evt.getContainer();
-		ReceiveLoginAction rla = evt.getAction();
+		ReceiveLoginAction rla = evt.getReceiveLoginAction();
 
 		userModel = rla.getModel();
 		

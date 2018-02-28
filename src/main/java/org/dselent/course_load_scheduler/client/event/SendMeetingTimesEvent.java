@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendMeetingTimesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendMeetingTimesEventHandler;
 
-public class SendMeetingTimesEvent extends BaseEvent<SendMeetingTimesAction, SendMeetingTimesEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendMeetingTimesEvent extends GwtEvent<SendMeetingTimesEventHandler>
+{
+	public static Type<SendMeetingTimesEventHandler> TYPE = new Type<SendMeetingTimesEventHandler>();
 	
-public static Type<SendMeetingTimesEventHandler> TYPE = new Type<SendMeetingTimesEventHandler>();
-	 
-	public SendMeetingTimesEvent(SendMeetingTimesAction action)
+	private SendMeetingTimesAction sendMeetingTimesAction;
+	
+	public SendMeetingTimesEvent(SendMeetingTimesAction sendMeetingTimesAction)
 	{
-		super(action);
+		this.sendMeetingTimesAction = sendMeetingTimesAction;
 	}
 	
 	@Override
@@ -24,4 +28,8 @@ public static Type<SendMeetingTimesEventHandler> TYPE = new Type<SendMeetingTime
 		handler.onSendMeetingTimes(this);
 	}
 
+	public SendMeetingTimesAction getSendMeetingTimesAction()
+	{
+		return sendMeetingTimesAction;
+	}
 }

@@ -2,7 +2,8 @@ package org.dselent.course_load_scheduler.client.model;
 
 // created by David M.
 
-public class SectionInfo {
+public class SectionInfo extends Model
+{
 	private Integer id;
 	private Integer sectionNumber;
 	private String sectionType;

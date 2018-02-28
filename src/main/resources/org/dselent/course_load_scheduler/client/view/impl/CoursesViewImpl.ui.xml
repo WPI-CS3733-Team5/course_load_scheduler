@@ -9,396 +9,396 @@
 	}
 	
 	</ui:style>
-	<g:HorizontalPanel>
-	<g:HTMLPanel ui:field="mainPanel">
-		<g:Grid width="785px" height="471px">
-			<g:row>
-				<g:customCell>
-					<g:Grid width="393px" height="386px">
-						<g:row>
-							<g:customCell>
-								<g:Grid width="258px">
-									<g:row>
-										<g:customCell>
-											<g:Label text="Sort By:" width="59px" ui:field="sortByLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:RadioButton name="new name" ui:field="departmentRadioButton"/>
-										</g:customCell>
-										<g:customCell>
-											<g:ListBox ui:field="departmentDropDown">
-											</g:ListBox>
-										</g:customCell>
-										<g:customCell>
-											<g:RadioButton name="new name" ui:field="termRadioButton"/>
-										</g:customCell>
-										<g:customCell>
-											<g:ListBox ui:field="termDropDown">
-											</g:ListBox>
-										</g:customCell>
-										<g:customCell>
-											<g:RadioButton name="new name" ui:field="courseNumberRadioButton"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox text="Course Number:" width="94px" ui:field="courseNumberTextBox"/>
-										</g:customCell>
-										<g:customCell>
-											<g:Button ui:field="sortButton">Sort</g:Button>
-										</g:customCell>
-									</g:row>
-								</g:Grid>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:ListBox visibleItemCount="5" width="462px" height="128px" ui:field="coursesListBox"/>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Grid width="472px" height="92px">
-									<g:row>
-										<g:customCell>
-											<g:Grid width="425px" height="132px">
-												<g:row>
-													<g:customCell>
-														<g:Label text="Wishlist" ui:field="wishlistLabel"/>
-													</g:customCell>
-												</g:row>
-												<g:row>
-													<g:customCell>
-														<g:ListBox visibleItemCount="5" width="414px" ui:field="wishlistListbox" height="102px"/>
-													</g:customCell>
-												</g:row>
-											</g:Grid>
-										</g:customCell>
-										<g:customCell>
-											<g:Grid width="309px" height="144px">
-												<g:row>
-													<g:customCell>
-														<g:Button text="Create New Course" ui:field="createCourseButton">Create Course</g:Button>
-													</g:customCell>
-												</g:row>
-												<g:row>
-													<g:customCell>
-														<g:Button ui:field="removeSelectedFromWishlistButton">Remove Selected From Wishlist</g:Button>
-													</g:customCell>
-												</g:row>
-												<g:row>
-													<g:customCell>
-														<g:Button text="View Full Wishlist" ui:field="viewFullWishlistButton"/>
-													</g:customCell>
-												</g:row>
-											</g:Grid>
-										</g:customCell>
-									</g:row>
-								</g:Grid>
-							</g:customCell>
-						</g:row>
-						<g:row/>
-					</g:Grid>
-				</g:customCell>
-				<g:customCell>
-					<g:Grid width="373px" height="405px">
-						<g:row>
-							<g:customCell>
-								<g:Grid width="395px">
-									<g:row>
-										<g:customCell>
-											<g:Label text="Department:" ui:field="departmentLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="departmentTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Course Number:" ui:field="courseNumberSideLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="courseNumberSideTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Course Section:" ui:field="courseSectionLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="courseSectionTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Section Type:" ui:field="sectionTypeLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="sectionTypeTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Term:" ui:field="termLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="termTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Meeting Times:" ui:field="meetingTimesLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="meetingTimesTextBox"/>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Label text="Location:" ui:field="locationLabel"/>
-										</g:customCell>
-										<g:customCell>
-											<g:TextBox ui:field="locationTextBox"/>
-										</g:customCell>
-									</g:row>
-								</g:Grid>
-							</g:customCell>
-						</g:row>
-						<g:row>
-							<g:customCell>
-								<g:Grid width="339px">
-									<g:row>
-										<g:customCell>
-											<g:Button width="244px" ui:field="addToWishlistButton">Add To Wishlist</g:Button>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Button width="244px" ui:field="editButton">Edit</g:Button>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Button text="Apply Changes" width="244px" ui:field="applyChangesButton">Apply Changes</g:Button>
-										</g:customCell>
-										<g:customCell>
-											<g:Button width="141px" ui:field="cancelChangesButton">Cancel Changes</g:Button>
-										</g:customCell>
-									</g:row>
-									<g:row>
-										<g:customCell>
-											<g:Button width="244px" ui:field="removeCourseButton">Remove Course</g:Button>
-										</g:customCell>
-									</g:row>
-								</g:Grid>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row/>
-		</g:Grid>
-
-	</g:HTMLPanel> 
-	<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px"> <!--addStyleNames="{style.hidden}"-->
-		<g:Grid width="911px" height="475px">
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Sort By:" ui:field="popup1SortByLabel"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:RadioButton name="new name" text="Lecture" ui:field="popup1LectureRadio"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:RadioButton name="new name" text="Lab" ui:field="popup1LabRadio"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button ui:field="popup1ApplyButton">Apply</g:Button>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:RadioButton name="new name" text="Special" ui:field="popup1SpecialRadio"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button ui:field="popup1CancelButton">Cancel</g:Button>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-		</g:Grid>
-	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel2" width="148px"> <!--  addStyleNames="{style.hidden}"-->
-		<g:Grid width="122px" height="100%">
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Select Meeting Day:" ui:field="popup2SelectMeetingDaysLabel"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Label text="Select Meeting Times:" ui:field="popup2SelectMeetingTimesLabel"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Sunday" ui:field="popup2SundayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Monday" ui:field="popup2MondayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-				<g:customCell>
-					<g:TextBox text="Start Time:" width="83px" ui:field="popup2StartTimeTextBox"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Tuesday" ui:field="popup2TuesdayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Wednesday" ui:field="popup2WednesdayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-				<g:customCell>
-					<g:TextBox text="End Time:" width="76px" ui:field="popup2EndTimeTextBox"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Thursday" ui:field="popup2ThursdayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Friday" ui:field="popup2FridayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-				<g:customCell>
-					<g:Button text="Apply" ui:field="popup2ApplyButton"/>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:CheckBox text="Saturday" ui:field="popup2SaturdayCheckbox"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-				<g:customCell>
-					<g:Button ui:field="popup2CancelButton">Cancel</g:Button>
-				</g:customCell>
-			</g:row>
-		</g:Grid> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
-	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel3" width="296px"> <!-- addStyleNames="{style.hidden}"-->
-		<g:Grid width="285px" height="100%">
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:Label text="Are you sure you want to remove this course?" ui:field="popup3RemoveCourseLabel"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:RadioButton name="new name" text="Yes" ui:field="popup3YesRadio"/>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Grid>
-						<g:row>
-							<g:customCell>
-								<g:RadioButton name="new name" text="No" ui:field="popup3NoRadio"/>
-							</g:customCell>
-							<g:customCell>
-								<g:Button ui:field="popup3ApplyButton">Apply</g:Button>
-							</g:customCell>
-						</g:row>
-					</g:Grid>
-				</g:customCell>
-			</g:row>
-		</g:Grid>
-	</g:PopupPanel>
-</g:HorizontalPanel>
+	<g:HorizontalPanel ui:field="rootPanel">
+		<g:HTMLPanel ui:field="mainPanel">
+			<g:Grid width="785px" height="471px">
+				<g:row>
+					<g:customCell>
+						<g:Grid width="393px" height="386px">
+							<g:row>
+								<g:customCell>
+									<g:Grid width="258px">
+										<g:row>
+											<g:customCell>
+												<g:Label text="Sort By:" width="59px" ui:field="sortByLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:RadioButton name="new name" ui:field="departmentRadioButton"/>
+											</g:customCell>
+											<g:customCell>
+												<g:ListBox ui:field="departmentDropDown">
+												</g:ListBox>
+											</g:customCell>
+											<g:customCell>
+												<g:RadioButton name="new name" ui:field="termRadioButton"/>
+											</g:customCell>
+											<g:customCell>
+												<g:ListBox ui:field="termDropDown">
+												</g:ListBox>
+											</g:customCell>
+											<g:customCell>
+												<g:RadioButton name="new name" ui:field="courseNumberRadioButton"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox text="Course Number:" width="94px" ui:field="courseNumberTextBox"/>
+											</g:customCell>
+											<g:customCell>
+												<g:Button ui:field="sortButton">Sort</g:Button>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:ListBox visibleItemCount="5" width="462px" height="128px" ui:field="coursesListBox"/>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Grid width="472px" height="92px">
+										<g:row>
+											<g:customCell>
+												<g:Grid width="425px" height="132px">
+													<g:row>
+														<g:customCell>
+															<g:Label text="Wishlist" ui:field="wishlistLabel"/>
+														</g:customCell>
+													</g:row>
+													<g:row>
+														<g:customCell>
+															<g:ListBox visibleItemCount="5" width="414px" ui:field="wishlistListbox" height="102px"/>
+														</g:customCell>
+													</g:row>
+												</g:Grid>
+											</g:customCell>
+											<g:customCell>
+												<g:Grid width="309px" height="144px">
+													<g:row>
+														<g:customCell>
+															<g:Button text="Create New Course" ui:field="createCourseButton">Create Course</g:Button>
+														</g:customCell>
+													</g:row>
+													<g:row>
+														<g:customCell>
+															<g:Button ui:field="removeSelectedFromWishlistButton">Remove Selected From Wishlist</g:Button>
+														</g:customCell>
+													</g:row>
+													<g:row>
+														<g:customCell>
+															<g:Button text="View Full Wishlist" ui:field="viewFullWishlistButton"/>
+														</g:customCell>
+													</g:row>
+												</g:Grid>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+								</g:customCell>
+							</g:row>
+							<g:row/>
+						</g:Grid>
+					</g:customCell>
+					<g:customCell>
+						<g:Grid width="373px" height="405px">
+							<g:row>
+								<g:customCell>
+									<g:Grid width="395px">
+										<g:row>
+											<g:customCell>
+												<g:Label text="Department:" ui:field="departmentLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="departmentTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Course Number:" ui:field="courseNumberSideLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="courseNumberSideTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Course Section:" ui:field="courseSectionLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="courseSectionTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Section Type:" ui:field="sectionTypeLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="sectionTypeTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Term:" ui:field="termLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="termTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Meeting Times:" ui:field="meetingTimesLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="meetingTimesTextBox"/>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Label text="Location:" ui:field="locationLabel"/>
+											</g:customCell>
+											<g:customCell>
+												<g:TextBox ui:field="locationTextBox"/>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+								</g:customCell>
+							</g:row>
+							<g:row>
+								<g:customCell>
+									<g:Grid width="339px">
+										<g:row>
+											<g:customCell>
+												<g:Button width="244px" ui:field="addToWishlistButton">Add To Wishlist</g:Button>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Button width="244px" ui:field="editButton">Edit</g:Button>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Button text="Apply Changes" width="244px" ui:field="applyChangesButton">Apply Changes</g:Button>
+											</g:customCell>
+											<g:customCell>
+												<g:Button width="141px" ui:field="cancelChangesButton">Cancel Changes</g:Button>
+											</g:customCell>
+										</g:row>
+										<g:row>
+											<g:customCell>
+												<g:Button width="244px" ui:field="removeCourseButton">Remove Course</g:Button>
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row/>
+			</g:Grid>
+	
+		</g:HTMLPanel> 
+		<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px" addStyleNames="{style.hidden}">
+			<g:Grid width="911px" height="475px">
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Sort By:" ui:field="popup1SortByLabel"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:RadioButton name="new name" text="Lecture" ui:field="popup1LectureRadio"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:RadioButton name="new name" text="Lab" ui:field="popup1LabRadio"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Button ui:field="popup1ApplyButton">Apply</g:Button>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:RadioButton name="new name" text="Special" ui:field="popup1SpecialRadio"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Button ui:field="popup1CancelButton">Cancel</g:Button>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+		</g:PopupPanel>
+		<g:PopupPanel ui:field="popupPanel2" width="148px" addStyleNames="{style.hidden}">
+			<g:Grid width="122px" height="100%">
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Select Meeting Day:" ui:field="popup2SelectMeetingDaysLabel"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Label text="Select Meeting Times:" ui:field="popup2SelectMeetingTimesLabel"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Sunday" ui:field="popup2SundayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Monday" ui:field="popup2MondayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox text="Start Time:" width="83px" ui:field="popup2StartTimeTextBox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Tuesday" ui:field="popup2TuesdayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Wednesday" ui:field="popup2WednesdayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox text="End Time:" width="76px" ui:field="popup2EndTimeTextBox"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Thursday" ui:field="popup2ThursdayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Friday" ui:field="popup2FridayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+					<g:customCell>
+						<g:Button text="Apply" ui:field="popup2ApplyButton"/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:CheckBox text="Saturday" ui:field="popup2SaturdayCheckbox"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+					<g:customCell>
+						<g:Button ui:field="popup2CancelButton">Cancel</g:Button>
+					</g:customCell>
+				</g:row>
+			</g:Grid> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
+		</g:PopupPanel>
+		<g:PopupPanel ui:field="popupPanel3" width="296px" addStyleNames="{style.hidden}">
+			<g:Grid width="285px" height="100%">
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:Label text="Are you sure you want to remove this course?" ui:field="popup3RemoveCourseLabel"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:RadioButton name="new name" text="Yes" ui:field="popup3YesRadio"/>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Grid>
+							<g:row>
+								<g:customCell>
+									<g:RadioButton name="new name" text="No" ui:field="popup3NoRadio"/>
+								</g:customCell>
+								<g:customCell>
+									<g:Button ui:field="popup3ApplyButton">Apply</g:Button>
+								</g:customCell>
+							</g:row>
+						</g:Grid>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+		</g:PopupPanel>
+	</g:HorizontalPanel>
 
 </ui:UiBinder> 

@@ -22,10 +22,10 @@ import com.google.gwt.user.client.ui.TextArea;
  * @author Leo Gonsalves
  *
  */
-public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> implements NotificationsView{
-	
-
+public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> implements NotificationsView
+{
 	private static NotificationsViewUiBinder uiBinder = GWT.create(NotificationsViewUiBinder.class);
+	
 	@UiField Button btnAccept;
 	@UiField Button btnReject;
 	@UiField Button btnArchive;
@@ -34,111 +34,135 @@ public class NotificationsViewImpl extends BaseViewImpl<NotificationsPresenter> 
 	@UiField Label lblTitle;
 	@UiField ListBox listNotification;
 	@UiField TextArea mainTextArea;
-	@UiField HTMLPanel mainPanel;
+	@UiField HTMLPanel rootPanel;
 
 	interface NotificationsViewUiBinder extends UiBinder<Widget, NotificationsViewImpl> {}
 
 	
+	public NotificationsViewImpl()
+	{
+		initWidget(uiBinder.createAndBindUi(this));
+	}
+
+	@Override
+	public void setPresenter(NotificationsPresenter presenter)
+	{
+		this.presenter = presenter;
+	}
+	
+	@Override
+	public Widget getWidgetContainer()
+	{
+		return this;
+	}
+	
+	@Override
+	public HasWidgets getViewRootPanel()
+	{
+		return rootPanel;
+	}
+	
+	public Button getBtnAccept()
+	{
+		return btnAccept;
+	}
+
+	public void setBtnAccept(Button btnAccept)
+	{
+		this.btnAccept = btnAccept;
+	}
+	
+	public Button getBtnReject()
+	{
+		return btnReject;
+	}
+
+	public void setBtnReject(Button btnReject)
+	{
+		this.btnReject = btnReject;
+	}
+	
+	public Button getBtnArchive()
+	{
+		return btnArchive;
+	}
+
+	public void setBtnArchive(Button btnArchive)
+	{
+		this.btnArchive = btnArchive;
+	}
+
+	public Label getLblSender()
+	{
+		return lblSender;
+	}
+
+	public void setLblSender(Label lblSender)
+	{
+		this.lblSender = lblSender;
+	}
+
+	public Label getLblSubject()
+	{
+		return lblSubject;
+	}
+
+	public void setLblSubject(Label lblSubject)
+	{
+		this.lblSubject = lblSubject;
+	}
+
+	public Label getLblTitle()
+	{
+		return lblTitle;
+	}
+
+	public void setLblTitle(Label lblTitle)
+	{
+		this.lblTitle = lblTitle;
+	}
+	
+	public ListBox getListNotification()
+	{
+		return listNotification;
+	}
+
+	public void setListNotification(ListBox listNotification)
+	{
+		this.listNotification = listNotification;
+	}
+
+	public TextArea getMainTextArea()
+	{
+		return mainTextArea;
+	}
+
+	public void setMainTextArea(TextArea mainTextArea)
+	{
+		this.mainTextArea = mainTextArea;
+	}
+	
 	@UiHandler("btnArchive")
-	void onBtnArchiveClick(ClickEvent event) {
+	void onBtnArchiveClick(ClickEvent event)
+	{
 		presenter.archiveNotification();
 	}
 
 	@UiHandler("btnReject")
-	void onBtnRejectClick(ClickEvent event) {
+	void onBtnRejectClick(ClickEvent event)
+	{
 		presenter.rejectScheduleRequest();
 	}
 	
 	@UiHandler("btnAccept")
-	void onBtnAcceptClick(ClickEvent event) {
+	void onBtnAcceptClick(ClickEvent event)
+	{
 		presenter.acceptScheduleRequest();
 	}
 	
-	@Override
-	public void setPresenter(NotificationsPresenter presenter) {
-		this.presenter = presenter;
-	}
-	
-	public NotificationsViewImpl() {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
-
-	public Button getBtnAccept() {
-		return btnAccept;
-	}
-
-	public void setBtnAccept(Button btnAccept) {
-		this.btnAccept = btnAccept;
-	}
-	
-	public Button getBtnReject() {
-		return btnReject;
-	}
-
-	public void setBtnReject(Button btnReject) {
-		this.btnReject = btnReject;
-	}
-	
-	public Button getBtnArchive() {
-		return btnArchive;
-	}
-
-	public void setBtnArchive(Button btnArchive) {
-		this.btnArchive = btnArchive;
-	}
-
-	public Label getLblSender() {
-		return lblSender;
-	}
-
-	public void setLblSender(Label lblSender) {
-		this.lblSender = lblSender;
-	}
-
-	public Label getLblSubject() {
-		return lblSubject;
-	}
-
-	public void setLblSubject(Label lblSubject) {
-		this.lblSubject = lblSubject;
-	}
-
-	public Label getLblTitle() {
-		return lblTitle;
-	}
-
-	public void setLblTitle(Label lblTitle) {
-		this.lblTitle = lblTitle;
-	}
-
 	@UiHandler("listNotification")
-	void onSelection(ChangeEvent event) {
+	void onSelection(ChangeEvent event)
+	{
 		presenter.selectNotification(listNotification.getSelectedIndex());
-	}
-	
-	public ListBox getListNotification() {
-		return listNotification;
-	}
-
-	public void setListNotification(ListBox listNotification) {
-		this.listNotification = listNotification;
-	}
-
-	@Override
-	public Widget getWidgetContainer() {
-		return this.getParent();
-	}
-
-	public TextArea getMainTextArea() {
-		return mainTextArea;
-	}
-
-	public void setMainTextArea(TextArea mainTextArea) {
-		this.mainTextArea = mainTextArea;
-	}
-
-	@Override
-	public HasWidgets getViewRootPanel() {
-		return mainPanel;
 	}
 }

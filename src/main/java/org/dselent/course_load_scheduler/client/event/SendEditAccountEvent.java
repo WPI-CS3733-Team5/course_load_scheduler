@@ -3,23 +3,33 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendEditAccountAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendEditAccountEventHandler;
 
-public class SendEditAccountEvent extends BaseEvent<SendEditAccountAction, SendEditAccountEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendEditAccountEvent extends GwtEvent<SendEditAccountEventHandler>{
 
 	public static Type<SendEditAccountEventHandler> TYPE = new Type<SendEditAccountEventHandler>();
 	
-	public SendEditAccountEvent(SendEditAccountAction action)
+	private SendEditAccountAction sendEditAccountAction;
+	
+	public SendEditAccountEvent(SendEditAccountAction sendEditAccountAction)
 	{
-		super(action);
+		this.sendEditAccountAction = sendEditAccountAction;
 	}
 	
 	@Override
-	public Type<SendEditAccountEventHandler> getAssociatedType() {
+	public Type<SendEditAccountEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(SendEditAccountEventHandler handler) {
+	protected void dispatch(SendEditAccountEventHandler handler)
+	{
 		handler.onSendEditAccount(this);
 	}
 
+	public SendEditAccountAction getSendEditAccountAction()
+	{
+		return sendEditAccountAction;
+	}
 }

@@ -4,7 +4,7 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel ui:field="mainPanel">
+	<g:HTMLPanel ui:field="rootPanel">
 		<g:HorizontalPanel>
 			<g:VerticalPanel width="190px" ui:field="leftPanel">
 				<g:InlineLabel text="Notifications" width="191px" height="36px"/>

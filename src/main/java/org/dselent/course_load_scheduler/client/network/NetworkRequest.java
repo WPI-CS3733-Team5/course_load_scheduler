@@ -1,9 +1,6 @@
 package org.dselent.course_load_scheduler.client.network;
 
-import java.util.ArrayList;
- import java.util.List;
- 
- import org.dselent.course_load_scheduler.client.exceptions.StatusCodeException;
+import org.dselent.course_load_scheduler.client.exceptions.StatusCodeException;
  import org.dselent.course_load_scheduler.client.utils.JSONHelper;
  import org.dselent.course_load_scheduler.client.utils.ToStringHelper;
  
@@ -34,7 +31,7 @@ import java.util.ArrayList;
  	private RequestBuilder requestBuilder;
  	private AsyncCallback<JSONValue> callback;
  
- 	private List<String> failedStatusList = new ArrayList<String>();
+ 	//private List<String> failedStatusList = new ArrayList<String>();
  	
  	private JSONValue requestData;
  	
@@ -134,15 +131,15 @@ import java.util.ArrayList;
  	}
  
    
- 	private StatusCodeException makeStatusCodeException(String responseText)
- 	{
- 		String message = new StringBuilder("Unexpected response from network request: ")
- 				.append(ToStringHelper.variableToString("responseStatus", ToStringHelper.arrayToString(failedStatusList, ", ")))
- 				.append(ToStringHelper.variableToString("responseText", responseText))
- 				.append(ToStringHelper.variableToString("url", this.requestBuilder.getUrl()))
- 				.append(ToStringHelper.variableToString("payload", this.requestData.toString()))
- 				.toString();
-     
- 		return new StatusCodeException(message);    
- 	}	
+	private StatusCodeException makeStatusCodeException(String responseText)
+	{
+		String message = new StringBuilder("Unexpected response from network request: ")
+				//.append(ToStringHelper.variableToString("responseStatus", ToStringHelper.arrayToString(failedStatusList, ", ")))
+				.append(ToStringHelper.variableToString("responseText", responseText))
+				//.append(ToStringHelper.variableToString("url", this.requestBuilder.getUrl()))
+				//.append(ToStringHelper.variableToString("payload", this.requestData.toString()))
+				.toString();
+    
+		return new StatusCodeException(message);    
+	}
  }

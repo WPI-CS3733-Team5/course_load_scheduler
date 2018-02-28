@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import org.dselent.course_load_scheduler.client.action.ReceiveHomeAction;
 import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendAcceptScheduleAction;
-import org.dselent.course_load_scheduler.client.action.SendHomeFilterAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestDifferentScheduleAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveHomeEvent;
 import org.dselent.course_load_scheduler.client.event.ReceiveLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendAcceptScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
-import org.dselent.course_load_scheduler.client.gin.Injector;
-import org.dselent.course_load_scheduler.client.model.ActiveUser;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
@@ -21,11 +18,9 @@ import org.dselent.course_load_scheduler.client.model.LabInfo;
 import org.dselent.course_load_scheduler.client.model.ScheduleLinks;
 import org.dselent.course_load_scheduler.client.model.SectionInfo;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
-import org.dselent.course_load_scheduler.client.presenter.BasePresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.utils.Pair;
-import org.dselent.course_load_scheduler.client.view.BaseView;
 import org.dselent.course_load_scheduler.client.view.HomeView;
 
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -33,13 +28,12 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.inject.Inject;
 
-public class HomePresenterImpl extends BasePresenterImpl implements HomePresenter {
+public class HomePresenterImpl extends BasePresenterImpl implements HomePresenter
+{
 	
 	private IndexPresenter parentPresenter;
 	private HomeView view;
-	private boolean acceptScheduleInProgress;
-	private boolean requestDifferentScheduleInProgress;
-	private boolean applyFilterInProgress;
+	
 	private ArrayList<UserInfo> userInfoList;
 	private ArrayList<InstructorInfo> instructorInfoList;
 	private ArrayList<ScheduleLinks> scheduleLinksList;
@@ -47,13 +41,18 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	private ArrayList<SectionInfo> sectionInfoList;
 	private ArrayList<LabInfo> labInfoList;
 	private ArrayList<CalendarInfo> calendarInfoList;
+	
+	private boolean acceptScheduleInProgress;
+	private boolean requestDifferentScheduleInProgress;
+	private boolean applyFilterInProgress;
+	
+	private UserInfo activeUser;
 
 	@Inject
-	public HomePresenterImpl(IndexPresenter parentPresenter, HomeView view)
+	public HomePresenterImpl(HomeView view)
 	{
 		this.view = view;
-		this.parentPresenter = parentPresenter;
-		view.setParent(this);
+		view.setPresenter(this);
 		acceptScheduleInProgress = false;
 		requestDifferentScheduleInProgress = false;
 		applyFilterInProgress = false;
@@ -83,56 +82,74 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		HandlerRegistration onReceiveHome;
 		onReceiveHome = eventBus.addHandler(ReceiveHomeEvent.TYPE,  this);
 		eventBusRegistration.put(ReceiveHomeEvent.TYPE, onReceiveHome);
+		
+		HandlerRegistration login;
+		login = eventBus.addHandler(ReceiveLoginEvent.TYPE, this);
+		eventBusRegistration.put(ReceiveLoginEvent.TYPE, login);
 	}
 	
 	@Override
-	public void go(HasWidgets container) {
+	public void go(HasWidgets container)
+	{
 		//gets the active user off parentPresenter and checks if his role is admin or not
 		//if the user is a regular user then clear the dropdown and add only this user to the list
-		if(parentPresenter.getActiveUser().getUserRole() == 1) {
-			view.getUserDropDown().clear();
-			view.getUserDropDown().addItem(parentPresenter.getActiveUser().getUserName());
-		} else
-		//if the user isnt the regular user then fill the dropdown menu with all the users in userInfoList
+				
+		if(activeUser.getUserRole() == 1)
 		{
 			view.getUserDropDown().clear();
-			for(UserInfo i: userInfoList) {
-				view.getUserDropDown().addItem(i.getUserName());
+			view.getUserDropDown().addItem(activeUser.getUserName());
+		}
+		else
+		//if the user is not the regular user then fill the dropdown menu with all the users in userInfoList
+		{
+			view.getUserDropDown().clear();
+			
+			for(UserInfo userInfo: userInfoList)
+			{
+				view.getUserDropDown().addItem(userInfo.getUserName());
 			}
 		}
 		
+		// Note hard-coded
 		//puts the A, B, C ect, terms in the drop down menu
+		view.getTermDropDown().clear();
 		view.getTermDropDown().addItem("A");
 		view.getTermDropDown().addItem("B");
 		view.getTermDropDown().addItem("C");
 		view.getTermDropDown().addItem("D");
 		view.getTermDropDown().addItem("E1");
 		view.getTermDropDown().addItem("E2");
+
+		parentPresenter.showMenuTabs();
 		
-//		parentPresenter.showMenuTabs();
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public BaseView<? extends BasePresenter> getView() {
-		return (BaseView<? extends BasePresenter>) this.view;
+	public IndexPresenter getParentPresenter()
+	{
+		return parentPresenter;
 	}
 	
 	@Override
-	public IndexPresenter getParentPresenter() {
-		return parentPresenter;
-	}
-	@Override
-	public void setParentPresenter(IndexPresenter parentPresenter) {
+	public void setParentPresenter(IndexPresenter parentPresenter)
+	{
 		this.parentPresenter = parentPresenter;
 	}
 	
-	//apply filter when the termBox and userBox are filled in.
+	@Override
+	public HomeView getView()
+	{
+		return view;
+	}
+	
+	// apply filter when the termBox and userBox are filled in.
 	// show the load screen while stuff is happening
 	@Override
-	public void applyFilter(ListBox termBox, ListBox userBox) {
+	public void applyFilter(ListBox termBox, ListBox userBox)
+	{
 		if(!applyFilterInProgress)
 		{
 			applyFilterInProgress = true;
@@ -167,38 +184,47 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		
 		//runs until it hits the end of the userInfoList(see above). checks if a user in the userInfoList shares a 
 		//userName with the username parameter. If it finds on it sets the user variable from above the the found user.
-		for(int i = 0; i < userInfoList.size(); i++) {
-			if(userInfoList.get(i).getUserName().equals(username)) {
+		for(int i = 0; i < userInfoList.size(); i++)
+		{
+			if(userInfoList.get(i).getUserName().equals(username))
+			{
 				user = userInfoList.get(i);
 				break;
 			}
 		}
 		
 		//same thing as the username loop above but for the instructor variable. 
-		for(int i = 0; i < instructorInfoList.size(); i++) {
-			if(instructorInfoList.get(i).getUserInfoId() == user.getId()) {
+		for(int i = 0; i < instructorInfoList.size(); i++)
+		{
+			if(instructorInfoList.get(i).getUserInfoId() == user.getId())
+			{
 				instructor = instructorInfoList.get(i);
 				break;
 			}
 		}
 		
 		//if the instructor variables Id = 0 then add that string to the views calendarList and return false. 
-		if(instructor.getId() == 0) {
+		if(instructor.getId() == 0)
+		{
 			view.getCalendarList().addItem("The selected user has no schedule");
 			return false;
 		}
 		
 		//iterate over the scheduleLinksList
-		for(int i = 0; i < scheduleLinksList.size(); i++) {
+		for(int i = 0; i < scheduleLinksList.size(); i++)
+		{
 			//if the ith element in in scheduleLinksList has a instructorInfoId = to the instructor 
 			//variable from above then continue
 			//the loop. else break from the loop.
-			if(scheduleLinksList.get(i).getInstructorInfoId() == instructor.getId()) {
+			if(scheduleLinksList.get(i).getInstructorInfoId() == instructor.getId())
+			{
 				//iterate over the sectionInfo list. 
-				for(int b = 0; b < sectionInfoList.size(); b++) {
+				for(int b = 0; b < sectionInfoList.size(); b++)
+				{
 					//if the ith element of scheduleLinksList' id is the same as the bth element of sectionInfoList
 					//then add the bth element of sectionInfoList to the sections list. then break from the loop.
-					if(scheduleLinksList.get(i).getSectionInfoId() == sectionInfoList.get(b).getId()) {
+					if(scheduleLinksList.get(i).getSectionInfoId() == sectionInfoList.get(b).getId())
+					{
 						sections.add(sectionInfoList.get(b));
 						break;
 					}
@@ -309,7 +335,8 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	}
 	
 	//turn the term string into an int. 
-	private int termToInt(String termString) {
+	private int termToInt(String termString)
+	{
 		
 		int term = 0;
 		
@@ -353,7 +380,8 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	
 	
 	@Override
-	public void acceptSchedule(ListBox termBox, ListBox userBox) {
+	public void acceptSchedule(ListBox termBox, ListBox userBox)
+	{
 		if(!acceptScheduleInProgress)
 		{
 			acceptScheduleInProgress = true;
@@ -366,7 +394,8 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		}
 	}
 	
-	private void sendAcceptSchedule(String term, String username) {
+	private void sendAcceptSchedule(String term, String username)
+	{
 		SendAcceptScheduleAction sasa = new SendAcceptScheduleAction(term, username);
 		SendAcceptScheduleEvent sase = new SendAcceptScheduleEvent(sasa);
 		eventBus.fireEvent(sase);
@@ -374,15 +403,18 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	
 	//TODO move to NotificationsPresenterImpl
 	@Override
-	public void onSendAcceptSchedule(SendAcceptScheduleEvent evt) {
-		String term = evt.getAction().getTerm();
-		String username = evt.getAction().getUserName();
+	public void onSendAcceptSchedule(SendAcceptScheduleEvent evt)
+	{
+		SendAcceptScheduleAction sasa = evt.getSendAcceptScheduleAction();
+		String term = sasa.getTerm();
+		String username = sasa.getUserName();
 		
 		//TODO create notification for admin saying that username accepted their schedule for term
 	}
 	
 	@Override
-	public void requestDifferentSchedule(ListBox termBox, ListBox userBox) {
+	public void requestDifferentSchedule(ListBox termBox, ListBox userBox)
+	{
 		if(!requestDifferentScheduleInProgress)
 		{
 			requestDifferentScheduleInProgress = true;
@@ -395,7 +427,8 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		}
 	}
 	
-	private void sendRequestDifferentSchedule(String term, String username) {
+	private void sendRequestDifferentSchedule(String term, String username)
+	{
 		SendRequestDifferentScheduleAction srdsa = new SendRequestDifferentScheduleAction(term, username, view.getViewRootPanel());
 		SendRequestDifferentScheduleEvent srdse = new SendRequestDifferentScheduleEvent(srdsa);
 		eventBus.fireEvent(srdse);
@@ -405,16 +438,36 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 	public void onReceiveHome(ReceiveHomeEvent evt)
 	{
 		HasWidgets container = evt.getContainer();
-		ReceiveHomeAction rha = evt.getAction();
-		instructorInfoList = rha.getInstructors();
-		userInfoList = rha.getUsers();
-		courseInfoList = rha.getCourses();
-		sectionInfoList = rha.getSections();
-		labInfoList = rha.getLabs();
-		calendarInfoList = rha.getCalendars();
-		scheduleLinksList = rha.getSchedules();
+		ReceiveHomeAction rha = evt.getReceiveHomeAction();
+
+		populateHomeAction(rha);
 		
 		go(container);
-		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		parentPresenter.hideLoadScreen();
+	}
+	
+	@Override
+	public void onReceiveLogin(ReceiveLoginEvent evt)
+	{
+		HasWidgets container = evt.getContainer();
+		ReceiveLoginAction rla = evt.getReceiveLoginAction();
+		ReceiveHomeAction rma = evt.getReceiveHomeAction();
+		
+		activeUser = rla.getModel();
+		populateHomeAction(rma);
+		
+		go(container);
+		parentPresenter.hideLoadScreen();
+	}
+	
+	private void populateHomeAction(ReceiveHomeAction action)
+	{
+		instructorInfoList = action.getInstructors();
+		userInfoList = action.getUsers();
+		courseInfoList = action.getCourses();
+		sectionInfoList = action.getSections();
+		labInfoList = action.getLabs();
+		calendarInfoList = action.getCalendars();
+		scheduleLinksList = action.getSchedules();
 	}
 }

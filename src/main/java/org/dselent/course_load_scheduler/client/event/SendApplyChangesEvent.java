@@ -3,22 +3,19 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendApplyChangesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendApplyChangesEventHandler;
 
-public class SendApplyChangesEvent extends BaseEvent<SendApplyChangesAction, SendApplyChangesEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
 
-public static Type<SendApplyChangesEventHandler> TYPE = new Type<SendApplyChangesEventHandler>();
+public class SendApplyChangesEvent extends GwtEvent<SendApplyChangesEventHandler>
+{
+	public static Type<SendApplyChangesEventHandler> TYPE = new Type<SendApplyChangesEventHandler>();
 	
-	private SendApplyChangesAction action;
+	private SendApplyChangesAction sendApplyChangesAction;
 	
-	public SendApplyChangesEvent(SendApplyChangesAction action)
+	public SendApplyChangesEvent(SendApplyChangesAction sendApplyChangesAction)
 	{
-		super(action);
+		this.sendApplyChangesAction = sendApplyChangesAction;
 	}
-	
-	public SendApplyChangesAction getAction()
-	{
-		return action;
-	}
-	
+		
 	@Override
 	public Type<SendApplyChangesEventHandler> getAssociatedType()
 	{
@@ -30,5 +27,9 @@ public static Type<SendApplyChangesEventHandler> TYPE = new Type<SendApplyChange
 	{
 		handler.onSendApplyChanges(this);
 	}
-	
+
+	public SendApplyChangesAction getSendApplyChangesAction()
+	{
+		return sendApplyChangesAction;
+	}	
 }

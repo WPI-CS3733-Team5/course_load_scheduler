@@ -1,11 +1,8 @@
 package org.dselent.course_load_scheduler.client.translator.impl;
 
-import java.util.Date;
-
 import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
 import org.dselent.course_load_scheduler.client.model.UserInfo;
-import org.dselent.course_load_scheduler.client.receive.jsonkeys.ReceiveLoginKeys;
 import org.dselent.course_load_scheduler.client.send.jsonkeys.SendLoginKeys;
 import org.dselent.course_load_scheduler.client.translator.ActionTranslator;
 import org.dselent.course_load_scheduler.client.utils.JSONHelper;
@@ -28,42 +25,25 @@ public class LoginActionTranslatorImpl implements ActionTranslator<SendLoginActi
 	
 	@Override
 	public ReceiveLoginAction translateToAction(JSONObject json)
+	{	
+		return translateToAction(json, 0);
+	}
+	
+	public ReceiveLoginAction translateToAction(JSONObject json, int arrayIndex)
 	{		
 		// null values will not have their keys sent back from the sever
 		// this will throw an exception here
 		// you may choose to handle the exception as you wish
 		
-		// sent timestamps as epoch seconds (long)
-		
+		UserInfoTranslator userInfoTranslator = new UserInfoTranslator();
+
 		JSONValue jsonObject = json.get("success");
-		JSONObject userObject = jsonObject.isArray().get(0).isObject();
+		JSONObject userObject = jsonObject.isArray().get(arrayIndex).isObject();
 		
-		Integer id = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.ID));
-		Integer userRole = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.USER_ROLE)); 
-		String userName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.USER_NAME));
-		String firstName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.FIRST_NAME));
-		String lastName = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.LAST_NAME));
-		String email = JSONHelper.getStringValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.EMAIL));
-		//Integer userStateId = JSONHelper.getIntValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.USER_STATE_ID));
-		//Long createdAt = JSONHelper.getLongValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.CREATED_AT));
-		//Long updatedAt = JSONHelper.getLongValue(userObject, JSONHelper.convertKeyName(ReceiveLoginKeys.UPDATED_AT));
-		
-		// TODO look into time conversion more
-		// put into JSONHelper?
-		
-		UserInfo user = new UserInfo();
-		user.setId(id);
-		user.setUserRole(userRole);
-		user.setUserName(userName);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setEmail(email);
-		//user.setUserStateId(userStateId);
-		//user.setCreatedAt(new Date(createdAt));
-		//user.setUpdatedAt(new Date(updatedAt));
-		
+		UserInfo userInfo = userInfoTranslator.translateToModel(userObject);
+	
 		// possibly use builder pattern if it is a lot of data
-		ReceiveLoginAction action = new ReceiveLoginAction(user);	
+		ReceiveLoginAction action = new ReceiveLoginAction(userInfo);	
 	
 		return action;
 	}

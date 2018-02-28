@@ -1,47 +1,25 @@
 package org.dselent.course_load_scheduler.client.view;
 
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
-import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
-import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
-
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.uibinder.client.UiField;
 
-public interface HomeView extends BaseView<HomePresenter>{
-	
-	public Button getApply();
-	
-	public void setApply(Button button) ;
-	
-	public Button getAcceptSchedule();
-	
-	public void setAcceptSchedule(Button button);
-	
-	public Button getRequestDifferentSchedule() ;
-	
-	public void setRequestDifferentSchedule(Button button);
-	
-	public ListBox getTermDropDown();
-	
-	public void setTermDropDown(ListBox termDropDown);
-
-	public ListBox getUserDropDown();
-	
-	public void setUserDropDown(ListBox userDropDown) ;
-	
-	public ListBox getCalendarList() ;
-	
-	public void setCalendarList(ListBox calendarList);
-	
-	public  Widget getWidgetContainer();
-
-	public void setParent(HomePresenterImpl homePresenterImpl);
-
-	public HasWidgets getViewRootPanel();
-
+public interface HomeView extends BaseView<HomePresenter>
+{
+	Widget getWidgetContainer();
+	HasWidgets getViewRootPanel();
+	Button getApply();
+	void setApply(Button button) ;
+	Button getAcceptSchedule();
+	void setAcceptSchedule(Button button);
+	Button getRequestDifferentSchedule() ;
+	void setRequestDifferentSchedule(Button button);
+	ListBox getTermDropDown();
+	void setTermDropDown(ListBox termDropDown);
+	ListBox getUserDropDown();
+	void setUserDropDown(ListBox userDropDown) ;
+	ListBox getCalendarList();
+	void setCalendarList(ListBox calendarList);
 }

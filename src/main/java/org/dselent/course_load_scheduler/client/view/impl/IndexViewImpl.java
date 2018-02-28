@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements IndexView
@@ -19,6 +20,12 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	interface IndexViewImplUiBinder extends UiBinder<Widget, IndexViewImpl> {}
 	
 	@UiField
+	VerticalPanel rootPanel;
+	
+	@UiField
+	HTMLPanel menuTabsPanel;
+	
+	@UiField
 	HTMLPanel mainPanel;
 	
 	@UiField
@@ -26,13 +33,41 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	
 	@UiField
 	PopupPanel glassLoadingPanel;
-	
-//	@UiField
-//	MenuTabsImpl menuTabsImpl;
-	
+		
 	public IndexViewImpl()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+	}
+
+	@Override
+	public void setPresenter(IndexPresenter presenter)
+	{
+		this.presenter = presenter;
+	}
+	
+	@Override
+	public Widget getWidgetContainer()
+	{
+		return this;
+	}
+	
+	@Override
+	public HasWidgets getViewRootPanel()
+	{
+		return rootPanel;
+	}
+	
+	
+	@Override
+	public HTMLPanel getMenuTabsPanel()
+	{
+		return menuTabsPanel;
+	}
+
+	@Override
+	public void setMenuTabsPanel(HTMLPanel menuTabsPanel)
+	{
+		this.menuTabsPanel = menuTabsPanel;
 	}
 
 	@Override
@@ -46,12 +81,6 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	{
 		this.mainPanel = mainPanel;
 	}
-
-	@Override
-	public void setPresenter(IndexPresenter presenter)
-	{
-		this.presenter = presenter;
-	}
 	
 	@Override
 	public PopupPanel getGlassLoadingPanel()
@@ -64,22 +93,4 @@ public class IndexViewImpl extends BaseViewImpl<IndexPresenter> implements Index
 	{
 		return loadingImage;
 	}
-	
-	@Override
-	public Widget getWidgetContainer()
-	{
-		return this;
-	}
-	
-	@Override
-	public HasWidgets getViewRootPanel()
-	{
-		return mainPanel;
-	}
-	
-//	@Override
-//	public MenuTabsImpl getMenuTabsImpl() {
-//		return menuTabsImpl;
-//	}
-
 }

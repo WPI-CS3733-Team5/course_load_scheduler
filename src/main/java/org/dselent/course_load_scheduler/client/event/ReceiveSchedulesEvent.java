@@ -5,15 +5,19 @@ import org.dselent.course_load_scheduler.client.event_handler.ReceiveSchedulesEv
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class ReceiveSchedulesEvent extends DisplayEvent<ReceiveSchedulesAction, ReceiveSchedulesEventHandler> {
-
+public class ReceiveSchedulesEvent extends DisplayEvent<ReceiveSchedulesEventHandler>
+{
 	public static Type<ReceiveSchedulesEventHandler> TYPE = new Type<ReceiveSchedulesEventHandler>();
 	
-	public ReceiveSchedulesEvent(ReceiveSchedulesAction action, HasWidgets container)
+	private ReceiveSchedulesAction receiveSchedulesAction;
+	
+	public ReceiveSchedulesEvent(ReceiveSchedulesAction receiveSchedulesAction, HasWidgets container)
 	{
-		super(action, container);
+		super(container);
+		this.receiveSchedulesAction = receiveSchedulesAction;
 	}
 	
+	@Override
 	public Type<ReceiveSchedulesEventHandler> getAssociatedType()
 	{
 		return TYPE;
@@ -23,5 +27,10 @@ public class ReceiveSchedulesEvent extends DisplayEvent<ReceiveSchedulesAction, 
 	protected void dispatch(ReceiveSchedulesEventHandler handler)
 	{
 		handler.onReceiveSchedules(this);
+	}
+
+	public ReceiveSchedulesAction getReceiveSchedulesAction()
+	{
+		return receiveSchedulesAction;
 	}
 }

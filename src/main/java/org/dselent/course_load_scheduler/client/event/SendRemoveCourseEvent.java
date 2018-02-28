@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendRemoveCourseAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendRemoveCourseEventHandler;
 
-public class SendRemoveCourseEvent extends BaseEvent<SendRemoveCourseAction, SendRemoveCourseEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendRemoveCourseEvent extends GwtEvent<SendRemoveCourseEventHandler>
+{
+	public static Type<SendRemoveCourseEventHandler> TYPE = new Type<SendRemoveCourseEventHandler>();
 	
-public static Type<SendRemoveCourseEventHandler> TYPE = new Type<SendRemoveCourseEventHandler>();
+	private SendRemoveCourseAction sendRemoveCourseAction;
 	
-	public SendRemoveCourseEvent(SendRemoveCourseAction action)
+	public SendRemoveCourseEvent(SendRemoveCourseAction sendRemoveCourseAction)
 	{
-		super(action);
+		this.sendRemoveCourseAction = sendRemoveCourseAction;
 	}
 	
 	@Override
@@ -24,5 +28,8 @@ public static Type<SendRemoveCourseEventHandler> TYPE = new Type<SendRemoveCours
 		handler.onSendRemoveCourse(this);
 	}
 
-
+	public SendRemoveCourseAction getSendRemoveCourseAction()
+	{
+		return sendRemoveCourseAction;
+	}
 }

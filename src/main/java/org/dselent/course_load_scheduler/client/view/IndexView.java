@@ -1,8 +1,6 @@
 package org.dselent.course_load_scheduler.client.view;
 
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
-import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
-
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -11,7 +9,8 @@ public interface IndexView extends BaseView<IndexPresenter>
 {
 	HTMLPanel getMainPanel();
 	void setMainPanel(HTMLPanel mainPanel);
+	HTMLPanel getMenuTabsPanel();
+	void setMenuTabsPanel(HTMLPanel menuTabsPanel);
 	PopupPanel getGlassLoadingPanel();
 	Image getLoadingImage();
-	//MenuTabsImpl getMenuTabsImpl();
 }

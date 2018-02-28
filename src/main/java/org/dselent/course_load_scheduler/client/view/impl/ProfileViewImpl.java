@@ -1,7 +1,6 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
 import org.dselent.course_load_scheduler.client.presenter.ProfilePresenter;
-import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.view.ProfileView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,78 +17,94 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 
 	private static ProfileViewUiBinder uiBinder = GWT.create(ProfileViewUiBinder.class);
 	public interface ProfileViewUiBinder extends UiBinder<Widget, ProfileViewImpl> {}
-	@SuppressWarnings("unused")
-	private ProfilePresenterImpl parent;
 	
-	@UiField HTMLPanel profileRoot;
+	@UiField HTMLPanel rootPanel;
 	@UiField Label username;
 	@UiField Label phoneNumber;
 	@UiField Label email;
 	@UiField Button editWishlistButton;
 
-	public ProfileViewImpl() {
+	public ProfileViewImpl()
+	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
-	public static ProfileViewUiBinder getUiBinder() {
-		return uiBinder;
+	
+	@Override
+	public void setPresenter(ProfilePresenter presenter)
+	{
+		this.presenter = presenter;		
 	}
 
+	@Override
+	public Widget getWidgetContainer()
+	{
+		return this;
+	}
 
-	
-	public static void setUiBinder(ProfileViewUiBinder uiBinder) {
-		ProfileViewImpl.uiBinder = uiBinder;
+	@Override
+	public HasWidgets getViewRootPanel()
+	{
+		return rootPanel;
 	}
 
 
 	@Override
-	public Label getUsername() {
+	public Label getUsername()
+	{
 		return username;
 	}
 
 
 	@Override
-	public void setUsername(Label username) {
+	public void setUsername(Label username)
+	{
 		this.username = username;
 	}
 
 	@Override
-	public Label getPhoneNumber() {
+	public Label getPhoneNumber()
+	{
 		return phoneNumber;
 	}
 
 
 	@Override
-	public void setPhoneNumber(Label phoneNumber) {
+	public void setPhoneNumber(Label phoneNumber)
+	{
 		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
-	public Label getEmail() {
+	public Label getEmail()
+	{
 		return email;
 	}
 
 
 	@Override
-	public void setEmail(Label email) {
+	public void setEmail(Label email)
+	{
 		this.email = email;
 	}
 
 
 	@Override
-	public Button getEditCourseWishlistButton() {
+	public Button getEditCourseWishlistButton()
+	{
 		return editWishlistButton;
 	}
 
 
 	@Override
-	public void setEditWishlistButton(Button editCourseWishlistButton) {
+	public void setEditWishlistButton(Button editCourseWishlistButton)
+	{
 		this.editWishlistButton = editCourseWishlistButton;
 	}
 	
 
 	@Override
-	public Button getEditWishlistButton() {
+	public Button getEditWishlistButton()
+	{
 		return this.editWishlistButton;
 	}
 
@@ -99,28 +114,5 @@ public class ProfileViewImpl extends BaseViewImpl<ProfilePresenter> implements P
 	{
 		presenter.editWishlist();
 	}
-
-
-
-	@Override
-	public void setPresenter(ProfilePresenter presenter) {
-		this.presenter = presenter;		
-	}
-
-
-
-	@Override
-	public Widget getWidgetContainer() {
-		return this;
-	}
-
-
-
-	@Override
-	public HasWidgets getViewRootPanel() {
-		return profileRoot;
-	}
-
-
 
 }

@@ -5,13 +5,16 @@ import org.dselent.course_load_scheduler.client.event_handler.SendProfileEventHa
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendProfileEvent extends DisplayEvent<SendProfileAction, SendProfileEventHandler>{
-	
+public class SendProfileEvent extends DisplayEvent<SendProfileEventHandler>
+{
 	public static Type<SendProfileEventHandler> TYPE = new Type<SendProfileEventHandler>();
 	
-	public SendProfileEvent(SendProfileAction action, HasWidgets container)
+	private SendProfileAction sendProfileAction;
+	
+	public SendProfileEvent(SendProfileAction sendProfileAction, HasWidgets container)
 	{
-		super(action, container);
+		super(container);
+		this.sendProfileAction = sendProfileAction;
 	}
 	
 	@Override
@@ -24,5 +27,10 @@ public class SendProfileEvent extends DisplayEvent<SendProfileAction, SendProfil
 	protected void dispatch(SendProfileEventHandler handler)
 	{
 		handler.onSendProfile(this);
+	}
+
+	public SendProfileAction getSendProfileAction()
+	{
+		return sendProfileAction;
 	}
 }

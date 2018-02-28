@@ -53,6 +53,24 @@ public class LoginViewImpl extends BaseViewImpl<LoginPresenter> implements Login
 	}
 	
 	@Override
+	public void setPresenter(LoginPresenter presenter)
+	{
+		this.presenter = presenter;
+	}
+	
+	@Override
+	public Widget getWidgetContainer()
+	{
+		return this;
+	}
+	
+	@Override
+	public HasWidgets getViewRootPanel()
+	{
+		return loginPanel;
+	}
+	
+	@Override
 	public TextBox getNameTextBox()
 	{
 		return nameTextBox;
@@ -81,29 +99,11 @@ public class LoginViewImpl extends BaseViewImpl<LoginPresenter> implements Login
 	{
 		return loginButton;
 	}
-
-	@Override
-	public void setPresenter(LoginPresenter presenter)
-	{
-		this.presenter = presenter;
-	}
 	
 	@Override
 	public void showErrorMessages(String errorMessages)
 	{
 		Window.alert(errorMessages);
-	}
-	
-	@Override
-	public Widget getWidgetContainer()
-	{
-		return this;
-	}
-	
-	@Override
-	public HasWidgets getViewRootPanel()
-	{
-		return loginPanel;
 	}
 	
 	@UiHandler("loginButton")

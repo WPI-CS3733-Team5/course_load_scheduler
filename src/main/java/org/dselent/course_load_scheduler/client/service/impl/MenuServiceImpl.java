@@ -1,7 +1,6 @@
 package org.dselent.course_load_scheduler.client.service.impl;
 
 import org.dselent.course_load_scheduler.client.action.SendAccountsAction;
-import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.action.SendHomeAction;
 import org.dselent.course_load_scheduler.client.action.SendProfileAction;
 import org.dselent.course_load_scheduler.client.action.SendSchedulesAction;
@@ -14,7 +13,6 @@ import org.dselent.course_load_scheduler.client.callback.SendSchedulesCallback;
 import org.dselent.course_load_scheduler.client.callback.SendWishlistCallback;
 import org.dselent.course_load_scheduler.client.event.SendAccountsEvent;
 import org.dselent.course_load_scheduler.client.event.SendCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendFetchListEvent;
 import org.dselent.course_load_scheduler.client.event.SendHomeEvent;
 import org.dselent.course_load_scheduler.client.event.SendProfileEvent;
 import org.dselent.course_load_scheduler.client.event.SendSchedulesEvent;
@@ -23,7 +21,6 @@ import org.dselent.course_load_scheduler.client.network.NetworkRequest;
 import org.dselent.course_load_scheduler.client.network.NetworkRequestStrings;
 import org.dselent.course_load_scheduler.client.service.MenuService;
 import org.dselent.course_load_scheduler.client.translator.impl.SendAccountsActionTranslatorImpl;
-import org.dselent.course_load_scheduler.client.translator.impl.SendCoursesActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendHomeActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendProfileActionTranslatorImpl;
 import org.dselent.course_load_scheduler.client.translator.impl.SendSchedulesActionTranslatorImpl;
@@ -56,10 +53,6 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 		profileRegistration = eventBus.addHandler(SendProfileEvent.TYPE, this);
 		eventBusRegistration.put(SendProfileEvent.TYPE, profileRegistration);
 		
-		HandlerRegistration notificationsRegistration;
-		notificationsRegistration = eventBus.addHandler(SendFetchListEvent.TYPE, this);
-		eventBusRegistration.put(SendFetchListEvent.TYPE, notificationsRegistration);
-		
 		HandlerRegistration wishlistRegistration;
 		wishlistRegistration = eventBus.addHandler(SendWishlistEvent.TYPE, this);
 		eventBusRegistration.put(SendWishlistEvent.TYPE, wishlistRegistration);
@@ -78,8 +71,9 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	}
 	
 	@Override
-	public void onSendHome(SendHomeEvent evt) {
-		SendHomeAction action = evt.getAction();
+	public void onSendHome(SendHomeEvent evt)
+	{
+		SendHomeAction action = evt.getSendHomeAction();
 		SendHomeActionTranslatorImpl homeActionTranslator = new SendHomeActionTranslatorImpl();
 		JSONObject json = homeActionTranslator.translateToJson(action);
 		SendHomeCallback homeCallback = new SendHomeCallback(eventBus, evt.getContainer());
@@ -89,8 +83,9 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	}
 	
 	@Override
-	public void onSendProfile(SendProfileEvent evt) {
-		SendProfileAction action = evt.getAction();
+	public void onSendProfile(SendProfileEvent evt)
+	{
+		SendProfileAction action = evt.getSendProfileAction();
 		SendProfileActionTranslatorImpl profileActionTranslator = new SendProfileActionTranslatorImpl();
 		JSONObject json = profileActionTranslator.translateToJson(action);
 		SendProfileCallback profileCallback = new SendProfileCallback(eventBus, evt.getContainer());
@@ -100,8 +95,9 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	}
 	
 	@Override
-	public void onSendWishlist(SendWishlistEvent evt) {
-		SendWishlistAction action = evt.getAction();
+	public void onSendWishlist(SendWishlistEvent evt)
+	{
+		SendWishlistAction action = evt.getSendWishlistAction();
 		SendWishlistActionTranslatorImpl wishlistActionTranslator = new SendWishlistActionTranslatorImpl();
 		JSONObject json = wishlistActionTranslator.translateToJson(action);
 		SendWishlistCallback wishlistCallback = new SendWishlistCallback(eventBus, evt.getContainer());
@@ -111,19 +107,17 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	}
 	
 	@Override
-	public void onSendCourses(SendCoursesEvent evt) {
-		SendCoursesAction action = evt.getAction();
-		SendCoursesActionTranslatorImpl coursesActionTranslator = new SendCoursesActionTranslatorImpl();
-		JSONObject json = coursesActionTranslator.translateToJson(action);
+	public void onSendCourses(SendCoursesEvent evt)
+	{
 		SendCoursesCallback coursesCallback = new SendCoursesCallback(eventBus, evt.getContainer());
-		
-		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, coursesCallback, json);
+		NetworkRequest request = new NetworkRequest(NetworkRequestStrings.GET_ALL_COURSE_SECTION_LAB_CALENDAR_INFO, coursesCallback, null);
 		request.send();
 	}
 	
 	@Override
-	public void onSendAccounts(SendAccountsEvent evt) {
-		SendAccountsAction action = evt.getAction();
+	public void onSendAccounts(SendAccountsEvent evt)
+	{
+		SendAccountsAction action = evt.getSendAccountsAction();
 		SendAccountsActionTranslatorImpl accountsActionTranslator = new SendAccountsActionTranslatorImpl();
 		JSONObject json = accountsActionTranslator.translateToJson(action);
 		SendAccountsCallback accountsCallback = new SendAccountsCallback(eventBus, evt.getContainer());
@@ -133,8 +127,9 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService
 	}
 	
 	@Override
-	public void onSendSchedules(SendSchedulesEvent evt) {
-		SendSchedulesAction action = evt.getAction();
+	public void onSendSchedules(SendSchedulesEvent evt)
+	{
+		SendSchedulesAction action = evt.getSendSchedulesAction();
 		SendSchedulesActionTranslatorImpl schedulesActionTranslator = new SendSchedulesActionTranslatorImpl();
 		JSONObject json = schedulesActionTranslator.translateToJson(action);
 		

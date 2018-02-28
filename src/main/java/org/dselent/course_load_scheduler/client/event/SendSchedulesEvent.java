@@ -5,13 +5,16 @@ import org.dselent.course_load_scheduler.client.event_handler.SendSchedulesEvent
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendSchedulesEvent extends DisplayEvent<SendSchedulesAction, SendSchedulesEventHandler>{
-	
+public class SendSchedulesEvent extends DisplayEvent<SendSchedulesEventHandler>
+{
 	public static Type<SendSchedulesEventHandler> TYPE = new Type<SendSchedulesEventHandler>();
-		
-	public SendSchedulesEvent(SendSchedulesAction action, HasWidgets panel)
+	
+	private SendSchedulesAction sendSchedulesAction;
+	
+	public SendSchedulesEvent(SendSchedulesAction sendSchedulesAction, HasWidgets panel)
 	{
-		super(action,panel);
+		super(panel);
+		this.sendSchedulesAction = sendSchedulesAction;
 	}
 	
 	@Override
@@ -24,5 +27,10 @@ public class SendSchedulesEvent extends DisplayEvent<SendSchedulesAction, SendSc
 	protected void dispatch(SendSchedulesEventHandler handler)
 	{
 		handler.onSendSchedules(this);
+	}
+
+	public SendSchedulesAction getSendSchedulesAction()
+	{
+		return sendSchedulesAction;
 	}
 }

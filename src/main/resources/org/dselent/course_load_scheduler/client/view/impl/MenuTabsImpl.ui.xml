@@ -4,7 +4,7 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel width="100%">
+	<g:HTMLPanel ui:field="rootPanel" width="100%">
 		<g:VerticalPanel>
 			<g:Grid ui:field="menuGrid" width="100%">
 			<g:row>

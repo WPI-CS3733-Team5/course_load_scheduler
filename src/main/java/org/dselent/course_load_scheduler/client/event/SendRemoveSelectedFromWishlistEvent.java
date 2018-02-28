@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendRemoveSelectedFromWishlistAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendRemoveSelectedFromWishlistEventHandler;
 
-public class SendRemoveSelectedFromWishlistEvent extends BaseEvent<SendRemoveSelectedFromWishlistAction, SendRemoveSelectedFromWishlistEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendRemoveSelectedFromWishlistEvent extends GwtEvent<SendRemoveSelectedFromWishlistEventHandler>
+{
+	public static Type<SendRemoveSelectedFromWishlistEventHandler> TYPE = new Type<SendRemoveSelectedFromWishlistEventHandler>();
 	
-public static Type<SendRemoveSelectedFromWishlistEventHandler> TYPE = new Type<SendRemoveSelectedFromWishlistEventHandler>();
-		
-	public SendRemoveSelectedFromWishlistEvent(SendRemoveSelectedFromWishlistAction action)
+	private SendRemoveSelectedFromWishlistAction sendRemoveSelectedFromWishlistAction;
+	
+	public SendRemoveSelectedFromWishlistEvent(SendRemoveSelectedFromWishlistAction sendRemoveSelectedFromWishlistAction)
 	{
-		super(action);
+		this.sendRemoveSelectedFromWishlistAction = sendRemoveSelectedFromWishlistAction;
 	}
 	
 	@Override
@@ -24,4 +28,8 @@ public static Type<SendRemoveSelectedFromWishlistEventHandler> TYPE = new Type<S
 		handler.onSendRemoveSelectedFromWishlist(this);
 	}
 
+	public SendRemoveSelectedFromWishlistAction getSendRemoveSelectedFromWishlistAction()
+	{
+		return sendRemoveSelectedFromWishlistAction;
+	}
 }

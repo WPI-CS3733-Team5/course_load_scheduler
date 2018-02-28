@@ -5,13 +5,17 @@ import org.dselent.course_load_scheduler.client.event_handler.ReceiveHomeEventHa
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class ReceiveHomeEvent extends DisplayEvent<ReceiveHomeAction, ReceiveHomeEventHandler>{
+public class ReceiveHomeEvent extends DisplayEvent<ReceiveHomeEventHandler>
+{
 
 	public static Type<ReceiveHomeEventHandler> TYPE = new Type<ReceiveHomeEventHandler>();
 	
-	public ReceiveHomeEvent(ReceiveHomeAction action, HasWidgets container)
+	private ReceiveHomeAction receiveHomeAction;
+	
+	public ReceiveHomeEvent(ReceiveHomeAction receiveHomeAction, HasWidgets container)
 	{
-		super(action, container);
+		super(container);
+		this.receiveHomeAction = receiveHomeAction;
 	}
 	
 	public Type<ReceiveHomeEventHandler> getAssociatedType()
@@ -23,5 +27,10 @@ public class ReceiveHomeEvent extends DisplayEvent<ReceiveHomeAction, ReceiveHom
 	protected void dispatch(ReceiveHomeEventHandler handler)
 	{
 		handler.onReceiveHome(this);
+	}
+
+	public ReceiveHomeAction getReceiveHomeAction()
+	{
+		return receiveHomeAction;
 	}
 }

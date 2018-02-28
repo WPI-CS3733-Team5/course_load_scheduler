@@ -5,34 +5,38 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
-public interface CoursesPresenter extends BasePresenter {
+public interface CoursesPresenter extends BasePresenter
+{
 	
-	public void showPopupPanel1();
-	public void hidePopupPanel1();
-	public void showPopupPanel2();
-	public void hidePopupPanel2();
-	public void showPopupPanel3();
-	public void hidePopupPanel3();
+	IndexPresenter getParentPresenter();
+	void setParentPresenter(IndexPresenter parentPresenter);
 	
-	public void requestSortCourses(ListBox departmentMenuBar, ListBox termMenuBar, TextBox courseNumberTextBox);
-	public void requestAddToWishlist(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestSendEditCourses(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestApplyChanges(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestCancelChanges(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestRemoveCourse(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestRemoveSelectedFromWishlist(ListBox wishlistListBox);
-	public void requestViewFullWishlist(ListBox wishlistListBox);
-	public void requestCreateCourse(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
-	public void requestSectionType(TextBox sectionTypeTextBox);
-	public void requestMeetingTimes(TextBox meetingTimesTextBox);
-	public void requestPopup1Apply(RadioButton lectureRadioButton, RadioButton labRadioButton, RadioButton specialRadioButton);
-	public void requestPopup1Cancel();
-	public void requestPopup2StartTime(TextBox popup2StartTimeTextBox);
-	public void requestPopup2EndTime(TextBox popup2EndTimeTextBox);
-	public void requestPopup2Apply(CheckBox popup2SundayCheckbox, CheckBox popup2MondayCheckbox, CheckBox popup2TuesdayCheckbox, CheckBox popup2WednesdayCheckBox, CheckBox popup2ThursdayCheckbox, CheckBox popup2FridayCheckbox, CheckBox popup2SaturdayCheckbox, TextBox popup2StartTimeTextBox, TextBox popup2EndTimeTextBox);
-	public void requestPopup2Cancel();
-	public void requestPopup3Apply(RadioButton popup3YesRadio, RadioButton popup3NoRadio);
+	void showPopupPanel1();
+	void hidePopupPanel1();
+	void showPopupPanel2();
+	void hidePopupPanel2();
+	void showPopupPanel3();
+	void hidePopupPanel3();
 	
-	public void populateCoursesViewer();
+	void requestSortCourses(ListBox departmentMenuBar, ListBox termMenuBar, TextBox courseNumberTextBox);
+	void requestAddToWishlist(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestSendEditCourses(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestApplyChanges(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestCancelChanges(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestRemoveCourse(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestRemoveSelectedFromWishlist(ListBox wishlistListBox);
+	void requestViewFullWishlist(ListBox wishlistListBox);
+	void requestCreateCourse(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox);
+	void requestSectionType(TextBox sectionTypeTextBox);
+	void requestMeetingTimes(TextBox meetingTimesTextBox);
+	void requestPopup1Apply(RadioButton lectureRadioButton, RadioButton labRadioButton, RadioButton specialRadioButton);
+	void requestPopup1Cancel();
+	void requestPopup2StartTime(TextBox popup2StartTimeTextBox);
+	void requestPopup2EndTime(TextBox popup2EndTimeTextBox);
+	void requestPopup2Apply(CheckBox popup2SundayCheckbox, CheckBox popup2MondayCheckbox, CheckBox popup2TuesdayCheckbox, CheckBox popup2WednesdayCheckBox, CheckBox popup2ThursdayCheckbox, CheckBox popup2FridayCheckbox, CheckBox popup2SaturdayCheckbox, TextBox popup2StartTimeTextBox, TextBox popup2EndTimeTextBox);
+	void requestPopup2Cancel();
+	void requestPopup3Apply(RadioButton popup3YesRadio, RadioButton popup3NoRadio);
+	
+	void populateCoursesViewer();
 	
 }

@@ -4,22 +4,32 @@ import org.dselent.course_load_scheduler.client.action.ReceiveWishlistAction;
 import org.dselent.course_load_scheduler.client.event_handler.ReceiveWishlistEventHandler;
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class ReceiveWishlistEvent extends DisplayEvent<ReceiveWishlistAction, ReceiveWishlistEventHandler>{
-
+public class ReceiveWishlistEvent extends DisplayEvent<ReceiveWishlistEventHandler>
+{
 	public static Type<ReceiveWishlistEventHandler> TYPE = new Type<ReceiveWishlistEventHandler>();
 	
-	public ReceiveWishlistEvent(ReceiveWishlistAction action, HasWidgets container) {
-		super(action, container);
+	private ReceiveWishlistAction receiveWishlistAction;
+	
+	public ReceiveWishlistEvent(ReceiveWishlistAction receiveWishlistAction, HasWidgets container)
+	{
+		super(container);
+		this.receiveWishlistAction = receiveWishlistAction;
 	}
 
 	@Override
-	public Type<ReceiveWishlistEventHandler> getAssociatedType() {
+	public Type<ReceiveWishlistEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(ReceiveWishlistEventHandler handler) {
+	protected void dispatch(ReceiveWishlistEventHandler handler)
+	{
 		handler.onReceiveWishlist(this);
 	}
-	
+
+	public ReceiveWishlistAction getReceiveWishlistAction()
+	{
+		return receiveWishlistAction;
+	}
 }

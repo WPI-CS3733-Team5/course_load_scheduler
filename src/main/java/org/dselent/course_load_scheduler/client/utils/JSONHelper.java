@@ -143,11 +143,11 @@ public class JSONHelper
 			throw getJsonException(jsonValue, "Missing key: " + key);
 		}
 
-		JSONBoolean jsonBoolean = jsonValue.isBoolean();
+		JSONBoolean jsonBoolean = jValue.isBoolean();
 		
 		if (jsonBoolean == null)
 		{
-			throw getJsonException(jsonValue, "Expected boolean value.");
+			throw getJsonException(jValue, "Expected boolean value.");
 		}
 		
 		return jsonBoolean.booleanValue();
@@ -458,9 +458,14 @@ public class JSONHelper
 		return map;
 	}
 
-	public static String convertKeyName(Enum<?> request_enum)
+	public static String createKey(Enum<?> keyPrefixEnum, Enum<?> requestEnum)
 	{
-		String enumString = request_enum.toString().toLowerCase();
+		return convertKeyName(keyPrefixEnum) + "_" + convertKeyName(requestEnum);
+	}
+	
+	public static String convertKeyName(Enum<?> requestEnum)
+	{
+		String enumString = requestEnum.toString().toLowerCase();
 		String[] variableNameParts = enumString.split("_");
 		String variableName = variableNameParts[0];
 		

@@ -6,13 +6,16 @@ import org.dselent.course_load_scheduler.client.event_handler.SendHomeEventHandl
 import com.google.gwt.user.client.ui.HasWidgets;
 
 
-public class SendHomeEvent extends DisplayEvent<SendHomeAction, SendHomeEventHandler>{
+public class SendHomeEvent extends DisplayEvent<SendHomeEventHandler>{
 
 	public static Type<SendHomeEventHandler> TYPE = new Type<SendHomeEventHandler>();
-		
-	public SendHomeEvent(SendHomeAction action, HasWidgets container)
+
+	private SendHomeAction sendHomeAction;
+	
+	public SendHomeEvent(SendHomeAction sendHomeAction, HasWidgets container)
 	{
-		super(action, container);
+		super(container);
+		this.sendHomeAction = sendHomeAction;
 	}
 	
 	@Override
@@ -25,5 +28,10 @@ public class SendHomeEvent extends DisplayEvent<SendHomeAction, SendHomeEventHan
 	protected void dispatch(SendHomeEventHandler handler)
 	{
 		handler.onSendHome(this);
+	}
+
+	public SendHomeAction getSendHomeAction()
+	{
+		return sendHomeAction;
 	}
 }

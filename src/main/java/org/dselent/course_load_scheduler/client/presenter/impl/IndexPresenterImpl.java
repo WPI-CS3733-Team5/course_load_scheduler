@@ -2,7 +2,6 @@ package org.dselent.course_load_scheduler.client.presenter.impl;
 
 import javax.inject.Inject;
 
-import org.dselent.course_load_scheduler.client.model.ActiveUser;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.view.IndexView;
 import com.google.gwt.dom.client.Style;
@@ -12,13 +11,14 @@ import com.google.gwt.user.client.ui.HasWidgets;
 public class IndexPresenterImpl extends BasePresenterImpl implements IndexPresenter
 {
 	private IndexView view;
-	private ActiveUser activeUser;
 
 	@Inject
 	public IndexPresenterImpl(IndexView view)
 	{
 		this.view = view;
 		view.setPresenter(this);
+		
+		view.getMenuTabsPanel().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 	}
 	
 	@Override
@@ -33,22 +33,17 @@ public class IndexPresenterImpl extends BasePresenterImpl implements IndexPresen
 	{
 		return view;
 	}
-	
+
 	@Override
-	public ActiveUser getActiveUser()
+	public void showMenuTabs()
 	{
-		return this.activeUser;
+		view.getMenuTabsPanel().getElement().getStyle().setVisibility(Style.Visibility.VISIBLE);		
 	}
-	
+
 	@Override
-	public void setActiveUser(ActiveUser user)
+	public void hideMenuTabs()
 	{
-		this.activeUser = user;
-	}
-	
-	@Override
-	public void setActiveUserState(Integer state) {
-		this.activeUser.setAccountState(state);
+		view.getMenuTabsPanel().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 	}
 	
 	@Override
@@ -66,15 +61,4 @@ public class IndexPresenterImpl extends BasePresenterImpl implements IndexPresen
 		view.getLoadingImage().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 		view.getGlassLoadingPanel().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
 	}
-	
-//	@Override
-//	public void showMenuTabs()
-//	{
-//		view.getMenuTabsImpl().getElement().getStyle().setVisibility(Style.Visibility.VISIBLE);
-//	}
-//
-//	@Override
-//	public void hideMenuTabs() {
-//		view.getMenuTabsImpl().getElement().getStyle().setVisibility(Style.Visibility.HIDDEN);
-//	}
 }

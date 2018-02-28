@@ -5,23 +5,32 @@ import org.dselent.course_load_scheduler.client.event_handler.SendWishlistForUse
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendWishlistForUserEvent extends DisplayEvent<SendWishlistForUserAction, SendWishlistForUserEventHandler>{
+public class SendWishlistForUserEvent extends DisplayEvent<SendWishlistForUserEventHandler>
+{
 	public static Type<SendWishlistForUserEventHandler> TYPE = new Type<SendWishlistForUserEventHandler>();
-	private SendWishlistForUserAction action;
 	
-	public SendWishlistForUserEvent(SendWishlistForUserAction action, HasWidgets panel) {
-		super(action, panel);
+	private SendWishlistForUserAction sendWishlistForUserAction;
+	
+	public SendWishlistForUserEvent(SendWishlistForUserAction sendWishlistForUserAction, HasWidgets panel)
+	{
+		super(panel);
+		this.sendWishlistForUserAction = sendWishlistForUserAction;
 	}
 	
-	public SendWishlistForUserAction getAction() {
-		return action;
-	}
-
-	public Type<SendWishlistForUserEventHandler> getAssociatedType(){
+	@Override
+	public Type<SendWishlistForUserEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 	
-	public void dispatch(SendWishlistForUserEventHandler handler) {
+	@Override
+	public void dispatch(SendWishlistForUserEventHandler handler)
+	{
 		handler.onSendWishlistForUser(this);
+	}
+
+	public SendWishlistForUserAction getSendWishlistForUserAction()
+	{
+		return sendWishlistForUserAction;
 	}
 }

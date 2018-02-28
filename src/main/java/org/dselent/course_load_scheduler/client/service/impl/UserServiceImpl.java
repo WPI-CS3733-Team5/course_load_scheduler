@@ -36,7 +36,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService
 	@Override
 	public void onSendLogin(SendLoginEvent evt)
 	{
-		SendLoginAction action = evt.getAction();
+		SendLoginAction action = evt.getSendLoginAction();
 		LoginActionTranslatorImpl loginActionTranslator = new LoginActionTranslatorImpl();
 		JSONObject json = loginActionTranslator.translateToJson(action);
 		SendLoginCallback loginCallback = new SendLoginCallback(eventBus, evt.getContainer());

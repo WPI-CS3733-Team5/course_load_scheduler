@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendRequestDifferentScheduleAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendRequestDifferentScheduleEventHandler;
 
-public class SendRequestDifferentScheduleEvent extends BaseEvent<SendRequestDifferentScheduleAction, SendRequestDifferentScheduleEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendRequestDifferentScheduleEvent extends GwtEvent<SendRequestDifferentScheduleEventHandler>
+{	
+	public static Type<SendRequestDifferentScheduleEventHandler> TYPE = new Type<SendRequestDifferentScheduleEventHandler>();
 	
-public static Type<SendRequestDifferentScheduleEventHandler> TYPE = new Type<SendRequestDifferentScheduleEventHandler>();
-		
-	public SendRequestDifferentScheduleEvent(SendRequestDifferentScheduleAction action)
+	private SendRequestDifferentScheduleAction sendRequestDifferentScheduleAction;
+	
+	public SendRequestDifferentScheduleEvent(SendRequestDifferentScheduleAction sendRequestDifferentScheduleAction)
 	{
-		super(action);
+		this.sendRequestDifferentScheduleAction = sendRequestDifferentScheduleAction;
 	}
 	
 	@Override
@@ -22,5 +26,10 @@ public static Type<SendRequestDifferentScheduleEventHandler> TYPE = new Type<Sen
 	protected void dispatch(SendRequestDifferentScheduleEventHandler handler)
 	{
 		handler.onSendRequestDifferentSchedule(this);
+	}
+
+	public SendRequestDifferentScheduleAction getSendRequestDifferentScheduleAction()
+	{
+		return sendRequestDifferentScheduleAction;
 	}
 }

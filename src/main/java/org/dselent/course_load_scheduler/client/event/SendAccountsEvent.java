@@ -6,13 +6,15 @@ import org.dselent.course_load_scheduler.client.event_handler.SendAccountsEventH
 import com.google.gwt.user.client.ui.HasWidgets;
 
 
-public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAccountsEventHandler>{
-	
+public class SendAccountsEvent extends DisplayEvent<SendAccountsEventHandler>
+{
 	public static Type<SendAccountsEventHandler> TYPE = new Type<SendAccountsEventHandler>();
 	
-	public SendAccountsEvent(SendAccountsAction action, HasWidgets panel)
+	private SendAccountsAction sendAccountsAction;
+	
+	public SendAccountsEvent(SendAccountsAction sendAccountsAction, HasWidgets panel)
 	{
-		super(action, panel);
+		super(panel);
 	}
 	
 	@Override
@@ -25,6 +27,11 @@ public class SendAccountsEvent extends DisplayEvent<SendAccountsAction, SendAcco
 	protected void dispatch(SendAccountsEventHandler handler)
 	{
 		handler.onSendAccounts(this);
+	}
+
+	public SendAccountsAction getSendAccountsAction()
+	{
+		return sendAccountsAction;
 	}
 }
 

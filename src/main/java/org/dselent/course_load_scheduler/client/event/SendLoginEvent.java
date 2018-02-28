@@ -5,16 +5,18 @@ import org.dselent.course_load_scheduler.client.event_handler.SendLoginEventHand
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendLoginEvent extends DisplayEvent<SendLoginAction, SendLoginEventHandler>
+public class SendLoginEvent extends DisplayEvent<SendLoginEventHandler>
 {
 	public static Type<SendLoginEventHandler> TYPE = new Type<SendLoginEventHandler>();
 	
-	public SendLoginEvent(SendLoginAction action, HasWidgets container)
+	private SendLoginAction sendLoginAction;
+	
+	public SendLoginEvent(SendLoginAction sendLoginAction, HasWidgets container)
  	{
-		super(action, container);
+		super(container);
+		this.sendLoginAction = sendLoginAction;
  	}
 	
-
 	public Type<SendLoginEventHandler> getAssociatedType()
 	{
 		return TYPE;
@@ -23,5 +25,10 @@ public class SendLoginEvent extends DisplayEvent<SendLoginAction, SendLoginEvent
 	protected void dispatch(SendLoginEventHandler handler)
 	{
 		handler.onSendLogin(this);
+	}
+
+	public SendLoginAction getSendLoginAction()
+	{
+		return sendLoginAction;
 	}
 }

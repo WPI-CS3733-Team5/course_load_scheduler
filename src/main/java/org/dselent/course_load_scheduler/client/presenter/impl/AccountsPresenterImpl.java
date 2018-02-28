@@ -37,8 +37,8 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	private ArrayList<InstructorInfo> instructorInfoList;
 	
 	@Inject
-	public AccountsPresenterImpl(IndexPresenter parentPresenter, AccountsView view) {
-		this.parentPresenter = parentPresenter;
+	public AccountsPresenterImpl(AccountsView view)
+	{
 		this.view = view;
 		applySortInProgress = false;
 		editInProgress = false;
@@ -314,7 +314,8 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 				break;
 			}
 		}
-		if(noInstructor) {
+		if(noInstructor)
+		{
 			instructor.setDepartment("N/A");
 			instructor.setCourseLoad(0);
 			instructor.setOffice("N/A");
@@ -333,8 +334,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 
 	@Override
-	public void applyChanges() {
-		if (editInProgress) {
+	public void applyChanges()
+	{
+		if (editInProgress)
+		{
 			editInProgress = false;
 			enableUserFields(false);
 			view.getButtonApply().setEnabled(false);
@@ -363,11 +366,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			SendEditAccountAction seaa = new SendEditAccountAction(user, instructor);
 			SendEditAccountEvent seae = new SendEditAccountEvent(seaa);
 			eventBus.fireEvent(seae);
-			
-			
-			
+
 		}
-		else if (creationInProgress) {
+		else if (creationInProgress)
+		{
 			creationInProgress = false;
 			enableUserFields(false);
 			view.getButtonApply().setEnabled(false);
@@ -395,14 +397,12 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			SendCreateAccountAction scaa = new SendCreateAccountAction(user, instructor);
 			SendCreateAccountEvent scae = new SendCreateAccountEvent(scaa);
 			eventBus.fireEvent(scae);
-			
-			
-			
 		}
 	}
 
 	@Override
-	public void cancelChanges() {
+	public void cancelChanges()
+	{
 		if (editInProgress) {
 			editInProgress = false;
 			clearUserFields();
@@ -410,7 +410,8 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 			view.getButtonApply().setEnabled(false);
 			view.getButtonCancel().setEnabled(false);
 		}
-		else if (creationInProgress) {
+		else if (creationInProgress)
+		{
 			creationInProgress = false;
 			clearUserFields();
 			enableUserFields(false);
@@ -420,7 +421,8 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 
 	@Override
-	public void removeAccount() {
+	public void removeAccount()
+	{
 		//String itemToRemove = view.getListAccounts().getValue(view.getListAccounts().getSelectedIndex());
 		String accountInfo = view.getListAccounts().getItemText(view.getListAccounts().getSelectedIndex());
 		
@@ -432,8 +434,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 
 	@Override
-	public void createAccount() {
-		if (!creationInProgress && !editInProgress) {
+	public void createAccount()
+	{
+		if (!creationInProgress && !editInProgress)
+		{
 			creationInProgress = true;
 			enableUserFields(true);
 			clearUserFields();
@@ -443,9 +447,10 @@ public class AccountsPresenterImpl extends BasePresenterImpl implements Accounts
 	}
 	
 	@Override
-	public void onReceiveAccounts(ReceiveAccountsEvent evt) {
+	public void onReceiveAccounts(ReceiveAccountsEvent evt)
+	{
 		HasWidgets container = evt.getContainer();
-		ReceiveAccountsAction raa = evt.getAction();
+		ReceiveAccountsAction raa = evt.getReceiveAccountsAction();
 		userInfoList = raa.getUserinfoList();
 		instructorInfoList = raa.getInstructorInfoList();
 		go(container);

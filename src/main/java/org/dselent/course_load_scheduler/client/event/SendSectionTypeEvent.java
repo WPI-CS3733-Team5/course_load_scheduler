@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendSectionTypeAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendSectionTypeEventHandler;
 
-public class SendSectionTypeEvent extends BaseEvent<SendSectionTypeAction, SendSectionTypeEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendSectionTypeEvent extends GwtEvent<SendSectionTypeEventHandler>{
 	
-public static Type<SendSectionTypeEventHandler> TYPE = new Type<SendSectionTypeEventHandler>();
-		
-	public SendSectionTypeEvent(SendSectionTypeAction action)
+	public static Type<SendSectionTypeEventHandler> TYPE = new Type<SendSectionTypeEventHandler>();
+	
+	private SendSectionTypeAction sendSectionTypeAction;
+	
+	public SendSectionTypeEvent(SendSectionTypeAction sendSectionTypeAction)
 	{
-		super(action);
+		this.sendSectionTypeAction = sendSectionTypeAction;
 	}
 	
 	@Override
@@ -24,5 +28,8 @@ public static Type<SendSectionTypeEventHandler> TYPE = new Type<SendSectionTypeE
 		handler.onSendSectionType(this);
 	}
 
-
+	public SendSectionTypeAction getSendSectionTypeAction()
+	{
+		return sendSectionTypeAction;
+	}
 }

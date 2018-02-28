@@ -3,23 +3,33 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
 import org.dselent.course_load_scheduler.client.event_handler.InvalidCoursesEventHandler;
 
-public class InvalidCoursesEvent extends BaseEvent<InvalidGenericAction, InvalidCoursesEventHandler>
-{
+import com.google.gwt.event.shared.GwtEvent;
 
+public class InvalidCoursesEvent extends GwtEvent<InvalidCoursesEventHandler>
+{
 	public static Type<InvalidCoursesEventHandler> TYPE = new Type<InvalidCoursesEventHandler>();
 	
-	public InvalidCoursesEvent(InvalidGenericAction action) {
-		super(action);
+	private InvalidGenericAction invalidGenericAction;
+	
+	public InvalidCoursesEvent(InvalidGenericAction invalidGenericAction)
+	{
+		this.invalidGenericAction = invalidGenericAction;
 	}
 
 	@Override
-	public Type<InvalidCoursesEventHandler> getAssociatedType() {
+	public Type<InvalidCoursesEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(InvalidCoursesEventHandler handler) {
+	protected void dispatch(InvalidCoursesEventHandler handler)
+	{
 		handler.onInvalidCourses(this);		
 	}
-	
+
+	public InvalidGenericAction getInvalidGenericAction()
+	{
+		return invalidGenericAction;
+	}
 }

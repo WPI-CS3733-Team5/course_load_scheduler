@@ -3,14 +3,18 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendAcceptScheduleAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendAcceptScheduleEventHandler;
 
+import com.google.gwt.event.shared.GwtEvent;
 
-public class SendAcceptScheduleEvent extends BaseEvent<SendAcceptScheduleAction, SendAcceptScheduleEventHandler>{
+
+public class SendAcceptScheduleEvent extends GwtEvent<SendAcceptScheduleEventHandler>{
 	
 	public static Type<SendAcceptScheduleEventHandler> TYPE = new Type<SendAcceptScheduleEventHandler>();
 	
-	public SendAcceptScheduleEvent(SendAcceptScheduleAction action)
+	private SendAcceptScheduleAction sendAcceptScheduleAction;
+	
+	public SendAcceptScheduleEvent(SendAcceptScheduleAction sendAcceptScheduleAction)
 	{
-		super(action);
+		this.sendAcceptScheduleAction = sendAcceptScheduleAction;
 	}
 	
 	@Override
@@ -24,4 +28,9 @@ public class SendAcceptScheduleEvent extends BaseEvent<SendAcceptScheduleAction,
 	{
 		handler.onSendAcceptSchedule(this);
 	}
+
+	public SendAcceptScheduleAction getSendAcceptScheduleAction()
+	{
+		return sendAcceptScheduleAction;
+	}	
 }

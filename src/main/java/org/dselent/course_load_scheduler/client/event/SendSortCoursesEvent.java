@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendSortCoursesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendSortCoursesEventHandler;
 
-public class SendSortCoursesEvent extends BaseEvent<SendSortCoursesAction, SendSortCoursesEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendSortCoursesEvent extends GwtEvent<SendSortCoursesEventHandler>
+{
+	public static Type<SendSortCoursesEventHandler> TYPE = new Type<SendSortCoursesEventHandler>();
 	
-public static Type<SendSortCoursesEventHandler> TYPE = new Type<SendSortCoursesEventHandler>();
-		
-	public SendSortCoursesEvent(SendSortCoursesAction action)
+	private SendSortCoursesAction sendSortCoursesAction;
+	
+	public SendSortCoursesEvent(SendSortCoursesAction sendSortCoursesAction)
 	{
-		super(action);
+		this.sendSortCoursesAction = sendSortCoursesAction;
 	}
 	
 	@Override
@@ -24,6 +28,8 @@ public static Type<SendSortCoursesEventHandler> TYPE = new Type<SendSortCoursesE
 		handler.onSendSortCourses(this);
 	}
 
-	
-
+	public SendSortCoursesAction getSendSortCoursesAction()
+	{
+		return sendSortCoursesAction;
+	}
 }

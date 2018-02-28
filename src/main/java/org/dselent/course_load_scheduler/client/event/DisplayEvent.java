@@ -1,11 +1,10 @@
 package org.dselent.course_load_scheduler.client.event;
 
-import org.dselent.course_load_scheduler.client.action.Action;
-
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public abstract class DisplayEvent<A extends Action, E extends EventHandler> extends BaseEvent<A, E>
+public abstract class DisplayEvent<E extends EventHandler> extends GwtEvent<E>
 {
 	// What should this be?
 	// Would a "parent" view or associated presenter be better?
@@ -13,9 +12,8 @@ public abstract class DisplayEvent<A extends Action, E extends EventHandler> ext
 	// When lacking an oracle, try and see what happens...
 	private HasWidgets container;
 	
-	public DisplayEvent(A action, HasWidgets container)
+	public DisplayEvent(HasWidgets container)
 	{
-		super(action);
 		this.container = container;
 	}
 	

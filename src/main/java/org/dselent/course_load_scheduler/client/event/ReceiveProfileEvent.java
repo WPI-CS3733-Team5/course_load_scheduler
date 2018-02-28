@@ -5,22 +5,32 @@ import org.dselent.course_load_scheduler.client.event_handler.ReceiveProfileEven
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class ReceiveProfileEvent extends DisplayEvent<ReceiveProfileAction, ReceiveProfileEventHandler>{
-
+public class ReceiveProfileEvent extends DisplayEvent<ReceiveProfileEventHandler>
+{
 	public static Type<ReceiveProfileEventHandler> TYPE = new Type<ReceiveProfileEventHandler>();
 	
-	public ReceiveProfileEvent(ReceiveProfileAction action, HasWidgets container) {
-		super(action, container);
+	private ReceiveProfileAction receiveProfileAction;
+	
+	public ReceiveProfileEvent(ReceiveProfileAction receiveProfileAction, HasWidgets container)
+	{
+		super(container);
+		this.receiveProfileAction = receiveProfileAction;
 	}
 
 	@Override
-	public Type<ReceiveProfileEventHandler> getAssociatedType() {
+	public Type<ReceiveProfileEventHandler> getAssociatedType()
+	{
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(ReceiveProfileEventHandler handler) {
+	protected void dispatch(ReceiveProfileEventHandler handler)
+	{
 		handler.onReceiveProfile(this);
 	}
-	
+
+	public ReceiveProfileAction getReceiveProfileAction()
+	{
+		return receiveProfileAction;
+	}
 }

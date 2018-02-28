@@ -5,19 +5,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import org.dselent.course_load_scheduler.client.action.ReceiveWishlistAction;
-import org.dselent.course_load_scheduler.client.action.SendEditWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendRequestNewScheduleAction;
-import org.dselent.course_load_scheduler.client.action.SendSortWishlistAction;
-import org.dselent.course_load_scheduler.client.action.SendViewCourseDetailsAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendEditWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendHomeFilterEvent;
-import org.dselent.course_load_scheduler.client.event.SendRequestDifferentScheduleEvent;
 import org.dselent.course_load_scheduler.client.event.SendRequestNewScheduleEvent;
-import org.dselent.course_load_scheduler.client.event.SendSortWishlistEvent;
-import org.dselent.course_load_scheduler.client.event.SendViewCourseDetailsEvent;
-import org.dselent.course_load_scheduler.client.event.SendWishlistEvent;
-import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
 import org.dselent.course_load_scheduler.client.model.InstructorInfo;
@@ -37,15 +27,17 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class WishlistPresenterImpl extends BasePresenterImpl implements WishlistPresenter {
+public class WishlistPresenterImpl extends BasePresenterImpl implements WishlistPresenter
+{
 
 	private IndexPresenter parentPresenter;
-	private MenuTabsPresenterImpl menuTabs;
 	private WishlistView view;
+	
 	private boolean sort;
 	private boolean viewCourseDetails;
 	private boolean requestNewSchedule;
 	private boolean editWishlist;
+	
 	private ArrayList<InstructorInfo> instructorInfoList;
 	private ArrayList<SectionInfo> sectionInfoList;
 	private ArrayList<CalendarInfo> calendarInfoList;
@@ -54,11 +46,10 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	private ArrayList<WishlistLinks> wishlists;
 
 	@Inject
-	public WishlistPresenterImpl(IndexPresenter parentPresenter, WishlistView view) {
+	public WishlistPresenterImpl(WishlistView view) 
+	{
 		this.view = view;
-		this.parentPresenter = parentPresenter;
-		view.setParent(this);
-
+		view.setPresenter(this);
 	}
 	
 	@Override
@@ -70,9 +61,11 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	}
 
 	@Override
-	public void go(HasWidgets container) {
+	public void go(HasWidgets container)
+	{
 		
 		ArrayList<String> departments = new ArrayList<>();
+		
 		for(int i = 0; i < instructorInfoList.size(); i++) {
 			boolean onList = false;
 			for(int b = 0; b < departments.size(); b++) {
@@ -140,7 +133,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	public void filterByDepartment() {
 		String department = view.getDeptCmbx().getValue(view.getDeptCmbx().getSelectedIndex());
 		ArrayList<Pair<Pair<CourseInfo, SectionInfo>, CalendarInfo>> coursesAndSectionsAndCalendars = new ArrayList<>();
-		Integer activeUserId = parentPresenter.getActiveUser().getId();
+		Integer activeUserId = 1;//TODO get if of active user in some way
 		Integer activeInstructorId = -1;
 		for(int i = 0; i < instructorInfoList.size(); i++) {
 			if(instructorInfoList.get(i).getUserInfoId() == activeUserId) {
@@ -199,7 +192,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		String term = view.getTermCmbx().getSelectedItemText();
 		
 		ArrayList<Pair<Pair<CalendarInfo, SectionInfo>, CourseInfo>> calendarsAndSectionsAndCourses = new ArrayList<>();
-		Integer activeUserId = parentPresenter.getActiveUser().getId();
+		Integer activeUserId = 1;//TODOparentPresenter.getActiveUser().getId();
 		Integer activeInstructorId = -1;
 		for(int i = 0; i < instructorInfoList.size(); i++) {
 			if(instructorInfoList.get(i).getUserInfoId() == activeUserId) {
@@ -263,7 +256,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 	
 	public void filterByCourseNumber() {
 		Integer courseNum = termToInt(view.getCourseNumberCmbx().getValue(view.getCourseNumberCmbx().getSelectedIndex()));
-		Integer activeUserId = parentPresenter.getActiveUser().getId();
+		Integer activeUserId = 1;//TODO parentPresenter.getActiveUser().getId();
 		ArrayList<Pair<Pair<CourseInfo, SectionInfo>, CalendarInfo>> coursesAndSectionsAndCalendars = new ArrayList<>();
 
 		Integer activeInstructorId = -1;
@@ -427,7 +420,8 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 //			String course1 = course.getItemText(course.getSelectedIndex());
 //			sendViewCourseDetails(course1);
 			
-			menuTabs.courses();
+			// TODO BELOW LINE BROKEN
+			//menuTabs.courses();
 			view.getViewCourseDetailsButton().setEnabled(true);
 			viewCourseDetails = false;
 		}
@@ -451,7 +445,8 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 
 //			sendEditWishList();
 			
-			menuTabs.courses();
+			// TODO BELOW LINE BROKEN
+			//menuTabs.courses();
 			view.getEditWishlistButton().setEnabled(true);
 			editWishlist = false;
 
@@ -528,9 +523,10 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		this.labInfoList = labInfoList;
 	}
 
-	public void onReceiveWishlist(ReceiveWishlistEvent evt) {
+	public void onReceiveWishlist(ReceiveWishlistEvent evt)
+	{
 		HasWidgets container = evt.getContainer();
-		ReceiveWishlistAction rwa = evt.getAction();
+		ReceiveWishlistAction rwa = evt.getReceiveWishlistAction();
 		setSectionInfoList(rwa.getSections());
 		setCalendarInfoList(rwa.getCalendars());
 		setCourseInfoList(rwa.getCourses());
@@ -538,14 +534,7 @@ public class WishlistPresenterImpl extends BasePresenterImpl implements Wishlist
 		wishlists = rwa.getWishlists();
 		
 		go(container);
-		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		parentPresenter.hideLoadScreen();
 	}
 
-	public MenuTabsPresenterImpl getMenuTabs() {
-		return menuTabs;
-	}
-
-	public void setMenuTabs(MenuTabsPresenterImpl menuTabs) {
-		this.menuTabs = menuTabs;
-	}
 }

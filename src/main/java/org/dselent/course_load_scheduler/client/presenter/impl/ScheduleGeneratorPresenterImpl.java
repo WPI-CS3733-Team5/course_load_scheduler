@@ -507,7 +507,8 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	}
 	public void sendHome()
 	{
-		SendHomeAction sha = new SendHomeAction(view.getViewRootPanel());
+		//TODO FIX THIS
+		SendHomeAction sha = new SendHomeAction();
 		SendHomeEvent she = new SendHomeEvent(sha, parentPresenter.getView().getViewRootPanel());
 		eventBus.fireEvent(she);
 	}
@@ -553,7 +554,7 @@ public class ScheduleGeneratorPresenterImpl extends BasePresenterImpl implements
 	@Override
 	public void onReceiveSchedules(ReceiveSchedulesEvent evt) {
 		HasWidgets container = evt.getContainer();
-		ReceiveSchedulesAction rha = evt.getAction();
+		ReceiveSchedulesAction rha = evt.getReceiveSchedulesAction();
 		users = rha.getUsers();
 		instructors = rha.getInstructors();
 		courses = rha.getCourses();

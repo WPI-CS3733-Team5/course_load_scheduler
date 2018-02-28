@@ -1,24 +1,16 @@
 package org.dselent.course_load_scheduler.client.event;
 
-import org.dselent.course_load_scheduler.client.action.SendCoursesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendCoursesEventHandler;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-public class SendCoursesEvent extends DisplayEvent<SendCoursesAction, SendCoursesEventHandler>{
-	
+public class SendCoursesEvent extends DisplayEvent<SendCoursesEventHandler>
+{
 	public static Type<SendCoursesEventHandler> TYPE = new Type<SendCoursesEventHandler>();
 	
-	private SendCoursesAction action;
-	
-	public SendCoursesEvent(SendCoursesAction action, HasWidgets panel)
+	public SendCoursesEvent(HasWidgets panel)
 	{
-		super(action, panel);
-	}
-	
-	public SendCoursesAction getAction()
-	{
-		return action;
+		super(panel);
 	}
 	
 	@Override

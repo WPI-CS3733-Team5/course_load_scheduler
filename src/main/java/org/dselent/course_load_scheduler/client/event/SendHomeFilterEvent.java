@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendHomeFilterAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendHomeFilterEventHandler;
 
-public class SendHomeFilterEvent extends BaseEvent<SendHomeFilterAction, SendHomeFilterEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendHomeFilterEvent extends GwtEvent<SendHomeFilterEventHandler>{
 	
 	public static Type<SendHomeFilterEventHandler> TYPE = new Type<SendHomeFilterEventHandler>();
 	
-	public SendHomeFilterEvent(SendHomeFilterAction action)
+	private SendHomeFilterAction sendHomeFilterAction;
+	
+	public SendHomeFilterEvent(SendHomeFilterAction sendHomeFilterAction)
 	{
-		super(action);
+		this.sendHomeFilterAction = sendHomeFilterAction;
 	}
 	
 	@Override
@@ -23,4 +27,9 @@ public class SendHomeFilterEvent extends BaseEvent<SendHomeFilterAction, SendHom
 	{
 		handler.onSendHomeFilter(this);
 	}
+
+	public SendHomeFilterAction getSendHomeFilterAction()
+	{
+		return sendHomeFilterAction;
+	}	
 }

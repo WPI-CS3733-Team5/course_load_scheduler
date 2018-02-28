@@ -1,8 +1,8 @@
 package org.dselent.course_load_scheduler.client.gin;
 
+import org.dselent.course_load_scheduler.client.model.GlobalData;
 import org.dselent.course_load_scheduler.client.presenter.impl.AccountsPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.CoursesPresenterImpl;
-import org.dselent.course_load_scheduler.client.presenter.impl.ExamplePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.HomePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.IndexPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.LoginPresenterImpl;
@@ -11,6 +11,8 @@ import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPres
 import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
+import org.dselent.course_load_scheduler.client.service.impl.GeneratorServiceImpl;
+import org.dselent.course_load_scheduler.client.service.impl.MenuServiceImpl;
 import org.dselent.course_load_scheduler.client.service.impl.UserServiceImpl;
 import org.dselent.course_load_scheduler.client.view.impl.AccountsViewImpl;
 import org.dselent.course_load_scheduler.client.view.impl.CoursesViewImpl;
@@ -75,4 +77,9 @@ public interface Injector extends Ginjector
     
     // services
     public UserServiceImpl getUserService();
+    public MenuServiceImpl getMenuService();
+    public GeneratorServiceImpl getGeneratorService();
+    
+    // Global data
+    public GlobalData getGlobalData();
 }

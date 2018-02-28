@@ -1,5 +1,6 @@
 package org.dselent.course_load_scheduler.client.gin;
 
+import org.dselent.course_load_scheduler.client.model.GlobalData;
 import org.dselent.course_load_scheduler.client.presenter.AccountsPresenter;
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
 import org.dselent.course_load_scheduler.client.presenter.HomePresenter;
@@ -20,7 +21,11 @@ import org.dselent.course_load_scheduler.client.presenter.impl.NotificationsPres
 import org.dselent.course_load_scheduler.client.presenter.impl.ProfilePresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.ScheduleGeneratorPresenterImpl;
 import org.dselent.course_load_scheduler.client.presenter.impl.WishlistPresenterImpl;
+import org.dselent.course_load_scheduler.client.service.GeneratorService;
+import org.dselent.course_load_scheduler.client.service.MenuService;
 import org.dselent.course_load_scheduler.client.service.UserService;
+import org.dselent.course_load_scheduler.client.service.impl.GeneratorServiceImpl;
+import org.dselent.course_load_scheduler.client.service.impl.MenuServiceImpl;
 import org.dselent.course_load_scheduler.client.service.impl.UserServiceImpl;
 import org.dselent.course_load_scheduler.client.view.AccountsView;
 import org.dselent.course_load_scheduler.client.view.CoursesView;
@@ -72,9 +77,6 @@ public class InjectorModule extends AbstractGinModule
         bind(ProfilePresenter.class).to(ProfilePresenterImpl.class).in(Singleton.class);
         bind(ScheduleGeneratorPresenter.class).to(ScheduleGeneratorPresenterImpl.class).in(Singleton.class);
         bind(WishlistPresenter.class).to(WishlistPresenterImpl.class).in(Singleton.class);
-        //bind(ExamplePresenter.class).to(ExamplePresenterImpl.class).in(Singleton.class);
-        
-        //bind(TabTestPresenter.class).to(TabTestPresenterImpl.class).in(Singleton.class);
 
         // views
         bind(IndexView.class).to(IndexViewImpl.class).in(Singleton.class);
@@ -87,12 +89,15 @@ public class InjectorModule extends AbstractGinModule
         bind(ProfileView.class).to(ProfileViewImpl.class).in(Singleton.class);
         bind(ScheduleGeneratorView.class).to(ScheduleGeneratorViewImpl.class).in(Singleton.class);
         bind(WishlistView.class).to(WishlistViewImpl.class).in(Singleton.class);
-        //bind(ExampleView.class).to(ExampleViewImpl.class).in(Singleton.class);
-        
-        //bind(TabTestView.class).to(TabTest.class).in(Singleton.class);
+
         
 		// services
         bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
+        bind(MenuService.class).to(MenuServiceImpl.class).in(Singleton.class);
+        bind(GeneratorService.class).to(GeneratorServiceImpl.class).in(Singleton.class);
+        
+        // global data
+        bind(GlobalData.class).in(Singleton.class);
 
     }
 	

@@ -3,13 +3,18 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendAddToWishlistAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendAddToWishlistEventHandler;
 
-public class SendAddToWishlistEvent extends BaseEvent<SendAddToWishlistAction, SendAddToWishlistEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendAddToWishlistEvent extends GwtEvent<SendAddToWishlistEventHandler>
+{
 	
-public static Type<SendAddToWishlistEventHandler> TYPE = new Type<SendAddToWishlistEventHandler>();
+	public static Type<SendAddToWishlistEventHandler> TYPE = new Type<SendAddToWishlistEventHandler>();
 	
-	public SendAddToWishlistEvent(SendAddToWishlistAction action)
+	private SendAddToWishlistAction sendAddToWishlistAction;
+	
+	public SendAddToWishlistEvent(SendAddToWishlistAction sendAddToWishlistAction)
 	{
-		super(action);
+		this.sendAddToWishlistAction = sendAddToWishlistAction;
 	}
 	
 	@Override
@@ -24,4 +29,8 @@ public static Type<SendAddToWishlistEventHandler> TYPE = new Type<SendAddToWishl
 		handler.onSendAddToWishlist(this);
 	}
 
+	public SendAddToWishlistAction getSendAddToWishlistAction()
+	{
+		return sendAddToWishlistAction;
+	}
 }

@@ -32,7 +32,6 @@ implements InvalidLoginEventHandler,
 			SendSortCoursesEventHandler,
 			SendAddToWishlistEventHandler,
 			SendRemoveSelectedFromWishlistEventHandler,
-			SendViewFullWishlistEventHandler,
 			SendApplyChangesEventHandler,
 			SendEditCoursesEventHandler,
 			SendCancelChangesEventHandler,
@@ -117,9 +116,6 @@ implements InvalidLoginEventHandler,
 	
 	@Override
 	public void onSendRemoveSelectedFromWishlist(SendRemoveSelectedFromWishlistEvent evt) {}
-	
-	@Override
-	public void onSendViewFullWishlist(SendViewFullWishlistEvent evt) {}
 	
 	@Override
 	public void onSendApplyChanges(SendApplyChangesEvent evt) {}

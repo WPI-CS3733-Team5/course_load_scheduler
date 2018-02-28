@@ -25,10 +25,9 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	private InstructorInfo instructor;
 
 	@Inject
-	public ProfilePresenterImpl(IndexPresenter parentPresenter, ProfileView view)
+	public ProfilePresenterImpl(ProfileView view)
 	{
 		this.view = view;
-		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
 		setEditWishlistClickInProgress(false);
 	}
@@ -94,7 +93,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 
 	@Override
 	public void onSendProfile(SendProfileEvent evt) {
-		go(evt.getAction().getPanel());
+		go(evt.getSendProfileAction().getPanel());
 	}
 
 
@@ -111,7 +110,7 @@ public class ProfilePresenterImpl extends BasePresenterImpl implements ProfilePr
 	public void onReceiveProfile(ReceiveProfileEvent evt)
 	{
 		HasWidgets container = evt.getContainer();
-		ReceiveProfileAction rpa = evt.getAction();
+		ReceiveProfileAction rpa = evt.getReceiveProfileAction();
 		this.user = rpa.getUser();
 		this.setInstructor(rpa.getInstructor());
 		go(container);

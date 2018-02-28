@@ -14,13 +14,15 @@ public class SendGenerateActionTranslatorImpl implements ActionTranslator<SendGe
 	public SendGenerateActionTranslatorImpl() {}
 	
 	@Override
-	public JSONObject translateToJson(SendGenerateAction act) {
+	public JSONObject translateToJson(SendGenerateAction act)
+	{
 		JSONObject json = new JSONObject();
 		StringBuilder keyString = new StringBuilder();
 		
 		JSONHelper.putIntValue(json, JSONHelper.convertKeyName(ReceiveInstructorInfoKeys.ID), act.getInstructor().getId());
 		
-		for(SectionInfo c: act.getSections()) {
+		for(SectionInfo c: act.getSections())
+		{
 			keyString.append(Integer.toString(c.getId()) + " ");
 		}
 		
@@ -30,7 +32,8 @@ public class SendGenerateActionTranslatorImpl implements ActionTranslator<SendGe
 	}
 	
 	@Override
-	public ReceiveGenerateAction translateToAction(JSONObject json) {
+	public ReceiveGenerateAction translateToAction(JSONObject json)
+	{
 		ReceiveGenerateAction act = new ReceiveGenerateAction();
 		return act;
 	}

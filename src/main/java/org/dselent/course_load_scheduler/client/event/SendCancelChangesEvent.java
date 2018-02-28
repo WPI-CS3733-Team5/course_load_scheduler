@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendCancelChangesAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendCancelChangesEventHandler;
 
-public class SendCancelChangesEvent extends BaseEvent<SendCancelChangesAction, SendCancelChangesEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendCancelChangesEvent extends GwtEvent<SendCancelChangesEventHandler>
+{
+	public static Type<SendCancelChangesEventHandler> TYPE = new Type<SendCancelChangesEventHandler>();
 	
-public static Type<SendCancelChangesEventHandler> TYPE = new Type<SendCancelChangesEventHandler>();
+	private SendCancelChangesAction sendCancelChangesAction;
 	
-	public SendCancelChangesEvent(SendCancelChangesAction action)
+	public SendCancelChangesEvent(SendCancelChangesAction sendCancelChangesAction)
 	{
-		super(action);
+		this.sendCancelChangesAction = sendCancelChangesAction;
 	}
 	
 	@Override
@@ -24,5 +28,8 @@ public static Type<SendCancelChangesEventHandler> TYPE = new Type<SendCancelChan
 		handler.onSendCancelChanges(this);
 	}
 
-
+	public SendCancelChangesAction getSendCancelChangesAction()
+	{
+		return sendCancelChangesAction;
+	}	
 }

@@ -4,7 +4,7 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="rootPanel">
 		<g:Grid width="670px" ui:field="fullGrid">
 			<g:row>
 				<g:customCell>

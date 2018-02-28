@@ -21,7 +21,6 @@ import org.dselent.course_load_scheduler.client.action.SendRemoveCourseAction;
 import org.dselent.course_load_scheduler.client.action.SendRemoveSelectedFromWishlistAction;
 import org.dselent.course_load_scheduler.client.action.SendSectionTypeAction;
 import org.dselent.course_load_scheduler.client.action.SendSortCoursesAction;
-import org.dselent.course_load_scheduler.client.action.SendViewFullWishlistAction;
 import org.dselent.course_load_scheduler.client.event.ReceiveCoursesEvent;
 import org.dselent.course_load_scheduler.client.event.SendAddToWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendApplyChangesEvent;
@@ -41,7 +40,6 @@ import org.dselent.course_load_scheduler.client.event.SendRemoveCourseEvent;
 import org.dselent.course_load_scheduler.client.event.SendRemoveSelectedFromWishlistEvent;
 import org.dselent.course_load_scheduler.client.event.SendSectionTypeEvent;
 import org.dselent.course_load_scheduler.client.event.SendSortCoursesEvent;
-import org.dselent.course_load_scheduler.client.event.SendViewFullWishlistEvent;
 import org.dselent.course_load_scheduler.client.gin.Injector;
 import org.dselent.course_load_scheduler.client.model.CalendarInfo;
 import org.dselent.course_load_scheduler.client.model.CourseInfo;
@@ -62,10 +60,12 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPresenter {
+public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPresenter
+{
 	
 	private IndexPresenter parentPresenter;
 	private CoursesView view;
+	
 	private boolean requestSortCoursesInProgress;
 	private boolean requestAddToWishlistInProgress;
 	private boolean requestEditCoursesInProgress;
@@ -86,6 +86,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	private boolean requestPopup3ApplyInProgress;
 	private boolean populateCoursesInProgress;
 	private boolean populateWishlistInProgress;
+	
 	private ArrayList<CourseInfo> courseList;
 	private ArrayList<SectionInfo> sectionList;
 	private ArrayList<CalendarInfo> calendarList;
@@ -94,19 +95,15 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	private ArrayList<UserInfo> userInfoList;
 
 	@Inject
-	public CoursesPresenterImpl(IndexPresenter parentPresenter, CoursesView view)
+	public CoursesPresenterImpl(CoursesView view)
 	{
-		this.parentPresenter = parentPresenter;
 		this.view = view;
-		view.setPresenter(this);
-		
-		
 	}
-	
 	
 	@Override
 	public void init()
 	{
+		view.setPresenter(this);
 		bind();
 	}
 	
@@ -140,10 +137,6 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		HandlerRegistration removeSelectedFromWishlistRegistration;
 		removeSelectedFromWishlistRegistration = eventBus.addHandler(SendRemoveSelectedFromWishlistEvent.TYPE, this);
 		eventBusRegistration.put(SendRemoveSelectedFromWishlistEvent.TYPE, removeSelectedFromWishlistRegistration);
-
-		HandlerRegistration viewFullWishlistRegistration;
-		viewFullWishlistRegistration = eventBus.addHandler(SendViewFullWishlistEvent.TYPE, this);
-		eventBusRegistration.put(SendViewFullWishlistEvent.TYPE, viewFullWishlistRegistration);
 
 		HandlerRegistration createNewCourseRegistration;
 		createNewCourseRegistration = eventBus.addHandler(SendCreateCourseEvent.TYPE, this);
@@ -188,6 +181,18 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	}
 	
 	//
+	
+	@Override
+	public IndexPresenter getParentPresenter()
+	{
+		return parentPresenter;
+	}
+	
+	@Override
+	public void setParentPresenter(IndexPresenter parentPresenter)
+	{
+		this.parentPresenter = parentPresenter;
+	}
 	
 	@Override
 	public CoursesView getView()
@@ -238,7 +243,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	}
 	
 	@Override
-	public void go(HasWidgets container) {
+	public void go(HasWidgets container)
+	{
 		
 		view.getDepartmentRadioButton().setValue(true);
 		view.getTermRadioButton().setValue(false);
@@ -246,6 +252,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 		clearCoursesTextBoxes();
 		
+		view.getTermDropDown().clear();
 		view.getTermDropDown().addItem("A");
 		view.getTermDropDown().addItem("B");
 		view.getTermDropDown().addItem("C");
@@ -253,6 +260,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		view.getTermDropDown().addItem("E1");
 		view.getTermDropDown().addItem("E2");
 		
+		view.getDepartmentDropDown().clear();
 		view.getDepartmentDropDown().addItem("CS");
 		view.getDepartmentDropDown().addItem("IMGD");
 		view.getDepartmentDropDown().addItem("ECE");
@@ -267,12 +275,16 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		container.clear();
 		container.add(view.getWidgetContainer());
 		
-		if(parentPresenter.getActiveUser().getUserRole() == 1) {
+		// TODO see if there is a nicer way
+		if(Injector.INSTANCE.getGlobalData().getActiveUser().getUserRole() == 1)
+		{
 			editButtons(false);
 		}
+		
 	}
 	
-	private void editButtons(Boolean editing) {
+	private void editButtons(Boolean editing)
+	{
 		
 		view.getEditButton().setEnabled(!editing);
 		view.getApplyChangesButton().setEnabled(editing);
@@ -283,7 +295,8 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 	}
 	
-	private void clearCoursesTextBoxes() {
+	private void clearCoursesTextBoxes()
+	{
 		view.getDepartmentTextBox().setText("");
 		view.getCourseNumberSideTextBox().setText("");
 		view.getCourseSectionTextBox().setText("");
@@ -295,21 +308,28 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 	}
 	
 	
-	private void coursesFilter(Boolean departmentsRadioButton, Boolean termRadioButton, Boolean courseNumberRadioButton) {
+	private void coursesFilter(Boolean departmentsRadioButton, Boolean termRadioButton, Boolean courseNumberRadioButton)
+	{
 		parentPresenter.showLoadScreen();
-		if(departmentsRadioButton) {
+		
+		if(departmentsRadioButton)
+		{
 			filterByDepartment();
 		}
-		else if(termRadioButton) {
+		else if(termRadioButton)
+		{
 			filterByTerm();
 		}
-		else {
+		else
+		{
 			filterByCourseNumber();
 		}
+		
 		parentPresenter.hideLoadScreen();
 	}
 	
-	private void filterByDepartment() {
+	private void filterByDepartment()
+	{
 		ArrayList<String> departments = new ArrayList<>();
 		
 		for(int i = 0; i < instructorInfoList.size(); i++) {
@@ -896,9 +916,12 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		
 	}
 	
+	
 	@Override
-	public void requestViewFullWishlist(ListBox wishlistListBox) {
-		if(!requestViewFullWishlistInProgress) {
+	public void requestViewFullWishlist(ListBox wishlistListBox)
+	{
+		if(!requestViewFullWishlistInProgress)
+		{
 			
 			requestViewFullWishlistInProgress = true;
 			view.getViewFullWishlistButton().setEnabled(false);
@@ -909,11 +932,13 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 			int meetingTimesIndex = wishlistListBox.getSelectedIndex();
 			String meetingTimes = wishlistListBox.getValue(meetingTimesIndex);
 			
-			sendViewFullWishlist(courseNumber, meetingTimes);
+			//sendViewFullWishlist(courseNumber, meetingTimes);
 		}
 		
 	}
 	
+	
+	/*
 	public void sendViewFullWishlist(String courseNumber, String meetingTimes){
 		
 		SendViewFullWishlistAction svfwa = new SendViewFullWishlistAction(courseNumber, meetingTimes);
@@ -921,6 +946,7 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		eventBus.fireEvent(svfwe);	
 		
 	}
+	*/
 	
 	@Override
 	public void requestCreateCourse(TextBox departmentTextBox, TextBox courseNumberTextBox, TextBox courseSectionTextBox, TextBox sectionTypeTextBox, TextBox termTextBox, TextBox meetingTimesTextBox, TextBox locationTextBox){
@@ -1195,23 +1221,18 @@ public class CoursesPresenterImpl extends BasePresenterImpl implements CoursesPr
 		hidePopupPanel3();
 		
 	}
-
-	@Override
-	public void onSendCourses(SendCoursesEvent evt) {
-		go(evt.getAction().getPanel());
-	}	
 	
 	@Override
 	public void onReceiveCourses(ReceiveCoursesEvent evt)
 	{
 		HasWidgets container = evt.getContainer();
-		ReceiveCoursesAction rca = evt.getAction();
+		ReceiveCoursesAction rca = evt.getReceiveCoursesAction();
 		courseList = rca.getCourses();
 		sectionList = rca.getSections();
 		calendarList = rca.getCalendars();
 		labList = rca.getLabs();
 		go(container);
-		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		parentPresenter.hideLoadScreen();
 	}
 	
 	

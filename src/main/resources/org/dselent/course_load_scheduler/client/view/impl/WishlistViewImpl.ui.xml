@@ -4,7 +4,7 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel ui:field="root">
+	<g:HTMLPanel ui:field="rootPanel">
 		<g:AbsolutePanel height="366px">
 			<g:at top="44" left="7">
 				<g:RadioButton name="new name" text="Sort:" ui:field="sortDeptRadioButton"/>

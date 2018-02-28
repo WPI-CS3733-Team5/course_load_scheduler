@@ -4,21 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dselent.course_load_scheduler.client.action.InvalidGenericAction;
-import org.dselent.course_load_scheduler.client.action.ReceiveLoginAction;
 import org.dselent.course_load_scheduler.client.action.SendLoginAction;
 import org.dselent.course_load_scheduler.client.errorstring.InvalidLoginStrings;
 import org.dselent.course_load_scheduler.client.event.InvalidLoginEvent;
-import org.dselent.course_load_scheduler.client.event.ReceiveLoginEvent;
 import org.dselent.course_load_scheduler.client.event.SendLoginEvent;
 import org.dselent.course_load_scheduler.client.exceptions.EmptyStringException;
-import org.dselent.course_load_scheduler.client.gin.Injector;
-import org.dselent.course_load_scheduler.client.model.ActiveUser;
-import org.dselent.course_load_scheduler.client.model.UserInfo;
 import org.dselent.course_load_scheduler.client.presenter.IndexPresenter;
 import org.dselent.course_load_scheduler.client.presenter.LoginPresenter;
 import org.dselent.course_load_scheduler.client.view.LoginView;
-import org.dselent.course_load_scheduler.client.view.impl.MenuTabsImpl;
-
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
@@ -26,16 +19,16 @@ import com.google.inject.Inject;
 
 public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresenter
 {
-	private IndexPresenter parentPresenter;
-	private MenuTabsPresenterImpl menuTabs;
 	private LoginView view;
+	
+	private IndexPresenter parentPresenter;
+	
 	private boolean loginClickInProgress;
 
 	@Inject
-	public LoginPresenterImpl(IndexPresenter parentPresenter, LoginView view)
+	public LoginPresenterImpl(LoginView view)
 	{
 		this.view = view;
-		this.parentPresenter = parentPresenter;
 		view.setPresenter(this);
 		loginClickInProgress = false;
 	}
@@ -52,17 +45,11 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 		HandlerRegistration registration;
 		registration = eventBus.addHandler(InvalidLoginEvent.TYPE, this);
 		eventBusRegistration.put(InvalidLoginEvent.TYPE, registration);
-		
-		HandlerRegistration login;
-		login = eventBus.addHandler(ReceiveLoginEvent.TYPE, this);
-		eventBusRegistration.put(ReceiveLoginEvent.TYPE, login);
-		
 	}
 		
 	@Override
 	public void go(HasWidgets container)
 	{
-//		parentPresenter.hideMenuTabs();
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
@@ -80,17 +67,11 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 	}
 
 	@Override
-	public void setParentPresenter(IndexPresenter parentPresenter)
+	public void setParentPresenter(IndexPresenter indexPresenter)
 	{
-		this.parentPresenter = parentPresenter;
+		this.parentPresenter = indexPresenter;
 	}
-	
-	@Override
-	public void setMenuTabs(MenuTabsPresenterImpl menuTabs)
-	{
-		this.menuTabs = menuTabs;
-	}
-	
+		
 	@Override
 	public void login()
 	{
@@ -143,7 +124,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 	
 	private void sendLogin(String userName, String password)
 	{
-		HasWidgets container = parentPresenter.getView().getViewRootPanel();
+		HasWidgets container = parentPresenter.getView().getMainPanel();
 		SendLoginAction sla = new SendLoginAction(userName, password);
 		SendLoginEvent sle = new SendLoginEvent(sla, container);
 		eventBus.fireEvent(sle);
@@ -179,28 +160,18 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 		view.getLoginButton().setEnabled(true);
 		loginClickInProgress = false;
 		
-		InvalidGenericAction ila = evt.getAction();
+		InvalidGenericAction ila = evt.getInvalidGenericAction();
 		view.showErrorMessages(ila.toString());
 	}
 	
-	public void onReceiveLogout(HasWidgets container) {
+	// TODO fire not implemented yet
+	/*
+	public void onReceiveLogout(HasWidgets container)
+	{
 		go(container);
-		Injector.INSTANCE.getIndexPresenter().hideLoadScreen();
+		parentPresenter.hideMenuTabs();
+		parentPresenter.hideLoadScreen();
 	}
+	*/
 	
-	@Override
-	public void onReceiveLogin(ReceiveLoginEvent evt) {
-		HasWidgets container = evt.getContainer();
-		ReceiveLoginAction rla = evt.getAction();
-		UserInfo user = rla.getModel();
-		ActiveUser activeUser = new ActiveUser();
-		activeUser.setId(user.getId());
-		activeUser.setUserRole(user.getUserRole());
-		activeUser.setFirstName(user.getFirstName());
-		activeUser.setLastName(user.getLastName());
-		activeUser.setEmail(user.getEmail());
-		activeUser.setAccountState(1);
-		parentPresenter.setActiveUser(activeUser);
-		menuTabs.sendHome();
-	}
 }

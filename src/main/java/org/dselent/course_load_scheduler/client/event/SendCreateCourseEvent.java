@@ -3,22 +3,19 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendCreateCourseAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendCreateCourseEventHandler;
 
-public class SendCreateCourseEvent extends BaseEvent<SendCreateCourseAction, SendCreateCourseEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendCreateCourseEvent extends GwtEvent<SendCreateCourseEventHandler>
+{
+	public static Type<SendCreateCourseEventHandler> TYPE = new Type<SendCreateCourseEventHandler>();
 	
-public static Type<SendCreateCourseEventHandler> TYPE = new Type<SendCreateCourseEventHandler>();
+	private SendCreateCourseAction sendCreateCourseAction;
 	
-	private SendCreateCourseAction action;
-	
-	public SendCreateCourseEvent(SendCreateCourseAction action)
+	public SendCreateCourseEvent(SendCreateCourseAction sendCreateCourseAction)
 	{
-		super(action);
+		this.sendCreateCourseAction = sendCreateCourseAction;
 	}
-	
-	public SendCreateCourseAction getAction()
-	{
-		return action;
-	}
-	
+
 	@Override
 	public Type<SendCreateCourseEventHandler> getAssociatedType()
 	{
@@ -31,5 +28,8 @@ public static Type<SendCreateCourseEventHandler> TYPE = new Type<SendCreateCours
 		handler.onSendCreateCourse(this);
 	}
 
-
+	public SendCreateCourseAction getSendCreateCourseAction()
+	{
+		return sendCreateCourseAction;
+	}
 }

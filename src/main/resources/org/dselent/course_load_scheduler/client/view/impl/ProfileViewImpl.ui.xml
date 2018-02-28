@@ -4,7 +4,7 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:HTMLPanel ui:field="profileRoot">
+	<g:HTMLPanel ui:field="rootPanel">
 		<g:VerticalPanel>
 			<g:Image width="142px" height="143px"/>
 			<g:Label text="Last, First Name (username)" ui:field="username"/>

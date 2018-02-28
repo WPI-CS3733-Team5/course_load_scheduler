@@ -3,13 +3,18 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendPopup2ApplyAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendPopup2ApplyEventHandler;
 
-public class SendPopup2ApplyEvent extends BaseEvent<SendPopup2ApplyAction, SendPopup2ApplyEventHandler> {
+import com.google.gwt.event.shared.GwtEvent;
+
+public class SendPopup2ApplyEvent extends GwtEvent<SendPopup2ApplyEventHandler>
+{
 	
-public static Type<SendPopup2ApplyEventHandler> TYPE = new Type<SendPopup2ApplyEventHandler>();
+	public static Type<SendPopup2ApplyEventHandler> TYPE = new Type<SendPopup2ApplyEventHandler>();
 	
-	public SendPopup2ApplyEvent(SendPopup2ApplyAction action)
+	private SendPopup2ApplyAction sendPopup2ApplyAction;
+	
+	public SendPopup2ApplyEvent(SendPopup2ApplyAction sendPopup2ApplyAction)
 	{
-		super(action);
+		this.sendPopup2ApplyAction = sendPopup2ApplyAction;
 	}
 	
 	@Override
@@ -24,4 +29,8 @@ public static Type<SendPopup2ApplyEventHandler> TYPE = new Type<SendPopup2ApplyE
 		handler.onSendPopup2Apply(this);
 	}
 
+	public SendPopup2ApplyAction getSendPopup2ApplyAction()
+	{
+		return sendPopup2ApplyAction;
+	}
 }

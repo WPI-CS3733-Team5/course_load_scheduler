@@ -14,17 +14,24 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
-public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements AccountsView{
+public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements AccountsView
+{
 
 	private static AccountsViewUiBinder uiBinder = GWT.create(AccountsViewUiBinder.class);
 	
 	interface AccountsViewUiBinder extends UiBinder<Widget, AccountsViewImpl> {}
+	
+	@UiField HTMLPanel rootPanel;
+	@UiField HorizontalPanel radioPanel;
+	@UiField Grid fullGrid;
+	@UiField Grid gridEditing;
 	
 	@UiField Label labelUserName;
 	@UiField TextBox enterUserName;
@@ -39,11 +46,8 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	@UiField Label labelSort;
 	@UiField RadioButton radioSortDepartment;
 	@UiField RadioButton radioSortName;
-	@UiField HorizontalPanel radioPanel;
 	@UiField Button buttonSort;
-	@UiField Grid fullGrid;
 	@UiField ListBox listAccounts;
-	@UiField Grid gridEditing;
 	@UiField Label labelLastName;
 	@UiField TextBox enterLastName;
 	@UiField Label labelDepartment;
@@ -62,258 +66,377 @@ public class AccountsViewImpl extends BaseViewImpl<AccountsPresenter> implements
 	@UiField TextBox enterEmail;
 
 
-
-	public AccountsViewImpl() {
+	public AccountsViewImpl()
+	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public TextBox getEnterUserName() {
-		return enterUserName;
-	}
-
-	public void setEnterUserName(TextBox enterUserName) {
-		this.enterUserName = enterUserName;
-	}
-
-	public TextBox getEnterFirstName() {
-		return enterFirstName;
-	}
-
-	public void setEnterFirstName(TextBox enterFirstName) {
-		this.enterFirstName = enterFirstName;
-	}
-
-	public Button getButtonEdit() {
-		return buttonEdit;
-	}
-
-	public void setButtonEdit(Button buttonEdit) {
-		this.buttonEdit = buttonEdit;
-	}
-
-	public Button getButtonApply() {
-		return buttonApply;
-	}
-
-	public void setButtonApply(Button buttonApply) {
-		this.buttonApply = buttonApply;
-	}
-
-	public Button getButtonCancel() {
-		return buttonCancel;
-	}
-
-	public void setButtonCancel(Button buttonCancel) {
-		this.buttonCancel = buttonCancel;
-	}
-
-	public Button getButtonRemove() {
-		return buttonRemove;
-	}
-
-	public void setButtonRemove(Button buttonRemove) {
-		this.buttonRemove = buttonRemove;
-	}
-
-	public Button getButtonCreate() {
-		return buttonCreate;
-	}
-
-	public void setButtonCreate(Button buttonCreate) {
-		this.buttonCreate = buttonCreate;
-	}
-
-	public RadioButton getRadioSortDepartment() {
-		return radioSortDepartment;
-	}
-
-	public void setRadioSortDepartment(RadioButton radioSortDepartment) {
-		this.radioSortDepartment = radioSortDepartment;
-	}
-
-	public RadioButton getRadioSortName() {
-		return radioSortName;
-	}
-
-	public void setRadioSortName(RadioButton radioSortName) {
-		this.radioSortName = radioSortName;
-	}
-
-	public HorizontalPanel getRadioPanel() {
-		return radioPanel;
-	}
-
-	public void setRadioPanel(HorizontalPanel radioPanel) {
-		this.radioPanel = radioPanel;
-	}
-
-	public Grid getFullGrid() {
-		return fullGrid;
-	}
-
-	public void setFullGrid(Grid fullGrid) {
-		this.fullGrid = fullGrid;
-	}
-
-	public ListBox getListAccounts() {
-		return listAccounts;
-	}
-
-	public void setListAccounts(ListBox listAccounts) {
-		this.listAccounts = listAccounts;
-	}
-
-	public Grid getGridEditing() {
-		return gridEditing;
-	}
-
-	public void setGridEditing(Grid gridEditing) {
-		this.gridEditing = gridEditing;
-	}
-
-	public TextBox getEnterLastName() {
-		return enterLastName;
-	}
-
-	public void setEnterLastName(TextBox enterLastName) {
-		this.enterLastName = enterLastName;
-	}
-
-	public TextBox getEnterDepartment() {
-		return enterDepartment;
-	}
-
-	public void setEnterDepartment(TextBox enterDepartment) {
-		this.enterDepartment = enterDepartment;
-	}
-
-	public IntegerBox getEnterRank() {
-		return enterRank;
-	}
-
-	public void setEnterRank(IntegerBox enterRank) {
-		this.enterRank = enterRank;
-	}
-
-	public IntegerBox getEnterCourseLoad() {
-		return enterCourseLoad;
-	}
-
-	public void setEnterCourseLoad(IntegerBox enterCourseLoad) {
-		this.enterCourseLoad = enterCourseLoad;
-	}
-
-	public TextBox getEnterOffice() {
-		return enterOffice;
-	}
-
-	public void setEnterOffice(TextBox enterOffice) {
-		this.enterOffice = enterOffice;
-	}
-
-	public MenuBar getMenuPrivelages() {
-		return menuPrivelages;
-	}
-
-	public void setMenuPrivelages(MenuBar menuPrivelages) {
-		this.menuPrivelages = menuPrivelages;
-	}
-
-	public MenuItem getDropdownAdmin() {
-		return dropdownAdmin;
-	}
-
-	public void setDropdownAdmin(MenuItem dropdownAdmin) {
-		this.dropdownAdmin = dropdownAdmin;
-	}
-
-	public MenuItem getDropdownNonAdmin() {
-		return dropdownNonAdmin;
-	}
-
-	public void setDropdownNonAdmin(MenuItem dropdownNonAdmin) {
-		this.dropdownNonAdmin = dropdownNonAdmin;
-	}
-
-	public TextBox getEnterEmail() {
-		return enterEmail;
-	}
-
-	public void setEnterEmail(TextBox enterEmail) {
-		this.enterEmail = enterEmail;
-	}
-
-	public Label getLabelUserName() {
-		return labelUserName;
-	}
-
-	public Label getLabelFirstName() {
-		return labelFirstName;
-	}
-
-	public Label getLabelSort() {
-		return labelSort;
-	}
-
-	public Label getLabelLastName() {
-		return labelLastName;
-	}
-
-	public Label getLabelDepartment() {
-		return labelDepartment;
-	}
-
-	public Label getLabelRank() {
-		return labelRank;
-	}
-
-	public Label getLabelCourseLoad() {
-		return labelCourseLoad;
-	}
-
-	public Label getLabelOffice() {
-		return labelOffice;
-	}
-
-	public Label getLabelPrivelages() {
-		return labelPrivelages;
-	}
-
-	public Label getLabelEmail() {
-		return labelEmail;
-	}
-	
-	public Button getButtonViewAccount() {
-		return buttonViewAccount;
-	}
-
-	public void setButtonViewAccount(Button buttonViewAccount) {
-		this.buttonViewAccount = buttonViewAccount;
-	}
-
-	public Button getButtonSort() {
-		return buttonSort;
-	}
-
-	public void setButtonSort(Button buttonSort) {
-		this.buttonSort = buttonSort;
-	}
-
 	@Override
-	public void setPresenter(AccountsPresenter presenter) {
+	public void setPresenter(AccountsPresenter presenter)
+	{
 		this.presenter = presenter;
-		
 	}
 
 	@Override
-	public Widget getWidgetContainer() {
+	public Widget getWidgetContainer()
+	{
 		return this;
 	}
 
 	@Override
-	public HasWidgets getViewRootPanel() {
-		return this.fullGrid;
+	public HasWidgets getViewRootPanel()
+	{
+		return rootPanel;
 	}
+	
+	@Override
+	public TextBox getEnterUserName()
+	{
+		return enterUserName;
+	}
+
+	@Override
+	public void setEnterUserName(TextBox enterUserName)
+	{
+		this.enterUserName = enterUserName;
+	}
+
+	@Override
+	public TextBox getEnterFirstName()
+	{
+		return enterFirstName;
+	}
+
+	@Override
+	public void setEnterFirstName(TextBox enterFirstName)
+	{
+		this.enterFirstName = enterFirstName;
+	}
+
+	@Override
+	public Button getButtonEdit()
+	{
+		return buttonEdit;
+	}
+
+	@Override
+	public void setButtonEdit(Button buttonEdit)
+	{
+		this.buttonEdit = buttonEdit;
+	}
+
+	@Override
+	public Button getButtonApply()
+	{
+		return buttonApply;
+	}
+
+	@Override
+	public void setButtonApply(Button buttonApply)
+	{
+		this.buttonApply = buttonApply;
+	}
+
+	@Override
+	public Button getButtonCancel()
+	{
+		return buttonCancel;
+	}
+
+	@Override
+	public void setButtonCancel(Button buttonCancel)
+	{
+		this.buttonCancel = buttonCancel;
+	}
+
+	@Override
+	public Button getButtonRemove()
+	{
+		return buttonRemove;
+	}
+
+	@Override
+	public void setButtonRemove(Button buttonRemove)
+	{
+		this.buttonRemove = buttonRemove;
+	}
+
+	@Override
+	public Button getButtonCreate()
+	{
+		return buttonCreate;
+	}
+
+	@Override
+	public void setButtonCreate(Button buttonCreate)
+	{
+		this.buttonCreate = buttonCreate;
+	}
+
+	@Override
+	public RadioButton getRadioSortDepartment()
+	{
+		return radioSortDepartment;
+	}
+
+	@Override
+	public void setRadioSortDepartment(RadioButton radioSortDepartment)
+	{
+		this.radioSortDepartment = radioSortDepartment;
+	}
+
+	@Override
+	public RadioButton getRadioSortName()
+	{
+		return radioSortName;
+	}
+
+	@Override
+	public void setRadioSortName(RadioButton radioSortName)
+	{
+		this.radioSortName = radioSortName;
+	}
+
+	@Override
+	public HorizontalPanel getRadioPanel()
+	{
+		return radioPanel;
+	}
+
+	@Override
+	public void setRadioPanel(HorizontalPanel radioPanel)
+	{
+		this.radioPanel = radioPanel;
+	}
+
+	@Override
+	public Grid getFullGrid()
+	{
+		return fullGrid;
+	}
+
+	@Override
+	public void setFullGrid(Grid fullGrid)
+	{
+		this.fullGrid = fullGrid;
+	}
+
+	@Override
+	public ListBox getListAccounts()
+	{
+		return listAccounts;
+	}
+
+	@Override
+	public void setListAccounts(ListBox listAccounts)
+	{
+		this.listAccounts = listAccounts;
+	}
+
+	@Override
+	public Grid getGridEditing()
+	{
+		return gridEditing;
+	}
+
+	@Override
+	public void setGridEditing(Grid gridEditing)
+	{
+		this.gridEditing = gridEditing;
+	}
+
+	@Override
+	public TextBox getEnterLastName()
+	{
+		return enterLastName;
+	}
+
+	@Override
+	public void setEnterLastName(TextBox enterLastName)
+	{
+		this.enterLastName = enterLastName;
+	}
+
+	@Override
+	public TextBox getEnterDepartment()
+	{
+		return enterDepartment;
+	}
+
+	@Override
+	public void setEnterDepartment(TextBox enterDepartment)
+	{
+		this.enterDepartment = enterDepartment;
+	}
+
+	@Override
+	public IntegerBox getEnterRank()
+	{
+		return enterRank;
+	}
+
+	@Override
+	public void setEnterRank(IntegerBox enterRank)
+	{
+		this.enterRank = enterRank;
+	}
+
+	@Override
+	public IntegerBox getEnterCourseLoad()
+	{
+		return enterCourseLoad;
+	}
+
+	@Override
+	public void setEnterCourseLoad(IntegerBox enterCourseLoad)
+	{
+		this.enterCourseLoad = enterCourseLoad;
+	}
+
+	@Override
+	public TextBox getEnterOffice()
+	{
+		return enterOffice;
+	}
+
+	@Override
+	public void setEnterOffice(TextBox enterOffice)
+	{
+		this.enterOffice = enterOffice;
+	}
+
+	@Override
+	public MenuBar getMenuPrivelages()
+	{
+		return menuPrivelages;
+	}
+
+	@Override
+	public void setMenuPrivelages(MenuBar menuPrivelages)
+	{
+		this.menuPrivelages = menuPrivelages;
+	}
+
+	@Override
+	public MenuItem getDropdownAdmin()
+	{
+		return dropdownAdmin;
+	}
+
+	@Override
+	public void setDropdownAdmin(MenuItem dropdownAdmin)
+	{
+		this.dropdownAdmin = dropdownAdmin;
+	}
+
+	@Override
+	public MenuItem getDropdownNonAdmin()
+	{
+		return dropdownNonAdmin;
+	}
+
+	@Override
+	public void setDropdownNonAdmin(MenuItem dropdownNonAdmin)
+	{
+		this.dropdownNonAdmin = dropdownNonAdmin;
+	}
+
+	@Override
+	public TextBox getEnterEmail()
+	{
+		return enterEmail;
+	}
+
+	@Override
+	public void setEnterEmail(TextBox enterEmail)
+	{
+		this.enterEmail = enterEmail;
+	}
+
+	@Override
+	public Label getLabelUserName()
+	{
+		return labelUserName;
+	}
+
+	@Override
+	public Label getLabelFirstName()
+	{
+		return labelFirstName;
+	}
+
+	@Override
+	public Label getLabelSort()
+	{
+		return labelSort;
+	}
+
+	@Override
+	public Label getLabelLastName()
+	{
+		return labelLastName;
+	}
+
+	@Override
+	public Label getLabelDepartment()
+	{
+		return labelDepartment;
+	}
+
+	@Override
+	public Label getLabelRank()
+	{
+		return labelRank;
+	}
+
+	@Override
+	public Label getLabelCourseLoad()
+	{
+		return labelCourseLoad;
+	}
+
+	@Override
+	public Label getLabelOffice()
+	{
+		return labelOffice;
+	}
+
+	@Override
+	public Label getLabelPrivelages()
+	{
+		return labelPrivelages;
+	}
+
+	@Override
+	public Label getLabelEmail()
+	{
+		return labelEmail;
+	}
+	
+	@Override
+	public Button getButtonViewAccount()
+	{
+		return buttonViewAccount;
+	}
+
+	@Override
+	public void setButtonViewAccount(Button buttonViewAccount)
+	{
+		this.buttonViewAccount = buttonViewAccount;
+	}
+
+	@Override
+	public Button getButtonSort()
+	{
+		return buttonSort;
+	}
+
+	@Override
+	public void setButtonSort(Button buttonSort)
+	{
+		this.buttonSort = buttonSort;
+	}
+
 	
 	@UiHandler("buttonSort")
 	void onButtonSortClicked(ClickEvent evt)

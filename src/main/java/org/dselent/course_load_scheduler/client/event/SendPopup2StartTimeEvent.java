@@ -3,13 +3,17 @@ package org.dselent.course_load_scheduler.client.event;
 import org.dselent.course_load_scheduler.client.action.SendPopup2StartTimeAction;
 import org.dselent.course_load_scheduler.client.event_handler.SendPopup2StartTimeEventHandler;
 
-public class SendPopup2StartTimeEvent extends BaseEvent<SendPopup2StartTimeAction, SendPopup2StartTimeEventHandler>{
+import com.google.gwt.event.shared.GwtEvent;
 
-public static Type<SendPopup2StartTimeEventHandler> TYPE = new Type<SendPopup2StartTimeEventHandler>();
+public class SendPopup2StartTimeEvent extends GwtEvent<SendPopup2StartTimeEventHandler>
+{
+	public static Type<SendPopup2StartTimeEventHandler> TYPE = new Type<SendPopup2StartTimeEventHandler>();
 	
-	public SendPopup2StartTimeEvent(SendPopup2StartTimeAction action)
+	private SendPopup2StartTimeAction sendPopup2StartTimeAction;
+	
+	public SendPopup2StartTimeEvent(SendPopup2StartTimeAction sendPopup2StartTimeAction)
 	{
-		super(action);
+		this.sendPopup2StartTimeAction = sendPopup2StartTimeAction;
 	}
 	
 	@Override
@@ -23,6 +27,9 @@ public static Type<SendPopup2StartTimeEventHandler> TYPE = new Type<SendPopup2St
 	{
 		handler.onSendPopup2StartTime(this);
 	}
-	
-	
+
+	public SendPopup2StartTimeAction getSendPopup2StartTimeAction()
+	{
+		return sendPopup2StartTimeAction;
+	}
 }

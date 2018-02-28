@@ -1,7 +1,6 @@
 package org.dselent.course_load_scheduler.client.view.impl;
 
 import org.dselent.course_load_scheduler.client.presenter.CoursesPresenter;
-import org.dselent.course_load_scheduler.client.view.CoursesView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -12,20 +11,22 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import org.dselent.course_load_scheduler.client.view.CoursesView;
 
-public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements CoursesView {
-	
+public class CoursesViewImpl extends BaseViewImpl<CoursesPresenter> implements CoursesView
+{
 	private static CoursesViewImplUiBinder uiBinder = GWT.create(CoursesViewImplUiBinder.class);
 
-	interface CoursesViewImplUiBinder extends UiBinder<Widget, CoursesViewImpl> {
-	}
+	interface CoursesViewImplUiBinder extends UiBinder<Widget, CoursesViewImpl> {}
 	
+	@UiField HorizontalPanel rootPanel;
 	@UiField HTMLPanel mainPanel;
 	@UiField Label sortByLabel;
 	@UiField RadioButton departmentRadioButton;
@@ -92,135 +93,201 @@ public class CoursesViewImpl  extends BaseViewImpl<CoursesPresenter> implements 
 	
 	//getters and setters
 	
-	public Label getSortByLabel() {
+	@Override
+	public Label getSortByLabel()
+	{
 		return sortByLabel;
 	}
 
-	public RadioButton getDepartmentRadioButton() {
+	@Override
+	public RadioButton getDepartmentRadioButton()
+	{
 		return departmentRadioButton;
 	}
 
-	public ListBox getDepartmentDropDown() {
+	@Override
+	public ListBox getDepartmentDropDown()
+	{
 		return departmentDropDown;
 	}
 
-	public RadioButton getTermRadioButton() {
+	@Override
+	public RadioButton getTermRadioButton()
+	{
 		return termRadioButton;
 	}
 
-	public ListBox getTermDropDown() {
+	@Override
+	public ListBox getTermDropDown()
+	{
 		return termDropDown;
 	}
 
-	public RadioButton getCourseNumberRadioButton() {
+	@Override
+	public RadioButton getCourseNumberRadioButton()
+	{
 		return courseNumberRadioButton;
 	}
 
-	public TextBox getCourseNumberTextBox() {
+	@Override
+	public TextBox getCourseNumberTextBox()
+	{
 		return courseNumberTextBox;
 	}
 
-	public Button getSortButton() {
+	@Override
+	public Button getSortButton()
+	{
 		return sortButton;
 	}
 
-	public ListBox getCoursesListBox() {
+	@Override
+	public ListBox getCoursesListBox()
+	{
 		return coursesListBox;
 	}
 
-	public Label getWishlistLabel() {
+	@Override
+	public Label getWishlistLabel()
+	{
 		return wishlistLabel;
 	}
 
-	public ListBox getWishlistListbox() {
+	@Override
+	public ListBox getWishlistListbox()
+	{
 		return wishlistListbox;
 	}
 
-	public Button getCreateCourseButton() {
+	@Override
+	public Button getCreateCourseButton()
+	{
 		return createCourseButton;
 	}
 
-	public Button getRemoveSelectedFromWishlistButton() {
+	@Override
+	public Button getRemoveSelectedFromWishlistButton()
+	{
 		return removeSelectedFromWishlistButton;
 	}
 
-	public Button getViewFullWishlistButton() {
+	@Override
+	public Button getViewFullWishlistButton()
+	{
 		return viewFullWishlistButton;
 	}
 
-	public Label getDepartmentLabel() {
+	@Override
+	public Label getDepartmentLabel()
+	{
 		return departmentLabel;
 	}
 
-	public TextBox getDepartmentTextBox() {
+	@Override
+	public TextBox getDepartmentTextBox()
+	{
 		return departmentTextBox;
 	}
 
-	public Label getCourseNumberSideLabel() {
+	@Override
+	public Label getCourseNumberSideLabel()
+	{
 		return courseNumberSideLabel;
 	}
 
-	public TextBox getCourseNumberSideTextBox() {
+	@Override
+	public TextBox getCourseNumberSideTextBox()
+	{
 		return courseNumberSideTextBox;
 	}
 
-	public Label getCourseSectionLabel() {
+	@Override
+	public Label getCourseSectionLabel()
+	{
 		return courseSectionLabel;
 	}
 
-	public TextBox getCourseSectionTextBox() {
+	@Override
+	public TextBox getCourseSectionTextBox()
+	{
 		return courseSectionTextBox;
 	}
 
-	public Label getSectionTypeLabel() {
+	@Override
+	public Label getSectionTypeLabel()
+	{
 		return sectionTypeLabel;
 	}
 
-	public TextBox getSectionTypeTextBox() {
+	@Override
+	public TextBox getSectionTypeTextBox()
+	{
 		return sectionTypeTextBox;
 	}
 
-	public Label getTermLabel() {
+	@Override
+	public Label getTermLabel()
+	{
 		return termLabel;
 	}
 
-	public TextBox getTermTextBox() {
+	@Override
+	public TextBox getTermTextBox()
+	{
 		return termTextBox;
 	}
 
-	public Label getMeetingTimesLabel() {
+	@Override
+	public Label getMeetingTimesLabel()
+	{
 		return meetingTimesLabel;
 	}
 
-	public TextBox getMeetingTimesTextBox() {
+	@Override
+	public TextBox getMeetingTimesTextBox()
+	{
 		return meetingTimesTextBox;
 	}
 
-	public Label getLocationLabel() {
+	@Override
+	public Label getLocationLabel()
+	{
 		return locationLabel;
 	}
 
-	public TextBox getLocationTextBox() {
+	@Override
+	public TextBox getLocationTextBox()
+	{
 		return locationTextBox;
 	}
 
-	public Button getAddToWishlistButton() {
+	@Override
+	public Button getAddToWishlistButton()
+	{
 		return addToWishlistButton;
 	}
 
-	public Button getEditButton() {
+	@Override
+	public Button getEditButton()
+	{
 		return editButton;
 	}
 
-	public Button getApplyChangesButton() {
+	@Override
+	public Button getApplyChangesButton()
+	{
 		return applyChangesButton;
 	}
 
-	public Button getCancelChangesButton() {
+	@Override
+	public Button getCancelChangesButton()
+	{
 		return cancelChangesButton;
 	}
 
-	public Button getRemoveCourseButton() {
+	@Override
+	public Button getRemoveCourseButton()
+	{
 		return removeCourseButton;
 	}
 
