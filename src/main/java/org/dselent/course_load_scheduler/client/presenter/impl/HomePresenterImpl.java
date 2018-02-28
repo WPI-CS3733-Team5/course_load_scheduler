@@ -109,7 +109,7 @@ public class HomePresenterImpl extends BasePresenterImpl implements HomePresente
 		view.getTermDropDown().addItem("E1");
 		view.getTermDropDown().addItem("E2");
 		
-		parentPresenter.showMenuTabs();
+//		parentPresenter.showMenuTabs();
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}

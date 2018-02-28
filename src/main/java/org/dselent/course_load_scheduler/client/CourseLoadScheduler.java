@@ -74,44 +74,44 @@ public class CourseLoadScheduler implements EntryPoint
 		indexPresenter.init();
 		IndexView indexView = indexPresenter.getView();	
 		
-		HomePresenterImpl homePresenter = injector.getHomePresenterImpl();
-		homePresenter.init();
-		
-		CoursesPresenterImpl coursePresenter = injector.getCoursesPresenterImpl();
-		coursePresenter.init();
-		
-		WishlistPresenterImpl wishlistPresenter = injector.getWishlistPresenterImpl();
-		wishlistPresenter.init();
-		
-		ScheduleGeneratorPresenterImpl schedulerGeneratorPresenter = injector.getScheduleGeneratorPresenterImpl();
-		schedulerGeneratorPresenter.init();
-		
-		AccountsPresenterImpl accountsPresenter = injector.getAccountsPresenterImpl();
-		accountsPresenter.init();
-		
-		MenuTabsPresenterImpl menuTabs = injector.getMenuTabsPresenterImpl();
-		menuTabs.init();
-		
-		NotificationsPresenterImpl notificationPresenter = injector.getNotificationsPresenterImpl();
-		notificationPresenter.init();
-		
-		ProfilePresenterImpl profilePresenter = injector.getProfilePresenterImpl();
-		profilePresenter.init();
-				
-		LoginPresenterImpl loginPresenter = injector.getLoginPresenter();
-		loginPresenter.init();
-		loginPresenter.go(indexView.getViewRootPanel());
-		
-		//TabTestPresenterImpl tabTestPresenter = injector.getTestTabPresenter();
-		//tabTestPresenter.init();
-		
-		//LoginView loginView = loginPresenter.getView();	
-		
-		//ExamplePresenterImpl examplePresenter = injector.getExamplePresenter();
-		//examplePresenter.init();
-		
-		UserServiceImpl userService = injector.getUserService();
-		userService.init();
+//		HomePresenterImpl homePresenter = injector.getHomePresenterImpl();
+//		homePresenter.init();
+//		
+//		CoursesPresenterImpl coursePresenter = injector.getCoursesPresenterImpl();
+//		coursePresenter.init();
+//		
+//		WishlistPresenterImpl wishlistPresenter = injector.getWishlistPresenterImpl();
+//		wishlistPresenter.init();
+//		
+//		ScheduleGeneratorPresenterImpl schedulerGeneratorPresenter = injector.getScheduleGeneratorPresenterImpl();
+//		schedulerGeneratorPresenter.init();
+//		
+//		AccountsPresenterImpl accountsPresenter = injector.getAccountsPresenterImpl();
+//		accountsPresenter.init();
+//		
+//		MenuTabsPresenterImpl menuTabs = injector.getMenuTabsPresenterImpl();
+//		menuTabs.init();
+//		
+//		NotificationsPresenterImpl notificationPresenter = injector.getNotificationsPresenterImpl();
+//		notificationPresenter.init();
+//		
+//		ProfilePresenterImpl profilePresenter = injector.getProfilePresenterImpl();
+//		profilePresenter.init();
+//				
+//		LoginPresenterImpl loginPresenter = injector.getLoginPresenter();
+//		loginPresenter.init();
+//		loginPresenter.go(indexView.getViewRootPanel());
+//		
+//		//TabTestPresenterImpl tabTestPresenter = injector.getTestTabPresenter();
+//		//tabTestPresenter.init();
+//		
+//		//LoginView loginView = loginPresenter.getView();	
+//		
+//		//ExamplePresenterImpl examplePresenter = injector.getExamplePresenter();
+//		//examplePresenter.init();
+//		
+//		UserServiceImpl userService = injector.getUserService();
+//		userService.init();
 		
 		indexPresenter.go(root);
 		//MenuTabsPresenter.go(indexView.getViewRootPanel());
@@ -120,7 +120,7 @@ public class CourseLoadScheduler implements EntryPoint
 		//menuTabs.init();
 		//menuTabs.go(indexView.getViewRootPanel());
 		
-		//TabTest tt = new TabTest();
-		//root.add(tt);
+		TabTest tt = new TabTest();
+		root.add(tt);
 	}
 }

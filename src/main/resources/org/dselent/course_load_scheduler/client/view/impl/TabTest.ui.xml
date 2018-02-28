@@ -6,16 +6,16 @@
 	
 	<g:TabLayoutPanel barHeight="2" barUnit="EM" width="100%" height="50%" ui:field="tabPanel">
 		<g:tab>
-			<g:header>SimplePanel1</g:header>
-			<d:HomeViewImpl />
-		</g:tab>
-		<g:tab>
-			<g:header>SimplePanel2</g:header>
+			<g:header>Login Page</g:header>
 			<d:LoginViewImpl />
 		</g:tab>
 		<g:tab>
-			<g:header>HTML Panel</g:header>
+			<g:header>Menu Tabs</g:header>
 			<d:MenuTabsImpl />
+		</g:tab>
+		<g:tab>
+			<g:header>Home</g:header>
+			<d:HomeViewImpl />
 		</g:tab>
 		<g:tab>
 			<g:header>Accounts</g:header>
@@ -26,19 +26,19 @@
 			<d:ProfileViewImpl />
 		</g:tab>
 		<g:tab>
-			<g:header>Vertical Panel</g:header>
+			<g:header>Schedule Generator</g:header>
 			<d:ScheduleGeneratorViewImpl/>
 		</g:tab>
 		<g:tab>
-			<g:header>DockLayout Panel</g:header>
+			<g:header>Notifications</g:header>
 			<d:NotificationsViewImpl />
 		</g:tab>
 		<g:tab>
-			<g:header>Grid Panel</g:header>
+			<g:header>Wishlist</g:header>
 			<d:WishlistViewImpl />
 		</g:tab>
 		<g:tab>
-			<g:header>TabLayout Panel</g:header>
+			<g:header>Courses</g:header>
 			<d:CoursesViewImpl />
 		</g:tab>
 	</g:TabLayoutPanel>

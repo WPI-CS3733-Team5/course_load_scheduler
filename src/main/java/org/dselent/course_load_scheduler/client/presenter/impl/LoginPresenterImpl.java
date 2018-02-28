@@ -62,7 +62,7 @@ public class LoginPresenterImpl extends BasePresenterImpl implements LoginPresen
 	@Override
 	public void go(HasWidgets container)
 	{
-		parentPresenter.hideMenuTabs();
+//		parentPresenter.hideMenuTabs();
 		container.clear();
 		container.add(view.getWidgetContainer());
 	}
