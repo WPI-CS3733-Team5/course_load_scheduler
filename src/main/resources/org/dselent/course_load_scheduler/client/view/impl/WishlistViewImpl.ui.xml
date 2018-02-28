@@ -37,10 +37,10 @@
 				<g:Button text="View Course Details" width="90px" height="43px" ui:field="viewCourseDetailsButton"/>
 			</g:at>
 			<g:at top="118" left="360">
-				<g:Button width="90px" height="58px" ui:field="editWishlistButton">Edit Wishlist</g:Button>
+				<g:Button width="90px" height="50px" ui:field="editWishlistButton">Edit Wishlist</g:Button>
 			</g:at>
 			<g:at top="166" left="360">
-				<g:Button width="90px" height="58px" ui:field="requestNewScheduleButton">Request New Schedule</g:Button>
+				<g:Button width="90px" height="50px" ui:field="requestNewScheduleButton">Request New Schedule</g:Button>
 			</g:at>
 			<g:at top="40" left="350">
 				<g:Button ui:field="sortButton">Sort</g:Button>
