@@ -198,7 +198,7 @@
 		</g:Grid>
 
 	</g:HTMLPanel> 
-	<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px" addStyleNames="{style.hidden}">
+	<g:PopupPanel ui:field="popupPanel1" width="164px" height="153px"> <!--addStyleNames="{style.hidden}"-->
 		<g:Grid width="911px" height="475px">
 			<g:row>
 				<g:customCell>
@@ -252,7 +252,7 @@
 			</g:row>
 		</g:Grid>
 	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel2" width="148px" addStyleNames="{style.hidden}">
+	<g:PopupPanel ui:field="popupPanel2" width="148px"> <!--  addStyleNames="{style.hidden}"-->
 		<g:Grid width="122px" height="100%">
 			<g:row>
 				<g:customCell>
@@ -359,7 +359,7 @@
 			</g:row>
 		</g:Grid> <!-- addStyleNames="{style.loading-glass-panel}, {style.gwt-popup-panel-glass}" previewingAllNativeEvents="true"-->
 	</g:PopupPanel>
-	<g:PopupPanel ui:field="popupPanel3" width="296px" addStyleNames="{style.hidden}">
+	<g:PopupPanel ui:field="popupPanel3" width="296px"> <!-- addStyleNames="{style.hidden}"-->
 		<g:Grid width="285px" height="100%">
 			<g:row>
 				<g:customCell>
