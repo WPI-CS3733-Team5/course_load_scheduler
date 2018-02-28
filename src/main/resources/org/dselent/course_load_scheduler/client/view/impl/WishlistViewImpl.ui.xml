@@ -50,7 +50,7 @@
 			</g:at>
 			
 			<g:at top="178" left="360">
-				<g:TextBox width="90px" height="58px" ui:field="courseNumber"/>
+				<g:TextBox width="90px" height="25px" ui:field="courseNumber"/>
 			</g:at>
 		</g:AbsolutePanel>
 	</g:HTMLPanel>
